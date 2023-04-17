@@ -16,5 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //수지니 주석입니다....>..<
+        //나의 개인적인 코드 변경
+
+        //이렇게 저렇게
     }
 }
