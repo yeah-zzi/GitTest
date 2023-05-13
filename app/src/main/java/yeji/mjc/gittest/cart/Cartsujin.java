@@ -1,4 +1,4 @@
-package yeji.mjc.gittest;
+package yeji.mjc.gittest.cart;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.cart.FoodAdapter;
 import yeji.mjc.gittest.cart.FoodItem;
 
@@ -25,7 +26,7 @@ public class Cartsujin extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_cartsujin, container, false);
+        View view = inflater.inflate(R.layout.cart_main, container, false);
         recyclerView = view.findViewById(R.id.FoodListRV);
         //recyclerView.setHasFixedSize(true);
         return view;
