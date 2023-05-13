@@ -15,6 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import yeji.mjc.gittest.FoodSearch.FridgePlus;
+import yeji.mjc.gittest.cart.Cartsujin;
 import yeji.mjc.gittest.comunity.Comsujin;
 import yeji.mjc.gittest.frige.Frigesujin;
 import yeji.mjc.gittest.mypage.Bellset;
@@ -146,11 +147,11 @@ public class MainActivity extends AppCompatActivity {
         if(!cliked){
             tab2.setVisibility(tab2.VISIBLE);
             tab3.setVisibility(tab3.VISIBLE);
-            tab4.setVisibility(tab4.VISIBLE);
+            //tab4.setVisibility(tab4.VISIBLE);
         } else {
             tab2.setVisibility(tab2.INVISIBLE);
             tab3.setVisibility(tab3.INVISIBLE);
-            tab4.setVisibility(tab4.INVISIBLE);
+            //tab4.setVisibility(tab4.INVISIBLE);
         }
     }
 
@@ -161,12 +162,12 @@ public class MainActivity extends AppCompatActivity {
             tab.startAnimation(rotateOpen);
             tab2.startAnimation(fromBottom);
             tab3.startAnimation(fromBottom);
-            tab4.startAnimation(fromBottom);
+            //tab4.startAnimation(fromBottom);
         } else {
             tab.startAnimation(rotateClose);
             tab2.startAnimation(toBottom);
             tab3.startAnimation(toBottom);
-            tab4.startAnimation(toBottom);
+            //tab4.startAnimation(toBottom);
 
         }
     }
