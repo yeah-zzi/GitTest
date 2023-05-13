@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "492190963277",
+    "project_id": "foodiemate-1a25c",
+    "storage_bucket": "foodiemate-1a25c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:492190963277:android:b5a2d27364468e7cc7ee04",
+        "android_client_info": {
+          "package_name": "yeji.mjc.gittest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "492190963277-5529tde203qufd2rbdrljssl4eoq4hf7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "yeji.mjc.gittest",
+            "certificate_hash": "cf40793d0c8de63135f119a08ff04d0da265618d"
+          }
+        },
+        {
+          "client_id": "492190963277-8l77b1n7ol0a81onmhmb263f2imc28mq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBROrmggN5iSGtSNusw_9DGZGZpVf5YxdY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "492190963277-8l77b1n7ol0a81onmhmb263f2imc28mq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
