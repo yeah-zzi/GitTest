@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tip_comment_card"
+    android:layout_width="match_parent"
+    android:layout_height="130dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background_color"
+    android:layout_marginBottom="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/tip_img_background"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:background="@color/white"
+        app:cardCornerRadius="30dp"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/tip_post_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/tip_img"
+            android:scaleType="fitCenter"
+            android:src="@drawable/bread"
+            android:layout_gravity="center" />
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/writer_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Geu****"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginLeft="15dp"
+        app:layout_constraintLeft_toRightOf="@+id/tip_img_background"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/like"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_baseline_favorite_border_24"
+        android:layout_marginTop="28dp"
+        android:layout_marginRight="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/like_count"/>
+    <TextView
+        android:id="@+id/like_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/comment"/>
+    <ImageView
+        android:id="@+id/comment"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_outline_chat_bubble_outline_24"
+        android:layout_marginTop="28dp"
+        android:layout_marginRight="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/comment_count"/>
+    <TextView
+        android:id="@+id/comment_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginRight="30dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:background="@drawable/fridge_food_card"
+        android:elevation="10dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="기름이 많이 나올땐 식빵을 같이 구워봐요"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="13dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tip_img_background"
+        app:layout_constraintTop_toBottomOf="@+id/writer_id"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
