@@ -3,7 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.10833333333333334" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/FoodieMate/app/src/main/res/drawable-v24/back_select_bar.xml" value="0.274" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/drawable/fridge_type_bar.xml" value="0.1945" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/activity_main.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/add_fight.xml" value="0.30833333333333335" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/add_friend.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/add_friend_xml.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/allergy_search.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/allergy_search_recyclerview.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/barcode_register.xml" value="0.25" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/bellset.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/calendar.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/cart_main.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/cart_plus.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/cart_recyclerview.xml" value="0.15089514066496162" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/fragment_bellset.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/fragment_lifestyle_practice.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/post_addfriend.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/menu/bottom_nav_menu.xml" value="0.30833333333333335" />
       </map>
     </option>
   </component>

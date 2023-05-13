@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fight_main_fragment">
+
+    <TextView
+        android:id="@+id/winner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="고양이님이 이기고 있습니다!"
+        android:layout_marginTop="20dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/ending"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="23일 뒤 대결이 종료됩니다."
+        android:textSize="16dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/winner"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <ProgressBar
+        android:id="@+id/ProgressBar"
+        android:max="100"
+        android:progress="72"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ending"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/cat"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/cat"
+        app:civ_border_color="#C11E1E"
+        app:civ_border_width="5dp"
+        app:layout_constraintRight_toLeftOf="@id/ProgressBar"
+        app:layout_constraintTop_toTopOf="@id/ProgressBar"
+        app:layout_constraintBottom_toBottomOf="@id/ProgressBar"
+        tools:ignore="MissingConstraints" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/plus1"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/plus"
+        android:background="@color/white"
+        app:civ_border_color="#C11E1E"
+        app:layout_constraintRight_toRightOf="@id/cat"
+        app:layout_constraintBottom_toBottomOf="@id/cat"
+        tools:ignore="MissingConstraints" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/dog"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/dog"
+        app:civ_border_color="#636363"
+        app:civ_border_width="5dp"
+        app:layout_constraintLeft_toRightOf="@+id/ProgressBar"
+        app:layout_constraintTop_toTopOf="@id/ProgressBar"
+        app:layout_constraintBottom_toBottomOf="@id/ProgressBar"
+        tools:ignore="MissingConstraints" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/plus2"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/plus"
+        android:background="@color/white"
+        app:civ_border_color="#C11E1E"
+        app:layout_constraintRight_toRightOf="@id/dog"
+        app:layout_constraintBottom_toBottomOf="@id/dog"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/ing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="7일째 대결 진행중"
+        android:textSize="17dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/ProgressBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/Me"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="고양이님 (나)"
+        android:textSize="17dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/ing"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/Friend"/>
+
+    <Button
+        android:id="@+id/MeNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="13번"
+        android:textSize="16dp"
+        android:backgroundTint="#878787"
+        app:layout_constraintTop_toBottomOf="@id/Me"
+        app:layout_constraintLeft_toLeftOf="@id/Me"
+        app:layout_constraintRight_toRightOf="@id/Me"/>
+
+    <TextView
+        android:id="@+id/Friend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="강아지님 (친구)"
+        android:textSize="17dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/ing"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/Me"/>
+
+    <Button
+        android:id="@+id/FriendNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5번"
+        android:textSize="16dp"
+        android:backgroundTint="#787878"
+        app:layout_constraintTop_toBottomOf="@id/Friend"
+        app:layout_constraintLeft_toLeftOf="@id/Friend"
+        app:layout_constraintRight_toRightOf="@id/Friend"/>
+
+    <LinearLayout
+        android:id="@+id/bar_1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#F6B8B8"
+        app:layout_constraintTop_toBottomOf="@id/FriendNum"
+        android:orientation="vertical"
+
+
+        />
+
+    <LinearLayout
+        android:id="@+id/bar_2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#F6D1B8"
+        app:layout_constraintTop_toBottomOf="@id/bar_1"
+        android:orientation="vertical" />
+
+    <LinearLayout
+        android:id="@+id/bar_3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#F6F0B8"
+        app:layout_constraintTop_toBottomOf="@id/bar_2"
+        android:orientation="vertical" />
+
+    <LinearLayout
+        android:id="@+id/bar_4"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#C9D9EC"
+        app:layout_constraintTop_toBottomOf="@id/bar_3"
+        android:orientation="vertical" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

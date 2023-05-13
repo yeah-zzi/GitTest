@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:id="@+id/mpcontainer"
+    tools:context=".MyPagesujin">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal"
+        android:background="#FADA80"
+        android:id="@+id/main"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textmypage"
+        android:text="마이페이지"
+        android:textSize="30dp"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+
+    <FrameLayout
+        android:layout_width="306dp"
+        android:layout_height="300dp"
+        android:layout_marginLeft="47dp"
+        android:layout_marginTop="55dp"
+        android:id="@+id/fl1"
+        android:background="#F8F8F8">
+
+        <ImageView
+            android:id="@+id/profile"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="120dp"
+            android:src="@drawable/ic_round_face_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="girin_geurim"
+            android:layout_marginTop="85dp"
+            android:layout_marginLeft="110dp"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="120dp"
+            android:text="girin_geurim님의 알러지 정보"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/allergy1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="115dp"
+            android:layout_marginLeft="175dp"
+            android:src="@drawable/peach" />
+
+        <ImageView
+            android:id="@+id/allergy2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="115dp"
+            android:layout_marginLeft="220dp"
+            android:src="@drawable/apple" />
+
+        <ImageView
+            android:id="@+id/allergy3"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="115dp"
+            android:layout_marginLeft="265dp"
+            android:src="@drawable/pineapple" />
+
+
+
+        <ImageView
+            android:id="@+id/vs"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginLeft="98dp"
+            android:src="@drawable/vs" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="현재 대결중인 상대"
+            android:layout_marginTop="170dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="310dp"
+            android:layout_height="2px"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="155dp"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/profile1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginLeft="35dp"
+            android:src="@drawable/ic_round_face_24" />
+
+        <ImageView
+            android:id="@+id/profile2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginLeft="165dp"
+            android:src="@drawable/ic_round_face_24" />
+
+        <ImageView
+            android:id="@+id/profile3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginLeft="225dp"
+            android:src="@drawable/ic_round_face_24" />
+
+
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/User"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="380dp"
+        android:background="#ffffff"
+        android:elevation="3dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="60dp"
+            android:text="회원 정보 수정"
+            android:textSize="18sp"
+            android:gravity="center_vertical" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_margin="15dp"
+            android:src="@drawable/user" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="350dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/ic_baseline_chevron_right_24" />
+
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/Friend"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="460dp"
+        android:background="#ffffff"
+        android:elevation="3dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="60dp"
+            android:text="친구 관리"
+            android:textSize="18sp"
+            android:gravity="center_vertical" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_margin="15dp"
+            android:src="@drawable/friends" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="350dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/ic_baseline_chevron_right_24" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/Bell"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="540dp"
+        android:background="#ffffff"
+        android:elevation="3dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="60dp"
+            android:text="알림 설정"
+            android:textSize="18sp"
+            android:gravity="center_vertical" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_margin="15dp"
+            android:src="@drawable/bell1" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="350dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/ic_baseline_chevron_right_24" />
+
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:id="@+id/Tutorial"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="620dp"
+        android:background="#ffffff"
+        android:elevation="3dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="60dp"
+            android:text="튜토리얼"
+            android:textSize="18sp"
+            android:gravity="center_vertical" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_margin="15dp"
+            android:src="@drawable/tutorial" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="350dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/ic_baseline_chevron_right_24" />
+
+    </FrameLayout>
+</FrameLayout>
+
