@@ -17,7 +17,6 @@ import yeji.mjc.gittest.cart.FoodItem;
 public class Cartsujin extends Fragment {
 
     public RecyclerView recyclerView;
-    public RecyclerView.Adapter adapter_cart;
     public ArrayList<FoodItem> foodItems = new ArrayList<FoodItem>();
 
 
@@ -28,7 +27,7 @@ public class Cartsujin extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cartsujin, container, false);
         recyclerView = view.findViewById(R.id.FoodListRV);
-        recyclerView.setHasFixedSize(true);
+        //recyclerView.setHasFixedSize(true);
         return view;
     }
 

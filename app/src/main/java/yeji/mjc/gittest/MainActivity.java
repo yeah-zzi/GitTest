@@ -15,6 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import yeji.mjc.gittest.FoodSearch.FridgePlus;
+import yeji.mjc.gittest.comunity.Comsujin;
 import yeji.mjc.gittest.frige.Frigesujin;
 import yeji.mjc.gittest.mypage.Bellset;
 import yeji.mjc.gittest.mypage.UserInfoChange;
@@ -82,12 +83,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         tab4 = findViewById(R.id.tab4);
-        tab4.setOnClickListener(new View.OnClickListener() {
+        /*tab4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
-        });
+        });*/
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
