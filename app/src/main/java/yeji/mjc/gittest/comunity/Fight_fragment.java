@@ -7,10 +7,14 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import yeji.mjc.gittest.R;
 
 
 public class Fight_fragment extends Fragment {
+
 
 
     @Override

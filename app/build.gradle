@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services' //구글서비스 추가
 }
 
 android {
@@ -47,18 +48,23 @@ dependencies {
     //implementation "com.kakao.sdk:v2-navi:2.13.0" // 카카오내비
     //implementation "com.kakao.sdk:v2-friend:2.13.0" // 카카오톡 소셜 피커, 리소스 번들 파일 포함
     //implementation "com.github.bumptech.glide:glide:4.11.0"
+
+    //밑에 이거 풀면 시스템 컬러 머시기 오류가 나옵니다
     //implementation 'com.google.android.material:material:1.10.0-alpha01'
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
     implementation 'androidx.navigation:navigation-ui:2.5.3'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
 
 
-    // Import the Firebase BoM
+    // 밑에는 파이어베이스를 위한 것
     implementation platform('com.google.firebase:firebase-bom:29.2.0')
 
     // Add the dependency for the Firebase SDK for Google Analytics
     // When using the BoM, don't specify versions in Firebase dependencies
     implementation 'com.google.firebase:firebase-analytics'
+
+    //데이터베이스 이용을 위한 추가
+    implementation 'com.google.firebase:firebase-database'
 
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
