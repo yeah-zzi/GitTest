@@ -1,5 +1,8 @@
 package yeji.mjc.gittest.FoodSearch;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +16,15 @@ import yeji.mjc.gittest.R;
 
 public class FoodSearchAdapter extends RecyclerView.Adapter<FoodSearch_recycle_holder> {
 
-    //Context context;
+    private Context context;
     ArrayList<FoodSearchItem> items;
+    private SelectListener listener;
 
-    public FoodSearchAdapter(ArrayList<FoodSearchItem> items) {
+
+    public FoodSearchAdapter(Context context, ArrayList<FoodSearchItem> items,SelectListener listener) {
+        this.context = context;
         this.items = items;
+        this.listener = listener;
     }
 
     public FoodSearch_recycle_holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -26,9 +33,17 @@ public class FoodSearchAdapter extends RecyclerView.Adapter<FoodSearch_recycle_h
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FoodSearch_recycle_holder holder, int position) {
+    public void onBindViewHolder(@NonNull FoodSearch_recycle_holder holder, @SuppressLint("RecyclerView") int position) {
         holder.food_img.setImageResource(items.get(position).getFood_img());
         holder.food_name.setText(items.get(position).getFood_name());
+
+        //이벤트 추가
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClicked(items.get(position));
+            }
+        });
     }
 
     @Override

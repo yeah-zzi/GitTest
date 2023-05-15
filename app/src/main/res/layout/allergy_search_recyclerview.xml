@@ -14,44 +14,50 @@
         app:cardUseCompatPadding="true"
         app:cardElevation="4dp">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/back"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:padding="4dp">
             <ImageView
                 android:id="@+id/food_img"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:elevation="11dp"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center"
                 android:src="@drawable/potato"
+                app:layout_constraintLeft_toLeftOf="@+id/back"
+                app:layout_constraintTop_toTopOf="@+id/back"
+                app:layout_constraintBottom_toBottomOf="@+id/back"
                 />
 
             <TextView
                 android:id="@+id/food_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="25dp"
                 android:text="감자"
                 android:textSize="15dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:elevation="10dp"
+                app:layout_constraintLeft_toLeftOf="@+id/back"
+                app:layout_constraintTop_toTopOf="@+id/back"
+                app:layout_constraintBottom_toBottomOf="@+id/back"
                 />
 
             <ImageButton
+                android:id="@+id/delete"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginLeft="5dp"
                 android:elevation="10dp"
-                android:layout_gravity="center"
                 android:backgroundTint="@color/white"
                 android:src="@drawable/ic_baseline_cancel_24"
+                app:layout_constraintRight_toRightOf="@+id/back"
+                app:layout_constraintTop_toTopOf="@+id/back"
+                app:layout_constraintBottom_toBottomOf="@+id/back"
             />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

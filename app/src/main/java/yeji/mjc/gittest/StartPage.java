@@ -8,11 +8,15 @@ import android.widget.ImageButton;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import yeji.mjc.gittest.FoodSearch.FridgePlus;
 
 public class StartPage extends AppCompatActivity {
 
     ImageButton loginBtn;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -1,21 +1,32 @@
 package yeji.mjc.gittest.FoodSearch;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 import yeji.mjc.gittest.R;
+import yeji.mjc.gittest.firebase.AllergyFirebase;
 
-public class Allergy extends Activity implements View.OnClickListener{
+public class Allergy extends Activity implements View.OnClickListener, SelectListener{
 
     //리사이클러뷰 변수 선언
     public RecyclerView allergyrecyclerView;
@@ -25,6 +36,12 @@ public class Allergy extends Activity implements View.OnClickListener{
     public RecyclerView recyclerView;
     public RecyclerView.Adapter foodSearchAdapter;
     public ArrayList<FoodSearchItem> items = new ArrayList<FoodSearchItem>();
+
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    //알러지 레퍼런스 가져ㅗ기
+    DatabaseReference databaseReference = database.getReference();
+    //Query lastQuery = databaseReference.child("allergy").orderByKey().limitToFirst(10);
 
     ColorStateList def;
     TextView vegetable,fruit,meet,seafood,milk,drink,select;
@@ -53,11 +70,12 @@ public class Allergy extends Activity implements View.OnClickListener{
         def = fruit.getTextColors();
 
 
+
         //리사이클러뷰구현
         recyclerView = findViewById(R.id.foodSearchRecyclerView);
         recyclerView.setHasFixedSize(true);
 
-        items.add(new FoodSearchItem(R.drawable.apple,"감자"));
+        items.add(new FoodSearchItem(R.drawable.potato,"감자"));
         items.add(new FoodSearchItem(R.drawable.gazi,"가지"));
         items.add(new FoodSearchItem(R.drawable.sweetpotato,"고구마"));
         items.add(new FoodSearchItem(R.drawable.chilli,"고추"));
@@ -83,22 +101,19 @@ public class Allergy extends Activity implements View.OnClickListener{
         items.add(new FoodSearchItem(R.drawable.pimang,"피망"));
 
         recyclerView.setLayoutManager(new GridLayoutManager(this,5));
-        foodSearchAdapter = new FoodSearchAdapter(items);
+        foodSearchAdapter = new FoodSearchAdapter(this,items,this);
         recyclerView.setAdapter(foodSearchAdapter);
 
         allergyrecyclerView = findViewById(R.id.allergyRecycler);
         allergyrecyclerView.setHasFixedSize(true);
+
     }
 
 
     public void onStart(){
         super.onStart();
 
-        for(int i=0;i<6;i++){
-            allergyitems.add(new AllergyItem(R.drawable.potato,"감자"));
-        }
-
-        allergyrecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
+        allergyrecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         allergyrecyclerView.scrollToPosition(allergyitems.size() - 1);
         allergyrecyclerView.setAdapter(new AllergyAdapter(allergyitems));
     }
@@ -108,7 +123,7 @@ public class Allergy extends Activity implements View.OnClickListener{
             select.animate().x(10).setDuration(100);
             clear();
 
-            items.add(new FoodSearchItem(R.drawable.apple,"감자"));
+            items.add(new FoodSearchItem(R.drawable.potato,"감자"));
             items.add(new FoodSearchItem(R.drawable.gazi,"가지"));
             items.add(new FoodSearchItem(R.drawable.sweetpotato,"고구마"));
             items.add(new FoodSearchItem(R.drawable.chilli,"고추"));
@@ -234,7 +249,22 @@ public class Allergy extends Activity implements View.OnClickListener{
             for (int i = 0; i < size; i++) {
                 items.remove(0);
                 foodSearchAdapter.notifyItemRemoved(0);
+
             }
         }
+    }
+
+    @Override
+    public void onItemClicked(FoodSearchItem myModel) {
+        Toast.makeText(this,myModel.getFood_name(),Toast.LENGTH_SHORT).show();
+        allergyitems.add(new AllergyItem(myModel.getFood_img(), myModel.getFood_name()));
+        allergyrecyclerView.getAdapter().notifyDataSetChanged();
+
+        addAllergy(myModel.getFood_name(),myModel.getFood_img());
+    }
+
+    public void addAllergy(String name,int img){
+        AllergyFirebase allergyFirebase = new AllergyFirebase(name,img);
+        databaseReference.child("allergy").child(name).setValue(allergyFirebase);
     }
 }

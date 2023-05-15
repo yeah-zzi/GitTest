@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 
 import yeji.mjc.gittest.R;
 
-public class FoodSearch extends Activity implements View.OnClickListener {
+public class FoodSearch extends Activity implements View.OnClickListener,SelectListener {
 
     //리사이클러뷰 변수 선언
     public RecyclerView recyclerView;
@@ -78,7 +79,7 @@ public class FoodSearch extends Activity implements View.OnClickListener {
         items.add(new FoodSearchItem(R.drawable.pimang,"피망"));
 
         recyclerView.setLayoutManager(new GridLayoutManager(this,5));
-        foodSearchAdapter = new FoodSearchAdapter(items);
+        foodSearchAdapter = new FoodSearchAdapter(this,items,this);
         recyclerView.setAdapter(foodSearchAdapter);
 
     }
@@ -88,7 +89,7 @@ public class FoodSearch extends Activity implements View.OnClickListener {
             select.animate().x(10).setDuration(100);
             clear();
 
-            items.add(new FoodSearchItem(R.drawable.apple,"감자"));
+            items.add(new FoodSearchItem(R.drawable.potato,"감자"));
             items.add(new FoodSearchItem(R.drawable.gazi,"가지"));
             items.add(new FoodSearchItem(R.drawable.sweetpotato,"고구마"));
             items.add(new FoodSearchItem(R.drawable.chilli,"고추"));
@@ -216,5 +217,10 @@ public class FoodSearch extends Activity implements View.OnClickListener {
                 foodSearchAdapter.notifyItemRemoved(0);
             }
         }
+    }
+
+    @Override
+    public void onItemClicked(FoodSearchItem myModel) {
+        Toast.makeText(this,myModel.getFood_name(),Toast.LENGTH_SHORT).show();
     }
 }
