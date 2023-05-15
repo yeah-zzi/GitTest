@@ -37,9 +37,9 @@ public class AllergyAdapter extends RecyclerView.Adapter<Allergy_recycle_holder>
 
     @Override
     public void onBindViewHolder(@NonNull Allergy_recycle_holder holder, @SuppressLint("RecyclerView") int position) {
-        holder.food_img.setImageResource(items.get(position).getFood_img());
-        holder.food_name.setText(items.get(position).getFood_name());
-        String deleteAllergyName = items.get(position).getFood_name();
+        holder.food_img.setImageResource(items.get(position).getAllergy_img());
+        holder.food_name.setText(items.get(position).getAllergy_name());
+        String deleteAllergyName = items.get(position).getAllergy_name();
 
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
