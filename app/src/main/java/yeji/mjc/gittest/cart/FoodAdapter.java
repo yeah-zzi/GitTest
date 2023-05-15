@@ -23,7 +23,7 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
     @Override
     public Food_recycle_holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_recyclerview,parent,false);
-        return new Food_recycle_holder(v);
+        return new Food_recycle_holder(v); //오징어 이미지 수정
     }
 
     @Override
