@@ -6,6 +6,9 @@
     //인터넷 사용 권한 파이어베이스를 위해
     <uses-permission android:name="android.permission.INTERNET"/>
 
+    //바코드 카메라
+    <uses-permission android:name="android.permission.CAMERA"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,6 +17,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:hardwareAccelerated="true"
         android:theme="@style/Theme.GitTest"
         tools:targetApi="31">
         <activity
@@ -26,12 +30,16 @@
             </intent-filter>
         </activity>
 
+
+        <activity android:name=".Register"/>
+        <activity android:name=".Barcode" android:theme="@style/DialogTheme"/>
         <activity android:name=".MainActivity"/>
         <activity android:name=".register.Register"/>
         <activity android:name=".FoodSearch.FoodSearch" android:theme="@style/DialogTheme"/>
         <activity android:name=".FoodSearch.Allergy" android:theme="@style/DialogTheme"/>
         <activity android:name=".comunity.TipComment" android:theme="@style/DialogTheme"/>
         <activity android:name=".FoodSearch.FridgePlus" android:theme="@style/DialogTheme"/>
+        <activity android:name=".mypage.Bellset1" android:theme="@style/DialogTheme"/>
 
     </application>
 
