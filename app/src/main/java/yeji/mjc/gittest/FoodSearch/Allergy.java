@@ -1,10 +1,8 @@
 package yeji.mjc.gittest.FoodSearch;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,11 +18,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import yeji.mjc.gittest.AllergyItem;
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.firebase.AllergyFirebase;
 
@@ -108,7 +106,7 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
         allergyrecyclerView = findViewById(R.id.allergyRecycler);
         allergyrecyclerView.setHasFixedSize(true);
 
-        allergyDB = database.getReference("allergy");
+        allergyDB = database.getReference().child("userid").child("allergy");
         allergyDB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -287,7 +285,7 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
 
     public void addAllergy(String name, int img) {
         AllergyFirebase allergyFirebase = new AllergyFirebase(name, img);
-        databaseReference.child("allergy").child(name).setValue(allergyFirebase);
+        databaseReference.child("userid").child("allergy").child(name).setValue(allergyFirebase);
     }
 
 }
