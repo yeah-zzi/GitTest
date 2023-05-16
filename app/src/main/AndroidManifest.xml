@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="yeji.mjc.gittest">
 
-    //인터넷 사용 권한 파이어베이스를 위해
+    //인터넷 사용 권한 파이어베이스를 위해 (+카카오도 씀)
     <uses-permission android:name="android.permission.INTERNET"/>
 
     //바코드 카메라
@@ -19,6 +19,7 @@
         android:supportsRtl="true"
         android:hardwareAccelerated="true"
         android:theme="@style/Theme.GitTest"
+        android:name=".KakaoApplication"
         tools:targetApi="31">
         <activity
             android:name=".StartPage"
@@ -30,8 +31,20 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
-        <activity android:name=".Register"/>
+                <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
+                <data android:host="oauth"
+                    android:scheme="kakao17d02b02412588cc1e7d721a2982c0a3" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".Barcode" android:theme="@style/DialogTheme"/>
         <activity android:name=".MainActivity"/>
         <activity android:name=".register.Register"/>
