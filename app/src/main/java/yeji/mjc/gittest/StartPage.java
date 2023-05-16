@@ -12,6 +12,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import yeji.mjc.gittest.FoodSearch.FridgePlus;
+import yeji.mjc.gittest.register.Register;
 
 public class StartPage extends AppCompatActivity {
 

@@ -8,7 +8,7 @@ plugins {
     id 'com.android.library' version '7.2.2' apply false
 
     //파이어베이스를 위한 추가
-    id 'com.google.gms.google-services' version '4.3.13' apply false
+    //id 'com.google.gms.google-services' version '4.3.13' apply false
 }
 
 task clean(type: Delete) {

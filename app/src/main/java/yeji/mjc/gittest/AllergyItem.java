@@ -1,4 +1,4 @@
-package yeji.mjc.gittest.FoodSearch;
+package yeji.mjc.gittest;
 
 public class AllergyItem {
     int allergy_img;
