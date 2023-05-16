@@ -17,16 +17,6 @@ public class Bellset extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
        View view = inflater.inflate(R.layout.fragment_bellset , container, false);
-
-
-        FrameLayout fl = view.findViewById(R.id.Bell);
-        fl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity activity = (MainActivity) getActivity();
-                activity.onFragmentChanged(0);
-            }
-        });
         return view;
      }
 }

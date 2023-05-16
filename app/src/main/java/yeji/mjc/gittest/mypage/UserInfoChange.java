@@ -16,16 +16,6 @@ public class UserInfoChange extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_info_change , container, false);
-
-
-        FrameLayout fl = view.findViewById(R.id.User);
-        fl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity activity = (MainActivity) getActivity();
-                activity.onFragmentChanged(1);
-            }
-        });
         return view;
     }
 }
