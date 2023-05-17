@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         //FrameLayout에 xml 띄우기
@@ -170,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
 //    // 보여짐 사라짐
 //    private void setVisibility(boolean cliked){
 //
@@ -190,6 +192,8 @@ public class MainActivity extends AppCompatActivity {
 //            tabBattle.setVisibility(View.INVISIBLE);
 //        }
 //    }
+=======
+     
 
     // 애니메이션
     private  void setAnimation(boolean cliked) {
