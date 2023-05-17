@@ -38,7 +38,7 @@ public class Register extends AppCompatActivity {
 
     //파이어베이스에서 데이터베이스 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference allergyDB,userdb;
+    DatabaseReference allergyDB,userdb,foodbattleDB;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,6 +71,10 @@ public class Register extends AppCompatActivity {
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //가입하는 회원의 집밥대결 횟수를 0으로 만든다
+                int num = 1;
+                foodbattleDB = database.getReference().child("userid").child("foodbattle_count");
+                foodbattleDB.setValue(num);
                 Intent registerIntent = new Intent(Register.this, MainActivity.class);
                 startActivity(registerIntent);
                 finish();
