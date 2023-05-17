@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import yeji.mjc.gittest.R;
 
 
-public class Fight_fragment extends Fragment {
+public class Fight_fragment extends Fragment implements AddfightListener{
 
 
     @Override
@@ -22,10 +22,14 @@ public class Fight_fragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.food_fight, container, false);
 
-
         return view;
     }
 
+    @Override
+    public void onItemClicked(New_fight fight_fragment) {
+        Intent fridgePlusIntent = new Intent(getActivity(), New_fight_sub.class);
+        startActivity(fridgePlusIntent);
+    }
 
 
 // test

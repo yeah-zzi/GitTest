@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
+
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         //FrameLayout에 xml 띄우기
