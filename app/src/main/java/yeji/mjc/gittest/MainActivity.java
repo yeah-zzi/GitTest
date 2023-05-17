@@ -127,10 +127,14 @@ public class MainActivity extends AppCompatActivity {
         if(!cliked){
             tab2.setVisibility(tab2.VISIBLE);
             tab3.setVisibility(tab3.VISIBLE);
+            tab2.setEnabled(true);
+            tab3.setEnabled(true);
             //tab4.setVisibility(tab4.VISIBLE);
         } else {
             tab2.setVisibility(tab2.INVISIBLE);
             tab3.setVisibility(tab3.INVISIBLE);
+            tab2.setEnabled(false);
+            tab3.setEnabled(false);
             //tab4.setVisibility(tab4.INVISIBLE);
         }
     }

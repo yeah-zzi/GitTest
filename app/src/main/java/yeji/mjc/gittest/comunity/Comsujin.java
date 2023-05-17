@@ -46,7 +46,7 @@ public class Comsujin extends Fragment implements View.OnClickListener{
     public void onClick(View view){
         if(view.getId() == R.id.life_info){
             select.animate().x(70).setDuration(100);
-            //밑을 lifestyle_practice()를 바뀐 자바클래스 이름으로 바꾸시면 되용 집밥대결도 동일
+            //선택되는 메뉴에 따라 프래그먼트가 해당 커뮤니티의 프래그먼트로 바뀐다
             getFragmentManager().beginTransaction().replace(R.id.tip_container, new Life_Fragment()).commit();
         }else if(view.getId()==R.id.tip){
             int size = tip.getWidth() + 75;

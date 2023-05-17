@@ -13,6 +13,7 @@ import yeji.mjc.gittest.R;
 
 public class FridgePlus extends AppCompatActivity {
 
+    //변수 선언
     ImageButton plusBTN,cancelBTN,completeBTN,calendarBTN;
     TextView foodName,foodCount,deadLine;
 
@@ -26,24 +27,23 @@ public class FridgePlus extends AppCompatActivity {
         completeBTN = findViewById(R.id.complete);
         calendarBTN = findViewById(R.id.calendar);
 
+        //취소버튼을 누르면 dialog창이 닫힌다
         cancelBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent backIntent = new Intent(getApplicationContext(), MainActivity.class);
-                //startActivity(backIntent);
                 finish();
             }
         });
 
+        //확인 버튼을 누르면 dialog창이 닫힌다
         completeBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent backIntent = new Intent(getApplicationContext(), MainActivity.class);
-                //startActivity(backIntent);
                 finish();
             }
         });
 
+        //상품추가 버튼을 누르면 상품추가 dialog창이 뜬다
         plusBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
