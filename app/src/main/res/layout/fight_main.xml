@@ -148,7 +148,7 @@
         android:id="@+id/bar_1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#F6B8B8"
+        android:background="#FFFFFF"
         app:layout_constraintTop_toBottomOf="@id/FriendNum"
         android:orientation="vertical"
 
@@ -159,7 +159,7 @@
         android:id="@+id/bar_2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#F6D1B8"
+        android:background="#DADADA"
         app:layout_constraintTop_toBottomOf="@id/bar_1"
         android:orientation="vertical" />
 
@@ -177,6 +177,22 @@
         android:layout_height="50dp"
         android:background="#C9D9EC"
         app:layout_constraintTop_toBottomOf="@id/bar_3"
+        android:orientation="vertical" />
+
+    <LinearLayout
+        android:id="@+id/bar_5"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#DADADA"
+        app:layout_constraintTop_toBottomOf="@id/bar_4"
+        android:orientation="vertical" />
+
+    <LinearLayout
+        android:id="@+id/bar_6"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#F6F0B8"
+        app:layout_constraintTop_toBottomOf="@id/bar_5"
         android:orientation="vertical" />
 
 
