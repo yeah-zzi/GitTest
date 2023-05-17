@@ -1,15 +1,24 @@
 package yeji.mjc.gittest.comunity;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import yeji.mjc.gittest.FoodSearch.FridgePlus;
+import yeji.mjc.gittest.MainActivity;
+=======
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,11 +48,10 @@ public class Comsujin extends Fragment implements View.OnClickListener{
 
         getFragmentManager().beginTransaction().add(R.id.tip_container, new Life_Fragment()).commit();
 
-
-
         life_info = view.findViewById(R.id.life_info);
         tip = view.findViewById(R.id.tip);
         food_battle = view.findViewById(R.id.food_battle);
+
 
         life_info.setOnClickListener(this);
         tip.setOnClickListener(this);
@@ -90,5 +98,8 @@ public class Comsujin extends Fragment implements View.OnClickListener{
                 getFragmentManager().beginTransaction().replace(R.id.tip_container, new Fight_fragment()).commit();
             }
         }
+    }//
+
+=======
     }
 }

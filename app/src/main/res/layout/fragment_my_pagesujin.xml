@@ -138,6 +138,9 @@
 
 
     </FrameLayout>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="700dp" >
 
     <FrameLayout
         android:id="@+id/User"
@@ -271,5 +274,6 @@
             android:src="@drawable/ic_baseline_chevron_right_24" />
 
     </FrameLayout>
+</FrameLayout>
 </FrameLayout>
 

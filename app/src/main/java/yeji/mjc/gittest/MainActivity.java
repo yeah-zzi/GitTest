@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private Animation rotateClose;
     private Animation fromBottom;
     private Animation toBottom;
-    FloatingActionButton tab, tab2, tab3 ,tab4;
+    FloatingActionButton tab, tabBarcode, tabWrite ,tabFriendAdd, tabPost, tabCamera, tabBattle;
     private boolean cliked = false;
 
     // 하단바 연결
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         fromBottom = AnimationUtils.loadAnimation(this,R.anim.from_bottom_anim);
         toBottom = AnimationUtils.loadAnimation(this,R.anim.to_bottom_anim);
 
+
+
         // + 버튼
         tab = findViewById(R.id.tab);
         tab.setOnClickListener(new View.OnClickListener() {
@@ -55,34 +58,56 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // tab2 숫자 올라갈 수록 위쪽에 있는 플로팅 버튼임
-        tab2 = findViewById(R.id.tab2);
-        tab2.setOnClickListener(new View.OnClickListener() {
+        tabWrite = findViewById(R.id.tabWrite);
+        tabWrite.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                Intent FridgePlusintent = new Intent(MainActivity.this, FridgePlus.class);
+                startActivity(FridgePlusintent);
+            }
+        });
+
+        tabBarcode = findViewById(R.id.tabBarcode);
+        tabBarcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Intent barcode = new Intent(MainActivity.this, Barcode.class);
                 startActivity(barcode);
             }
         });
 
 
-        tab3 = findViewById(R.id.tab3);
-        tab3.setOnClickListener(new View.OnClickListener() {
+        tabFriendAdd = findViewById(R.id.tabFriendAdd);
+        tabFriendAdd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                //그림이 만든 냉장고추가 팝업창 설정
-                Intent fridgePlusIntent = new Intent(MainActivity.this, FridgePlus.class);
-                startActivity(fridgePlusIntent);
+            public void onClick(View v) {
+                // tabFriendAdd 누르면 친구 추가 화면
             }
         });
 
-        tab4 = findViewById(R.id.tab4);
-        /*tab4.setOnClickListener(new View.OnClickListener() {
+        tabPost =findViewById(R.id.tabPost);
+        tabPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // tabPost 누르면 글쓰는 화면
             }
-        });*/
+        });
+
+        tabCamera = findViewById(R.id.tabCamera);
+        tabCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // tabCamera 누르면 카메라
+            }
+        });
+
+        tabBattle = findViewById(R.id.tabBattle);
+        tabBattle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // tabBattle 누르면 배틀신청
+            }
+        });
 
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -98,16 +123,36 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.f:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, new Frigesujin()).commit();
+                        tabBarcode.setEnabled(true); tabWrite.setEnabled(true);
+                        tabWrite.setVisibility(View.VISIBLE); tabBarcode.setVisibility(View.VISIBLE);
+                        tabFriendAdd.setVisibility(View.INVISIBLE); tabPost.setVisibility(View.INVISIBLE);
+                        tabCamera.setVisibility(View.INVISIBLE); tabBattle.setVisibility(View.INVISIBLE);
+                        tabCamera.setEnabled(false); tabPost.setEnabled(false); tabBattle.setEnabled(false); tabFriendAdd.setEnabled(false);
                         break;
                     case R.id.c:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, new Cartsujin()).commit();
+                        tabBarcode.setEnabled(true); tabWrite.setEnabled(true);
+                        tabWrite.setVisibility(View.VISIBLE); tabBarcode.setVisibility(View.VISIBLE);
+                        tabFriendAdd.setVisibility(View.INVISIBLE); tabPost.setVisibility(View.INVISIBLE);
+                        tabCamera.setVisibility(View.INVISIBLE); tabBattle.setVisibility(View.INVISIBLE);
+                        tabCamera.setEnabled(false); tabPost.setEnabled(false); tabBattle.setEnabled(false); tabFriendAdd.setEnabled(false);
                         break;
                     case R.id.p:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyPagesujin()).commit();
+                        tabBarcode.setEnabled(true); tabWrite.setEnabled(true);
+                        tabWrite.setVisibility(View.VISIBLE); tabBarcode.setVisibility(View.VISIBLE);
+                        tabFriendAdd.setVisibility(View.INVISIBLE); tabPost.setVisibility(View.INVISIBLE);
+                        tabCamera.setVisibility(View.INVISIBLE); tabBattle.setVisibility(View.INVISIBLE);
+                        tabCamera.setEnabled(false); tabPost.setEnabled(false); tabBattle.setEnabled(false); tabFriendAdd.setEnabled(false);
                         break;
                     case R.id.co:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, new Comsujin()).commit();
+                        tabBarcode.setEnabled(false); tabWrite.setEnabled(false);
+                        tabWrite.setVisibility(View.INVISIBLE); tabBarcode.setVisibility(View.INVISIBLE);
+                        tabFriendAdd.setVisibility(View.VISIBLE); tabPost.setVisibility(View.VISIBLE); tabCamera.setVisibility(View.VISIBLE); tabBattle.setVisibility(View.VISIBLE);
+                        tabCamera.setEnabled(true); tabPost.setEnabled(true); tabBattle.setEnabled(true); tabFriendAdd.setEnabled(true);
                         break;
+
                 }
                 return true;
             }
@@ -115,47 +160,66 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     // 클릭 이벤트
     private void onAddButtonCliked(){
-        setVisibility(cliked);
+        //setVisibility(cliked);
+        tabCamera.setVisibility(View.INVISIBLE);
+        tabFriendAdd.setVisibility(View.INVISIBLE);
         setAnimation(cliked);
         cliked = !cliked;
     }
 
-    // 보여짐 사라짐
-    private void setVisibility(boolean cliked){
 
-        if(!cliked){
-            tab2.setVisibility(tab2.VISIBLE);
-            tab3.setVisibility(tab3.VISIBLE);
-            tab2.setEnabled(true);
-            tab3.setEnabled(true);
-            //tab4.setVisibility(tab4.VISIBLE);
-        } else {
-            tab2.setVisibility(tab2.INVISIBLE);
-            tab3.setVisibility(tab3.INVISIBLE);
-            tab2.setEnabled(false);
-            tab3.setEnabled(false);
-            //tab4.setVisibility(tab4.INVISIBLE);
-        }
-    }
+
+//    // 보여짐 사라짐
+//    private void setVisibility(boolean cliked){
+//
+//        if(!cliked){
+//            tabWrite.setVisibility(View.VISIBLE);
+//            tabBarcode.setVisibility(View.VISIBLE);
+//            tabFriendAdd.setVisibility(View.VISIBLE);
+//            tabPost.setVisibility(View.VISIBLE);
+//            tabCamera.setVisibility(View.VISIBLE);
+//            tabBattle.setVisibility(View.VISIBLE);
+//
+//        } else {
+//            tabWrite.setVisibility(View.INVISIBLE);
+//            tabBarcode.setVisibility(View.INVISIBLE);
+//            tabFriendAdd.setVisibility(View.INVISIBLE);
+//            tabPost.setVisibility(View.INVISIBLE);
+//            tabCamera.setVisibility(View.INVISIBLE);
+//            tabBattle.setVisibility(View.INVISIBLE);
+//        }
+//    }
+=======
+     
 
     // 애니메이션
-    private  void setAnimation(boolean cliked){
+    private  void setAnimation(boolean cliked) {
 
-        if(!cliked){
+        if (!cliked) {
             tab.startAnimation(rotateOpen);
-            tab2.startAnimation(fromBottom);
-            tab3.startAnimation(fromBottom);
-            //tab4.startAnimation(fromBottom);
+            tabWrite.startAnimation(fromBottom);
+            tabBarcode.startAnimation(fromBottom);
+            tabFriendAdd.startAnimation(fromBottom);
+            tabPost.startAnimation(fromBottom);
+            tabCamera.startAnimation(fromBottom);
+            tabBattle.startAnimation(fromBottom);
         } else {
             tab.startAnimation(rotateClose);
-            tab2.startAnimation(toBottom);
-            tab3.startAnimation(toBottom);
-            //tab4.startAnimation(toBottom);
-
+            tabWrite.startAnimation(toBottom);
+            tabBarcode.startAnimation(toBottom);
+            tabFriendAdd.startAnimation(toBottom);
+            tabPost.startAnimation(toBottom);
+            tabCamera.startAnimation(toBottom);
+            tabBattle.startAnimation(toBottom);
         }
+
+
     }
+
 }
+
 
 
