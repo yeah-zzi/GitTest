@@ -6,10 +6,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,20 +36,10 @@ public class MainActivity extends AppCompatActivity {
     // 하단바 연결
     BottomNavigationView bottomNavigationView; // 바텀 네비게이션 뷰
 
-    //프래그먼트 연결
-    Bellset fragment_bellset;
-    UserInfoChange fragment_user_info_change;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        fragment_bellset = new Bellset();
-        fragment_user_info_change = new UserInfoChange();
-
 
         rotateOpen = AnimationUtils.loadAnimation(this, R.anim.rotate_open_anim);
         rotateClose = AnimationUtils.loadAnimation(this,R.anim.rotate_close_anim);
@@ -68,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
         tab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "ㅇㅇ", Toast.LENGTH_SHORT).show();
+                Intent barcode = new Intent(MainActivity.this, Barcode.class);
+                startActivity(barcode);
             }
         });
 
@@ -118,21 +111,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
     }
-
-    // fragment 교체
-    public void onFragmentChanged(int index) {
-        if(index == 0)
-        {
-            getSupportFragmentManager().beginTransaction().replace(R.id.mpcontainer, fragment_bellset).commit();
-        }
-
-        else if(index == 1)
-        {
-            getSupportFragmentManager().beginTransaction().replace(R.id.mpcontainer, fragment_user_info_change).commit();
-        }
-    }
-
 
     // 클릭 이벤트
     private void onAddButtonCliked(){

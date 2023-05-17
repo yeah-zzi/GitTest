@@ -42,33 +42,15 @@
 
     <ImageButton
         android:id="@+id/loginButton"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/kakao_login_medium_narrow"
         android:background="@drawable/fridge_food_card"
         app:layout_constraintTop_toBottomOf="@+id/starttxt"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="30dp" />
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/google"
-        app:layout_constraintLeft_toLeftOf="@+id/loginButton"
-        app:layout_constraintTop_toTopOf="@+id/loginButton"
-        app:layout_constraintBottom_toBottomOf="@+id/loginButton"
-        android:layout_marginLeft="10dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="구글연동"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="@+id/loginButton"
-        app:layout_constraintTop_toTopOf="@+id/loginButton"
-        app:layout_constraintBottom_toBottomOf="@+id/loginButton"
-        android:layout_marginLeft="50dp" />
 
 
 

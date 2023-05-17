@@ -1,20 +1,21 @@
 {
   "project_info": {
     "project_number": "492190963277",
+    "firebase_url": "https://foodiemate-1a25c-default-rtdb.firebaseio.com",
     "project_id": "foodiemate-1a25c",
     "storage_bucket": "foodiemate-1a25c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:492190963277:android:b5a2d27364468e7cc7ee04",
+        "mobilesdk_app_id": "1:492190963277:android:3a1a48206fb51df0c7ee04",
         "android_client_info": {
           "package_name": "yeji.mjc.gittest"
         }
       },
       "oauth_client": [
         {
-          "client_id": "492190963277-5529tde203qufd2rbdrljssl4eoq4hf7.apps.googleusercontent.com",
+          "client_id": "492190963277-5khjca6sdnhpi44oldgr3v291s47419t.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "yeji.mjc.gittest",
