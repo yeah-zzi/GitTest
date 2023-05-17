@@ -125,7 +125,7 @@
         app:layout_constraintBottom_toBottomOf="@id/friend_view"/>
 
     <ImageButton
-        android:id="@+id/complete"
+        android:id="@+id/bt1"
         android:layout_width="120dp"
         android:layout_height="40dp"
         android:background="@drawable/switch_track_on"
@@ -133,7 +133,9 @@
         android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/back"
         app:layout_constraintLeft_toLeftOf="@+id/back"
-        app:layout_constraintRight_toRightOf="@+id/back"/>
+        app:layout_constraintRight_toRightOf="@+id/back"
+        />
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -142,9 +144,10 @@
         android:text="다음"
         android:textSize="18dp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="@+id/complete"
-        app:layout_constraintBottom_toBottomOf="@id/complete"
-        app:layout_constraintLeft_toLeftOf="@id/complete"
-        app:layout_constraintRight_toRightOf="@id/complete"/>
+        app:layout_constraintTop_toTopOf="@+id/bt1"
+        app:layout_constraintBottom_toBottomOf="@id/bt1"
+        app:layout_constraintLeft_toLeftOf="@id/bt1"
+        app:layout_constraintRight_toRightOf="@id/bt1"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
