@@ -18,7 +18,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import yeji.mjc.gittest.FoodSearch.FridgePlus;
 import yeji.mjc.gittest.MainActivity;
-=======
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -100,6 +99,4 @@ public class Comsujin extends Fragment implements View.OnClickListener{
         }
     }//
 
-=======
-    }
 }

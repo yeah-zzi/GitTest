@@ -31,8 +31,11 @@ public class MainActivity extends AppCompatActivity {
     private Animation rotateClose;
     private Animation fromBottom;
     private Animation toBottom;
+    private Animation die;
     FloatingActionButton tab, tabBarcode, tabWrite ,tabFriendAdd, tabPost, tabCamera, tabBattle;
-    private boolean cliked = false;
+    boolean clicked = false;
+    private boolean community = false;
+    boolean from_comm = false;
 
     // 하단바 연결
     BottomNavigationView bottomNavigationView; // 바텀 네비게이션 뷰
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         rotateClose = AnimationUtils.loadAnimation(this,R.anim.rotate_close_anim);
         fromBottom = AnimationUtils.loadAnimation(this,R.anim.from_bottom_anim);
         toBottom = AnimationUtils.loadAnimation(this,R.anim.to_bottom_anim);
-
+        die = AnimationUtils.loadAnimation(this,R.anim.die_ainm);
 
 
         // + 버튼
@@ -120,39 +123,67 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-
+                    //냉장고
                     case R.id.f:
+                        community = false;
+                        clicked = false;
+                        if(from_comm == true){
+                            tab.startAnimation(rotateClose);
+                            tabFriendAdd.startAnimation(toBottom);
+                            tabPost.startAnimation(toBottom);
+                            tabCamera.startAnimation(toBottom);
+                            tabBattle.startAnimation(toBottom);
+                            tabWrite.startAnimation(toBottom);
+                            tabBarcode.startAnimation(toBottom);
+                        }else{
+                            setAnimation();
+                        }
+                        from_comm = false;
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, new Frigesujin()).commit();
-                        tabBarcode.setEnabled(true); tabWrite.setEnabled(true);
-                        tabWrite.setVisibility(View.VISIBLE); tabBarcode.setVisibility(View.VISIBLE);
-                        tabFriendAdd.setVisibility(View.INVISIBLE); tabPost.setVisibility(View.INVISIBLE);
-                        tabCamera.setVisibility(View.INVISIBLE); tabBattle.setVisibility(View.INVISIBLE);
-                        tabCamera.setEnabled(false); tabPost.setEnabled(false); tabBattle.setEnabled(false); tabFriendAdd.setEnabled(false);
                         break;
-                    case R.id.c:
+                    case R.id.c://장바구니
+                        community = false;
+                        clicked = false;
+                        if(from_comm == true){
+                            tab.startAnimation(rotateClose);
+                            tabFriendAdd.startAnimation(toBottom);
+                            tabPost.startAnimation(toBottom);
+                            tabCamera.startAnimation(toBottom);
+                            tabBattle.startAnimation(toBottom);
+                            tabWrite.startAnimation(toBottom);
+                            tabBarcode.startAnimation(toBottom);
+                        }else{
+                            setAnimation();
+                        }
+                        from_comm = false;
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, new Cartsujin()).commit();
-                        tabBarcode.setEnabled(true); tabWrite.setEnabled(true);
-                        tabWrite.setVisibility(View.VISIBLE); tabBarcode.setVisibility(View.VISIBLE);
-                        tabFriendAdd.setVisibility(View.INVISIBLE); tabPost.setVisibility(View.INVISIBLE);
-                        tabCamera.setVisibility(View.INVISIBLE); tabBattle.setVisibility(View.INVISIBLE);
-                        tabCamera.setEnabled(false); tabPost.setEnabled(false); tabBattle.setEnabled(false); tabFriendAdd.setEnabled(false);
                         break;
-                    case R.id.p:
+                    case R.id.p://마이페이지
+                        community = false;
+                        clicked = false;
+                        if(from_comm == true){
+                            tab.startAnimation(rotateClose);
+                            tabFriendAdd.startAnimation(toBottom);
+                            tabPost.startAnimation(toBottom);
+                            tabCamera.startAnimation(toBottom);
+                            tabBattle.startAnimation(toBottom);
+                            tabWrite.startAnimation(toBottom);
+                            tabBarcode.startAnimation(toBottom);
+                        }else{
+                            setAnimation();
+                        }
+                        from_comm = false;
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyPagesujin()).commit();
-                        tabBarcode.setEnabled(true); tabWrite.setEnabled(true);
-                        tabWrite.setVisibility(View.VISIBLE); tabBarcode.setVisibility(View.VISIBLE);
-                        tabFriendAdd.setVisibility(View.INVISIBLE); tabPost.setVisibility(View.INVISIBLE);
-                        tabCamera.setVisibility(View.INVISIBLE); tabBattle.setVisibility(View.INVISIBLE);
-                        tabCamera.setEnabled(false); tabPost.setEnabled(false); tabBattle.setEnabled(false); tabFriendAdd.setEnabled(false);
                         break;
-                    case R.id.co:
+                    case R.id.co://커뮤니티
+                        if(clicked == true){
+                            clicked = false;
+                            setAnimation();
+                        }
+                        community = true;
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, new Comsujin()).commit();
-                        tabBarcode.setEnabled(false); tabWrite.setEnabled(false);
-                        tabWrite.setVisibility(View.INVISIBLE); tabBarcode.setVisibility(View.INVISIBLE);
-                        tabFriendAdd.setVisibility(View.VISIBLE); tabPost.setVisibility(View.VISIBLE); tabCamera.setVisibility(View.VISIBLE); tabBattle.setVisibility(View.VISIBLE);
-                        tabCamera.setEnabled(true); tabPost.setEnabled(true); tabBattle.setEnabled(true); tabFriendAdd.setEnabled(true);
+                        from_comm = true;
                         break;
-
                 }
                 return true;
             }
@@ -163,57 +194,68 @@ public class MainActivity extends AppCompatActivity {
 
     // 클릭 이벤트
     private void onAddButtonCliked(){
-        //setVisibility(cliked);
-        tabCamera.setVisibility(View.INVISIBLE);
-        tabFriendAdd.setVisibility(View.INVISIBLE);
-        setAnimation(cliked);
-        cliked = !cliked;
+        clicked = !clicked;
+        setVisibility();
+        setAnimation();
     }
 
 
 
-//    // 보여짐 사라짐
-//    private void setVisibility(boolean cliked){
-//
-//        if(!cliked){
-//            tabWrite.setVisibility(View.VISIBLE);
-//            tabBarcode.setVisibility(View.VISIBLE);
-//            tabFriendAdd.setVisibility(View.VISIBLE);
-//            tabPost.setVisibility(View.VISIBLE);
-//            tabCamera.setVisibility(View.VISIBLE);
-//            tabBattle.setVisibility(View.VISIBLE);
-//
-//        } else {
-//            tabWrite.setVisibility(View.INVISIBLE);
-//            tabBarcode.setVisibility(View.INVISIBLE);
-//            tabFriendAdd.setVisibility(View.INVISIBLE);
-//            tabPost.setVisibility(View.INVISIBLE);
-//            tabCamera.setVisibility(View.INVISIBLE);
-//            tabBattle.setVisibility(View.INVISIBLE);
-//        }
-//    }
-=======
-     
+    // 보여짐 사라짐
+    private void setVisibility(){
+
+        if(clicked == true){
+            if(community == true)
+            {
+                tabBarcode.setEnabled(false); tabWrite.setEnabled(false);
+                tabWrite.setVisibility(View.GONE); tabBarcode.setVisibility(View.GONE);
+                tabFriendAdd.setVisibility(View.VISIBLE); tabPost.setVisibility(View.VISIBLE); tabCamera.setVisibility(View.VISIBLE); tabBattle.setVisibility(View.VISIBLE);
+                tabCamera.setEnabled(true); tabPost.setEnabled(true); tabBattle.setEnabled(true); tabFriendAdd.setEnabled(true);
+            }else{
+                tabBarcode.setEnabled(true); tabWrite.setEnabled(true);
+                tabWrite.setVisibility(View.VISIBLE); tabBarcode.setVisibility(View.VISIBLE);
+                tabFriendAdd.setVisibility(View.GONE); tabPost.setVisibility(View.GONE);
+                tabCamera.setVisibility(View.GONE); tabBattle.setVisibility(View.GONE);
+                tabCamera.setEnabled(false); tabPost.setEnabled(false); tabBattle.setEnabled(false); tabFriendAdd.setEnabled(false);
+            }
+        }
+    }
+
 
     // 애니메이션
-    private  void setAnimation(boolean cliked) {
+    private  void setAnimation() {
 
-        if (!cliked) {
+        if (clicked == true) {
             tab.startAnimation(rotateOpen);
-            tabWrite.startAnimation(fromBottom);
-            tabBarcode.startAnimation(fromBottom);
-            tabFriendAdd.startAnimation(fromBottom);
-            tabPost.startAnimation(fromBottom);
-            tabCamera.startAnimation(fromBottom);
-            tabBattle.startAnimation(fromBottom);
+            if(community == true)
+            {
+                tabFriendAdd.startAnimation(fromBottom);
+                tabPost.startAnimation(fromBottom);
+                tabCamera.startAnimation(fromBottom);
+                tabBattle.startAnimation(fromBottom);
+                tabWrite.startAnimation(fromBottom);
+                tabBarcode.startAnimation(fromBottom);
+            }else{
+                tabWrite.startAnimation(fromBottom);
+                tabBarcode.startAnimation(fromBottom);
+            }
         } else {
             tab.startAnimation(rotateClose);
-            tabWrite.startAnimation(toBottom);
-            tabBarcode.startAnimation(toBottom);
-            tabFriendAdd.startAnimation(toBottom);
-            tabPost.startAnimation(toBottom);
-            tabCamera.startAnimation(toBottom);
-            tabBattle.startAnimation(toBottom);
+            if(community == true){
+                tabFriendAdd.startAnimation(toBottom);
+                tabPost.startAnimation(toBottom);
+                tabCamera.startAnimation(toBottom);
+                tabBattle.startAnimation(toBottom);
+                tabWrite.startAnimation(toBottom);
+                tabBarcode.startAnimation(toBottom);
+            }else{
+                tabFriendAdd.startAnimation(die);
+                tabPost.startAnimation(die);
+                tabCamera.startAnimation(die);
+                tabBattle.startAnimation(die);
+                tabWrite.startAnimation(toBottom);
+                tabBarcode.startAnimation(toBottom);
+            }
         }
 
 
