@@ -223,6 +223,6 @@ public class FoodSearch extends Activity implements View.OnClickListener,SelectL
 
     @Override
     public void onItemClicked(FoodSearchItem myModel) {
-        Toast.makeText(this,myModel.getFood_name(),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,myModel.getFood_name(),Toast.LENGTH_SHORT).show();
     }
 }
