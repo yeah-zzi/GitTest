@@ -32,11 +32,12 @@ public class Register extends AppCompatActivity {
     Button allergyBtn,nameBtn;
     EditText edit_name;
 
+    //리사이클러뷰 선언 및 리사이클러뷰에 넣을 아이템 선언
     public RecyclerView registerallergyrecyclerView;
     public ArrayList<AllergyItem> allergyitems = new ArrayList<AllergyItem>();
 
+    //파이어베이스에서 데이터베이스 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    //알러지 레퍼런스 가져ㅗ기
     DatabaseReference allergyDB,userdb;
 
     @Override
@@ -47,7 +48,7 @@ public class Register extends AppCompatActivity {
         registerallergyrecyclerView = findViewById(R.id.allergyregister);
         registerallergyrecyclerView.setHasFixedSize(true);
 
-
+        //리사이클러뷰에 매니저와 어댑터를 연결
         registerallergyrecyclerView.setLayoutManager(new GridLayoutManager(this, 5));
         registerallergyrecyclerView.setAdapter(new RegisterAllergyAdapter(allergyitems));
 
@@ -56,7 +57,7 @@ public class Register extends AppCompatActivity {
         edit_name = findViewById(R.id.edittextnickname);
         nameBtn = findViewById(R.id.idbuttion);
 
-
+        //닉네임 중복 확인 버튼을 누르면 쓰여있는 닉네임을 받아서 데이터베이스에 넣는다
         nameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +67,7 @@ public class Register extends AppCompatActivity {
             }
         });
 
+        //시작하기 버튼을 누르면 main화면으로 이동한다
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +77,7 @@ public class Register extends AppCompatActivity {
             }
         });
 
+        //알러지 선택 버튼을 누르면 알러지 선택 dialog창을 띄워준다
         allergyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,6 +91,7 @@ public class Register extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        //파이어베이스에 저장되어 있는 회원의 알러지 정보를 받아 해당하는 알러지를 recyclerview로 나타낸다
         allergyDB = database.getReference().child("userid").child("allergy");
         allergyDB.addValueEventListener(new ValueEventListener() {
             @Override
