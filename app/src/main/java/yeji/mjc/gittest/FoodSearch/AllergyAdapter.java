@@ -21,14 +21,15 @@ public class AllergyAdapter extends RecyclerView.Adapter<Allergy_recycle_holder>
 
     ArrayList<AllergyItem> items;
 
+    //파이어베이스에서 데이터베이스 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    //알러지 레퍼런스 가져ㅗ기
     DatabaseReference allergyDB;
 
     public AllergyAdapter(ArrayList<AllergyItem> items) {
         this.items = items;
     }
 
+    //리사이클러뷰 홀더를 연결한다
     public Allergy_recycle_holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.allergy_search_recyclerview,parent,false);
         return new Allergy_recycle_holder(v);
@@ -40,6 +41,7 @@ public class AllergyAdapter extends RecyclerView.Adapter<Allergy_recycle_holder>
         holder.food_name.setText(items.get(position).getAllergy_name());
         String deleteAllergyName = items.get(position).getAllergy_name();
 
+        //x버튼을 누를시 해당 알러지를 파이어베이스에서 삭제하며 해당 리사이클러뷰도 삭제한다
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

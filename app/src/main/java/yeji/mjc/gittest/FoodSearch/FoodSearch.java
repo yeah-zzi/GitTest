@@ -53,6 +53,7 @@ public class FoodSearch extends Activity implements View.OnClickListener,SelectL
         recyclerView = findViewById(R.id.foodSearchRecyclerView);
         recyclerView.setHasFixedSize(true);
 
+        //초기 화면인 메뉴가 채소로 되어있을 때의 아이템 추가
         items.add(new FoodSearchItem(R.drawable.apple,"감자"));
         items.add(new FoodSearchItem(R.drawable.gazi,"가지"));
         items.add(new FoodSearchItem(R.drawable.sweetpotato,"고구마"));
@@ -78,6 +79,7 @@ public class FoodSearch extends Activity implements View.OnClickListener,SelectL
         items.add(new FoodSearchItem(R.drawable.papurika,"파프리카"));
         items.add(new FoodSearchItem(R.drawable.pimang,"피망"));
 
+        //리사이클러뷰 매니저와 어댑터 지정
         recyclerView.setLayoutManager(new GridLayoutManager(this,5));
         foodSearchAdapter = new FoodSearchAdapter(this,items,this);
         recyclerView.setAdapter(foodSearchAdapter);
@@ -221,6 +223,6 @@ public class FoodSearch extends Activity implements View.OnClickListener,SelectL
 
     @Override
     public void onItemClicked(FoodSearchItem myModel) {
-        Toast.makeText(this,myModel.getFood_name(),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,myModel.getFood_name(),Toast.LENGTH_SHORT).show();
     }
 }

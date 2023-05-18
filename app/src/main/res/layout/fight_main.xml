@@ -12,7 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="고양이님이 이기고 있습니다!"
-        android:layout_marginTop="20dp"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_marginTop="18dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         tools:ignore="MissingConstraints" />
@@ -22,7 +24,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="23일 뒤 대결이 종료됩니다."
-        android:textSize="16dp"
+        android:textSize="15dp"
+        android:textStyle="bold"
         android:layout_marginTop="5dp"
         app:layout_constraintTop_toBottomOf="@id/winner"
         app:layout_constraintRight_toRightOf="parent"
@@ -33,7 +36,8 @@
         android:max="100"
         android:progress="72"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="150dp"
+        android:progressDrawable="@drawable/fb_progressbar"
+        android:layout_width="170dp"
         android:layout_height="30dp"
         android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -47,9 +51,9 @@
         android:src="@drawable/cat"
         app:civ_border_color="#C11E1E"
         app:civ_border_width="5dp"
-        app:layout_constraintRight_toLeftOf="@id/ProgressBar"
         app:layout_constraintTop_toTopOf="@id/ProgressBar"
         app:layout_constraintBottom_toBottomOf="@id/ProgressBar"
+        app:layout_constraintRight_toLeftOf="@+id/ProgressBar"
         tools:ignore="MissingConstraints" />
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -87,11 +91,25 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
+        android:id="@+id/food_battle_range"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="7일째                  "
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:textColor="#BA2015"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/ProgressBar"
+       app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
         android:id="@+id/ing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="7일째 대결 진행중"
-        android:textSize="17dp"
+        android:text="             대결 진행중"
+        android:textSize="18dp"
+        android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginTop="30dp"
         app:layout_constraintTop_toBottomOf="@id/ProgressBar"
@@ -104,8 +122,9 @@
         android:layout_height="wrap_content"
         android:text="고양이님 (나)"
         android:textSize="17dp"
+        android:textStyle="bold"
         android:textColor="@color/black"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/ing"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/Friend"/>
@@ -115,8 +134,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="13번"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         android:textSize="16dp"
-        android:backgroundTint="#878787"
+        android:backgroundTint="@color/main_yellow"
         app:layout_constraintTop_toBottomOf="@id/Me"
         app:layout_constraintLeft_toLeftOf="@id/Me"
         app:layout_constraintRight_toRightOf="@id/Me"/>
@@ -127,8 +148,9 @@
         android:layout_height="wrap_content"
         android:text="강아지님 (친구)"
         android:textSize="17dp"
+        android:textStyle="bold"
         android:textColor="@color/black"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/ing"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@id/Me"/>
@@ -139,7 +161,8 @@
         android:layout_height="wrap_content"
         android:text="5번"
         android:textSize="16dp"
-        android:backgroundTint="#787878"
+        android:textStyle="bold"
+        android:backgroundTint="#B1B1B1"
         app:layout_constraintTop_toBottomOf="@id/Friend"
         app:layout_constraintLeft_toLeftOf="@id/Friend"
         app:layout_constraintRight_toRightOf="@id/Friend"/>
@@ -195,5 +218,20 @@
         app:layout_constraintTop_toBottomOf="@id/bar_5"
         android:orientation="vertical" />
 
+    <LinearLayout
+        android:id="@+id/bar_5"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#DADADA"
+        app:layout_constraintTop_toBottomOf="@id/bar_4"
+        android:orientation="vertical" />
+
+    <LinearLayout
+        android:id="@+id/bar_6"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#F6F0B8"
+        app:layout_constraintTop_toBottomOf="@id/bar_5"
+        android:orientation="vertical" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

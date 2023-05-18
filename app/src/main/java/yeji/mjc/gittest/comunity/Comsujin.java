@@ -1,20 +1,41 @@
 package yeji.mjc.gittest.comunity;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import yeji.mjc.gittest.FoodSearch.FridgePlus;
+import yeji.mjc.gittest.MainActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import yeji.mjc.gittest.AllergyItem;
 import yeji.mjc.gittest.R;
 
 public class Comsujin extends Fragment implements View.OnClickListener{
 
     ColorStateList def;
     TextView life_info,tip,food_battle,select;
+
+    //파이어베이스에서 데이터베이스 가져오기
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference foodbattleDB;
+    int foodbattle_count = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,11 +47,10 @@ public class Comsujin extends Fragment implements View.OnClickListener{
 
         getFragmentManager().beginTransaction().add(R.id.tip_container, new Life_Fragment()).commit();
 
-
-
         life_info = view.findViewById(R.id.life_info);
         tip = view.findViewById(R.id.tip);
         food_battle = view.findViewById(R.id.food_battle);
+
 
         life_info.setOnClickListener(this);
         tip.setOnClickListener(this);
@@ -39,6 +59,20 @@ public class Comsujin extends Fragment implements View.OnClickListener{
         select = view.findViewById(R.id.select);
         def = tip.getTextColors();
 
+        //파이어베이스에서 유저당 대결횟수를 가져옴
+        foodbattleDB = database.getReference().child("userid").child("foodbattle_count");
+        foodbattleDB.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                foodbattle_count = (int)snapshot.getValue(Integer.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         return view;
     }
@@ -46,7 +80,7 @@ public class Comsujin extends Fragment implements View.OnClickListener{
     public void onClick(View view){
         if(view.getId() == R.id.life_info){
             select.animate().x(70).setDuration(100);
-            //밑을 lifestyle_practice()를 바뀐 자바클래스 이름으로 바꾸시면 되용 집밥대결도 동일
+            //선택되는 메뉴에 따라 프래그먼트가 해당 커뮤니티의 프래그먼트로 바뀐다
             getFragmentManager().beginTransaction().replace(R.id.tip_container, new Life_Fragment()).commit();
         }else if(view.getId()==R.id.tip){
             int size = tip.getWidth() + 75;
@@ -55,7 +89,14 @@ public class Comsujin extends Fragment implements View.OnClickListener{
         }else if(view.getId()==R.id.food_battle){
             int size = tip.getWidth() * 2 + 85;
             select.animate().x(size).setDuration(100);
-            getFragmentManager().beginTransaction().replace(R.id.tip_container, new Fight_fragment()).commit();
+            //유저 대결횟수가 0일때와 아닐때의 화면이 다르게 나온다
+            if(foodbattle_count == 0)
+            {
+                getFragmentManager().beginTransaction().replace(R.id.tip_container, new NewFight_fragment()).commit();
+            }else{
+                getFragmentManager().beginTransaction().replace(R.id.tip_container, new Fight_fragment()).commit();
+            }
         }
     }//
+
 }

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F8F8"
+    android:background="#ffffff"
+    android:layout_weight="1"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bellset1">
 
@@ -35,10 +36,17 @@
     </LinearLayout>
 
     <FrameLayout
+        android:layout_marginTop="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="670dp"
+        android:background="#f8f8f8">
+
+
+    <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="10dp"
         android:background="#ffffff">
 
         <TextView
@@ -70,7 +78,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="80dp"
         android:background="#ffffff" >
 
         <TextView
@@ -101,7 +109,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="150dp"
         android:background="#ffffff" >
 
         <TextView
@@ -131,7 +139,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="310dp"
+        android:layout_marginTop="220dp"
         android:background="#ffffff" >
 
         <TextView
@@ -161,7 +169,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="380dp"
+        android:layout_marginTop="290dp"
         android:background="#ffffff" >
 
         <TextView
@@ -187,7 +195,7 @@
             />
 
     </FrameLayout>
+    </FrameLayout>
 
 
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</FrameLayout>
