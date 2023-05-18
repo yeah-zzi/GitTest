@@ -4,38 +4,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import yeji.mjc.gittest.FoodSearch.FoodSearch;
 import yeji.mjc.gittest.R;
 
+public class New_friend_sub extends AppCompatActivity {
 
-public class New_fight_sub extends AppCompatActivity {
-
-    ImageButton close, bt1;
+    ImageButton close;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_fight);
+        setContentView(R.layout.add_friend);
 
         close = findViewById(R.id.close);
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
-            }
-        });
-
-        bt1 = findViewById(R.id.bt1);
-        bt1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent fridgeSearchIntent = new Intent(getApplicationContext(), Select_date_sub.class);
-                startActivity(fridgeSearchIntent);
             }
         });
     }

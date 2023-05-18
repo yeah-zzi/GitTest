@@ -27,11 +27,11 @@ public class Fight_fragment extends Fragment implements AddfightListener{
     }
 
     @Override
-    public void onItemClicked(New_fight fight_fragment) {
+    public void onItemClicked(New_fight_sub fight_fragment) {
         Intent fridgePlusIntent = new Intent(getActivity(), New_fight_sub.class);
         startActivity(fridgePlusIntent);
     }
 
 
-// test
+//  test
 }
