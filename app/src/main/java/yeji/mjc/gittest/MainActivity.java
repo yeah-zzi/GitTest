@@ -6,13 +6,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -20,9 +16,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import yeji.mjc.gittest.FoodSearch.FridgePlus;
 import yeji.mjc.gittest.cart.Cartsujin;
 import yeji.mjc.gittest.comunity.Comsujin;
+import yeji.mjc.gittest.comunity.New_fight_sub;
+import yeji.mjc.gittest.comunity.New_friend_sub;
 import yeji.mjc.gittest.frige.Frigesujin;
-import yeji.mjc.gittest.mypage.Bellset;
-import yeji.mjc.gittest.mypage.UserInfoChange;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -79,12 +75,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         tabFriendAdd = findViewById(R.id.tabFriendAdd);
         tabFriendAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // tabFriendAdd 누르면 친구 추가 화면
+                Intent addfriend = new Intent(MainActivity.this, New_friend_sub.class);
+                startActivity(addfriend);
             }
         });
 
@@ -108,7 +104,8 @@ public class MainActivity extends AppCompatActivity {
         tabBattle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // tabBattle 누르면 배틀신청
+                Intent addfight = new Intent(MainActivity.this, New_fight_sub.class);
+                startActivity(addfight);
             }
         });
 
