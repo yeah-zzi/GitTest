@@ -126,51 +126,57 @@ public class MainActivity extends AppCompatActivity {
                     //냉장고
                     case R.id.f:
                         community = false;
-                        clicked = false;
-                        if(from_comm == true){
-                            tab.startAnimation(rotateClose);
-                            tabFriendAdd.startAnimation(toBottom);
-                            tabPost.startAnimation(toBottom);
-                            tabCamera.startAnimation(toBottom);
-                            tabBattle.startAnimation(toBottom);
-                            tabWrite.startAnimation(toBottom);
-                            tabBarcode.startAnimation(toBottom);
-                        }else{
-                            setAnimation();
+                        if(clicked == true){
+                            clicked = false;
+                            if(from_comm == true){
+                                tab.startAnimation(rotateClose);
+                                tabFriendAdd.startAnimation(toBottom);
+                                tabPost.startAnimation(toBottom);
+                                tabCamera.startAnimation(toBottom);
+                                tabBattle.startAnimation(toBottom);
+                                tabWrite.startAnimation(toBottom);
+                                tabBarcode.startAnimation(toBottom);
+                            }else{
+                                setAnimation();
+                            }
                         }
                         from_comm = false;
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, new Frigesujin()).commit();
                         break;
                     case R.id.c://장바구니
                         community = false;
-                        clicked = false;
-                        if(from_comm == true){
-                            tab.startAnimation(rotateClose);
-                            tabFriendAdd.startAnimation(toBottom);
-                            tabPost.startAnimation(toBottom);
-                            tabCamera.startAnimation(toBottom);
-                            tabBattle.startAnimation(toBottom);
-                            tabWrite.startAnimation(toBottom);
-                            tabBarcode.startAnimation(toBottom);
-                        }else{
-                            setAnimation();
+                        if(clicked == true){
+                            clicked = false;
+                            if(from_comm == true){
+                                tab.startAnimation(rotateClose);
+                                tabFriendAdd.startAnimation(toBottom);
+                                tabPost.startAnimation(toBottom);
+                                tabCamera.startAnimation(toBottom);
+                                tabBattle.startAnimation(toBottom);
+                                tabWrite.startAnimation(toBottom);
+                                tabBarcode.startAnimation(toBottom);
+                            }else{
+                                setAnimation();
+                            }
                         }
                         from_comm = false;
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, new Cartsujin()).commit();
                         break;
                     case R.id.p://마이페이지
                         community = false;
-                        clicked = false;
-                        if(from_comm == true){
-                            tab.startAnimation(rotateClose);
-                            tabFriendAdd.startAnimation(toBottom);
-                            tabPost.startAnimation(toBottom);
-                            tabCamera.startAnimation(toBottom);
-                            tabBattle.startAnimation(toBottom);
-                            tabWrite.startAnimation(toBottom);
-                            tabBarcode.startAnimation(toBottom);
-                        }else{
-                            setAnimation();
+                        if(clicked == true){
+                            clicked = false;
+                            if(from_comm == true){
+                                tab.startAnimation(rotateClose);
+                                tabFriendAdd.startAnimation(toBottom);
+                                tabPost.startAnimation(toBottom);
+                                tabCamera.startAnimation(toBottom);
+                                tabBattle.startAnimation(toBottom);
+                                tabWrite.startAnimation(toBottom);
+                                tabBarcode.startAnimation(toBottom);
+                            }else{
+                                setAnimation();
+                            }
                         }
                         from_comm = false;
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyPagesujin()).commit();
