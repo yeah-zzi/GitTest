@@ -33,5 +33,5 @@ public class Fight_fragment extends Fragment implements AddfightListener{
     }
 
 
-// test
+//  test
 }
