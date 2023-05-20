@@ -76,6 +76,7 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/days3"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:background="@drawable/radius_noselect"
@@ -87,6 +88,7 @@
         app:layout_constraintBottom_toTopOf="@+id/complete"/>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/days7"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:background="@drawable/radius_select"
@@ -99,6 +101,7 @@
         app:layout_constraintBottom_toTopOf="@+id/complete"/>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/days30"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:background="@drawable/radius_noselect"

@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/back"
         android:layout_width="350dp"
-        android:layout_height="420dp"
+        android:layout_height="500dp"
         android:background="@drawable/fridge_food_card"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -98,42 +98,20 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="70dp"
+        android:paddingLeft="15dp"
         android:background="@null"
         app:layout_constraintTop_toBottomOf="@id/image1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <ImageView
-        android:id="@+id/friend_view"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/friend_add_recyclerview"
         android:layout_width="250dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/spinner_background"
-        app:layout_constraintRight_toRightOf="@id/back"
-        app:layout_constraintLeft_toLeftOf="@id/back"
-        app:layout_constraintTop_toBottomOf="@id/edt1"/>
-
-    <ImageView
-        android:id="@+id/friend_img"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
-        android:src="@drawable/food_squid"
-        app:layout_constraintLeft_toLeftOf="@id/friend_view"
-        app:layout_constraintTop_toTopOf="@id/friend_view"
-        app:layout_constraintBottom_toBottomOf="@id/friend_view"/>
-
-    <TextView
-        android:layout_width="160dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:text="Hyerim"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toRightOf="@+id/friend_img"
-        app:layout_constraintTop_toTopOf="@id/friend_view"
-        app:layout_constraintBottom_toBottomOf="@id/friend_view"/>
+        android:layout_height="130dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintTop_toBottomOf="@id/edt1"
+        app:layout_constraintLeft_toLeftOf="@+id/back"
+        app:layout_constraintRight_toRightOf="@+id/back"/>
 
     <ImageButton
         android:id="@+id/bt1"

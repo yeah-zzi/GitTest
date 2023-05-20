@@ -2,7 +2,6 @@ package yeji.mjc.gittest.FoodSearch;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import yeji.mjc.gittest.R;
+import yeji.mjc.gittest.SelectListener;
 
 public class FoodSearchAdapter extends RecyclerView.Adapter<FoodSearch_recycle_holder> {
 

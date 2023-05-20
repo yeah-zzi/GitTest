@@ -31,6 +31,7 @@ public class Register extends AppCompatActivity {
     ImageButton startBtn;
     Button allergyBtn,nameBtn;
     EditText edit_name;
+    String userid = "임시용 유저 아이디1";
 
     //리사이클러뷰 선언 및 리사이클러뷰에 넣을 아이템 선언
     public RecyclerView registerallergyrecyclerView;
@@ -62,7 +63,7 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name = edit_name.getText().toString();
-                userdb = database.getReference().child("userid").child("user_name");
+                userdb = database.getReference().child("user").child(userid).child("user_info").child("user_name");
                 userdb.setValue(name);
             }
         });
@@ -73,7 +74,7 @@ public class Register extends AppCompatActivity {
             public void onClick(View v) {
                 //가입하는 회원의 집밥대결 횟수를 0으로 만든다
                 int num = 1;
-                foodbattleDB = database.getReference().child("userid").child("foodbattle_count");
+                foodbattleDB = database.getReference().child("user").child(userid).child("foodbattle_count");
                 foodbattleDB.setValue(num);
                 Intent registerIntent = new Intent(Register.this, MainActivity.class);
                 startActivity(registerIntent);
@@ -96,7 +97,7 @@ public class Register extends AppCompatActivity {
         super.onStart();
 
         //파이어베이스에 저장되어 있는 회원의 알러지 정보를 받아 해당하는 알러지를 recyclerview로 나타낸다
-        allergyDB = database.getReference().child("userid").child("allergy");
+        allergyDB = database.getReference().child("user").child(userid).child("allergy");
         allergyDB.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

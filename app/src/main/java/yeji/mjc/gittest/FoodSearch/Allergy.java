@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 import yeji.mjc.gittest.AllergyItem;
 import yeji.mjc.gittest.R;
+import yeji.mjc.gittest.SelectListener;
 import yeji.mjc.gittest.firebase.AllergyFirebase;
 
 public class Allergy extends Activity implements View.OnClickListener, SelectListener {
@@ -45,6 +46,7 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
 
     ColorStateList def;
     TextView vegetable, fruit, meet, seafood, milk, drink, select;
+    String userid = "임시용 유저 아이디1";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -108,7 +110,7 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
         allergyrecyclerView.setHasFixedSize(true);
 
         //파이어베이스에 저장되어 있는 알러지정보를 유저아이디 정보를 통해 가져옴
-        allergyDB = database.getReference().child("userid").child("allergy");
+        allergyDB = database.getReference().child("user").child(userid).child("allergy");
         //파이어베이스에 저장되어 있는 알러지정보가 변경되면 이벤트를 작동함
         allergyDB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -299,7 +301,7 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
     //해당 알러지를 파이어베이스에 추가한다
     public void addAllergy(String name, int img) {
         AllergyFirebase allergyFirebase = new AllergyFirebase(name, img);
-        databaseReference.child("userid").child("allergy").child(name).setValue(allergyFirebase);
+        databaseReference.child("user").child(userid).child("allergy").child(name).setValue(allergyFirebase);
     }
 
 }

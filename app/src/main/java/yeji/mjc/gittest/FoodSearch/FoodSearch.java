@@ -5,7 +5,6 @@ import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -14,8 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import yeji.mjc.gittest.R;
+import yeji.mjc.gittest.SelectListener;
 
-public class FoodSearch extends Activity implements View.OnClickListener,SelectListener {
+public class FoodSearch extends Activity implements View.OnClickListener, SelectListener {
 
     //리사이클러뷰 변수 선언
     public RecyclerView recyclerView;
