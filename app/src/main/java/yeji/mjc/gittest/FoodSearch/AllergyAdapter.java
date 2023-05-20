@@ -24,6 +24,7 @@ public class AllergyAdapter extends RecyclerView.Adapter<Allergy_recycle_holder>
     //파이어베이스에서 데이터베이스 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference allergyDB;
+    String userid = "임시용 유저 아이디1";
 
     public AllergyAdapter(ArrayList<AllergyItem> items) {
         this.items = items;
@@ -46,7 +47,7 @@ public class AllergyAdapter extends RecyclerView.Adapter<Allergy_recycle_holder>
             @Override
             public void onClick(View v) {
 
-                allergyDB = database.getReference().child("userid").child("allergy").child("allergy").child(deleteAllergyName);
+                allergyDB = database.getReference().child("user").child(userid).child("allergy").child(deleteAllergyName);
                 allergyDB.removeValue();
 
                 items.remove(position);

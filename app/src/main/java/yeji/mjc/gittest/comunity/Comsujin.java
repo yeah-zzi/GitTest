@@ -32,6 +32,8 @@ public class Comsujin extends Fragment implements View.OnClickListener{
     ColorStateList def;
     TextView life_info,tip,food_battle,select;
 
+    String userid = "임시용 유저 아이디1";
+
     //파이어베이스에서 데이터베이스 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference foodbattleDB;
@@ -60,7 +62,7 @@ public class Comsujin extends Fragment implements View.OnClickListener{
         def = tip.getTextColors();
 
         //파이어베이스에서 유저당 대결횟수를 가져옴
-        foodbattleDB = database.getReference().child("userid").child("foodbattle_count");
+        foodbattleDB = database.getReference().child("user").child(userid).child("foodbattle_count");
         foodbattleDB.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

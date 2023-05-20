@@ -24,6 +24,8 @@ public class RegisterAllergyAdapter extends RecyclerView.Adapter<RegisterAllergy
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference allergyDB;
 
+    String userid = "임시용 유저 아이디1";
+
     public RegisterAllergyAdapter(ArrayList<AllergyItem> items) {
         this.items = items;
     }
@@ -45,7 +47,7 @@ public class RegisterAllergyAdapter extends RecyclerView.Adapter<RegisterAllergy
             @Override
             public void onClick(View v) {
 
-                allergyDB = database.getReference().child("userid").child("allergy").child(deleteAllergyName);
+                allergyDB = database.getReference().child("user").child(userid).child("allergy").child(deleteAllergyName);
                 allergyDB.removeValue();
 
                 items.remove(position);

@@ -21,7 +21,7 @@ public class Fight_fragment extends Fragment implements AddfightListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.food_fight, container, false);
+        View view = inflater.inflate(R.layout.fight_main, container, false);
 
         return view;
     }
