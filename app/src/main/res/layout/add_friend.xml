@@ -107,6 +107,7 @@
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
         android:src="@drawable/food_squid"
+        android:visibility="invisible"
         app:layout_constraintLeft_toLeftOf="@id/friend_view"
         app:layout_constraintTop_toTopOf="@id/friend_view"
         app:layout_constraintBottom_toBottomOf="@id/friend_view"/>
@@ -119,6 +120,7 @@
         android:text="Hyerim"
         android:textSize="25dp"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintLeft_toRightOf="@+id/friend_img"
         app:layout_constraintTop_toTopOf="@id/friend_view"
         app:layout_constraintBottom_toBottomOf="@id/friend_view"/>
