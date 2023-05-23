@@ -42,15 +42,14 @@ public class LoginActivity extends AppCompatActivity {
             public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
                 // 이때 토큰이 전달이 되면 로그인이 성공한 것이고 토큰이 전달되지 않았다면 로그인 실패
                 if(oAuthToken != null) {
-                    //로그인이 되었을 때 처리할 일들
+                //로그인이 되었을 때 처리할 일들
                     Log.i("user", oAuthToken.getAccessToken() + " " + oAuthToken.getRefreshToken());
-                    updateKakaoLoginUi();
                 }
                 if (throwable != null) {
-                    // 결과 오류 시, 처리할 부분
+                // 결과 오류 시, 처리할 부분
                     Log.w(TAG, "invoke: " + throwable.getLocalizedMessage());
                 }
-
+                updateKakaoLoginUi();
                 return null;
             }
         };
@@ -83,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
 //            }
 //        });
 
-
+        updateKakaoLoginUi();
     }
     private void updateKakaoLoginUi() {
         UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
@@ -93,13 +92,13 @@ public class LoginActivity extends AppCompatActivity {
                 if( user != null) {
 
                     // 유저의 아이디
-                    Log.d(TAG,"invoke: id " + user.getId());
+                    Log.d(TAG,"invoke: id" + user.getId());
 //                    // 유저의 어카운트정보에 이메일
-                    Log.d(TAG,"invoke: email " + user.getKakaoAccount().getEmail());
+                    Log.d(TAG,"invoke: nickname" + user.getKakaoAccount().getEmail());
 //                    // 유저의 어카운트 정보의 프로파일에 닉네임
-                    Log.d(TAG,"invoke: nickname " + user.getKakaoAccount().getProfile().getNickname());
+                    Log.d(TAG,"invoke: email" + user.getKakaoAccount().getProfile().getNickname());
                     // 유저의 이미지 URL을 불러옵니다.
-                    // Log.d(TAG, "userimage " + user.getKakaoAccount().getProfile().getProfileImageUrl());
+                   // Log.d(TAG, "userimage " + user.getKakaoAccount().getProfile().getProfileImageUrl());
 
 //                    // 유저의 어카운트 파일의 성별
 //                    Log.d(TAG,"invoke: gerder" + user.getKakaoAccount().getGender());
