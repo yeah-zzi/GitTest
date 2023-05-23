@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="yeji.mjc.gittest">
 
-    //인터넷 사용 권한 파이어베이스를 위해 (+카카오도 씀)
+    //인터넷 사용 권한 파이어베이스를 위해 +카카오
     <uses-permission android:name="android.permission.INTERNET"/>
 
     //바코드 카메라
