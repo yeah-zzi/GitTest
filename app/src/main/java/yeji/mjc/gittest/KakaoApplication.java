@@ -10,6 +10,6 @@ public class KakaoApplication extends Application {
         super.onCreate();
 
         // Kakao SDK 초기화
-        KakaoSdk.init(this, "17d02b02412588cc1e7d721a2982c0a3");
+        KakaoSdk.init(this, "64551003f034bdc438ee13c677e73f8a");
     }
 }

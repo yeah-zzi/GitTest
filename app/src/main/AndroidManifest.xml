@@ -20,9 +20,11 @@
         android:hardwareAccelerated="true"
         android:theme="@style/Theme.GitTest"
         android:name=".KakaoApplication"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        android:usesCleartextTraffic="true" >
+
         <activity
-            android:name=".StartPage"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,6 +32,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
 
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
@@ -41,7 +47,7 @@
 
                 <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
                 <data android:host="oauth"
-                    android:scheme="kakao17d02b02412588cc1e7d721a2982c0a3" />
+                    android:scheme="kakao64551003f034bdc438ee13c677e73f8a" />
             </intent-filter>
         </activity>
 

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.103125" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/FoodieMate/app/src/main/res/drawable-v24/back_select_bar.xml" value="0.274" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/drawable/fridge_type_bar.xml" value="0.1945" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/activity_main.xml" value="0.3619791666666667" />
@@ -25,7 +26,9 @@
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/toolbar.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/menu/bottom_nav_menu.xml" value="0.30833333333333335" />
         <entry key="app/src/main/res/drawable/circle_progressbar.xml" value="0.1685" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/mypage.xml" value="0.2453125" />
+        <entry key="app/src/main/res/layout/register.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/startpage.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/toolbar.xml" value="0.2453125" />
       </map>

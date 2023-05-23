@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GitTest</string>
+    <string name="app_name">FoodieMate</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -27,4 +27,7 @@
     <item>11월</item>
     <item>12월</item>
     </string-array>
+
+    <string name="kakao_app_key">64551003f034bdc438ee13c677e73f8a</string>
 </resources>
+
