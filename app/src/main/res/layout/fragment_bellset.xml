@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
+    android:id="@+id/bellcontainer"
     tools:context=".mypage.Bellset">
 
     <LinearLayout
@@ -33,162 +34,166 @@
     </LinearLayout>
 
     <FrameLayout
-        android:id="@+id/frameLayout"
+        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="100dp"
-        android:background="#ffffff"
-        android:elevation="3dp" >
+        android:layout_height="670dp"
+        android:background="#f8f8f8">
 
-        <TextView
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="15dp"
-            android:text="전체 알림"
-            android:elevation="10dp"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:background="#ffffff">
 
-        <Switch
-            android:id="@+id/sw1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:switchPadding="8dp"
-            android:thumb="@drawable/switch_thumb"
-            android:track="@drawable/selector_switch"
-            android:switchMinWidth="50dp"
-            android:layout_marginLeft="320dp"
-            android:layout_marginTop="15dp"
-            android:checked="true"
-            />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="15dp"
+                android:text="전체 알림"
+                android:elevation="10dp"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/sw1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:switchPadding="8dp"
+                android:thumb="@drawable/switch_thumb"
+                android:track="@drawable/selector_switch"
+                android:switchMinWidth="50dp"
+                android:layout_marginLeft="320dp"
+                android:layout_marginTop="15dp"
+                android:checked="true"
+                />
 
 
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="80dp"
+            android:background="#ffffff" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="15dp"
+                android:text="유통기한 알림"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/sw2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:switchPadding="8dp"
+                android:thumb="@drawable/switch_thumb"
+                android:track="@drawable/selector_switch"
+                android:switchMinWidth="50dp"
+                android:layout_marginLeft="320dp"
+                android:layout_marginTop="15dp"
+                android:checked="true"
+                />
+
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="150dp"
+            android:background="#ffffff" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="15dp"
+                android:text="수량 알림"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/sw3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:switchPadding="8dp"
+                android:thumb="@drawable/switch_thumb"
+                android:track="@drawable/selector_switch"
+                android:switchMinWidth="50dp"
+                android:layout_marginLeft="320dp"
+                android:layout_marginTop="15dp"
+                android:checked="false"
+                />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="220dp"
+            android:background="#ffffff" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="15dp"
+                android:text="커뮤니티 알림"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/sw4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:switchPadding="8dp"
+                android:thumb="@drawable/switch_thumb"
+                android:track="@drawable/selector_switch"
+                android:switchMinWidth="50dp"
+                android:layout_marginLeft="320dp"
+                android:layout_marginTop="15dp"
+                android:checked="false"
+                />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="290dp"
+            android:background="#ffffff" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="15dp"
+                android:text="집밥 대결 알림"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/sw5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:switchPadding="8dp"
+                android:thumb="@drawable/switch_thumb"
+                android:track="@drawable/selector_switch"
+                android:switchMinWidth="50dp"
+                android:layout_marginLeft="320dp"
+                android:layout_marginTop="15dp"
+                android:checked="false"
+                />
+
+        </FrameLayout>
     </FrameLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="170dp"
-        android:background="#ffffff"
-        android:elevation="3dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="15dp"
-            android:text="유통기한 알림"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <Switch
-            android:id="@+id/sw2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:switchPadding="8dp"
-            android:thumb="@drawable/switch_thumb"
-            android:track="@drawable/selector_switch"
-            android:switchMinWidth="50dp"
-            android:layout_marginLeft="320dp"
-            android:layout_marginTop="15dp"
-            android:checked="true"
-            />
-
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="240dp"
-        android:background="#ffffff"
-        android:elevation="3dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="15dp"
-            android:text="수량 알림"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <Switch
-            android:id="@+id/sw3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:switchPadding="8dp"
-            android:thumb="@drawable/switch_thumb"
-            android:track="@drawable/selector_switch"
-            android:switchMinWidth="50dp"
-            android:layout_marginLeft="320dp"
-            android:layout_marginTop="15dp"
-            android:checked="false"
-            />
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="310dp"
-        android:background="#ffffff"
-        android:elevation="3dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="15dp"
-            android:text="커뮤니티 알림"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <Switch
-            android:id="@+id/sw4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:switchPadding="8dp"
-            android:thumb="@drawable/switch_thumb"
-            android:track="@drawable/selector_switch"
-            android:switchMinWidth="50dp"
-            android:layout_marginLeft="320dp"
-            android:layout_marginTop="15dp"
-            android:checked="false"
-            />
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="380dp"
-        android:background="#ffffff"
-        android:elevation="3dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="15dp"
-            android:text="집밥 대결 알림"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <Switch
-            android:id="@+id/sw5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:switchPadding="8dp"
-            android:thumb="@drawable/switch_thumb"
-            android:track="@drawable/selector_switch"
-            android:switchMinWidth="50dp"
-            android:layout_marginLeft="320dp"
-            android:layout_marginTop="15dp"
-            android:checked="false"
-            />
-
-    </FrameLayout>
 
 </FrameLayout>
