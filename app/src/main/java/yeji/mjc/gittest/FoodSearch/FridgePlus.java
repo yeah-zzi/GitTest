@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ public class FridgePlus extends AppCompatActivity {
     //변수 선언
     ImageButton plusBTN,cancelBTN,completeBTN,calendarBTN;
     TextView foodName,foodCount,deadLine;
+    ImageView foodImg;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,6 +28,8 @@ public class FridgePlus extends AppCompatActivity {
         cancelBTN = findViewById(R.id.cancel);
         completeBTN = findViewById(R.id.complete);
         calendarBTN = findViewById(R.id.calendar);
+        foodName = findViewById(R.id.search_food_name);
+        foodImg = findViewById(R.id.food_img);
 
         //취소버튼을 누르면 dialog창이 닫힌다
         cancelBTN.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +55,9 @@ public class FridgePlus extends AppCompatActivity {
                 startActivity(fridgeSearchIntent);
             }
         });
+
+        String productName = getIntent().getStringExtra("productName");
+        foodName.setText(productName);
     }
 
     //팝업창을 종료할때 하단으로 내려가는 애니메이션 효과를 제거하는 함수
