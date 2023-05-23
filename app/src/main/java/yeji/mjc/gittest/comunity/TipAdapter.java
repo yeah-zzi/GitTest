@@ -1,4 +1,5 @@
 package yeji.mjc.gittest.comunity;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +31,7 @@ public class TipAdapter extends RecyclerView.Adapter<Tip_recycle_holder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Tip_recycle_holder holder, int position) {
+    public void onBindViewHolder(@NonNull Tip_recycle_holder holder, @SuppressLint("RecyclerView") int position) {
         holder.tip_img.setImageResource(items.get(position).getTip_img());
         holder.id.setText(items.get(position).getId());
         holder.like.setText(items.get(position).getLike());

@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 import androidx.fragment.app.Fragment;
 
 import yeji.mjc.gittest.MainActivity;
+import yeji.mjc.gittest.MyPagesujin;
 import yeji.mjc.gittest.R;
 
 public class UserInfoChange extends Fragment {
@@ -16,6 +17,16 @@ public class UserInfoChange extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_info_change , container, false);
+        View backbtn = view.findViewById(R.id.backbtn);
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.userinfocontainer, new MyPagesujin()).commit();
+                return;
+            }
+        });
+
         return view;
     }
 }

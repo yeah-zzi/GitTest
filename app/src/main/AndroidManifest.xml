@@ -9,6 +9,10 @@
     //바코드 카메라
     <uses-permission android:name="android.permission.CAMERA"/>
 
+    //파이어베이스 이미지 저장용
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -54,11 +58,15 @@
         <activity android:name=".Barcode" android:theme="@style/DialogTheme"/>
         <activity android:name=".MainActivity"/>
         <activity android:name=".register.Register"/>
+        <activity android:name=".FoodBattle_IMG_Upload" android:theme="@style/DialogTheme"/>
         <activity android:name=".FoodSearch.FoodSearch" android:theme="@style/DialogTheme"/>
         <activity android:name=".FoodSearch.Allergy" android:theme="@style/DialogTheme"/>
         <activity android:name=".comunity.TipComment" android:theme="@style/DialogTheme"/>
         <activity android:name=".FoodSearch.FridgePlus" android:theme="@style/DialogTheme"/>
         <activity android:name=".mypage.Bellset1" android:theme="@style/DialogTheme"/>
+        <activity android:name=".comunity.New_fight_sub" android:theme="@style/DialogTheme"></activity>
+        <activity android:name=".comunity.New_friend_sub" android:theme="@style/DialogTheme"></activity>
+        <activity android:name=".comunity.Select_date_sub" android:theme="@style/DialogTheme"></activity>
 
     </application>
 

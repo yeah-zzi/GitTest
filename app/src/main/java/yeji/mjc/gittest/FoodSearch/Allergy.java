@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 import yeji.mjc.gittest.AllergyItem;
 import yeji.mjc.gittest.R;
+import yeji.mjc.gittest.SelectListener;
 import yeji.mjc.gittest.firebase.AllergyFirebase;
 
 public class Allergy extends Activity implements View.OnClickListener, SelectListener {
@@ -38,14 +39,14 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
     public RecyclerView.Adapter foodSearchAdapter, allergyAdapter;
     public ArrayList<FoodSearchItem> items = new ArrayList<FoodSearchItem>();
 
-
+    //파이어베이스에서 데이터베이스 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    //알러지 레퍼런스 가져ㅗ기
     DatabaseReference databaseReference = database.getReference();
     DatabaseReference allergyDB;
 
     ColorStateList def;
     TextView vegetable, fruit, meet, seafood, milk, drink, select;
+    String userid = "임시용 유저 아이디1";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,6 +75,7 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
         recyclerView = findViewById(R.id.foodSearchRecyclerView);
         recyclerView.setHasFixedSize(true);
 
+        //초기 화면인 메뉴가 채소로 되어있을 때의 아이템 추가
         items.add(new FoodSearchItem(R.drawable.potato, "감자"));
         items.add(new FoodSearchItem(R.drawable.gazi, "가지"));
         items.add(new FoodSearchItem(R.drawable.sweetpotato, "고구마"));
@@ -99,6 +101,7 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
         items.add(new FoodSearchItem(R.drawable.papurika, "파프리카"));
         items.add(new FoodSearchItem(R.drawable.pimang, "피망"));
 
+        //리사이클러뷰에 매니저와 어댑터를 연결
         recyclerView.setLayoutManager(new GridLayoutManager(this, 5));
         foodSearchAdapter = new FoodSearchAdapter(this, items, this);
         recyclerView.setAdapter(foodSearchAdapter);
@@ -106,13 +109,16 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
         allergyrecyclerView = findViewById(R.id.allergyRecycler);
         allergyrecyclerView.setHasFixedSize(true);
 
-        allergyDB = database.getReference().child("userid").child("allergy");
+        //파이어베이스에 저장되어 있는 알러지정보를 유저아이디 정보를 통해 가져옴
+        allergyDB = database.getReference().child("user").child(userid).child("allergy");
+        //파이어베이스에 저장되어 있는 알러지정보가 변경되면 이벤트를 작동함
         allergyDB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //파이어베이스 데이터베이스의 데이터를 받아오는 곳
-                allergyitems.clear();   //기존 배열리스트가 존재하지 않게 초기화
+                allergyitems.clear();   //기존 리사이클러뷰의 아이템이 존재하지 않게 초기화
                 for (DataSnapshot snapshot1 : snapshot.getChildren()){
+                    //알러지의 자식 key가 있다면 반복해서 알러지 정보를 받아오고 리사이클러뷰에 추가 시킨다
                     AllergyItem allergyItem = snapshot1.getValue(AllergyItem.class);
                     allergyitems.add(allergyItem);
                 }
@@ -130,7 +136,7 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
 
     public void onStart() {
         super.onStart();
-
+        //리사이클러뷰에 어댑터와 매니저를 지정한다
         allergyrecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         allergyAdapter = new AllergyAdapter(allergyitems);
         allergyrecyclerView.scrollToPosition(allergyitems.size() - 1);
@@ -139,10 +145,13 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
     }
 
     public void onClick(View view) {
+        //알러지 종류 메뉴바에 야채를 선택할 경우
         if (view.getId() == R.id.vegetable) {
+            //선택한 것이 야채임을 보여주는 애니메이션
             select.animate().x(10).setDuration(100);
+            //기존 리사이클러뷰의 아이템이 존재하지 않게 초기화
             clear();
-
+            //해당하는 아이템들 추가
             items.add(new FoodSearchItem(R.drawable.potato, "감자"));
             items.add(new FoodSearchItem(R.drawable.gazi, "가지"));
             items.add(new FoodSearchItem(R.drawable.sweetpotato, "고구마"));
@@ -171,12 +180,12 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
             for (int i = 0; i < items.size(); i++) {
                 foodSearchAdapter.notifyItemInserted(i);
             }
-        } else if (view.getId() == R.id.fruit) {
+        } else if (view.getId() == R.id.fruit) {//알러지 종류 메뉴바에 과일을 선택할 경우
             int size = fruit.getWidth() + 10;
             select.animate().x(size).setDuration(100);
-            //아이템 전부 삭제
+            //기존 리사이클러뷰의 아이템이 존재하지 않게 초기화
             clear();
-
+            //해당하는 아이템들 추가
             items.add(new FoodSearchItem(R.drawable.apple, "사과"));
             items.add(new FoodSearchItem(R.drawable.strawberry, "딸기"));
             items.add(new FoodSearchItem(R.drawable.lemon, "레몬"));
@@ -197,11 +206,12 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
             for (int i = 0; i < items.size(); i++) {
                 foodSearchAdapter.notifyItemInserted(i);
             }
-        } else if (view.getId() == R.id.meet) {
+        } else if (view.getId() == R.id.meet) {//알러지 종류 메뉴바에 고기를 선택할 경우
             int size = fruit.getWidth() * 2 + 10;
             select.animate().x(size).setDuration(100);
+            //기존 리사이클러뷰의 아이템이 존재하지 않게 초기화
             clear();
-
+            //해당하는 아이템들 추가
             items.add(new FoodSearchItem(R.drawable.sajfkldfjasldkfjsdl, "닭가슴살"));
             items.add(new FoodSearchItem(R.drawable.dfdfd, "닭날개"));
             items.add(new FoodSearchItem(R.drawable.fdfddf, "닭다리"));
@@ -215,11 +225,12 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
             for (int i = 0; i < items.size(); i++) {
                 foodSearchAdapter.notifyItemInserted(i);
             }
-        } else if (view.getId() == R.id.seafood) {
+        } else if (view.getId() == R.id.seafood) {//알러지 종류 메뉴바에 해산물을 선택할 경우
             int size = fruit.getWidth() * 3 + 25;
             select.animate().x(size).setDuration(100);
+            //기존 리사이클러뷰의 아이템이 존재하지 않게 초기화
             clear();
-
+            //해당하는 아이템들 추가
             items.add(new FoodSearchItem(R.drawable.garivi, "가리비"));
             items.add(new FoodSearchItem(R.drawable.gare, "게"));
             items.add(new FoodSearchItem(R.drawable.rapsta, "랍스터"));
@@ -234,11 +245,12 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
             for (int i = 0; i < items.size(); i++) {
                 foodSearchAdapter.notifyItemInserted(i);
             }
-        } else if (view.getId() == R.id.milk) {
+        } else if (view.getId() == R.id.milk) {//알러지 종류 메뉴바에 유제품을 선택할 경우
             int size = fruit.getWidth() * 4 + 65;
             select.animate().x(size).setDuration(100);
+            //기존 리사이클러뷰의 아이템이 존재하지 않게 초기화
             clear();
-
+            //해당하는 아이템들 추가
             items.add(new FoodSearchItem(R.drawable.eggs, "계란"));
             items.add(new FoodSearchItem(R.drawable.breadfdfd, "빵"));
             items.add(new FoodSearchItem(R.drawable.milk, "우유"));
@@ -249,11 +261,12 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
             for (int i = 0; i < items.size(); i++) {
                 foodSearchAdapter.notifyItemInserted(i);
             }
-        } else if (view.getId() == R.id.drink) {
+        } else if (view.getId() == R.id.drink) {//알러지 종류 메뉴바에 음료를 선택할 경우
             int size = fruit.getWidth() * 5 + 80;
             select.animate().x(size).setDuration(100);
+            //기존 리사이클러뷰의 아이템이 존재하지 않게 초기화
             clear();
-
+            //해당하는 아이템들 추가
             items.add(new FoodSearchItem(R.drawable.drink, "주스"));
             items.add(new FoodSearchItem(R.drawable.cola, "콜라"));
 
@@ -263,6 +276,7 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
         }
     }
 
+    //리사이클러뷰의 아이템을 초기화해주는 함수
     public void clear() {
         int size = items.size();
         if (size > 0) {
@@ -274,6 +288,7 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
         }
     }
 
+    //알러지를 누르면 해당하는 알러지 정보를 사용자의 알러지 정보를 나타내는 리사이클러뷰에 추가한다
     @Override
     public void onItemClicked(FoodSearchItem myModel) {
         Toast.makeText(this, myModel.getFood_name(), Toast.LENGTH_SHORT).show();
@@ -283,9 +298,10 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
         addAllergy(myModel.getFood_name(), myModel.getFood_img());
     }
 
+    //해당 알러지를 파이어베이스에 추가한다
     public void addAllergy(String name, int img) {
         AllergyFirebase allergyFirebase = new AllergyFirebase(name, img);
-        databaseReference.child("userid").child("allergy").child(name).setValue(allergyFirebase);
+        databaseReference.child("user").child(userid).child("allergy").child(name).setValue(allergyFirebase);
     }
 
 }

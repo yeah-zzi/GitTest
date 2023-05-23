@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
+    android:background="#ffffff"
+    android:id="@+id/userinfocontainer"
     tools:context=".mypage.UserInfoChange">
 
     <LinearLayout
@@ -33,10 +35,16 @@
     </LinearLayout>
 
     <FrameLayout
+        android:layout_marginTop="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="730dp"
+        android:background="#ffffff" >
+
+    <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="10dp"
         android:elevation="3dp"
         android:background="#ffffff">
 
@@ -63,7 +71,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="80dp"
         android:background="#ffffff"
         android:elevation="3dp">
 
@@ -88,5 +96,7 @@
 
 
     </FrameLayout>
+</FrameLayout>
+
 
 </FrameLayout>

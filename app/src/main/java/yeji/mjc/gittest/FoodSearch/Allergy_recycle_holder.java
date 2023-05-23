@@ -12,6 +12,7 @@ import yeji.mjc.gittest.R;
 
 public class Allergy_recycle_holder extends RecyclerView.ViewHolder {
 
+    //리사이클러뷰에 사용된 각 뷰의 id를 연결해주기 위한 홀더이다
     ImageView food_img;
     TextView food_name;
     ImageButton deleteBtn;

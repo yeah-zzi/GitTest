@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:layout_weight="1"
     android:id="@+id/mpcontainer"
+    android:background="#ffffff"
     tools:context=".MyPagesujin">
 
     <!-- TODO: Update blank fragment layout -->
@@ -29,7 +30,7 @@
     <FrameLayout
         android:layout_width="306dp"
         android:layout_height="300dp"
-        android:layout_marginLeft="47dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="55dp"
         android:id="@+id/fl1"
         android:background="#F8F8F8">
@@ -138,6 +139,10 @@
 
 
     </FrameLayout>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="700dp"
+    android:layout_marginTop="150dp">
 
     <FrameLayout
         android:id="@+id/User"
@@ -145,7 +150,7 @@
         android:layout_height="60dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="380dp"
+        android:layout_marginTop="220dp"
         android:background="#ffffff"
         android:elevation="3dp">
 
@@ -179,7 +184,7 @@
         android:layout_height="60dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="460dp"
+        android:layout_marginTop="290dp"
         android:background="#ffffff"
         android:elevation="3dp">
 
@@ -211,7 +216,7 @@
         android:layout_height="60dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="540dp"
+        android:layout_marginTop="360dp"
         android:background="#ffffff"
         android:elevation="3dp">
 
@@ -245,7 +250,7 @@
         android:layout_height="60dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="620dp"
+        android:layout_marginTop="430dp"
         android:background="#ffffff"
         android:elevation="3dp">
 
@@ -271,5 +276,6 @@
             android:src="@drawable/ic_baseline_chevron_right_24" />
 
     </FrameLayout>
+</FrameLayout>
 </FrameLayout>
 
