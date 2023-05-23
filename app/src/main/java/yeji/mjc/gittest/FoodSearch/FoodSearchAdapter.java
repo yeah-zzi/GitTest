@@ -21,7 +21,7 @@ public class FoodSearchAdapter extends RecyclerView.Adapter<FoodSearch_recycle_h
     private SelectListener listener;
 
 
-    public FoodSearchAdapter(Context context, ArrayList<FoodSearchItem> items,SelectListener listener) {
+    public FoodSearchAdapter(Context context, ArrayList<FoodSearchItem> items, SelectListener listener) {
         this.context = context;
         this.items = items;
         this.listener = listener;
