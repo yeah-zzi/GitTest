@@ -1,4 +1,4 @@
-package yeji.mjc.gittest.FoodSearch;
+package yeji.mjc.gittest.frige;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import yeji.mjc.gittest.AllergyItem;
 import yeji.mjc.gittest.FoodItem;
+import yeji.mjc.gittest.FoodSearch.FoodSearchItem;
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.SelectListener;
 

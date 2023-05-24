@@ -13,6 +13,12 @@ public class Item {
         this.food_date = food_date;
     }
 
+    public Item(int food_img, String food_name)
+    {
+        this.food_img = food_img;
+        this.food_name = food_name;
+    }
+
     public int getFood_img() {
         return food_img;
     }
