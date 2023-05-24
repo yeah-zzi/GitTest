@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import yeji.mjc.gittest.AllergyItem;
+import yeji.mjc.gittest.FoodItem;
 import yeji.mjc.gittest.FoodSearch.Allergy;
 import yeji.mjc.gittest.MainActivity;
 import yeji.mjc.gittest.R;
@@ -39,7 +40,7 @@ public class Register extends AppCompatActivity {
 
     //파이어베이스에서 데이터베이스 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference allergyDB,userdb,foodbattleDB;
+    DatabaseReference allergyDB,userdb,foodbattleDB,foodDB;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -115,5 +116,6 @@ public class Register extends AppCompatActivity {
                 //디비를 가져오다 오류 발생시
             }
         });
+
     }
 }
