@@ -18,6 +18,9 @@
 
     <!--팝업창 테마-->
     <style name="DialogTheme" parent="@style/Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/main_yellow</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/dialogColor</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowIsTranslucent">true</item>

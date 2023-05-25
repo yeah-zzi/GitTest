@@ -59,12 +59,14 @@
         app:layout_constraintLeft_toLeftOf="@id/back"
         app:layout_constraintRight_toRightOf="@id/back" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/friend_img"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
         android:src="@drawable/food_squid"
+        app:civ_border_color="#E4E4E4"
+        app:civ_border_width="1dp"
         app:layout_constraintLeft_toLeftOf="@id/friend_view"
         app:layout_constraintTop_toTopOf="@id/friend_view"
         app:layout_constraintBottom_toBottomOf="@id/friend_view"/>
@@ -77,6 +79,7 @@
         android:layout_marginTop="10dp"
         android:text="Hyerim"
         android:textSize="25dp"
+        android:textColor="#323232"
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@+id/friend_img"
         app:layout_constraintTop_toTopOf="@id/friend_view"
@@ -86,9 +89,10 @@
         android:layout_width="60dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="55dp"
+        android:layout_marginRight="70dp"
         android:text="님과"
         android:textSize="25dp"
+        android:textColor="#323232"
         android:textStyle="bold"
         app:layout_constraintRight_toRightOf="@id/back"
         app:layout_constraintTop_toTopOf="@id/friend_view"
@@ -96,10 +100,10 @@
 
     <TextView
         android:id="@+id/date"
-        android:layout_width="75dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginTop="25dp"
-        android:layout_marginLeft="80dp"
+        android:layout_marginLeft="70dp"
         android:text="7일간"
         android:textSize="30dp"
         android:textStyle="bold"
@@ -134,7 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:text="다음"
+        android:text="완료"
         android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="@+id/complete"

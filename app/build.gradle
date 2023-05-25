@@ -32,7 +32,7 @@ android {
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.firebase:firebase-database-ktx:20.2.1'
     testImplementation 'junit:junit:4.13.2'
@@ -55,27 +55,16 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:4.11.0"
 
     //밑에 이거 풀면 시스템 컬러 머시기 오류가 나옵니다
-    //implementation 'com.google.android.material:material:1.10.0-alpha01'
+    implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
     implementation 'androidx.navigation:navigation-ui:2.5.3'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
 
-
     // 밑에는 파이어베이스를 위한 것
     implementation platform('com.google.firebase:firebase-bom:29.2.0')
 
-    // Add the dependency for the Firebase SDK for Google Analytics
-    // When using the BoM, don't specify versions in Firebase dependencies
-    //implementation 'com.google.firebase:firebase-analytics'
-
     //데이터베이스 이용을 위한 추가
     implementation 'com.google.firebase:firebase-database'
-    // Add the dependencies for any other desired Firebase products
-    // https://firebase.google.com/docs/android/setup#available-libraries
-
-    // Declare the dependency for the Firebase Authentication library
-    // When using the BoM, you don't specify versions in Firebase library dependencies
-    //implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-database:20.2.1'
     implementation 'com.google.firebase:firebase-database-ktx:20.2.1'
 

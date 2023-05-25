@@ -22,11 +22,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import yeji.mjc.gittest.AllergyItem;
-import yeji.mjc.gittest.FoodSearch.FoodSearchItem;
 import yeji.mjc.gittest.R;
-import yeji.mjc.gittest.SelectListener;
-import yeji.mjc.gittest.firebase.AllergyFirebase;
+
 
 
 public class New_fight_sub extends AppCompatActivity implements FriendListener {
@@ -36,7 +33,7 @@ public class New_fight_sub extends AppCompatActivity implements FriendListener {
 
     //파이어베이스에서 데이터베이스 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference friendDB,foodbattleDB,makeDB;
+    DatabaseReference friendDB,makeDB;
 
     //리사이클러뷰에 추가할 아이템 리스트
     public ArrayList<FriendAdd_Item> friendaddItems = new ArrayList<FriendAdd_Item>();
@@ -44,7 +41,8 @@ public class New_fight_sub extends AppCompatActivity implements FriendListener {
     public ArrayList<FriendAdd_Item> search_Items = new ArrayList<FriendAdd_Item>();
 
     String userid = "임시용 유저 아이디1";
-    String friendid = "임시용 친구 아이디1";
+    String friendid = "";
+    String friendImg = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +87,16 @@ public class New_fight_sub extends AppCompatActivity implements FriendListener {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent fridgeSearchIntent = new Intent(getApplicationContext(), Select_date_sub.class);
-                startActivity(fridgeSearchIntent);
-                finish();
+                if(friendid == ""){
+                    Toast.makeText(getApplicationContext(),"집밥대결 상대를 선택해 주십시오",Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent fridgeSearchIntent = new Intent(getApplicationContext(), Select_date_sub.class);
+                    fridgeSearchIntent.putExtra("유저",userid);
+                    fridgeSearchIntent.putExtra("집밥대결 유저",friendid);
+                    fridgeSearchIntent.putExtra("집밥대결 유저 이미지",friendImg);
+                    startActivity(fridgeSearchIntent);
+                    finish();
+                }
             }
         });
 
@@ -140,16 +145,17 @@ public class New_fight_sub extends AppCompatActivity implements FriendListener {
 
 
     //해당 알러지를 파이어베이스에 추가한다
-    public void addAllergy(String name) {
+    /*public void addAllergy(String name) {
         foodbattleDB = makeDB.child("fb_mem2").child("id");
         foodbattleDB.setValue(name);
 
         foodbattleDB = makeDB.child("fb_mem1").child("id");
         foodbattleDB.setValue(userid);
-    }
+    }*/
 
     @Override
     public void onItemClicked(FriendAdd_Item myModel) {
-        addAllergy(myModel.getUser_name());
+        friendid = myModel.getUser_name();
+        friendImg = myModel.getUser_img();
     }
 }

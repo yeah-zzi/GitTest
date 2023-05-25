@@ -64,12 +64,13 @@
 
 
     <CalendarView
+        android:id="@+id/fbcalendar"
         android:layout_width="320dp"
         android:layout_height="319dp"
         android:layout_marginTop="35dp"
         app:layout_constraintRight_toRightOf="@id/back"
         app:layout_constraintLeft_toLeftOf="@+id/back"
-        app:layout_constraintTop_toBottomOf="@+id/bar_1" />
+        app:layout_constraintTop_toBottomOf="@+id/bar_1"/>
 
     <ImageButton
         android:id="@+id/complete"
