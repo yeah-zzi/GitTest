@@ -2,8 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
     android:layout_gravity="center">
 
     <ImageView
@@ -63,6 +64,7 @@
         app:layout_constraintTop_toTopOf="@id/bar_1"/>
 
     <ImageButton
+        android:id="@+id/calendar"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
@@ -91,7 +93,7 @@
         android:id="@+id/days7"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:background="@drawable/radius_select"
+        android:background="@drawable/radius_noselect"
         android:layout_marginBottom="30dp"
         android:text="7일"
         android:textStyle="bold"
@@ -107,7 +109,7 @@
         android:background="@drawable/radius_noselect"
         android:layout_marginBottom="30dp"
         android:layout_marginRight="25dp"
-        android:text="30일"
+        android:text="1개월"
         android:textSize="18dp"
         app:layout_constraintRight_toRightOf="@id/bar_1"
         app:layout_constraintBottom_toTopOf="@+id/complete"/>

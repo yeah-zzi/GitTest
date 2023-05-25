@@ -63,9 +63,11 @@
         <activity android:name=".FoodSearch.Allergy" android:theme="@style/DialogTheme"/>
         <activity android:name=".comunity.TipComment" android:theme="@style/DialogTheme"/>
         <activity android:name=".FoodSearch.FridgePlus" android:theme="@style/DialogTheme"/>
+        <activity android:name=".comunity.FightGo" android:theme="@style/DialogTheme"/>
+        <activity android:name=".comunity.FoodBattleCalendar" android:theme="@style/DialogTheme"/>
         <activity android:name=".comunity.New_fight_sub" android:theme="@style/DialogTheme"></activity>
         <activity android:name=".comunity.New_friend_sub" android:theme="@style/DialogTheme"></activity>
-        <activity android:name=".comunity.Select_date_sub" android:theme="@style/DialogTheme"></activity>
+        <activity android:name=".comunity.Select_date_sub"></activity>
 
     </application>
 
