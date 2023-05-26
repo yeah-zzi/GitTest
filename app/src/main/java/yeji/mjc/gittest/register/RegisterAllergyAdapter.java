@@ -24,7 +24,8 @@ public class RegisterAllergyAdapter extends RecyclerView.Adapter<RegisterAllergy
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference allergyDB;
 
-    String userid = "임시용 유저 아이디1";
+    Register register = new Register();
+    String userid = register.userid;
 
     public RegisterAllergyAdapter(ArrayList<AllergyItem> items) {
         this.items = items;
