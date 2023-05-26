@@ -90,19 +90,6 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         });
-        // 로그 아웃 버튼
-//        logoutButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
-//                    @Override
-//                    public Unit invoke(Throwable throwable) {
-//                        updateKakaoLoginUi();
-//                        return null;
-//                    }
-//                });
-//            }
-//        });
 
         updateKakaoLoginUi();
     }
@@ -113,19 +100,20 @@ public class LoginActivity extends AppCompatActivity {
                 //로그인 되어 있는 경우
                 if( user != null) {
 
-                    // 유저의 아이디
-                    Log.d(TAG,"invoke: id" + user.getId());
-//                    // 유저의 어카운트정보에 이메일
-                    Log.d(TAG,"invoke: nickname" + user.getKakaoAccount().getEmail());
-//                    // 유저의 어카운트 정보의 프로파일에 닉네임
-                    Log.d(TAG,"invoke: email" + user.getKakaoAccount().getProfile().getNickname());
-                    // 유저의 이미지 URL을 불러옵니다.
-                   // Log.d(TAG, "userimage " + user.getKakaoAccount().getProfile().getProfileImageUrl());
+                    String userId = user.getId().toString();
+                    String userEmail = user.getKakaoAccount().getEmail().toString();
+                    String userNickname = user.getKakaoAccount().getProfile().getNickname().toString();
+                    String userImg = user.getKakaoAccount().getProfile().getProfileImageUrl().toString();
 
-//                    // 유저의 어카운트 파일의 성별
-//                    Log.d(TAG,"invoke: gerder" + user.getKakaoAccount().getGender());
-//                    // 유저의 어카운트 정보에 나이
-//                    Log.d(TAG,"invoke: age" + user.getKakaoAccount().getAgeRange());
+                    // 유저의 아이디
+                    Log.d(TAG,"kakao 유저 id : " + userId);
+                    // 유저의 어카운트정보에 이메일
+                    Log.d(TAG,"kakao 유저 email : " + userEmail);
+                    // 유저의 어카운트 정보의 프로파일에 닉네임
+                    Log.d(TAG,"kakao 유저 닉네임 : " + userNickname);
+                    // 유저의 이미지 URL을 불러옵니다.
+                    Log.d(TAG, "kakao 유저 프사 url :  " + userImg);
+
 
 //                    nickName.setText(user.getKakaoAccount().getProfile().getNickname()); // 받아온 닉네임
 //                    Glide.with(profile).load(user.getKakaoAccount().getProfile().getProfileImageUrl()).circleCrop().into(profile);
@@ -142,7 +130,7 @@ public class LoginActivity extends AppCompatActivity {
                     // 로그인이 되어 있지 않은 경우
 //                    nickName.setText(null);
 //                    profile.setImageBitmap(null);
-                    loginButton.setVisibility(View.VISIBLE);
+//                    loginButton.setVisibility(View.VISIBLE);
                 }
                 return null;
             }
