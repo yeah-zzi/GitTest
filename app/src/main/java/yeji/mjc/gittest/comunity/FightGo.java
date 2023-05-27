@@ -84,12 +84,17 @@ public class FightGo extends AppCompatActivity {
                 foodbattleDB.setValue(changeDate);
                 foodbattleDB = makeDB.child("fb_start_date");
                 foodbattleDB.setValue(startDate);
-                foodbattleDB = makeDB.child("fb_mem2").child("id");
+                foodbattleDB = makeDB.child("fb_mem").push();
                 foodbattleDB.setValue(friendid);
-                foodbattleDB = makeDB.child("fb_mem2").child("fb_img");
-                foodbattleDB.setValue(friendimg);
-                foodbattleDB = makeDB.child("fb_mem1").child("id");
+                foodbattleDB = makeDB.child("fb_mem").push();
                 foodbattleDB.setValue(userid);
+
+                String fb_code = makeDB.getKey();
+
+                makeDB = database.getReference().child("user").child(userid).child("foodbattle_code").push();
+                makeDB.child("code").setValue(fb_code);
+                makeDB.child("fb_friend").setValue(friendid);
+                makeDB.child("fb_friend_img").setValue(friendimg);
                 finish();
             }
         });
