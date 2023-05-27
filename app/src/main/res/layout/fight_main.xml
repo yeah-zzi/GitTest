@@ -7,6 +7,24 @@
     android:layout_height="match_parent"
     android:id="@+id/fight_main_fragment">
 
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:src="@drawable/fridge_type_bar"
+        android:padding="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tbTabrecycler"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="15dp"
+        app:layout_constraintLeft_toLeftOf="@id/back"
+        app:layout_constraintTop_toTopOf="@id/back"
+        app:layout_constraintBottom_toBottomOf="@id/back"/>
+
     <TextView
         android:id="@+id/winner"
         android:layout_width="wrap_content"
@@ -15,6 +33,7 @@
         android:textSize="18dp"
         android:textStyle="bold"
         android:layout_marginTop="18dp"
+        app:layout_constraintTop_toBottomOf="@+id/back"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         tools:ignore="MissingConstraints" />
@@ -167,71 +186,5 @@
         app:layout_constraintLeft_toLeftOf="@id/Friend"
         app:layout_constraintRight_toRightOf="@id/Friend"/>
 
-    <LinearLayout
-        android:id="@+id/bar_1"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@id/FriendNum"
-        android:orientation="vertical"
-
-
-        />
-
-    <LinearLayout
-        android:id="@+id/bar_2"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#DADADA"
-        app:layout_constraintTop_toBottomOf="@id/bar_1"
-        android:orientation="vertical" />
-
-    <LinearLayout
-        android:id="@+id/bar_3"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#F6F0B8"
-        app:layout_constraintTop_toBottomOf="@id/bar_2"
-        android:orientation="vertical" />
-
-    <LinearLayout
-        android:id="@+id/bar_4"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#C9D9EC"
-        app:layout_constraintTop_toBottomOf="@id/bar_3"
-        android:orientation="vertical" />
-
-    <LinearLayout
-        android:id="@+id/bar_5"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#DADADA"
-        app:layout_constraintTop_toBottomOf="@id/bar_4"
-        android:orientation="vertical" />
-
-    <LinearLayout
-        android:id="@+id/bar_6"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#F6F0B8"
-        app:layout_constraintTop_toBottomOf="@id/bar_5"
-        android:orientation="vertical" />
-
-    <LinearLayout
-        android:id="@+id/bar_5"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#DADADA"
-        app:layout_constraintTop_toBottomOf="@id/bar_4"
-        android:orientation="vertical" />
-
-    <LinearLayout
-        android:id="@+id/bar_6"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#F6F0B8"
-        app:layout_constraintTop_toBottomOf="@id/bar_5"
-        android:orientation="vertical" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
