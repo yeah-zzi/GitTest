@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="150dp"
+    android:layout_height="150dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:src="@drawable/spinner_background"
+        android:elevation="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/fb_img"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:src="@drawable/bread"
+        android:elevation="10dp"
+        android:layout_marginTop="13dp"
+        app:layout_constraintLeft_toLeftOf="@+id/back"
+        app:layout_constraintRight_toRightOf="@+id/back"
+        app:layout_constraintTop_toTopOf="@+id/back"/>
+
+    <TextView
+        android:id="@+id/fb_img_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2021/03/11"
+        android:textColor="@color/gray"
+        android:textSize="10dp"
+        android:elevation="10dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintLeft_toLeftOf="@+id/back"
+        app:layout_constraintRight_toRightOf="@+id/back"
+        app:layout_constraintTop_toBottomOf="@+id/fb_img"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

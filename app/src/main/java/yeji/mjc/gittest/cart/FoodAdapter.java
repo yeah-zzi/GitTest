@@ -33,6 +33,7 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
         holder.foodNum.setText(items.get(position).getNum());
         holder.checkBox.setChecked(items.get(position).isCheckBox(checkBox));
         holder.foodImage.setImageResource(items.get(position).getImg());
+
     }
 
     @Override

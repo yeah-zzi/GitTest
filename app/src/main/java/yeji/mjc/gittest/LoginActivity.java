@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private DatabaseReference mDatabase;
     public ImageButton loginButton;
+    public String userId;
 //    public Button logoutButton;
 //    public TextView nickName;
 //    public ImageView profile;
@@ -77,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         UserApiClient.getInstance().accessTokenInfo((tokenInfo, error) -> {
             if (error != null) {
                 Toast.makeText(this, "토큰 정보 보기 실패", Toast.LENGTH_SHORT).show();
+                updateKakaoLoginUi();
             } else if (tokenInfo != null) {
                 Toast.makeText(this, "토큰 정보 보기 성공", Toast.LENGTH_SHORT).show();
                 Log.i(TAG, "토큰 정보 보기 성공" +
@@ -119,10 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                     //카카오톡 미설치, 카카오계정으로 로그인
                 }
             }
-
         });
-
-        updateKakaoLoginUi();
     }
 
     //유저 정보 받아오는 메소드
@@ -133,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
                 //로그인 되어 있는 경우
                 if (user != null) {
 
-                    String userId = user.getId().toString();
+                    userId = user.getId().toString();
                     String userEmail = user.getKakaoAccount().getEmail().toString();
                     String userName = user.getKakaoAccount().getProfile().getNickname().toString();
                     String userImg = user.getKakaoAccount().getProfile().getProfileImageUrl().toString();
@@ -154,6 +153,7 @@ public class LoginActivity extends AppCompatActivity {
                     userInfo.put("profileImg", userImg);
 
                     writeNewUser(userId, userName, userEmail, userImg);
+
 
 //                    nickName.setText(user.getKakaoAccount().getProfile().getNickname()); // 받아온 닉네임
 //                    Glide.with(profile).load(user.getKakaoAccount().getProfile().getProfileImageUrl()).circleCrop().into(profile);

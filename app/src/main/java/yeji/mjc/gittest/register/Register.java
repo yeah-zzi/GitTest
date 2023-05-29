@@ -32,10 +32,7 @@ public class Register extends AppCompatActivity {
     ImageButton startBtn;
     Button allergyBtn,nameBtn;
     EditText edit_name;
-
-    //로그인 시 아이디값 인텐트로 받아오기
-    Intent intent = getIntent();
-    public String userid = intent.getStringExtra("userId");
+    public String userid;
 
     //리사이클러뷰 선언 및 리사이클러뷰에 넣을 아이템 선언
     public RecyclerView registerallergyrecyclerView;
@@ -61,6 +58,10 @@ public class Register extends AppCompatActivity {
         allergyBtn = findViewById(R.id.allergybtn);
         edit_name = findViewById(R.id.edittextnickname);
         nameBtn = findViewById(R.id.idbuttion);
+
+        //로그인 시 아이디값 인텐트로 받아오기
+        Intent intent = getIntent();
+        userid = intent.getStringExtra("userId");
 
         //닉네임 중복 확인 버튼을 누르면 쓰여있는 닉네임을 받아서 데이터베이스에 넣는다
         //TODO 데이터 중복 확인 구문 작성
