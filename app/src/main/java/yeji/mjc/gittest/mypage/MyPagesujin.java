@@ -1,4 +1,4 @@
-package yeji.mjc.gittest;
+package yeji.mjc.gittest.mypage;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import com.kakao.sdk.user.UserApiClient;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
+import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.comunity.Life_Fragment;
 import yeji.mjc.gittest.mypage.Bellset;
 import yeji.mjc.gittest.mypage.UserInfoChange;
@@ -31,7 +32,7 @@ public class MyPagesujin extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.mypage, container, false);
+        View view = inflater.inflate(R.layout.fragment_my_pagesujin, container, false);
         View User = view.findViewById(R.id.User);
         //View Friend = view.findViewById(R.id.Friend);
         View Bell = view.findViewById(R.id.Bell);

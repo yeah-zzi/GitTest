@@ -6,7 +6,7 @@
     android:layout_weight="1"
     android:id="@+id/mpcontainer"
     android:background="#ffffff"
-    tools:context=".MyPagesujin">
+    tools:context=".mypage.MyPagesujin">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -30,7 +30,7 @@
     <FrameLayout
         android:layout_width="306dp"
         android:layout_height="300dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="31dp"
         android:layout_marginTop="55dp"
         android:id="@+id/fl1"
         android:background="#F8F8F8">
@@ -135,6 +135,13 @@
             android:layout_marginTop="200dp"
             android:layout_marginLeft="225dp"
             android:src="@drawable/ic_round_face_24" />
+        <Button
+            android:id ="@+id/logoutButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:backgroundTint="@color/lightgray"
+            android:layout_marginTop="250dp" />
 
 
 

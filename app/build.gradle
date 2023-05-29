@@ -80,4 +80,7 @@ dependencies {
 
     //바코드
     implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
+
+    //스와이프
+    implementation 'it.xabaras.android:recyclerview-swipedecorator:1.4'
 }
