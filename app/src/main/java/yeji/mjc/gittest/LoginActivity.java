@@ -78,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         UserApiClient.getInstance().accessTokenInfo((tokenInfo, error) -> {
             if (error != null) {
                 Toast.makeText(this, "토큰 정보 보기 실패", Toast.LENGTH_SHORT).show();
+                updateKakaoLoginUi();
             } else if (tokenInfo != null) {
                 Toast.makeText(this, "토큰 정보 보기 성공", Toast.LENGTH_SHORT).show();
                 Log.i(TAG, "토큰 정보 보기 성공" +
@@ -120,10 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                     //카카오톡 미설치, 카카오계정으로 로그인
                 }
             }
-
         });
-
-        updateKakaoLoginUi();
     }
 
     //유저 정보 받아오는 메소드
