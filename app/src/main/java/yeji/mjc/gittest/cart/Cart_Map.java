@@ -2,6 +2,7 @@ package yeji.mjc.gittest.cart;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,6 +71,8 @@ public class Cart_Map extends AppCompatActivity implements MapView.CurrentLocati
     private EditText et_search_field; // 텍스트 창
     private Button btn_search, btn_prevPage, btn_nextPage;          // 검색 버튼, 이전, 다음
     private TextView tv_pageNumber;
+    private ConstraintLayout resultLayout;
+    private ImageButton btn_locationIn, btn_locationOut;
 
     private MapView mapView;
     private MapPoint mapPoint;
@@ -89,11 +93,30 @@ public class Cart_Map extends AppCompatActivity implements MapView.CurrentLocati
         listAdapter = new MapListAdapter(listItems);
         recyclerView.setAdapter(listAdapter);
 
+        btn_locationIn = findViewById(R.id.location_in);
+        btn_locationOut = findViewById(R.id.location_out);
+
         listAdapter.setItemClickListener(new MapListAdapter.OnItemClickListener() {
             @Override
             public void onClick(View v, int position) {
                 mapPoint = MapPoint.mapPointWithGeoCoord(Double.parseDouble(listItems.get(position).getY()), Double.parseDouble(listItems.get(position).getX()));
                 mapView.setMapCenterPointAndZoomLevel(mapPoint, 1, true);
+                // 리스트 내의 검색된 아이템을 클릭하면 자동으로 현위치 이동되지 않도록 해줌 (TrackingModeOff)
+                // 검색 장소로 화면 이동
+                mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
+                btn_locationIn.setVisibility(View.INVISIBLE);
+                btn_locationOut.setVisibility(View.VISIBLE); // 현위치 out 버튼 활성화
+
+            }
+        });
+
+        //검색 위치로 화면이동 시(location_out), 버튼 클릭이벤트로 현위치로 화면 이동
+        btn_locationOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
+                btn_locationOut.setVisibility(View.INVISIBLE);
+                btn_locationIn.setVisibility(View.VISIBLE); // 다시 현위치 버튼 활성화
             }
         });
 
@@ -103,6 +126,7 @@ public class Cart_Map extends AppCompatActivity implements MapView.CurrentLocati
         tv_pageNumber = findViewById(R.id.tv_pageNumber);
 
         et_search_field = findViewById(R.id.et_search_field);
+        resultLayout = findViewById(R.id.result_Layout);
 
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,6 +137,7 @@ public class Cart_Map extends AppCompatActivity implements MapView.CurrentLocati
                 //MapPoint.GeoCoordinate mapPointGeo = mapPoint.getMapPointGeoCoord();
 
                 searchKeyword(keyword, pageNumber,currentLatitude, currentLongitude);
+                resultLayout.setVisibility(View.VISIBLE);
             }
         });
 
