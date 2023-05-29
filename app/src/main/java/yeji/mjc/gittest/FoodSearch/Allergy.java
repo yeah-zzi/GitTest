@@ -1,6 +1,7 @@
 package yeji.mjc.gittest.FoodSearch;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
@@ -46,7 +47,7 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
 
     ColorStateList def;
     TextView vegetable, fruit, meet, seafood, milk, drink, select;
-    String userid = "임시용 유저 아이디1";
+    String userid; // 파이어베이스로 받아올 유저 아이디 변수 선언
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -108,6 +109,10 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
 
         allergyrecyclerView = findViewById(R.id.allergyRecycler);
         allergyrecyclerView.setHasFixedSize(true);
+
+        //로그인 시 아이디값 인텐트로 받아오기 (Register.class에서)
+        Intent intent = getIntent();
+        userid = intent.getStringExtra("userId");
 
         //파이어베이스에 저장되어 있는 알러지정보를 유저아이디 정보를 통해 가져옴
         allergyDB = database.getReference().child("user").child(userid).child("allergy");

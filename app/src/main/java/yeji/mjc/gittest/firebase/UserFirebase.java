@@ -57,6 +57,7 @@ public class UserFirebase {
         return user_nickname;
     }
 
+
     @Override
     public String toString() {
         return "UserFirebase{" +

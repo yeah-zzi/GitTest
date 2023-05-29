@@ -93,6 +93,7 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent registerIntent = new Intent(Register.this, Allergy.class);
+                registerIntent.putExtra("userId", userid);
                 startActivity(registerIntent);
             }
         });
