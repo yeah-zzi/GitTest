@@ -97,7 +97,6 @@
             android:layout_height="wrap_content"
             android:text="3"
             android:textSize="18dp"
-            android:textColor="@color/gray"
             android:layout_marginTop="12dp"
             android:layout_marginStart="15dp"/>
     </LinearLayout>
@@ -126,7 +125,6 @@
             android:layout_height="wrap_content"
             android:text="3"
             android:textSize="18dp"
-            android:textColor="@color/gray"
             android:layout_marginTop="12dp"
             android:layout_marginStart="15dp"/>
     </LinearLayout>

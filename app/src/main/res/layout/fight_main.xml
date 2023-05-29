@@ -7,14 +7,33 @@
     android:layout_height="match_parent"
     android:id="@+id/fight_main_fragment">
 
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:src="@drawable/fridge_type_bar"
+        android:padding="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tbTabrecycler"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="15dp"
+        app:layout_constraintLeft_toLeftOf="@id/back"
+        app:layout_constraintTop_toTopOf="@id/back"
+        app:layout_constraintBottom_toBottomOf="@id/back"/>
+
     <TextView
         android:id="@+id/winner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="고양이님이 이기고 있습니다!"
+        android:text=""
         android:textSize="18dp"
         android:textStyle="bold"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/back"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         tools:ignore="MissingConstraints" />
@@ -23,7 +42,7 @@
         android:id="@+id/ending"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="23일 뒤 대결이 종료됩니다."
+        android:text="대결 상대를 선택해 주세요"
         android:textSize="15dp"
         android:textStyle="bold"
         android:layout_marginTop="5dp"
@@ -39,7 +58,7 @@
         android:progressDrawable="@drawable/fb_progressbar"
         android:layout_width="170dp"
         android:layout_height="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ending"/>
@@ -50,71 +69,49 @@
         android:layout_height="70dp"
         android:src="@drawable/cat"
         app:civ_border_color="#C11E1E"
-        app:civ_border_width="5dp"
+        app:civ_border_width="3dp"
         app:layout_constraintTop_toTopOf="@id/ProgressBar"
         app:layout_constraintBottom_toBottomOf="@id/ProgressBar"
         app:layout_constraintRight_toLeftOf="@+id/ProgressBar"
         tools:ignore="MissingConstraints" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/plus1"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:src="@drawable/plus"
-        android:background="@color/white"
-        app:civ_border_color="#C11E1E"
-        app:layout_constraintRight_toRightOf="@id/cat"
-        app:layout_constraintBottom_toBottomOf="@id/cat"
-        tools:ignore="MissingConstraints" />
-
-    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/dog"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:src="@drawable/dog"
-        app:civ_border_color="#636363"
-        app:civ_border_width="5dp"
+        android:src="@drawable/ic_round_face_24"
+        app:civ_border_color="#03A9F4"
+        app:civ_border_width="3dp"
         app:layout_constraintLeft_toRightOf="@+id/ProgressBar"
         app:layout_constraintTop_toTopOf="@id/ProgressBar"
         app:layout_constraintBottom_toBottomOf="@id/ProgressBar"
-        tools:ignore="MissingConstraints" />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/plus2"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:src="@drawable/plus"
-        android:background="@color/white"
-        app:civ_border_color="#C11E1E"
-        app:layout_constraintRight_toRightOf="@id/dog"
-        app:layout_constraintBottom_toBottomOf="@id/dog"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/food_battle_range"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="7일째                  "
+        android:text=" "
         android:textSize="18dp"
         android:textStyle="bold"
         android:textColor="#BA2015"
         android:layout_marginTop="30dp"
+        android:layout_marginRight="10dp"
         app:layout_constraintTop_toBottomOf="@id/ProgressBar"
-       app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toLeftOf="@+id/guideline"/>
 
     <TextView
         android:id="@+id/ing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="             대결 진행중"
+        android:text=""
         android:textSize="18dp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginTop="30dp"
         app:layout_constraintTop_toBottomOf="@id/ProgressBar"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintLeft_toRightOf="@+id/guideline"
+        />
 
     <TextView
         android:id="@+id/Me"
@@ -127,13 +124,13 @@
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/ing"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/Friend"/>
+        app:layout_constraintRight_toLeftOf="@+id/guideline"/>
 
     <Button
         android:id="@+id/MeNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="13번"
+        android:text="0번"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="16dp"
@@ -146,20 +143,20 @@
         android:id="@+id/Friend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="강아지님 (친구)"
+        android:text="선택된 친구 없습니다"
         android:textSize="17dp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/ing"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/Me"/>
+        app:layout_constraintLeft_toRightOf="@+id/guideline"/>
 
     <Button
         android:id="@+id/FriendNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="5번"
+        android:text="0번"
         android:textSize="16dp"
         android:textStyle="bold"
         android:backgroundTint="#B1B1B1"
@@ -167,71 +164,49 @@
         app:layout_constraintLeft_toLeftOf="@id/Friend"
         app:layout_constraintRight_toRightOf="@id/Friend"/>
 
-    <LinearLayout
-        android:id="@+id/bar_1"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@id/FriendNum"
+    <ImageView
+        android:id="@+id/imgback1"
+        android:layout_width="160dp"
+        android:layout_height="390dp"
+        android:src="@drawable/spinner_background"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/FriendNum"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/userImgZone1"
+        android:layout_width="150dp"
+        android:layout_height="350dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="@+id/imgback1"
+        app:layout_constraintRight_toRightOf="@+id/imgback1"
+        app:layout_constraintTop_toTopOf="@+id/imgback1"/>
+    <ImageView
+        android:id="@+id/imgback2"
+        android:layout_width="160dp"
+        android:layout_height="390dp"
+        android:src="@drawable/spinner_background"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/MeNum"
+        app:layout_constraintLeft_toRightOf="@+id/guideline"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/userImgZone2"
+        android:layout_width="150dp"
+        android:layout_height="350dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="@+id/imgback2"
+        app:layout_constraintRight_toRightOf="@+id/imgback2"
+        app:layout_constraintTop_toTopOf="@+id/imgback2"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
-
-        />
-
-    <LinearLayout
-        android:id="@+id/bar_2"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#DADADA"
-        app:layout_constraintTop_toBottomOf="@id/bar_1"
-        android:orientation="vertical" />
-
-    <LinearLayout
-        android:id="@+id/bar_3"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#F6F0B8"
-        app:layout_constraintTop_toBottomOf="@id/bar_2"
-        android:orientation="vertical" />
-
-    <LinearLayout
-        android:id="@+id/bar_4"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#C9D9EC"
-        app:layout_constraintTop_toBottomOf="@id/bar_3"
-        android:orientation="vertical" />
-
-    <LinearLayout
-        android:id="@+id/bar_5"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#DADADA"
-        app:layout_constraintTop_toBottomOf="@id/bar_4"
-        android:orientation="vertical" />
-
-    <LinearLayout
-        android:id="@+id/bar_6"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#F6F0B8"
-        app:layout_constraintTop_toBottomOf="@id/bar_5"
-        android:orientation="vertical" />
-
-    <LinearLayout
-        android:id="@+id/bar_5"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#DADADA"
-        app:layout_constraintTop_toBottomOf="@id/bar_4"
-        android:orientation="vertical" />
-
-    <LinearLayout
-        android:id="@+id/bar_6"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#F6F0B8"
-        app:layout_constraintTop_toBottomOf="@id/bar_5"
-        android:orientation="vertical" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

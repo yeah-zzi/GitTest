@@ -65,7 +65,7 @@
                 android:thumb="@drawable/switch_thumb"
                 android:track="@drawable/selector_switch"
                 android:switchMinWidth="50dp"
-                android:layout_marginLeft="320dp"
+                android:layout_marginLeft="300dp"
                 android:layout_marginTop="15dp"
                 android:checked="true"
                 />
@@ -96,7 +96,7 @@
                 android:thumb="@drawable/switch_thumb"
                 android:track="@drawable/selector_switch"
                 android:switchMinWidth="50dp"
-                android:layout_marginLeft="320dp"
+                android:layout_marginLeft="300dp"
                 android:layout_marginTop="15dp"
                 android:checked="true"
                 />
@@ -127,7 +127,7 @@
                 android:thumb="@drawable/switch_thumb"
                 android:track="@drawable/selector_switch"
                 android:switchMinWidth="50dp"
-                android:layout_marginLeft="320dp"
+                android:layout_marginLeft="300dp"
                 android:layout_marginTop="15dp"
                 android:checked="false"
                 />
@@ -157,7 +157,7 @@
                 android:thumb="@drawable/switch_thumb"
                 android:track="@drawable/selector_switch"
                 android:switchMinWidth="50dp"
-                android:layout_marginLeft="320dp"
+                android:layout_marginLeft="300dp"
                 android:layout_marginTop="15dp"
                 android:checked="false"
                 />
@@ -187,7 +187,7 @@
                 android:thumb="@drawable/switch_thumb"
                 android:track="@drawable/selector_switch"
                 android:switchMinWidth="50dp"
-                android:layout_marginLeft="320dp"
+                android:layout_marginLeft="300dp"
                 android:layout_marginTop="15dp"
                 android:checked="false"
                 />

@@ -17,6 +17,8 @@
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/cart_main.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/cart_plus.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/cart_recyclerview.xml" value="0.15089514066496162" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/fb_tab_recyclerview.xml" value="0.2933727311101731" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/fb_upload_recyclerview.xml" value="0.5" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/fight_main.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/food_img_search_recyclerview.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/fragment_bellset.xml" value="0.3619791666666667" />
@@ -27,6 +29,7 @@
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/post_addfriend.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/register.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/search_menu.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/select_date.xml" value="0.2933727311101731" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/startpage.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/toolbar.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/menu/bottom_nav_menu.xml" value="0.30833333333333335" />
@@ -63,16 +66,11 @@
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/homerice_battle.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/life_post_items.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/menu_selector_color.xml" value="0.1" />
-        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/mypage.xml" value="0.13179347826086957" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/new_friend.xml" value="0.1" />
-        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/new_friend_recyclerview.xml" value="0.264" />
-        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/post_addfriend.xml" value="0.13179347826086957" />
-        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/register.xml" value="0.1" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/register_allergy_recyclerview.xml" value="0.12864583333333332" />
-        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/register_food_recyclerview.xml" value="0.13179347826086957" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/search_menu.xml" value="0.12864583333333332" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/select_date.xml" value="0.10989583333333333" />
-        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/startpage.xml" value="0.152" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/startpage.xml" value="0.12864583333333332" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/tip_comment.xml" value="0.12864583333333332" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/tip_comment_recycler.xml" value="0.13179347826086957" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/tip_main.xml" value="0.2" />
@@ -119,6 +117,9 @@
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/tip_recyclerview.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/toolbar.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/menu/bottom_nav_menu.xml" value="0.24947916666666667" />
+        <entry key="app/src/main/res/layout/fragment_my_pagesujin.xml" value="0.16979166666666667" />
+        <entry key="app/src/main/res/layout/mypage.xml" value="0.1671794871794872" />
+        <entry key="app/src/main/res/layout/startpage.xml" value="0.16944444444444445" />
       </map>
     </option>
   </component>

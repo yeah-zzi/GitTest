@@ -61,6 +61,13 @@ public class Comsujin extends Fragment implements View.OnClickListener{
         select = view.findViewById(R.id.select);
         def = tip.getTextColors();
 
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
         //파이어베이스에서 유저당 대결횟수를 가져옴
         foodbattleDB = database.getReference().child("user").child(userid).child("foodbattle_count");
         foodbattleDB.addValueEventListener(new ValueEventListener() {
@@ -74,10 +81,8 @@ public class Comsujin extends Fragment implements View.OnClickListener{
 
             }
         });
-
-
-        return view;
     }
+
     //커뮤니티 메뉴바 선택 배경 움직이는 애니메이션
     public void onClick(View view){
         if(view.getId() == R.id.life_info){

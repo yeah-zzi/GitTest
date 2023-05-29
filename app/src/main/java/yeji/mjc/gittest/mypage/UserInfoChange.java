@@ -4,12 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import androidx.fragment.app.Fragment;
 
-import yeji.mjc.gittest.MainActivity;
-import yeji.mjc.gittest.MyPagesujin;
 import yeji.mjc.gittest.R;
 
 public class UserInfoChange extends Fragment {

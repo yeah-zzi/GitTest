@@ -32,7 +32,7 @@ public class Register extends AppCompatActivity {
     ImageButton startBtn;
     Button allergyBtn,nameBtn;
     EditText edit_name;
-    String userid = "임시용 유저 아이디1";
+    public String userid;
 
     //리사이클러뷰 선언 및 리사이클러뷰에 넣을 아이템 선언
     public RecyclerView registerallergyrecyclerView;
@@ -59,12 +59,17 @@ public class Register extends AppCompatActivity {
         edit_name = findViewById(R.id.edittextnickname);
         nameBtn = findViewById(R.id.idbuttion);
 
+        //로그인 시 아이디값 인텐트로 받아오기
+        Intent intent = getIntent();
+        userid = intent.getStringExtra("userId");
+
         //닉네임 중복 확인 버튼을 누르면 쓰여있는 닉네임을 받아서 데이터베이스에 넣는다
+        //TODO 데이터 중복 확인 구문 작성
         nameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name = edit_name.getText().toString();
-                userdb = database.getReference().child("user").child(userid).child("user_info").child("user_name");
+                userdb = database.getReference().child("user").child(userid).child("user_info").child("user_nickname");
                 userdb.setValue(name);
             }
         });
@@ -88,6 +93,7 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent registerIntent = new Intent(Register.this, Allergy.class);
+                registerIntent.putExtra("userId", userid);
                 startActivity(registerIntent);
             }
         });
