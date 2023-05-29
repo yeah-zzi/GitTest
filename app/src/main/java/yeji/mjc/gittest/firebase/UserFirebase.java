@@ -1,17 +1,17 @@
 package yeji.mjc.gittest.firebase;
 
 public class UserFirebase {
-    public String userId;
-    public String user_name;
-    public String user_email;
-    public String user_img;
-    public String user_nickname;
+    public String userId="";
+    public String user_name="";
+    public String user_email="";
+    public String user_img="";
+    public String user_nickname="";
 
     public UserFirebase() {
         // Default constructor required for calls to DataSnapshot.getValue(UserFirebase.class)
     }
 
-    public UserFirebase(String userId,String userName, String userEmail, String userImgUrl) {
+    public UserFirebase(String userId, String userName, String userEmail, String userImgUrl) {
         this.userId = userId;
         this.user_name = userName;
         this.user_email = userEmail;

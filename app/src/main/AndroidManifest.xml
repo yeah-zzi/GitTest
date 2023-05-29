@@ -6,6 +6,11 @@
     //인터넷 사용 권한 파이어베이스를 위해 +카카오
     <uses-permission android:name="android.permission.INTERNET"/>
 
+    //GPS와 네트워크를 사용하여 사용자의 정확한 위치 정보를 가져온다
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    //네트워크만 사용하여 사용자의 대략적인 위치 정보만을 가져온다
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     //바코드 카메라
     <uses-permission android:name="android.permission.CAMERA"/>
 
@@ -58,6 +63,7 @@
         <activity android:name=".Barcode" android:theme="@style/DialogTheme"/>
         <activity android:name=".MainActivity"/>
         <activity android:name=".register.Register"/>
+        <activity android:name=".cart.Cart_Map"/>
         <activity android:name=".FoodBattle_IMG_Upload" android:theme="@style/DialogTheme"/>
         <activity android:name=".FoodSearch.FoodSearch" android:theme="@style/DialogTheme"/>
         <activity android:name=".FoodSearch.Allergy" android:theme="@style/DialogTheme"/>
