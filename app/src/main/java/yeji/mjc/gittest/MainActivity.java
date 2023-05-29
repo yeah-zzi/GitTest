@@ -19,6 +19,7 @@ import yeji.mjc.gittest.comunity.Comsujin;
 import yeji.mjc.gittest.comunity.New_fight_sub;
 import yeji.mjc.gittest.comunity.New_friend_sub;
 import yeji.mjc.gittest.frige.Frigesujin;
+import yeji.mjc.gittest.mypage.MyPagesujin;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -97,8 +98,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // tabCamera 누르면 카메라
-                Intent FBIMGPlusintent = new Intent(MainActivity.this, FoodBattle_IMG_Upload.class);
-                startActivity(FBIMGPlusintent);
+              //  Intent FBIMGPlusintent = new Intent(MainActivity.this, FoodBattle_IMG_Upload.class);
+                //startActivity(FBIMGPlusintent);
             }
         });
 
