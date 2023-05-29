@@ -2,6 +2,7 @@ package yeji.mjc.gittest.cart;
 
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +17,8 @@ public class Food_recycle_holder extends RecyclerView.ViewHolder {
     ImageView foodImage;
     TextView foodName;
     TextView foodNum;
+    ImageButton count_plus;
+    ImageButton count_minus;
 
     public Food_recycle_holder(@NonNull View itemView) {
         super(itemView);
@@ -24,6 +27,8 @@ public class Food_recycle_holder extends RecyclerView.ViewHolder {
         foodImage=itemView.findViewById(R.id.foodImage);
         foodName=itemView.findViewById(R.id.foodName);
         foodNum=itemView.findViewById(R.id.foodNum);
+        count_plus=itemView.findViewById(R.id.count_plus);
+        count_minus=itemView.findViewById(R.id.count_minus);
     }
 
 }
