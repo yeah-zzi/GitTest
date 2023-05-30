@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import yeji.mjc.gittest.FoodSearch.FridgePlus;
 import yeji.mjc.gittest.cart.Cartsujin;
@@ -36,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
 
     // 하단바 연결
     BottomNavigationView bottomNavigationView; // 바텀 네비게이션 뷰
+
+    //FireBase DB 가져오기
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference addfoodDB;
+    String userid = "임시용 유저 아이디1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +69,13 @@ public class MainActivity extends AppCompatActivity {
         tabWrite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                addfoodDB=database.getReference().child("user").child(userid).child("addfood");
+                //식재료 추가 버튼 눌렀을때 빈 페이지 불러오기
+                //addfoodDB.removeValue();
+
                 Intent FridgePlusintent = new Intent(MainActivity.this, FridgePlus.class);
                 startActivity(FridgePlusintent);
+
             }
         });
 

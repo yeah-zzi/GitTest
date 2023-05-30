@@ -32,10 +32,9 @@ public class FoodSearch extends Activity implements View.OnClickListener, Select
 
     //FireBase DB 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference havefoodDB;
+    DatabaseReference havefoodDB, addfoodDB;
     String userid = "임시용 유저 아이디1";
 
-    TextView foodname;
 
     ColorStateList def;
     TextView vegetable,fruit,meet,seafood,milk,drink,select;
@@ -45,6 +44,7 @@ public class FoodSearch extends Activity implements View.OnClickListener, Select
         super.onCreate(savedInstanceState);
         setContentView(R.layout.food_img_search);
 
+        addfoodDB = database.getReference().child("user").child(userid).child("addfood");
         havefoodDB = database.getReference().child("user").child(userid).child("fridge");
 
         //설치 메뉴바 구현
@@ -224,11 +224,12 @@ public class FoodSearch extends Activity implements View.OnClickListener, Select
         int fb_food_img = myModel.food_img;
         String fb_food_name = myModel.food_name;
 
-        havefoodDB.child(fb_food_name).child("food_name").setValue(fb_food_name);
-        havefoodDB.child(fb_food_name).child("food_img").setValue(fb_food_img);
-
+        addfoodDB.child(fb_food_name).child("food_name").setValue(fb_food_name);
+        addfoodDB.child(fb_food_name).child("food_img").setValue(fb_food_img);
 
     }
+
+
 
 
 }
