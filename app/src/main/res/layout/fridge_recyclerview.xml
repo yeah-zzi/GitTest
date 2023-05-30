@@ -22,8 +22,8 @@
 
     <ImageView
         android:id="@+id/food_img"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
         android:layout_marginTop="33dp"
         android:elevation="11dp"
         android:src="@drawable/potato"
@@ -40,7 +40,8 @@
         android:indeterminate="false"
         android:layout_marginTop="14dp"
         android:max="100"
-        android:progressBackgroundTint="@color/gray"
+        android:progress="72"
+        android:progressBackgroundTint="@color/lightgray"
         android:progressDrawable="@drawable/circle_progressbar"
         android:progressTint="@color/green"
         tools:layout_editor_absoluteX="43dp"
