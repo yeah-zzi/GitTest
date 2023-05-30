@@ -36,7 +36,7 @@ public class Frigesujin extends Fragment {
     public void onStart(){
         super.onStart();
 
-        for(int i=0;i<14;i++){
+        for(int i=0;i<2;i++){
             items.add(new Item(R.drawable.potato,"감자","20개","D-16"));
         }
 

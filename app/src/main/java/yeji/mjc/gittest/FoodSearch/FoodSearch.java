@@ -227,8 +227,9 @@ public class FoodSearch extends Activity implements View.OnClickListener, Select
         havefoodDB.child(fb_food_name).child("food_name").setValue(fb_food_name);
         havefoodDB.child(fb_food_name).child("food_img").setValue(fb_food_img);
 
-
     }
+
+
 
 
 }

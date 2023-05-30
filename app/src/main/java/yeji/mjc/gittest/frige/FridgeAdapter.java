@@ -3,12 +3,15 @@ package yeji.mjc.gittest.frige;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import yeji.mjc.gittest.MainActivity;
 import yeji.mjc.gittest.R;
 
 public class FridgeAdapter extends RecyclerView.Adapter<Fridge_recycle_holder> {
@@ -31,6 +34,20 @@ public class FridgeAdapter extends RecyclerView.Adapter<Fridge_recycle_holder> {
         holder.food_name.setText(items.get(position).getFood_name());
         holder.food_count.setText(items.get(position).getFood_count());
         holder.food_date.setText(items.get(position).getFood_date());
+
+        holder.count_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        holder.count_minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     @Override

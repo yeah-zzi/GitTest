@@ -15,6 +15,8 @@ public class Fridge_recycle_holder extends RecyclerView.ViewHolder {
     TextView food_name;
     TextView food_count;
     TextView food_date;
+    ImageView count_plus;
+    ImageView count_minus;
 
     public Fridge_recycle_holder(@NonNull View itemView) {
         super(itemView);
@@ -23,6 +25,8 @@ public class Fridge_recycle_holder extends RecyclerView.ViewHolder {
         food_name = itemView.findViewById(R.id.food_name);
         food_count = itemView.findViewById(R.id.food_count);
         food_date = itemView.findViewById(R.id.food_date);
+        count_plus=itemView.findViewById(R.id.count_plus);
+        count_minus=itemView.findViewById(R.id.count_minus);
 
 
     }
