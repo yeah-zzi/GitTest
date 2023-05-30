@@ -1,6 +1,7 @@
 package yeji.mjc.gittest.frige;
 
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,8 +16,8 @@ public class Fridge_recycle_holder extends RecyclerView.ViewHolder {
     TextView food_name;
     TextView food_count;
     TextView food_date;
-    ImageView count_plus;
-    ImageView count_minus;
+    ImageButton count_plus;
+    ImageButton count_minus;
 
     public Fridge_recycle_holder(@NonNull View itemView) {
         super(itemView);

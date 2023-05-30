@@ -18,6 +18,7 @@ public class FridgeAdapter extends RecyclerView.Adapter<Fridge_recycle_holder> {
 
     //Context context;
     ArrayList<Item> items;
+    int count=0;
 
     public FridgeAdapter(ArrayList<Item> items) {
         this.items = items;
@@ -38,6 +39,8 @@ public class FridgeAdapter extends RecyclerView.Adapter<Fridge_recycle_holder> {
         holder.count_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                count++;
+                holder.food_count.setText(count+"개");
 
             }
         });
@@ -45,6 +48,10 @@ public class FridgeAdapter extends RecyclerView.Adapter<Fridge_recycle_holder> {
         holder.count_minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(count>1){ //식재료 수가 0 또는 음수일때 감소하지 않도록
+                    count--;
+                    holder.food_count.setText(count+"개");
+                }
 
             }
         });
