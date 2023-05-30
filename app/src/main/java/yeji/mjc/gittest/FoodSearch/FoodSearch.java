@@ -32,7 +32,7 @@ public class FoodSearch extends Activity implements View.OnClickListener, Select
 
     //FireBase DB 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference havefoodDB, addfoodDB;
+    DatabaseReference addfoodDB;
     String userid = "임시용 유저 아이디1";
 
 
@@ -45,7 +45,6 @@ public class FoodSearch extends Activity implements View.OnClickListener, Select
         setContentView(R.layout.food_img_search);
 
         addfoodDB = database.getReference().child("user").child(userid).child("addfood");
-        havefoodDB = database.getReference().child("user").child(userid).child("fridge");
 
         //설치 메뉴바 구현
         vegetable = findViewById(R.id.vegetable);

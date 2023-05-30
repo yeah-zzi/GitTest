@@ -36,15 +36,16 @@ public class FridgeAdapter extends RecyclerView.Adapter<Fridge_recycle_holder> {
         holder.food_count.setText(items.get(position).getFood_count());
         holder.food_date.setText(items.get(position).getFood_date());
 
+        //재료 수 더하기
         holder.count_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 count++;
                 holder.food_count.setText(count+"개");
-
             }
         });
 
+        //재료 수 감소하기
         holder.count_minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,7 +53,6 @@ public class FridgeAdapter extends RecyclerView.Adapter<Fridge_recycle_holder> {
                     count--;
                     holder.food_count.setText(count+"개");
                 }
-
             }
         });
     }

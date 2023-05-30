@@ -112,7 +112,13 @@ public class FridgePlus extends AppCompatActivity {
         String productName = getIntent().getStringExtra("productName");
         foodName.setText(productName);
 
-
+        calendarBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent foodexpiry = new Intent(getApplicationContext(), Food_expiry.class);
+                startActivity(foodexpiry);
+            }
+        });
 
 
         //스캔하여 얻은 값
@@ -161,7 +167,7 @@ public class FridgePlus extends AppCompatActivity {
 //            }
 //        };
 //
-//        // ValueEventListener를 ValueEventListener를 통해 등록합니다.
+//        //  ValueEventListener를 ValueEventListener를 통해 등록합니다.
 //        Barcodedb.addValueEventListener(valueEventListener);
     }
 
