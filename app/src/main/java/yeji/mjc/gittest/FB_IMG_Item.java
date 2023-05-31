@@ -1,4 +1,4 @@
-package yeji.mjc.gittest.comunity;
+package yeji.mjc.gittest;
 
 public class FB_IMG_Item {
     String upload_img;

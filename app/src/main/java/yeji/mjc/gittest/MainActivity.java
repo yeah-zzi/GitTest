@@ -98,8 +98,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // tabCamera 누르면 카메라
-              //  Intent FBIMGPlusintent = new Intent(MainActivity.this, FoodBattle_IMG_Upload.class);
-                //startActivity(FBIMGPlusintent);
+                Intent FBIMGPlusintent = new Intent(MainActivity.this, FoodBattle_IMG_Upload.class);
+                startActivity(FBIMGPlusintent);
             }
         });
 

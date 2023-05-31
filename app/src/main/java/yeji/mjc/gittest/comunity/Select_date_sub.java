@@ -40,7 +40,7 @@ public class Select_date_sub extends AppCompatActivity {
     //집밥대결 시작 날짜
     String startDate;
     //로그인한 유저 아이디, 집밥대결 상대 아이디
-    String userid,friendid,friendImg;
+    String userid,friendid,friendImg,friendName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +65,10 @@ public class Select_date_sub extends AppCompatActivity {
         //전페이지에서 유저 아이디와 집밥대결 유저를 가져온다
         Intent dateIntent = getIntent();
         userid = dateIntent.getStringExtra("유저");
-        friendid = dateIntent.getStringExtra("집밥대결 유저");
-        friendImg = dateIntent.getStringExtra("집밥대결 유저 이미지");
+        friendid = dateIntent.getStringExtra("집밥대결 친구 아이디");
+        friendName = dateIntent.getStringExtra("집밥대결 친구 이름");
+        friendImg = dateIntent.getStringExtra("집밥대결 친구 이미지");
+
 
         Calendar now = Calendar.getInstance();
 
@@ -143,11 +145,13 @@ public class Select_date_sub extends AppCompatActivity {
                 }else{
                     Intent dateIntent = new Intent(getApplicationContext(), FightGo.class);
                     dateIntent.putExtra("유저",userid);
-                    dateIntent.putExtra("집밥대결 유저",friendid);
-                    dateIntent.putExtra("집밥대결 유저 이미지",friendImg);
+                    dateIntent.putExtra("집밥대결 친구 아이디",friendid);
+                    dateIntent.putExtra("집밥대결 친구 이름",friendName);
+                    dateIntent.putExtra("집밥대결 친구 이미지",friendImg);
                     dateIntent.putExtra("집밥대결 시작날짜",startDate);
                     dateIntent.putExtra("집밥대결 종료날짜",changeDate);
                     startActivity(dateIntent);
+
                     finish();
                 }
             }
