@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/back"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:background="@drawable/spinner_background">
         
@@ -17,6 +17,7 @@
             android:layout_width="250dp"
             android:layout_height="70dp"
             android:src="@drawable/back_select_bar"
+            android:elevation="10dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -24,37 +25,83 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="집밥대결에 업도드할\n이미지를 선택해주세요"
+            android:text="집밥대결에 업로드할\n이미지를 선택해주세요"
             android:gravity="center"
             android:textSize="17dp"
             android:textColor="#353535"
             android:textStyle="bold"
+            android:elevation="10dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/titlebar"
             app:layout_constraintBottom_toBottomOf="@+id/titlebar"/>
 
         <ImageView
+            android:id="@+id/btn_back"
+            android:src="@drawable/lifeitems_background"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_margin="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/titlebar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <ImageButton
+            android:id="@+id/gallery"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/photo_gallery"
+            android:src="@drawable/photo_gallery"
+            android:scaleType="fitXY"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_back"
+            app:layout_constraintRight_toLeftOf="@+id/camera" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="갤러리"
+            android:textSize="10dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:elevation="10dp"
+            app:layout_constraintLeft_toLeftOf="@+id/gallery"
+            app:layout_constraintRight_toRightOf="@+id/gallery"
+            app:layout_constraintTop_toBottomOf="@+id/gallery"/>
+
+        <ImageButton
+            android:id="@+id/camera"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/photo_gallery"
+            android:src="@drawable/camera"
+            android:scaleType="fitXY"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/gallery"
+            app:layout_constraintTop_toTopOf="@+id/btn_back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="카메라"
+            android:textSize="10dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:elevation="10dp"
+            app:layout_constraintLeft_toLeftOf="@+id/camera"
+            app:layout_constraintRight_toRightOf="@+id/camera"
+            app:layout_constraintTop_toBottomOf="@+id/camera"/>
+
+        <ImageView
         android:id="@+id/image_view"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:src="@drawable/tab_image"
         app:layout_constraintLeft_toLeftOf="@id/back"
         app:layout_constraintRight_toRightOf="@id/back"
-        app:layout_constraintTop_toTopOf="@id/back"
-        app:layout_constraintBottom_toBottomOf="@id/back"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/btn_back"/>
 
-    <ProgressBar
-        android:id="@+id/progress_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="@id/back"
-        app:layout_constraintRight_toRightOf="@id/back"
-        app:layout_constraintTop_toTopOf="@id/back"
-        app:layout_constraintBottom_toBottomOf="@id/back"/>
-
-    <Button
+        <Button
         android:id="@+id/cancel_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -68,17 +115,18 @@
         app:layout_constraintLeft_toLeftOf="@id/back"
         app:layout_constraintTop_toBottomOf="@+id/image_view"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/upload_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/main_yellow"
-        android:text="  업로드  "
-        android:textStyle="bold"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp"
-        app:layout_constraintBottom_toBottomOf="@id/back"
-        app:layout_constraintRight_toRightOf="@id/back"
-        app:layout_constraintTop_toBottomOf="@+id/image_view"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/upload_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/main_yellow"
+            android:text="  업로드  "
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/back"
+            app:layout_constraintRight_toRightOf="@id/back"
+            app:layout_constraintTop_toBottomOf="@+id/image_view"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

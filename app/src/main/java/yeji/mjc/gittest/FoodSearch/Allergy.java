@@ -138,7 +138,6 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
 
     }
 
-
     public void onStart() {
         super.onStart();
         //리사이클러뷰에 어댑터와 매니저를 지정한다
