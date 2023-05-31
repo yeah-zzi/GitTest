@@ -1,19 +1,19 @@
 package yeji.mjc.gittest.frige;
 
-public class Item {
+public class Fridge_Item {
     int food_img;
     String food_name;
     String food_count;
     String food_date;
 
-    public Item(int food_img, String food_name, String food_count, String food_date) {
+    public Fridge_Item(int food_img, String food_name, String food_count, String food_date) {
         this.food_img = food_img;
         this.food_name = food_name;
         this.food_count = food_count;
         this.food_date = food_date;
     }
 
-    public Item(int food_img, String food_name, String food_count)
+    public Fridge_Item(int food_img, String food_name, String food_count)
     {
         this.food_img = food_img;
         this.food_name = food_name;

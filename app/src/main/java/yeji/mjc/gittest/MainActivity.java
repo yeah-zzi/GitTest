@@ -20,7 +20,7 @@ import yeji.mjc.gittest.cart.Cartsujin;
 import yeji.mjc.gittest.comunity.Comsujin;
 import yeji.mjc.gittest.comunity.New_fight_sub;
 import yeji.mjc.gittest.comunity.New_friend_sub;
-import yeji.mjc.gittest.frige.Frigesujin;
+import yeji.mjc.gittest.frige.Fridge;
 import yeji.mjc.gittest.mypage.MyPagesujin;
 
 public class MainActivity extends AppCompatActivity {
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         //FrameLayout에 xml 띄우기
-        getSupportFragmentManager().beginTransaction().add(R.id.container, new Frigesujin()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.container, new Fridge()).commit();
 
         //바텀 네비게이션뷰 안의 아이템 설정
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                         from_comm = false;
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, new Frigesujin()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, new Fridge()).commit();
                         break;
                     case R.id.c://장바구니
                         community = false;
