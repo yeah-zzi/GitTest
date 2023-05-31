@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,11 +23,8 @@ public class Fridge extends Fragment implements View.OnClickListener{
     public Button fridge_cold; //냉장
     public Button fridge_frozen; //냉동
 
-    //화면 이동을 위한 프레그먼트 변수 선언
-    private final int Fragment_1 = 1;
-    private final int Fragment_2 = 2;
-    private final int Fragment_3 = 3;
-
+    //FragmentActivity1 frameLayout1;
+    //FragmentActivity2 frameLayout2;
 
     //리사이클러뷰 변수 선언
     public RecyclerView recyclerView;
@@ -38,6 +36,36 @@ public class Fridge extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fridge_main, container, false);
+/*
+        btn_goBack = view.findViewById(R.id.btn_goBack);
+        btn_goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                HomeFragment homeFragment = new HomeFragment();
+                //main_layout에 homeFragment로 transaction 한다.
+                transaction.replace(R.id.main_layout, homeFragment);
+                //꼭 commit을 해줘야 바뀐다.
+                transaction.commit();
+            }
+        });*/
+
+
+        /*
+        fridge_cold = view.findViewById(R.id.fridge_cold);
+        fridge_cold.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                HomeFragment homeFragment = new HomeFragment();
+                //main_layout에 homeFragment로 transaction 한다.
+                transaction.replace(R.id.main_layout, homeFragment);
+                //꼭 commit을 해줘야 바뀐다.
+                transaction.commit();
+            }
+        });
+
+        */
 
         recyclerView = view.findViewById(R.id.fridgeRecyclerView);
         recyclerView.setHasFixedSize(true);
@@ -84,6 +112,7 @@ public class Fridge extends Fragment implements View.OnClickListener{
         fridgeItems.add(new Fridge_Item(R.drawable.carrot,"당근","6개","D-30"));
         fridgeItems.add(new Fridge_Item(R.drawable.gazi,"가지","1개","D-7"));
         fridgeItems.add(new Fridge_Item(R.drawable.godung,"고등어","2개","D-2"));
+        fridgeItems.add(new Fridge_Item(R.drawable.corn,"옥수수","1개","D-21"));
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
         recyclerView.setAdapter(new Fridge_Adapter(fridgeItems));

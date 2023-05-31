@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -77,6 +78,7 @@ public class Cold_Fridge extends Fragment implements View.OnClickListener{
         fridgeItems.add(new Fridge_Item(R.drawable.potato,"감자","5개","D-16"));
         fridgeItems.add(new Fridge_Item(R.drawable.gazi,"가지","1개","D-7"));
         fridgeItems.add(new Fridge_Item(R.drawable.godung,"고등어","2개","D-2"));
+        fridgeItems.add(new Fridge_Item(R.drawable.corn,"옥수수","1개","D-21"));
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
         recyclerView.setAdapter(new Fridge_Adapter(fridgeItems));
