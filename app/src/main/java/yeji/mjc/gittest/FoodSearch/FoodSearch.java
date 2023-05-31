@@ -5,13 +5,18 @@ import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
+import yeji.mjc.gittest.AllergyItem;
 import yeji.mjc.gittest.FoodSearch.FoodSearchAdapter;
 import yeji.mjc.gittest.FoodSearch.FoodSearchItem;
 import yeji.mjc.gittest.R;
@@ -25,12 +30,22 @@ public class FoodSearch extends Activity implements View.OnClickListener, Select
     public RecyclerView.Adapter foodSearchAdapter;
     public ArrayList<FoodSearchItem> items = new ArrayList<FoodSearchItem>();
 
+    //FireBase DB 가져오기
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference addfoodDB;
+    String userid = "임시용 유저 아이디1";
+
+
     ColorStateList def;
     TextView vegetable,fruit,meet,seafood,milk,drink,select;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.food_img_search);
+
+        addfoodDB = database.getReference().child("user").child(userid).child("addfood");
+
         //설치 메뉴바 구현
         vegetable = findViewById(R.id.vegetable);
         fruit = findViewById(R.id.fruit);
@@ -46,9 +61,11 @@ public class FoodSearch extends Activity implements View.OnClickListener, Select
         drink.setOnClickListener(this);
         select = findViewById(R.id.select);
         def = fruit.getTextColors();
+
         //리사이클러뷰구현
         recyclerView = findViewById(R.id.foodSearchRecyclerView);
         recyclerView.setHasFixedSize(true);
+
         //초기 화면인 메뉴가 채소로 되어있을 때의 아이템 추가
         items.add(new FoodSearchItem(R.drawable.apple,"감자"));
         items.add(new FoodSearchItem(R.drawable.gazi,"가지"));
@@ -200,8 +217,18 @@ public class FoodSearch extends Activity implements View.OnClickListener, Select
             }
         }
     }
+
     @Override
     public void onItemClicked(FoodSearchItem myModel) {
-        //Toast.makeText(this,myModel.getFood_name(),Toast.LENGTH_SHORT).show();
+        int fb_food_img = myModel.food_img;
+        String fb_food_name = myModel.food_name;
+
+        addfoodDB.child(fb_food_name).child("food_name").setValue(fb_food_name);
+        addfoodDB.child(fb_food_name).child("food_img").setValue(fb_food_img);
+
     }
+
+
+
+
 }
