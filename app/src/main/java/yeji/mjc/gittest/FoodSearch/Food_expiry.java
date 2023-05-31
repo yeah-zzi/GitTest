@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.CalendarView;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -26,14 +27,7 @@ import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.comunity.FightGo;
 
 public class Food_expiry extends AppCompatActivity {
-    ImageButton close,calendar;
-
-    //현재시간 기준 선택한 기간에 따라 정해지는 유통기한이 끝나는 날짜
-    String changeDate = null;
-    //유통기한 시작 날짜
-    String startDate;
-    //로그인한 유저 아이디
-    String userid;
+    CalendarView calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,15 +44,6 @@ public class Food_expiry extends AppCompatActivity {
         overridePendingTransition(0,0);
 
         calendar = findViewById(R.id.calendar);
-        Calendar now = Calendar.getInstance();
-
-        //문자열로 날짜를 초기화
-        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-
-        //현재 날짜를 시작날짜 문자열에 저장
-        now.setTime(new Date());
-        startDate = df.format(now.getTime());
-
 
 
         /*

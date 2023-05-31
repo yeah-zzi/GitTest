@@ -75,7 +75,7 @@
 
 
     <CalendarView
-        android:id="@+id/fbcalendar"
+        android:id="@+id/calendar"
         android:layout_width="320dp"
         android:layout_height="319dp"
         android:layout_marginTop="35dp"
