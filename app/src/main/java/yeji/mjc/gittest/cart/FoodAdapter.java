@@ -1,5 +1,6 @@
 package yeji.mjc.gittest.cart;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import yeji.mjc.gittest.R;
 public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
 
     static ArrayList<FoodItem> items;
-    private boolean checkBox;
+    private int count =0;
 
     public FoodAdapter(ArrayList<FoodItem> items) {
         this.items = items;
@@ -30,9 +31,24 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
     @Override
     public void onBindViewHolder(@NonNull Food_recycle_holder holder, int position) {
         holder.foodName.setText(items.get(position).getName());
-        holder.foodNum.setText(items.get(position).getNum());
-        holder.checkBox.setChecked(items.get(position).isCheckBox(checkBox));
+       // holder.foodNum.setText(items.get(position).getNum());
+        holder.checkBox.setChecked(items.get(position).isCheckBox());
         holder.foodImage.setImageResource(items.get(position).getImg());
+        holder.count_minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                count--;
+                holder.foodNum.setText(count+"개");
+            }
+        });
+
+        holder.count_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                count++;
+                holder.foodNum.setText(count+"개");
+            }
+        });
 
     }
 
@@ -41,10 +57,18 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
         return items.size();
     }
 
-    public  void toggleAllSelection(boolean isChecked) {
-        checkBox = isChecked;
+    // 전체 선택
+    public void selectAll() {
         for (FoodItem item : items) {
-            item.isCheckBox(checkBox);
+            item.setCheckBox(true);
+        }
+        notifyDataSetChanged(); // 변경 사항을 어댑터에 알림
+    }
+
+    // 전체 해제
+    public void deselectAll() {
+        for (FoodItem item : items) {
+            item.setCheckBox(false);
         }
         notifyDataSetChanged();
     }

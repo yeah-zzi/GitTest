@@ -42,6 +42,7 @@ public class New_fight_sub extends AppCompatActivity implements FriendListener {
 
     String userid = "임시용 유저 아이디1";
     String friendid = "";
+    String friendName;
     String friendImg = null;
 
     @Override
@@ -92,8 +93,9 @@ public class New_fight_sub extends AppCompatActivity implements FriendListener {
                 }else{
                     Intent fridgeSearchIntent = new Intent(getApplicationContext(), Select_date_sub.class);
                     fridgeSearchIntent.putExtra("유저",userid);
-                    fridgeSearchIntent.putExtra("집밥대결 유저",friendid);
-                    fridgeSearchIntent.putExtra("집밥대결 유저 이미지",friendImg);
+                    fridgeSearchIntent.putExtra("집밥대결 친구 아이디",friendid);
+                    fridgeSearchIntent.putExtra("집밥대결 친구 이름",friendName);
+                    fridgeSearchIntent.putExtra("집밥대결 친구 이미지",friendImg);
                     startActivity(fridgeSearchIntent);
                     finish();
                 }
@@ -143,19 +145,10 @@ public class New_fight_sub extends AppCompatActivity implements FriendListener {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-
-    //해당 알러지를 파이어베이스에 추가한다
-    /*public void addAllergy(String name) {
-        foodbattleDB = makeDB.child("fb_mem2").child("id");
-        foodbattleDB.setValue(name);
-
-        foodbattleDB = makeDB.child("fb_mem1").child("id");
-        foodbattleDB.setValue(userid);
-    }*/
-
     @Override
     public void onItemClicked(FriendAdd_Item myModel) {
-        friendid = myModel.getUser_name();
+        friendName = myModel.getUser_name();
+        friendid = myModel.getUserId();
         friendImg = myModel.getUser_img();
     }
 }

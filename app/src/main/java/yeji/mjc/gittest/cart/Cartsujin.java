@@ -1,6 +1,7 @@
 package yeji.mjc.gittest.cart;
 
 
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Color;
 
@@ -17,6 +18,7 @@ import android.widget.ImageButton;
 
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -53,11 +55,32 @@ public class Cartsujin extends Fragment {
             @Override
             public void onClick(View v) {
                 boolean isChecked = ((RadioButton) v).isChecked();
-                foodAdapter.toggleAllSelection(isChecked);
+                if (isChecked) {
+                    foodAdapter.selectAll();
+//                    AlertDialog.Builder cartDelete = new AlertDialog.Builder(getContext());
+//                    cartDelete.setMessage("전부 삭제하시겠습니까?");
+//                    cartDelete.setPositiveButton("취소", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//
+//                        }
+//                    });
+//                    cartDelete.setNegativeButton("삭제", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                           foodAdapter.removeAllItem();
+//                        }
+//                    });
+//                    cartDelete.show();
+                } else {
+                    foodAdapter.deselectAll();
+                }
             }
         });
 
         foodAdapter = new FoodAdapter(foodItems);
+        recyclerView.setAdapter(foodAdapter);
+
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
@@ -81,17 +104,17 @@ public class Cartsujin extends Fragment {
                         foodAdapter.notifyItemRemoved(position);
                         foodAdapter.notifyDataSetChanged();
 
-//                        //복구
-//                        Snackbar.make(recyclerView, deleteItem.getName(), Snackbar.LENGTH_LONG)
-//                                .setAction("복구", new View.OnClickListener(){
-//                                    @Override
-//                                    public void onClick(View view) {
-//                                        foodItems.add(position, deleteItem);
-//                                        foodAdapter.addItem(position,deleteItem);
-//                                        foodAdapter.notifyItemInserted(position);
-//                                    }
-//                                }).show();
-//                        break;
+                        //복구
+                        Snackbar.make(recyclerView, deleteItem.getName(), Snackbar.LENGTH_LONG)
+                                .setAction("복구", new View.OnClickListener(){
+                                    @Override
+                                    public void onClick(View view) {
+                                        foodItems.add(position, deleteItem);
+                                        foodAdapter.addItem(position,deleteItem);
+                                        foodAdapter.notifyItemInserted(position);
+                                    }
+                                }).show();
+                        break;
 
                 }
             }
@@ -134,11 +157,11 @@ public class Cartsujin extends Fragment {
         super.onStart();
 
         for(int i=0;i<9;i++){
-            foodItems.add(new FoodItem("오징어", "3개",R.drawable.bread,true));
+            foodItems.add(new FoodItem("오징어", "0개",R.drawable.bread,false));
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(new FoodAdapter(foodItems));
+        //recyclerView.setAdapter(new FoodAdapter(foodItems));
     }
 
 }

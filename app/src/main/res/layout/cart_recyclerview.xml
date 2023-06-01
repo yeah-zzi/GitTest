@@ -43,26 +43,26 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageButton
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/plus"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_margin="15dp"
-        android:src="@drawable/minus"
+        android:background="@drawable/minus"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toLeftOf="@id/cart"
         app:civ_border_color="#FF000000"
         tools:ignore="MissingConstraints" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageButton
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/minus"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_margin="15dp"
-        android:src="@drawable/plus"
+        android:background="@drawable/plus"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -83,7 +83,7 @@
         android:id="@+id/foodNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="3개"
+        android:text="0개"
         android:textSize="16dp"
         android:layout_marginBottom="11dp"
         android:layout_marginLeft="4dp"

@@ -12,13 +12,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import yeji.mjc.gittest.FoodSearch.FridgePlus;
 import yeji.mjc.gittest.cart.Cartsujin;
 import yeji.mjc.gittest.comunity.Comsujin;
 import yeji.mjc.gittest.comunity.New_fight_sub;
 import yeji.mjc.gittest.comunity.New_friend_sub;
-import yeji.mjc.gittest.frige.Frigesujin;
+import yeji.mjc.gittest.frige.Fridge;
 import yeji.mjc.gittest.mypage.MyPagesujin;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
 
     // 하단바 연결
     BottomNavigationView bottomNavigationView; // 바텀 네비게이션 뷰
+
+    //FireBase DB 가져오기
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference addfoodDB;
+    String userid = "임시용 유저 아이디1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +69,13 @@ public class MainActivity extends AppCompatActivity {
         tabWrite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                addfoodDB=database.getReference().child("user").child(userid).child("addfood");
+                //식재료 추가 버튼 눌렀을때 빈 페이지 불러오기
+                //addfoodDB.removeValue();
+
                 Intent FridgePlusintent = new Intent(MainActivity.this, FridgePlus.class);
                 startActivity(FridgePlusintent);
+
             }
         });
 
@@ -98,8 +110,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // tabCamera 누르면 카메라
-              //  Intent FBIMGPlusintent = new Intent(MainActivity.this, FoodBattle_IMG_Upload.class);
-                //startActivity(FBIMGPlusintent);
+                Intent FBIMGPlusintent = new Intent(MainActivity.this, FoodBattle_IMG_Upload.class);
+                startActivity(FBIMGPlusintent);
             }
         });
 
@@ -116,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         //FrameLayout에 xml 띄우기
-        getSupportFragmentManager().beginTransaction().add(R.id.container, new Frigesujin()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.container, new Fridge()).commit();
 
         //바텀 네비게이션뷰 안의 아이템 설정
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -141,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                         from_comm = false;
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, new Frigesujin()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, new Fridge()).commit();
                         break;
                     case R.id.c://장바구니
                         community = false;

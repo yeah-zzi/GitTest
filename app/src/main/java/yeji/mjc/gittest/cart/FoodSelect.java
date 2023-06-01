@@ -1,4 +1,4 @@
-package yeji.mjc.gittest.frige;
+package yeji.mjc.gittest.cart;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -18,7 +18,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import yeji.mjc.gittest.AllergyItem;
 import yeji.mjc.gittest.FoodItem;
 import yeji.mjc.gittest.FoodSearch.FoodSearchItem;
 import yeji.mjc.gittest.R;

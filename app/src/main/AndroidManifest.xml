@@ -12,11 +12,14 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     //바코드 카메라
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.permission.CAMERA"/>
 
     //파이어베이스 이미지 저장용
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    //카메라를 위한
+    <uses-feature android:name="android.hardware.Camera" android:required="true"/>
 
     <application
         android:allowBackup="true"
@@ -31,6 +34,15 @@
         android:name=".KakaoApplication"
         tools:targetApi="31"
         android:usesCleartextTraffic="true" >
+        <provider
+            android:authorities="yeji.mjc.gittest.fileProvider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
 
         <activity
             android:name=".LoginActivity"
@@ -69,11 +81,13 @@
         <activity android:name=".FoodSearch.Allergy" android:theme="@style/DialogTheme"/>
         <activity android:name=".comunity.TipComment" android:theme="@style/DialogTheme"/>
         <activity android:name=".FoodSearch.FridgePlus" android:theme="@style/DialogTheme"/>
+        <activity android:name=".FoodSearch.Food_expiry" android:theme="@style/DialogTheme"/>
         <activity android:name=".comunity.FightGo" android:theme="@style/DialogTheme"/>
         <activity android:name=".comunity.FoodBattleCalendar" android:theme="@style/DialogTheme"/>
         <activity android:name=".comunity.New_fight_sub" android:theme="@style/DialogTheme"></activity>
         <activity android:name=".comunity.New_friend_sub" android:theme="@style/DialogTheme"></activity>
         <activity android:name=".comunity.Select_date_sub"></activity>
+
 
     </application>
 

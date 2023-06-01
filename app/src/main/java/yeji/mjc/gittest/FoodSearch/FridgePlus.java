@@ -13,6 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,13 +33,44 @@ public class FridgePlus extends AppCompatActivity {
     //변수 선언
     ImageButton plusBTN,cancelBTN,completeBTN,calendarBTN;
     TextView foodName,foodCount,deadLine;
-    ImageView foodImg;
     private DatabaseReference Barcodedb;
+
+    TextView getFoodName;
+    ImageView foodImg;
+
+
+    //FireBase DB 가져오기
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference addfoodDB;
+    String userid = "임시용 유저 아이디1";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fridge_plus);
+
+
+        addfoodDB=database.getReference().child("user").child(userid).child("addfood");
+        addfoodDB.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                //식재료들을 모두 가져오는 for문...
+                for (DataSnapshot snapshot1 : snapshot.getChildren()){
+                    int img = snapshot1.child("food_img").getValue(Integer.class);
+                    String name=snapshot1.child("food_name").getValue(String.class);
+
+                    getFoodName.setText(name);
+                    foodImg.setImageResource(img);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         plusBTN = findViewById(R.id.plusbtn);
         cancelBTN = findViewById(R.id.cancel);
@@ -41,11 +78,14 @@ public class FridgePlus extends AppCompatActivity {
         calendarBTN = findViewById(R.id.calendar);
         foodName = findViewById(R.id.search_food_name);
         foodImg = findViewById(R.id.food_img);
+        getFoodName=findViewById(R.id.search_food_name);
 
         //취소버튼을 누르면 dialog창이 닫힌다
         cancelBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Firebase 값에서 조회내역 삭제
+                addfoodDB.removeValue();
                 finish();
             }
         });
@@ -54,6 +94,8 @@ public class FridgePlus extends AppCompatActivity {
         completeBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Firebase 값에서 조회내역 삭제
+                addfoodDB.removeValue();
                 finish();
             }
         });
@@ -64,6 +106,17 @@ public class FridgePlus extends AppCompatActivity {
             public void onClick(View v) {
                 Intent fridgeSearchIntent = new Intent(getApplicationContext(), FoodSearch.class);
                 startActivity(fridgeSearchIntent);
+            }
+        });
+
+        String productName = getIntent().getStringExtra("productName");
+        foodName.setText(productName);
+
+        calendarBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent foodexpiry = new Intent(getApplicationContext(), Food_expiry.class);
+                startActivity(foodexpiry);
             }
         });
 
@@ -114,7 +167,7 @@ public class FridgePlus extends AppCompatActivity {
 //            }
 //        };
 //
-//        // ValueEventListener를 ValueEventListener를 통해 등록합니다.
+//        //  ValueEventListener를 ValueEventListener를 통해 등록합니다.
 //        Barcodedb.addValueEventListener(valueEventListener);
     }
 

@@ -1,7 +1,6 @@
 package yeji.mjc.gittest.comunity;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
+import yeji.mjc.gittest.FB_IMG_Item;
 import yeji.mjc.gittest.R;
 
 public class FB_IMG_Adapter extends RecyclerView.Adapter<FB_IMG_Holder>{
