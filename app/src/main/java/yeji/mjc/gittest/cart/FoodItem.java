@@ -41,8 +41,13 @@ public class FoodItem {
     }
 
 
+    public boolean isCheckBox() {
+        return checkBox;
+
+
     public boolean isCheckBox(boolean checkBox) {
         return this.checkBox;
+
     }
 
     public void setCheckBox(boolean checkBox) {
