@@ -44,8 +44,6 @@ public class Frozen_Fridge extends Fragment{
     }
 
 
-
-
     public void onStart(){
         super.onStart();
 
