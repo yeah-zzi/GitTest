@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/message1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="커뮤니티 > 생활정보"
+        android:textSize="17dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <ImageView
+        android:id="@+id/main_picture"
+        android:layout_width="420dp"
+        android:layout_height="238dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/picture"
+        app:layout_constraintTop_toBottomOf="@id/message1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="야경 보기 좋은 낙산공원!"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/main_picture"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/heart_image"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/ic_baseline_favorite_border_24"
+        android:layout_marginTop="19dp"
+        android:layout_marginRight="15dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintRight_toRightOf="@+id/heart_count"
+        />
+
+    <TextView
+        android:id="@+id/heart_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="33dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintRight_toRightOf="@+id/comment_image"
+        />
+
+    <ImageButton
+        android:id="@+id/comment_image"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/ic_outline_chat_bubble_outline_24"
+        android:layout_marginTop="19dp"
+        android:layout_marginRight="15dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintRight_toRightOf="@+id/comment_count"
+        />
+
+    <TextView
+        android:id="@+id/comment_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintRight_toRightOf="@id/main_picture"
+        />
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="작성자 : hyerim  / 게시일 : 2023-04-23"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="125dp"
+        app:layout_constraintTop_toBottomOf="@id/comment_count"
+        app:layout_constraintLeft_toLeftOf="@id/main_picture"
+        app:layout_constraintRight_toRightOf="@id/main_picture"
+        />
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="415dp"
+        android:layout_height="wrap_content"
+        android:text=" 서울에서 야경이 예쁜 곳으로 유명한 낙산공원은 오래된 성곽과 현재의 서울이 공존하는 곳으로 많은 이들이 산책을 즐기는 곳이다. "
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toBottomOf="@+id/info"
+        app:layout_constraintLeft_toLeftOf="@id/main_picture"
+        app:layout_constraintRight_toRightOf="@id/main_picture"
+        />
+
+    <ImageView
+        android:id="@+id/sub_image"
+        android:layout_width="210dp"
+        android:layout_height="210dp"
+        android:background="@drawable/plus_picture"
+        android:layout_marginTop="115dp"
+        app:layout_constraintTop_toBottomOf="@+id/info"
+        app:layout_constraintLeft_toLeftOf="@id/main_picture"
+        />
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="186dp"
+        android:layout_height="wrap_content"
+        android:text=" 아름다운 야경이 보고싶다면 낙산공원에 방문하는것을 추천한다. 일몰시간 30분 전에 정상에 도착하면 해가지는것과 해지고 난 후의 야경까지 모두 한번에 즐길 수 있다. 여름이 오면 정상에 오르기 힘드니 날이 따듯한 봄에 미리 다녀오는것이 좋겠다."
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="9dp"
+        android:layout_marginLeft="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/text1"
+        app:layout_constraintLeft_toRightOf="@id/sub_image"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

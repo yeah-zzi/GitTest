@@ -33,7 +33,7 @@ public class FightGo extends AppCompatActivity {
     Date startCalender=null,endCalender=null;
     long diffDays;
 
-    String userid,friendid,friendimg,startDate,changeDate;
+    String userid,friendid,friendName,friendimg,startDate,changeDate;
 
     //파이어베이스에서 데이터베이스 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -52,10 +52,12 @@ public class FightGo extends AppCompatActivity {
         //전페이지에서 입력받은 정보들 가져오기
         Intent finishIntent = getIntent();
         userid = finishIntent.getStringExtra("유저");
-        friendid = finishIntent.getStringExtra("집밥대결 유저");
-        friendimg = finishIntent.getStringExtra("집밥대결 유저 이미지");
+        friendid = finishIntent.getStringExtra("집밥대결 친구 아이디");
+        friendName = finishIntent.getStringExtra("집밥대결 친구 이름");
+        friendimg = finishIntent.getStringExtra("집밥대결 친구 이미지");
         startDate = finishIntent.getStringExtra("집밥대결 시작날짜");
         changeDate = finishIntent.getStringExtra("집밥대결 종료날짜");
+
 
         //문자열을 날짜로 변환
         DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
@@ -73,7 +75,7 @@ public class FightGo extends AppCompatActivity {
         //이미지 로드
         Glide.with(this).load(friendimg).into(friendImg);
         //아이디 적용
-        friendId.setText(friendid);
+        friendId.setText(friendName);
         fbDate.setText(diffDays+"일간");
 
         finish.setOnClickListener(new View.OnClickListener() {
@@ -91,11 +93,14 @@ public class FightGo extends AppCompatActivity {
 
                 String fb_code = makeDB.getKey();
 
+
+                //로그인한 유저한테 집밥대결 코드 정보를 저장
                 makeDB = database.getReference().child("user").child(userid).child("foodbattle_code").push();
                 makeDB.child("code").setValue(fb_code);
                 makeDB.child("fb_friend").setValue(friendid);
                 makeDB.child("fb_friend_img").setValue(friendimg);
 
+                //집밥대결을 신청한 친구한테 집밥대결 코드 정보를 저장
                 makeDB = database.getReference().child("user").child(friendid).child("foodbattle_code").push();
                 makeDB.child("code").setValue(fb_code);
                 makeDB.child("fb_friend").setValue(userid);

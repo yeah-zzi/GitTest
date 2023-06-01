@@ -33,14 +33,15 @@ public class FridgePlus extends AppCompatActivity {
     //변수 선언
     ImageButton plusBTN,cancelBTN,completeBTN,calendarBTN;
     TextView foodName,foodCount,deadLine;
-    ImageView foodImg;
     private DatabaseReference Barcodedb;
 
     TextView getFoodName;
+    ImageView foodImg;
+
 
     //FireBase DB 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference havefoodDB;
+    DatabaseReference addfoodDB;
     String userid = "임시용 유저 아이디1";
 
     @Override
@@ -48,8 +49,9 @@ public class FridgePlus extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fridge_plus);
 
-        havefoodDB=database.getReference().child("user").child(userid).child("fridge");
-        havefoodDB.addValueEventListener(new ValueEventListener() {
+
+        addfoodDB=database.getReference().child("user").child(userid).child("addfood");
+        addfoodDB.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -82,6 +84,8 @@ public class FridgePlus extends AppCompatActivity {
         cancelBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Firebase 값에서 조회내역 삭제
+                addfoodDB.removeValue();
                 finish();
             }
         });
@@ -90,6 +94,8 @@ public class FridgePlus extends AppCompatActivity {
         completeBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Firebase 값에서 조회내역 삭제
+                addfoodDB.removeValue();
                 finish();
             }
         });
@@ -106,7 +112,13 @@ public class FridgePlus extends AppCompatActivity {
         String productName = getIntent().getStringExtra("productName");
         foodName.setText(productName);
 
-
+        calendarBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent foodexpiry = new Intent(getApplicationContext(), Food_expiry.class);
+                startActivity(foodexpiry);
+            }
+        });
 
 
         //스캔하여 얻은 값
@@ -155,7 +167,7 @@ public class FridgePlus extends AppCompatActivity {
 //            }
 //        };
 //
-//        // ValueEventListener를 ValueEventListener를 통해 등록합니다.
+//        //  ValueEventListener를 ValueEventListener를 통해 등록합니다.
 //        Barcodedb.addValueEventListener(valueEventListener);
     }
 

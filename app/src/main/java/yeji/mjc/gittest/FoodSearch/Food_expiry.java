@@ -1,16 +1,13 @@
-package yeji.mjc.gittest.comunity;
+package yeji.mjc.gittest.FoodSearch;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.PaintDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
+import android.widget.CalendarView;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -20,8 +17,6 @@ import androidx.core.util.Pair;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -29,26 +24,17 @@ import java.util.Calendar;
 import java.util.Date;
 
 import yeji.mjc.gittest.R;
+import yeji.mjc.gittest.comunity.FightGo;
 
-public class Select_date_sub extends AppCompatActivity {
-
-    ImageButton close,calendar;
-    AppCompatButton day3,day7,day30;
-
-    //현재시간 기준 선택한 기간에 따라 정해지는 집밥대결이 끝나는 날짜
-    String changeDate = null;
-    //집밥대결 시작 날짜
-    String startDate;
-    //로그인한 유저 아이디, 집밥대결 상대 아이디
-    String userid,friendid,friendImg,friendName;
+public class Food_expiry extends AppCompatActivity {
+    CalendarView calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.select_date);
+        setContentView(R.layout.expiry_date);
 
-
-        //뒤 배경을 반투명하게 하려고
+        //뒤 배경을 반투명하게
         Window window = this.getWindow();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             setTranslucent(true);
@@ -57,30 +43,20 @@ public class Select_date_sub extends AppCompatActivity {
         }
         overridePendingTransition(0,0);
 
+        calendar = findViewById(R.id.calendar);
+
+
+        /*
         day3 = findViewById(R.id.days3);
         day7 = findViewById(R.id.days7);
         day30 = findViewById(R.id.days30);
-        calendar = findViewById(R.id.calendar);
 
-        //전페이지에서 유저 아이디와 집밥대결 유저를 가져온다
+        //전페이지에서 유저 아이디를 가져옴
         Intent dateIntent = getIntent();
         userid = dateIntent.getStringExtra("유저");
-        friendid = dateIntent.getStringExtra("집밥대결 친구 아이디");
-        friendName = dateIntent.getStringExtra("집밥대결 친구 이름");
-        friendImg = dateIntent.getStringExtra("집밥대결 친구 이미지");
-
-
-        Calendar now = Calendar.getInstance();
-
-        //문자열로 날짜를 초기화
-        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-
-        //현재 날짜를 시작날짜 문자열에 저장
-        now.setTime(new Date());
-        startDate = df.format(now.getTime());
 
         //3일을 선택하면
-      day3.setOnClickListener(new View.OnClickListener() {
+        day3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //선택된 버튼만 색 변화
@@ -145,13 +121,9 @@ public class Select_date_sub extends AppCompatActivity {
                 }else{
                     Intent dateIntent = new Intent(getApplicationContext(), FightGo.class);
                     dateIntent.putExtra("유저",userid);
-                    dateIntent.putExtra("집밥대결 친구 아이디",friendid);
-                    dateIntent.putExtra("집밥대결 친구 이름",friendName);
-                    dateIntent.putExtra("집밥대결 친구 이미지",friendImg);
                     dateIntent.putExtra("집밥대결 시작날짜",startDate);
                     dateIntent.putExtra("집밥대결 종료날짜",changeDate);
                     startActivity(dateIntent);
-
                     finish();
                 }
             }
@@ -191,7 +163,7 @@ public class Select_date_sub extends AppCompatActivity {
                     }
                 });
             }
-        });
+        }); */
 
     }
 

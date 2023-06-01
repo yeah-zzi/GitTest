@@ -22,6 +22,7 @@ public class FoodItem {
         this.name = name;
     }
 
+
     public String getNum() {
         return num;
     }
@@ -29,6 +30,7 @@ public class FoodItem {
     public void setNum(String num) {
         this.num = num;
     }
+
 
     public int getImg() {
         return img;
@@ -38,8 +40,14 @@ public class FoodItem {
         this.img = img;
     }
 
+
     public boolean isCheckBox() {
         return checkBox;
+
+
+    public boolean isCheckBox(boolean checkBox) {
+        return this.checkBox;
+
     }
 
     public void setCheckBox(boolean checkBox) {

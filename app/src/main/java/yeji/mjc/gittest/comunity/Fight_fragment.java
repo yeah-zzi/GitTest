@@ -1,18 +1,14 @@
 package yeji.mjc.gittest.comunity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,10 +27,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import yeji.mjc.gittest.AllergyItem;
-import yeji.mjc.gittest.FoodSearch.FoodSearchItem;
+import yeji.mjc.gittest.FB_IMG_Item;
 import yeji.mjc.gittest.R;
-import yeji.mjc.gittest.register.RegisterAllergyAdapter;
 
 
 public class Fight_fragment extends Fragment implements FBListener{
@@ -42,6 +36,7 @@ public class Fight_fragment extends Fragment implements FBListener{
     String userid = "임시용 유저 아이디1";
     TextView user_name,friend_name;
     TextView remainDate,ingDate,startDateText;
+    Button meNum,friendNum;
 
     //파이어베이스에서 데이터베이스 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -78,6 +73,8 @@ public class Fight_fragment extends Fragment implements FBListener{
         viewUserImg = view.findViewById(R.id.cat);
         viewFriendImg = view.findViewById(R.id.dog);
         startDateText = view.findViewById(R.id.ing);
+        meNum = view.findViewById(R.id.MeNum);
+        friendNum = view.findViewById(R.id.FriendNum);
 
         recyclerView = view.findViewById(R.id.tbTabrecycler);
         recyclerView.setHasFixedSize(true);
@@ -164,6 +161,7 @@ public class Fight_fragment extends Fragment implements FBListener{
                 fb_end = snapshot.child(fb_code).child("fb_end_date").getValue(String.class);
                 fb_start = snapshot.child(fb_code).child("fb_start_date").getValue(String.class);
 
+
                 //유저 이미지 올리는 리사이클러뷰
                 userimg_items.clear();   //기존 배열리스트가 존재하지 않게 초기화
                 for (DataSnapshot snapshot2 : snapshot.child(fb_code).child("fb_mem").child(userid).child("upload_info").getChildren()){
@@ -179,6 +177,9 @@ public class Fight_fragment extends Fragment implements FBListener{
                     friendimg_items.add(item_friend);
                 }
                 friend_recyclerview.getAdapter().notifyDataSetChanged();
+
+                meNum.setText(userimg_items.size()+"번");
+                friendNum.setText(friendimg_items.size()+"번");
 
                 //문자열을 날짜로 변환
                 DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
