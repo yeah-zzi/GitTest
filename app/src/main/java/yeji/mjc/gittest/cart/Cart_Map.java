@@ -1,6 +1,7 @@
 package yeji.mjc.gittest.cart;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
@@ -11,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -18,11 +21,13 @@ import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -31,6 +36,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.daum.mf.map.api.CalloutBalloonAdapter;
 import net.daum.mf.map.api.CameraUpdateFactory;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
@@ -42,7 +48,9 @@ import net.daum.mf.map.api.MapView;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,7 +59,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import yeji.mjc.gittest.R;
 
-public class Cart_Map extends AppCompatActivity implements MapView.CurrentLocationEventListener, MapView.MapViewEventListener{
+public class Cart_Map extends AppCompatActivity implements MapView.CurrentLocationEventListener, MapView.MapViewEventListener, MapView.POIItemEventListener{
 
     private static final String BASE_URL = "https://dapi.kakao.com/";
     private static final String API_KEY = "KakaoAK 70357dd8e199f5bba2ab2b9e05864431";   // REST API 키
@@ -70,6 +78,7 @@ public class Cart_Map extends AppCompatActivity implements MapView.CurrentLocati
     private int radius = 1000;        // 검색 범위(1m 단위)
     private EditText et_search_field; // 텍스트 창
     private Button btn_search, btn_prevPage, btn_nextPage;          // 검색 버튼, 이전, 다음
+    private Button btn_mart, btn_convenience, btn_market, btn_supermarket;  // 마트, 편의점, 시장, 대형마트 검색 버튼
     private TextView tv_pageNumber;
     private ConstraintLayout resultLayout;
     private ImageButton btn_locationIn, btn_locationOut;
@@ -128,6 +137,41 @@ public class Cart_Map extends AppCompatActivity implements MapView.CurrentLocati
         et_search_field = findViewById(R.id.et_search_field);
         resultLayout = findViewById(R.id.result_Layout);
 
+        btn_mart = findViewById(R.id.btn_mart);
+        btn_convenience = findViewById(R.id.btn_convenience);
+        btn_market = findViewById(R.id.btn_market);
+        btn_supermarket = findViewById(R.id.btn_supermarket);
+
+        // 마트 버튼 클릭리스너
+        btn_mart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goSearch(btn_mart.getText().toString());
+            }
+        });
+        // 편의점 버튼 클릭리스너
+        btn_convenience.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goSearch(btn_convenience.getText().toString());
+            }
+        });
+        // 시장 버튼 클릭리스너
+        btn_market.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goSearch(btn_market.getText().toString());
+            }
+        });
+        // 대형마트 버튼 클릭리스너
+        btn_supermarket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goSearch(btn_supermarket.getText().toString());
+            }
+        });
+
+        // 사용자가 직접 검색창에 검색어 입력 시
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -189,6 +233,19 @@ public class Cart_Map extends AppCompatActivity implements MapView.CurrentLocati
         mapView.setCurrentLocationEventListener(this);
         // 현재 위치 업데이트 시작
         mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
+        // 커스텀 말풍선 등록
+        mapView.setCalloutBalloonAdapter(new CustomBalloonAdapter(getLayoutInflater()));
+        // 마커 클릭 이벤트 리스너 등록
+        mapView.setPOIItemEventListener(this);
+    }
+
+    // 검색어 버튼 클릭시 메소드
+    private void goSearch (String searchPlace) {
+        keyword = searchPlace; // 버튼의 텍스트로 검색어를 받아옴
+        et_search_field.setText(searchPlace);
+        pageNumber = 1;
+        searchKeyword(keyword, pageNumber,currentLatitude, currentLongitude);
+        resultLayout.setVisibility(View.VISIBLE);
     }
 
 
@@ -237,10 +294,16 @@ public class Cart_Map extends AppCompatActivity implements MapView.CurrentLocati
 
                 MapPOIItem point = new MapPOIItem();
 
+                // setUserObject()를 사용하기 위해 주소와 전화번호를 Object 형태로 저장
+                Map<String, Object> customData = new HashMap<>();
+                customData.put("address",document.getAddress_name());
+                customData.put("phone",document.getPhone());
+
                 point.setItemName(document.getPlace_name());
                 point.setMapPoint(MapPoint.mapPointWithGeoCoord(
                         Double.parseDouble(document.getY()),
                         Double.parseDouble(document.getX())));
+                point.setUserObject(customData); // setUserObject()는 Object형태로 값을 보내야 됨
                 point.setMarkerType(MapPOIItem.MarkerType.BluePin);
                 point.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
                 mapView.addPOIItem(point);
@@ -295,6 +358,104 @@ public class Cart_Map extends AppCompatActivity implements MapView.CurrentLocati
     }
 
     @Override
+    public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
+        // 마커 클릭 시
+    }
+
+    @Override
+    public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
+        // 말풍선 클릭 시
+        // 이 함수도 작동하지만 밑에 있는 함수에서 작성
+    }
+
+    @Override
+    public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem poiItem, MapPOIItem.CalloutBalloonButtonType buttonType) {
+        // 말풍선 클릭 시
+        String ph="";
+
+        // Object 형태로 받아온 주소와 전화번호를 각 키(address, phone) 값으로 추출
+        Object addressPhone = poiItem.getUserObject();
+        if(addressPhone instanceof Map){
+            Map<?,?> map = (Map<?, ?>) addressPhone;
+            ph = (String) map.get("phone");
+            if(ph.length() == 0)
+                ph = "";
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        String[] itemList = {ph, "취소"};
+        builder.setTitle(poiItem.getItemName());
+        String telPhone = ph;
+        builder.setItems(itemList, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:
+                        if(!telPhone.equals("")){
+                            Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:"+ telPhone));
+                            startActivity(myIntent);
+                        }
+                        break;
+                    case 1:
+                        dialog.dismiss();   // 대화상자 닫기
+                        break;
+                }
+            }
+        });
+        builder.show();
+    }
+
+    // 커스텀 말풍선 클래스
+    private class CustomBalloonAdapter implements CalloutBalloonAdapter {
+        private View mCalloutBalloon;
+        private TextView name, address, phone;
+        private String add = "", ph = "";   // getUserObject()에서 받아온 주소와 전화번호 저장
+
+        @SuppressLint("LongLogTag")
+        public CustomBalloonAdapter(LayoutInflater inflater){
+            mCalloutBalloon = inflater.inflate(R.layout.cart_map_balloon, null);
+            name = mCalloutBalloon.findViewById(R.id.ball_tv_name);
+            address = mCalloutBalloon.findViewById(R.id.ball_tv_address);
+            phone = mCalloutBalloon.findViewById(R.id.ball_tv_phone);
+            Log.d("test : 1. BalloonAdapter",mCalloutBalloon+"");
+        }
+
+        // 마커 클릭 시 나오는 말풍선
+        @SuppressLint("LongLogTag")
+        @Override
+        public View getCalloutBalloon(MapPOIItem poiItem){
+
+            // Object 형태로 받아온 주소와 전화번호를 각 키(address, phone) 값으로 추출
+            Object addressPhone = poiItem.getUserObject();
+            if(addressPhone instanceof Map){
+                Map<?,?> map = (Map<?, ?>) addressPhone;
+                add = (String) map.get("address");
+                ph = (String) map.get("phone");
+            }
+
+            Log.d("test : 2. getCalloutBalloon getUserObject",poiItem.getUserObject().toString());
+            Log.d("test : 2. getCalloutBalloon 주소", add);
+            Log.d("test : 2. getCalloutBalloon 전화번호", ph);
+            name.setText(poiItem != null ? poiItem.getItemName() : ""); // 해당 마커의 정보 이용 가능
+            address.setText(poiItem != null ? add : "");
+            phone.setText(poiItem != null ? ph : "");
+
+            return mCalloutBalloon;
+        }
+
+        // 말풍선 클릭 시
+        @Override
+        public View getPressedCalloutBalloon(MapPOIItem mapPOIItem) {
+            return mCalloutBalloon;
+        }
+    }
+
+    @Override
+    public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
+        // 마커의 속성 중 isDraggable = true 일 때 마커를 이동시켰을 경우
+    }
+
+    @Override
     public void onCurrentLocationDeviceHeadingUpdate(MapView mapView, float v) {
 
     }
@@ -319,20 +480,20 @@ public class Cart_Map extends AppCompatActivity implements MapView.CurrentLocati
 
     }
     @Override
+    // 맵 한번 클릭하면
     public void onMapViewSingleTapped(MapView mapView, MapPoint mapPoint) {
-
+        resultLayout.setVisibility(View.GONE); // 검색 리스트 안보여지게 함
     }
     @Override
     public void onMapViewDoubleTapped(MapView mapView, MapPoint mapPoint) {
-
     }
     @Override
     public void onMapViewLongPressed(MapView mapView, MapPoint mapPoint) {
-
     }
     @Override
+    // 맵 위로 스와이프하면
     public void onMapViewDragStarted(MapView mapView, MapPoint mapPoint) {
-
+        resultLayout.setVisibility(View.VISIBLE); // 검색 리스트 다시 보여지게 함
     }
     @Override
     public void onMapViewDragEnded(MapView mapView, MapPoint mapPoint) {

@@ -17,6 +17,48 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.136" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_mart"
+        android:text="마트"
+        android:backgroundTint="@color/lightgray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="7dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_convenience"
+        android:text="편의점"
+        android:backgroundTint="@color/lightgray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/btn_mart"
+        android:layout_marginStart="15dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_market"
+        android:text="시장"
+        android:backgroundTint="@color/lightgray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/btn_convenience"
+        android:layout_marginStart="15dp"  />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_supermarket"
+        android:text="대형마트"
+        android:backgroundTint="@color/lightgray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/btn_market"
+        android:layout_marginStart="15dp"  />
+
+
+
     <ImageButton
         android:id="@+id/location_in"
         android:layout_width="wrap_content"
