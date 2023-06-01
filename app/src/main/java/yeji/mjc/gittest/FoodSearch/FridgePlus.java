@@ -17,6 +17,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import com.bumptech.glide.Glide;
@@ -96,6 +97,7 @@ public class FridgePlus extends AppCompatActivity {
             public void onClick(View v) {
                 //Firebase 값에서 조회내역 삭제
                 addfoodDB.removeValue();
+                //TODO : 확인 버튼 누르면 냉장고에 들어가야함
                 finish();
             }
         });
@@ -123,14 +125,16 @@ public class FridgePlus extends AppCompatActivity {
 
         //스캔하여 얻은 값
         String scannedBarcode = getIntent().getStringExtra("barcode");
-        // 파이어베이스 데이터베이스의 "Product" 경로에서 바코드 값에 해당하는 이름을 가져옴
-        Barcodedb = FirebaseDatabase.getInstance().getReference().child("Product");
-        Barcodedb.addValueEventListener(new ValueEventListener() {
+        // 파이어베이스 데이터베이스의 "Product" 경로에서 바코드 값을 가져옴
+        Barcodedb = FirebaseDatabase.getInstance().getReference().child("Product").child("barcode");
+        // 스캔한 바코드 값과 파이어베이스 안에 있는 바코드 값이 같으면 불러냄
+        Query query = Barcodedb.orderByKey().equalTo(scannedBarcode);
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot barcode_date: snapshot.getChildren()){
                     Product product = barcode_date.getValue(Product.class);
-                    if( product != null && equals(scannedBarcode)){
+                    if( product != null ){
                         String name = product.getPRDT_NM()+" ";
                         foodName.setText((String)name);
                         String img = product.getImg();
