@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array">
+        <item>추가순</item>
+        <item>이름순</item>
+        <item>유통기한순</item>
+    </string-array>
+</resources>

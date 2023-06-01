@@ -81,6 +81,7 @@ public class Fridge extends Fragment{
         });
         return view;
 
+
     }
 
 
