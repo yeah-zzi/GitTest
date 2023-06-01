@@ -99,6 +99,10 @@
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/barcode_register.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/bellset.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/calendar.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/cart_main.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/cart_map_recyclerview.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/cart_plus.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/cart_recyclerview.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/community_menu.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/fight_go.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/fight_main.xml" value="0.24947916666666667" />
@@ -116,6 +120,7 @@
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/homerice_battle.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/life_post_items.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/mypage.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/mypage_allergy_recyclerview.xml" value="0.2484375" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/new_friend.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/new_friend_recyclerview.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/post_addfriend.xml" value="0.24947916666666667" />

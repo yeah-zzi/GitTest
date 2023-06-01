@@ -61,30 +61,12 @@
             android:textSize="12dp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/allergy1"
-            android:layout_width="30dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="150dp"
             android:layout_height="30dp"
-            android:layout_marginTop="115dp"
-            android:layout_marginLeft="175dp"
-            android:src="@drawable/peach" />
-
-        <ImageView
-            android:id="@+id/allergy2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="115dp"
-            android:layout_marginLeft="220dp"
-            android:src="@drawable/apple" />
-
-        <ImageView
-            android:id="@+id/allergy3"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="115dp"
-            android:layout_marginLeft="265dp"
-            android:src="@drawable/pineapple" />
-
+            android:id="@+id/mypagerecyclerview"
+            android:layout_marginLeft="170dp"
+            android:layout_marginTop="115dp"/>
 
 
         <ImageView
