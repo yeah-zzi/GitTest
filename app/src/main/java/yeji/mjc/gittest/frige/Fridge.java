@@ -7,24 +7,30 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.kakao.sdk.user.model.User;
+
 import java.util.ArrayList;
 
 import yeji.mjc.gittest.R;
+import yeji.mjc.gittest.comunity.Fight_fragment;
+import yeji.mjc.gittest.comunity.Life_Fragment;
+import yeji.mjc.gittest.comunity.NewFight_fragment;
+import yeji.mjc.gittest.comunity.Tip_fragment;
+import yeji.mjc.gittest.mypage.Bellset;
+import yeji.mjc.gittest.mypage.UserInfoChange;
 
-public class Fridge extends Fragment implements View.OnClickListener{
+public class Fridge extends Fragment{
 
     //메뉴바 버튼 변수 선언
     public Button fridge_main; //종합
     public Button fridge_cold; //냉장
     public Button fridge_frozen; //냉동
-
-    //FragmentActivity1 frameLayout1;
-    //FragmentActivity2 frameLayout2;
 
     //리사이클러뷰 변수 선언
     public RecyclerView recyclerView;
@@ -32,75 +38,54 @@ public class Fridge extends Fragment implements View.OnClickListener{
     public ArrayList<Fridge_Item> fridgeItems = new ArrayList<Fridge_Item>();
 
     @Override
+    public void setEnterTransition(@Nullable Object transition) {
+        super.setEnterTransition(transition);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fridge_main, container, false);
-/*
-        btn_goBack = view.findViewById(R.id.btn_goBack);
-        btn_goBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                HomeFragment homeFragment = new HomeFragment();
-                //main_layout에 homeFragment로 transaction 한다.
-                transaction.replace(R.id.main_layout, homeFragment);
-                //꼭 commit을 해줘야 바뀐다.
-                transaction.commit();
-            }
-        });*/
 
-
-        /*
-        fridge_cold = view.findViewById(R.id.fridge_cold);
-        fridge_cold.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                HomeFragment homeFragment = new HomeFragment();
-                //main_layout에 homeFragment로 transaction 한다.
-                transaction.replace(R.id.main_layout, homeFragment);
-                //꼭 commit을 해줘야 바뀐다.
-                transaction.commit();
-            }
-        });
-
-        */
 
         recyclerView = view.findViewById(R.id.fridgeRecyclerView);
         recyclerView.setHasFixedSize(true);
 
-        fridge_main = view.findViewById(R.id.fridge_main);
-        fridge_cold = view.findViewById(R.id.fridge_cold);
-        fridge_frozen = view.findViewById(R.id.fridge_frozen);
+        View fridge_main = view.findViewById(R.id.fridge_main);
+        View fridge_cold = view.findViewById(R.id.fridge_cold);
+        View fridge_frozen = view.findViewById(R.id.fridge_frozen);
 
-        //ClickListener를 상속 받아 사용하기 위함
-        fridge_main.setOnClickListener(this);
-        fridge_cold.setOnClickListener(this);
-        fridge_frozen.setOnClickListener(this);
+        fridge_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.fridge_main_container, new Fridge()).commit();
+                return;
+            }
+        });
 
+        fridge_cold.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.fridge_main_container, new Cold_Fridge()).commit();
+                return;
+            }
+        });
+
+        fridge_frozen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.fridge_main_container, new Frozen_Fridge()).commit();
+                return;
+            }
+        });
         return view;
+
     }
 
-    //메뉴바 버튼에 따른 페이지 이동
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            //종합 버튼
-            case R.id.fridge_main:
-                break;
-            //냉장 버튼
-            case R.id.fridge_cold:
-                //냉장 식재료 관련 로직
-                Toast.makeText(getContext(),"냉장",Toast.LENGTH_SHORT).show();
-                break;
-            //냉동 버튼
-            case R.id.fridge_frozen:
-                //냉동 식재료 관련 로직
-                Toast.makeText(getContext(),"냉동",Toast.LENGTH_SHORT).show();
-                break;
-        }
-    }
+
+
+
 
 
     public void onStart(){

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 import yeji.mjc.gittest.R;
 
-public class Cold_Fridge extends Fragment implements View.OnClickListener{
+public class Cold_Fridge extends Fragment{
 
     //메뉴바 버튼 변수 선언
     public Button fridge_main; //종합
@@ -41,35 +41,11 @@ public class Cold_Fridge extends Fragment implements View.OnClickListener{
         fridge_cold = view.findViewById(R.id.fridge_cold);
         fridge_frozen = view.findViewById(R.id.fridge_frozen);
 
-        //ClickListener를 상속 받아 사용하기 위함
-        fridge_main.setOnClickListener(this);
-        fridge_cold.setOnClickListener(this);
-        fridge_frozen.setOnClickListener(this);
-
         return view;
     }
 
     //메뉴바 버튼에 따른 페이지 이동
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            //종합 버튼
-            case R.id.fridge_main:
-                //종합 식재료 관련 로직
-                Toast.makeText(getContext(),"종합",Toast.LENGTH_SHORT).show();
-                break;
-            //냉장 버튼
-            case R.id.fridge_cold:
-                //냉장 식재료 관련 로직
-                Toast.makeText(getContext(),"냉장",Toast.LENGTH_SHORT).show();
-                break;
-            //냉동 버튼
-            case R.id.fridge_frozen:
-                //냉동 식재료 관련 로직
-                Toast.makeText(getContext(),"냉동",Toast.LENGTH_SHORT).show();
-                break;
-        }
-    }
+
 
 
     public void onStart(){

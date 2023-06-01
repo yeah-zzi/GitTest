@@ -74,11 +74,9 @@
         android:textStyle="bold"
         app:backgroundTint="@color/main_yellow"
         app:layout_constraintBottom_toBottomOf="@+id/fridgetype"
-        app:layout_constraintHorizontal_bias="0.307"
         app:layout_constraintLeft_toLeftOf="@+id/bar2"
         app:layout_constraintRight_toRightOf="@+id/fridgetype"
-        app:layout_constraintTop_toTopOf="@+id/fridgetype"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="@+id/fridgetype" />
 
     <EditText
         android:id="@+id/search_bar"
