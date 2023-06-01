@@ -6,14 +6,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.kakao.sdk.user.UserApiClient;
+
+import java.util.ArrayList;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
+import yeji.mjc.gittest.AllergyItem;
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.comunity.Life_Fragment;
 import yeji.mjc.gittest.mypage.Bellset;
@@ -22,6 +32,13 @@ import yeji.mjc.gittest.LoginActivity;
 
 public class MyPagesujin extends Fragment {
     Button logoutBtn;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference allergyDB;
+    public String userid;
+
+    public ArrayList<AllergyItem> allergyitems = new ArrayList<AllergyItem>();
+    public ImageView allergy1, allergy2, allergy3;
+
 
     @Override
     public void setEnterTransition(@Nullable Object transition) {
@@ -71,5 +88,31 @@ public class MyPagesujin extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        //파이어베이스에 저장되어 있는 회원의 알러지 정보를 받아 해당하는 알러지를 recyclerview로 나타낸다
+        allergyDB = database.getReference().child("user").child(userid).child("allergy");
+        allergyDB.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //파이어베이스 데이터베이스의 데이터를 받아오는 곳
+                allergyitems.clear();   //기존 배열리스트가 존재하지 않게 초기화
+                for (DataSnapshot snapshot1 : snapshot.getChildren()){
+                    AllergyItem allergyItem = snapshot1.getValue(AllergyItem.class);
+                    allergyitems.add(allergyItem);
+                }
+                //allergy1.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //디비를 가져오다 오류 발생시
+            }
+        });
+
     }
 }

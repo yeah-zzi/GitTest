@@ -38,8 +38,8 @@ public class FoodItem {
         this.img = img;
     }
 
-    public boolean isCheckBox(boolean checkBox) {
-        return this.checkBox;
+    public boolean isCheckBox() {
+        return checkBox;
     }
 
     public void setCheckBox(boolean checkBox) {
