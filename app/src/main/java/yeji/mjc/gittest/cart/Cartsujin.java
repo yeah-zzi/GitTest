@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
 import android.widget.RadioButton;
 
 import android.widget.ImageButton;
@@ -29,6 +30,8 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
+import yeji.mjc.gittest.FoodBattle_IMG_Upload;
+import yeji.mjc.gittest.MainActivity;
 import yeji.mjc.gittest.R;
 
 public class Cartsujin extends Fragment {
@@ -38,8 +41,9 @@ public class Cartsujin extends Fragment {
 
     public FoodAdapter foodAdapter;
 
-    ImageButton MartSearch;
 
+    ImageButton MartSearch;
+    Button AddBtn;
 
 
 
@@ -49,6 +53,14 @@ public class Cartsujin extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.cart_main, container, false);
         recyclerView = view.findViewById(R.id.FoodListRV);
+        AddBtn = view.findViewById(R.id.AddBtn);
+        AddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent CartPlusintent = new Intent(getContext(), CartPlus.class);
+                startActivity(CartPlusintent);
+            }
+        });
         //recyclerView.setHasFixedSize(true);
       RadioButton radioButton = view.findViewById(R.id.AllSelectBT);
         radioButton.setOnClickListener(new View.OnClickListener() {
