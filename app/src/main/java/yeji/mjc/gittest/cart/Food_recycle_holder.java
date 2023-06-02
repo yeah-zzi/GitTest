@@ -17,8 +17,8 @@ public class Food_recycle_holder extends RecyclerView.ViewHolder {
     ImageView foodImage;
     TextView foodName;
     TextView foodNum;
-    ImageView count_plus;
-    ImageView count_minus;
+    ImageView plus;
+    ImageView minus;
 
     public Food_recycle_holder(@NonNull View itemView) {
         super(itemView);
@@ -27,8 +27,8 @@ public class Food_recycle_holder extends RecyclerView.ViewHolder {
         foodImage=itemView.findViewById(R.id.foodImage);
         foodName=itemView.findViewById(R.id.foodName);
         foodNum=itemView.findViewById(R.id.foodNum);
-        count_plus=itemView.findViewById(R.id.plus);
-        count_minus=itemView.findViewById(R.id.minus);
+        plus=itemView.findViewById(R.id.plus);
+        minus=itemView.findViewById(R.id.minus);
     }
 
 }

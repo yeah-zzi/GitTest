@@ -11,7 +11,10 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,12 +26,10 @@ import java.util.ArrayList;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
-import yeji.mjc.gittest.AllergyItem;
+import yeji.mjc.gittest.FoodSearch.AllergyAdapter;
 import yeji.mjc.gittest.R;
-import yeji.mjc.gittest.comunity.Life_Fragment;
-import yeji.mjc.gittest.mypage.Bellset;
-import yeji.mjc.gittest.mypage.UserInfoChange;
 import yeji.mjc.gittest.LoginActivity;
+import yeji.mjc.gittest.register.RegisterAllergyAdapter;
 
 public class MyPagesujin extends Fragment {
     Button logoutBtn;
@@ -36,7 +37,9 @@ public class MyPagesujin extends Fragment {
     DatabaseReference allergyDB;
     public String userid;
 
-    public ArrayList<AllergyItem> allergyitems = new ArrayList<AllergyItem>();
+    //리사이클러뷰 선언 및 리사이클러뷰에 넣을 아이템 선언
+    public RecyclerView allergyrecyclerView;
+    public ArrayList<MyPageAllergyItem> allergyitems = new ArrayList<MyPageAllergyItem>();
     public ImageView allergy1, allergy2, allergy3;
 
 
@@ -51,6 +54,13 @@ public class MyPagesujin extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_pagesujin, container, false);
         View User = view.findViewById(R.id.User);
+        allergyrecyclerView = view.findViewById(R.id.mypagerecyclerview);
+        allergyrecyclerView.setHasFixedSize(true);
+        //리사이클러뷰에 매니저와 어댑터를 연결
+        allergyrecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        allergyrecyclerView.setAdapter(new MyPageAdapter(allergyitems));
+
+
         //View Friend = view.findViewById(R.id.Friend);
         View Bell = view.findViewById(R.id.Bell);
         //View Tutorial = view.findViewById(R.id.Tutorial);
@@ -102,10 +112,10 @@ public class MyPagesujin extends Fragment {
                 //파이어베이스 데이터베이스의 데이터를 받아오는 곳
                 allergyitems.clear();   //기존 배열리스트가 존재하지 않게 초기화
                 for (DataSnapshot snapshot1 : snapshot.getChildren()){
-                    AllergyItem allergyItem = snapshot1.getValue(AllergyItem.class);
-                    allergyitems.add(allergyItem);
+                    MyPageAllergyItem mypageallergyItem = snapshot1.getValue(MyPageAllergyItem.class);
+                    allergyitems.add(mypageallergyItem);
                 }
-                //allergy1.notifyDataSetChanged();
+                allergyrecyclerView.getAdapter().notifyDataSetChanged();
             }
 
             @Override

@@ -35,6 +35,15 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/PreviewMap"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/AddBtn"
+        android:text="추가"
+        android:layout_margin="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PreviewMap"/>
+
     <TextView
         android:id="@+id/AllSelect"
         android:layout_width="90dp"

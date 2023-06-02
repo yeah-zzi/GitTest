@@ -44,8 +44,6 @@ public class Cold_Fridge extends Fragment{
         return view;
     }
 
-    //메뉴바 버튼에 따른 페이지 이동
-
 
 
     public void onStart(){

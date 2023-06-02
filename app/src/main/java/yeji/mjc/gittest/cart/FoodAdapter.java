@@ -34,7 +34,7 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
        // holder.foodNum.setText(items.get(position).getNum());
         holder.checkBox.setChecked(items.get(position).isCheckBox());
         holder.foodImage.setImageResource(items.get(position).getImg());
-        holder.count_minus.setOnClickListener(new View.OnClickListener() {
+        holder.minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 count--;
@@ -42,7 +42,7 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
             }
         });
 
-        holder.count_plus.setOnClickListener(new View.OnClickListener() {
+        holder.plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 count++;
