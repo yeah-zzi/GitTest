@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/Users/82109/AndroidStudioProjects/FoodieMate/app/src/main/res/drawable-v24/back_select_bar.xml" value="0.274" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/drawable/fridge_type_bar.xml" value="0.1945" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/drawable/half_round.xml" value="0.1895" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/drawable/round_button.xml" value="0.209" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/activity_main.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/add_fight.xml" value="0.30833333333333335" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/add_friend.xml" value="0.3619791666666667" />
@@ -24,14 +26,18 @@
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/fragment_bellset.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/fragment_cartsujin.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/fragment_comsujin.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/fragment_life.xml" value="0.21633176571184268" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/fragment_lifestyle_practice.xml" value="0.3619791666666667" />
-        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_main.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/fragment_tip_fragment.xml" value="0.21633176571184268" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_main.xml" value="0.9" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/post_addfriend.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/register.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/search_menu.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/select_date.xml" value="0.2933727311101731" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/startpage.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/toolbar.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/write_community.xml" value="0.33" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/write_community_kind.xml" value="0.29628046173578454" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/menu/bottom_nav_menu.xml" value="0.30833333333333335" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/drawable/fridge_back_bar.xml" value="0.1" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/drawable/fridge_food_card.xml" value="0.1" />
