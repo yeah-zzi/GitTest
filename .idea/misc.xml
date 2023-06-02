@@ -127,8 +127,15 @@
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/tip_recyclerview.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/toolbar.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/menu/bottom_nav_menu.xml" value="0.24947916666666667" />
-        <entry key="app/src/main/res/layout/cart_map.xml" value="0.33697916666666666" />
+        <entry key="app/src/main/res/drawable/cart_map_btn_circle.xml" value="0.2105" />
+        <entry key="app/src/main/res/drawable/ic_baseline_local_grocery_store_24.xml" value="0.1765" />
+        <entry key="app/src/main/res/drawable/ic_baseline_sentiment_very_satisfied_24.xml" value="0.1185" />
+        <entry key="app/src/main/res/drawable/ic_baseline_set_meal_24.xml" value="0.1185" />
+        <entry key="app/src/main/res/drawable/ic_baseline_storefront_24.xml" value="0.1765" />
+        <entry key="app/src/main/res/drawable/mainyellowcircle.xml" value="0.1485" />
+        <entry key="app/src/main/res/layout/cart_map.xml" value="0.23659362792968752" />
         <entry key="app/src/main/res/layout/cart_map_balloon.xml" value="0.8107769423558897" />
+        <entry key="app/src/main/res/layout/cart_map_recyclerview.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/fragment_my_pagesujin.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/mypage.xml" value="0.1671794871794872" />
         <entry key="app/src/main/res/layout/startpage.xml" value="0.16944444444444445" />
