@@ -62,7 +62,7 @@ public class FoodBattle_IMG_Upload extends AppCompatActivity {
     ImageButton btnCamera, btnGallery;
     Button cancel, btnUpload;
 
-    ActivityResultLauncher<Uri>  takePictureLauncher;
+    ActivityResultLauncher<Uri> takePictureLauncher;
     Uri imageUri;
 
     public ArrayList<String> code_item = new ArrayList<String>();
@@ -71,10 +71,10 @@ public class FoodBattle_IMG_Upload extends AppCompatActivity {
 
     String userid = "임시용 유저 아이디1";
     String today;
-    private  static final int REQUEST_IMAGE_CODE = 101;
+    private static final int REQUEST_IMAGE_CODE = 101;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance(); // 파이어베이스 저장소 객체
-    DatabaseReference fb_upload,codeDB,ref;
+    DatabaseReference fb_upload, codeDB, ref;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference reference = storage.getReference(); // 저장소 레퍼런스 객체 : storage 를 사용해 저장 위치를 설정
 
@@ -107,7 +107,7 @@ public class FoodBattle_IMG_Upload extends AppCompatActivity {
         codeDB.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot friend_data : snapshot.getChildren()){
+                for (DataSnapshot friend_data : snapshot.getChildren()) {
                     FBTabItem getItem = friend_data.getValue(FBTabItem.class);
                     String code = getItem.getCode();
                     code_item.add(code);
@@ -139,22 +139,32 @@ public class FoodBattle_IMG_Upload extends AppCompatActivity {
             }
         });
 
+        //갤러리 버튼을 누를 시 갤러리로 들어가진다
+        btnGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, 1);
+            }
+        });
+
         //업로드 버튼을 누를 시
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(imageUri != null){
+                if (imageUri != null) {
                     uploadToFirebase(imageUri);
                     finish();
-                }else{
-                    Toast.makeText(FoodBattle_IMG_Upload.this,"사진을 선택해주세요",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(FoodBattle_IMG_Upload.this, "사진을 선택해주세요", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
     private void uploadToFirebase(Uri uri) {
-        StorageReference fileRef = reference.child(System.currentTimeMillis()+"."+imageUri);
+        StorageReference fileRef = reference.child(System.currentTimeMillis() + "." + imageUri);
         fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -164,14 +174,14 @@ public class FoodBattle_IMG_Upload extends AppCompatActivity {
                         //이미지 모델에 담기
                         Model model = new Model(uri.toString());
 
-                        for(int i=0;i<code_item.size();i++){
+                        for (int i = 0; i < code_item.size(); i++) {
                             String code = code_item.get(i);
                             ref = fb_upload.child(code_item.get(i)).child("fb_mem").child(userid).child("upload_info").push();
                             ref.child("upload_img").setValue(uri.toString());
                             ref.child("upload_time").setValue(today);
                         }
 
-                        Toast.makeText(FoodBattle_IMG_Upload.this,"업로드 성공",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FoodBattle_IMG_Upload.this, "업로드 성공", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -179,55 +189,69 @@ public class FoodBattle_IMG_Upload extends AppCompatActivity {
     }
 
 
-            private Uri createUri() {
-                File imageFile = new File(getApplicationContext().getFilesDir(), "camera_photo.jpg");
-                return FileProvider.getUriForFile(
-                        getApplicationContext(),
-                        "yeji.mjc.gittest.fileProvider",
-                        imageFile
-                );
-            }
+    private Uri createUri() {
+        File imageFile = new File(getApplicationContext().getFilesDir(), "camera_photo.jpg");
+        return FileProvider.getUriForFile(
+                getApplicationContext(),
+                "yeji.mjc.gittest.fileProvider",
+                imageFile
+        );
+    }
 
-            private void registerPictureLauncher() {
-                takePictureLauncher = registerForActivityResult(
-                        new ActivityResultContracts.TakePicture(),
-                        new ActivityResultCallback<Boolean>() {
-                            @Override
-                            public void onActivityResult(Boolean result) {
-                                try {
-                                    if (result) {
-                                        imageView.setImageURI(null);
-                                        imageView.setImageURI(imageUri);
-                                    }
-                                } catch (Exception exception) {
-                                    exception.getStackTrace();
-                                }
+    private void registerPictureLauncher() {
+        takePictureLauncher = registerForActivityResult(
+                new ActivityResultContracts.TakePicture(),
+                new ActivityResultCallback<Boolean>() {
+                    @Override
+                    public void onActivityResult(Boolean result) {
+                        try {
+                            if (result) {
+                                imageView.setImageURI(null);
+                                imageView.setImageURI(imageUri);
                             }
+                        } catch (Exception exception) {
+                            exception.getStackTrace();
                         }
-                );
-            }
-
-            private void checkCameraPermissionOpenCamera() {
-                if (ActivityCompat.checkSelfPermission(FoodBattle_IMG_Upload.this,
-                        Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(FoodBattle_IMG_Upload.this,
-                            new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
-                } else {
-                    takePictureLauncher.launch(imageUri);
-                }
-            }
-
-            @Override
-            public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-                if (requestCode == CAMERA_PERMISSION_CODE) {
-                    if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                        takePictureLauncher.launch(imageUri);
-                    } else {
-                        Toast.makeText(this, "카메라 권한이 거부 되었습니다. 권한을 허용해 주세요", Toast.LENGTH_SHORT).show();
                     }
                 }
-            }
+        );
     }
+
+    private void checkCameraPermissionOpenCamera() {
+        if (ActivityCompat.checkSelfPermission(FoodBattle_IMG_Upload.this,
+                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(FoodBattle_IMG_Upload.this,
+                    new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
+        } else {
+            takePictureLauncher.launch(imageUri);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                takePictureLauncher.launch(imageUri);
+            } else {
+                Toast.makeText(this, "카메라 권한이 거부 되었습니다. 권한을 허용해 주세요", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    imageUri = data.getData();
+                    imageView.setImageURI(imageUri);
+                }
+                break;
+        }
+    }
+}
 
 

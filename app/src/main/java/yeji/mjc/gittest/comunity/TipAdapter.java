@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 import yeji.mjc.gittest.R;
@@ -32,11 +34,11 @@ public class TipAdapter extends RecyclerView.Adapter<Tip_recycle_holder>{
 
     @Override
     public void onBindViewHolder(@NonNull Tip_recycle_holder holder, @SuppressLint("RecyclerView") int position) {
-        holder.tip_img.setImageResource(items.get(position).getTip_img());
-        holder.id.setText(items.get(position).getId());
+        Glide.with(holder.itemView).load(items.get(position).getPost_img()).into(holder.tip_img);
+        holder.id.setText(items.get(position).getWriter());
         holder.like.setText(items.get(position).getLike());
-        holder.comment.setText(items.get(position).getComment());
-        holder.content.setText(items.get(position).getContent());
+        holder.comment.setText(items.get(position).getComment_count());
+        holder.content.setText(items.get(position).getTitle());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
