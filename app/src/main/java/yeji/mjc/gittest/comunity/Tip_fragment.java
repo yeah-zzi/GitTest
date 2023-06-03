@@ -6,12 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
+import yeji.mjc.gittest.AllergyItem;
 import yeji.mjc.gittest.R;
 
 
@@ -21,29 +29,43 @@ public class Tip_fragment extends Fragment implements SelectListener{
     public RecyclerView.Adapter adapter_tip;
     public ArrayList<TipItem> tipItems = new ArrayList<TipItem>();
 
-
+    //파이어베이스에서 데이터베이스 가져오기
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference tipDB;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tip_fragment, container, false);
         recyclerView = view.findViewById(R.id.tipRecyclerView);
-        recyclerView.setHasFixedSize(true);
-        return view;
-    }
-
-    public void onStart(){
-        super.onStart();
-
-        for(int i=0;i<9;i++){
-            tipItems.add(new TipItem("Geuli**","4","5","식빵을 기름으로 없애보세요",R.drawable.bread));
-        }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(new TipAdapter(getActivity(),tipItems,this));
-    }
+        // Inflate the layout for this fragment
 
+        recyclerView.setHasFixedSize(true);
+
+        //파이어베이스에 저장되어 있는 회원의 알러지 정보를 받아 해당하는 알러지를 recyclerview로 나타낸다
+        tipDB = database.getReference().child("tip");
+        tipDB.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //파이어베이스 데이터베이스의 데이터를 받아오는 곳
+                tipItems.clear();   //기존 배열리스트가 존재하지 않게 초기화
+                for (DataSnapshot snapshot1 : snapshot.getChildren()){
+                    TipItem tipitem = snapshot1.getValue(TipItem.class);
+                    tipItems.add(tipitem);
+                }
+                recyclerView.getAdapter().notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //디비를 가져오다 오류 발생시
+            }
+        });
+        return view;
+    }
 
     @Override
     public void onItemClicked(TipItem tip_fragment) {
