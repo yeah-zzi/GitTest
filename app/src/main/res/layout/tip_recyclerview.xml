@@ -27,9 +27,9 @@
         <ImageView
             android:id="@+id/tip_post_img"
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="80dp"
             android:background="@drawable/tip_img"
-            android:scaleType="fitCenter"
+            android:scaleType="fitXY"
             android:src="@drawable/bread"
             android:layout_gravity="center" />
     </androidx.cardview.widget.CardView>
@@ -63,7 +63,6 @@
         android:layout_height="wrap_content"
         android:text="4"
         android:textColor="@color/black"
-        android:textStyle="bold"
         android:textSize="20dp"
         android:layout_marginTop="23dp"
         android:layout_marginRight="20dp"
@@ -84,7 +83,6 @@
         android:layout_height="wrap_content"
         android:text="3"
         android:textColor="@color/black"
-        android:textStyle="bold"
         android:textSize="20dp"
         android:layout_marginTop="23dp"
         android:layout_marginRight="30dp"
@@ -93,7 +91,7 @@
 
     <TextView
         android:id="@+id/content"
-        android:layout_width="250dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:background="@drawable/fridge_food_card"
         android:elevation="10dp"
@@ -105,6 +103,8 @@
         android:textSize="13dp"
         android:maxLines="1"
         android:ellipsize="end"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/tip_img_background"

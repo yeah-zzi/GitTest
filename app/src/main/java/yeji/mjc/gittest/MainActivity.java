@@ -20,6 +20,7 @@ import yeji.mjc.gittest.cart.Cartsujin;
 import yeji.mjc.gittest.comunity.Comsujin;
 import yeji.mjc.gittest.comunity.New_fight_sub;
 import yeji.mjc.gittest.comunity.New_friend_sub;
+import yeji.mjc.gittest.comunity.PlusComm;
 import yeji.mjc.gittest.frige.Fridge;
 import yeji.mjc.gittest.mypage.MyPagesujin;
 
@@ -102,6 +103,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // tabPost 누르면 글쓰는 화면
+                Intent post = new Intent(MainActivity.this, PlusComm.class);
+                startActivity(post);
+
             }
         });
 

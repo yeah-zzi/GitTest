@@ -10,6 +10,7 @@
         android:layout_height="40dp"
         android:scaleType="fitXY"
         android:background="@color/white"
+        android:padding="5dp"
         android:src="@drawable/ic_baseline_close_24"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -22,11 +23,12 @@
         android:text="커뮤니티 글쓰기"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:textSize="25dp"
+        android:textSize="20dp"
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/line"/>
 
     <ImageButton
         android:id="@+id/line"
@@ -54,7 +56,7 @@
     <ImageButton
         android:id="@+id/complete"
         android:layout_width="80dp"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:src="@drawable/back_select_bar"
         android:background="@color/white"
         android:padding="10dp"
@@ -74,11 +76,14 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line"/>
 
-    <ImageView
+    <ImageButton
+        android:id="@+id/com_kind_btn"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginRight="10dp"
         android:src="@drawable/ic_baseline_chevron_right_24"
+        android:background="@null"
+        android:scaleType="fitXY"
         app:layout_constraintTop_toBottomOf="@+id/line"
         app:layout_constraintBottom_toTopOf="@+id/line2"
         app:layout_constraintRight_toRightOf="parent"/>
@@ -113,6 +118,7 @@
         android:hint="제목을 입력해 주세요"
         android:textColorHint="@color/gray"
         android:lines="1"
+        android:background="@null"
         android:textColor="@color/black"
         android:layout_marginLeft="20dp"
         app:layout_constraintTop_toTopOf="@+id/titleback"
@@ -130,13 +136,17 @@
 
     <EditText
         android:id="@+id/plus_content"
-        android:layout_width="380dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="내용을 입력해주세요"
+        android:background="@null"
         android:textColorHint="@color/gray"
         android:textColor="@color/black"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         app:layout_constraintTop_toBottomOf="@+id/plus_img"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         android:layout_margin="15dp"/>
 
 
