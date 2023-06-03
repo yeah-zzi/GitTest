@@ -10,12 +10,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 import yeji.mjc.gittest.R;
 
 public class LifePost_Adapter extends RecyclerView.Adapter<LifePost_Adapter.ViewHolder> {
-    private ArrayList<LifePostItem> items = null;
+
+    private ArrayList<TipItem> items = null;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView text_title;
@@ -31,7 +34,7 @@ public class LifePost_Adapter extends RecyclerView.Adapter<LifePost_Adapter.View
         }
     }
 
-    LifePost_Adapter(ArrayList<LifePostItem> list){
+    LifePost_Adapter(ArrayList<TipItem> list){
         items = list;
     }
 
@@ -49,13 +52,9 @@ public class LifePost_Adapter extends RecyclerView.Adapter<LifePost_Adapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String title = items.get(position).title;
-        String script = items.get(position).script;
-        int resId = items.get(position).resId;
-
-        holder.text_title.setText(title);
-        holder.text_script.setText(script);
-        holder.imageView.setImageResource(resId);
+        holder.text_title.setText(items.get(position).getTitle());
+        holder.text_script.setText(items.get(position).getContent());
+        Glide.with(holder.itemView).load(items.get(position).getPost_img()).into(holder.imageView);
 
         //TODO : [holder.객체.setOnClickListener] 만들어야 함 --> 클릭 시, 게시물 상세페이지로 넘어가게
     }
@@ -63,11 +62,6 @@ public class LifePost_Adapter extends RecyclerView.Adapter<LifePost_Adapter.View
     @Override
     public int getItemCount() {
         return items.size();
-    }
-
-    public void setItems(ArrayList<LifePostItem> list){
-        items = list;
-        notifyDataSetChanged();
     }
 
 
