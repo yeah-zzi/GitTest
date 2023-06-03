@@ -33,10 +33,16 @@
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/startpage.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/toolbar.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/menu/bottom_nav_menu.xml" value="0.30833333333333335" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/drawable/button_cart.xml" value="0.1" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/drawable/button_delete.xml" value="0.203" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/drawable/circle_button.xml" value="0.1" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/drawable/circle_progressbar.xml" value="0.1" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/drawable/edit_text_custom.xml" value="0.1" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/drawable/fridge_back_bar.xml" value="0.1" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/drawable/fridge_food_card.xml" value="0.1" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/drawable/fridge_type_bar.xml" value="0.1" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/drawable/round_button.xml" value="0.1" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/drawable/round_button_gray.xml" value="0.177" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/drawable/round_longclick.xml" value="0.1" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/activity_main.xml" value="0.12409420289855072" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/add_fight.xml" value="0.176" />
@@ -59,7 +65,7 @@
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fight_main.xml" value="0.136" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/food_fight.xml" value="0.152" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/food_img_search.xml" value="0.1" />
-        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/food_img_search_recyclerview.xml" value="0.1" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/food_img_search_recyclerview.xml" value="0.6" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/foodbattle_img_upload.xml" value="0.1" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fragment_bellset.xml" value="0.1" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fragment_life.xml" value="0.1" />
@@ -75,7 +81,7 @@
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_frozen.xml" value="0.2" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_main.xml" value="0.1" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_plus.xml" value="0.264" />
-        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_recyclerview.xml" value="0.536" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_recyclerview.xml" value="0.1" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_recyclerview_longclick.xml" value="0.4" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/homerice_battle.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/life_post_items.xml" value="0.10989583333333333" />

@@ -6,6 +6,7 @@ public class Fridge_Item {
     String food_count;
     String food_date;
 
+
     public Fridge_Item(int food_img, String food_name, String food_count, String food_date) {
         this.food_img = food_img;
         this.food_name = food_name;
@@ -13,12 +14,7 @@ public class Fridge_Item {
         this.food_date = food_date;
     }
 
-    public Fridge_Item(int food_img, String food_name, String food_count)
-    {
-        this.food_img = food_img;
-        this.food_name = food_name;
-        this.food_count=food_count;
-    }
+
 
     public int getFood_img() {
         return food_img;

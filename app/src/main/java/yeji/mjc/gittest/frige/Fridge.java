@@ -37,6 +37,7 @@ public class Fridge extends Fragment{
     public RecyclerView.Adapter adapter_refidge;
     public ArrayList<Fridge_Item> fridgeItems = new ArrayList<Fridge_Item>();
 
+
     @Override
     public void setEnterTransition(@Nullable Object transition) {
         super.setEnterTransition(transition);
