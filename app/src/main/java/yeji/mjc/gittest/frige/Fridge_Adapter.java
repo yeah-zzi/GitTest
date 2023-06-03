@@ -26,7 +26,7 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
         return new Fridge_recycle_holder(v);
     }
 
-    //롱클릭한 Item을 삭제할 때 사용할 메소드
+    //롱클릭한 Item을 삭제할 때 사용할 메소드 구현
     public void removeItem(int itemPosition) {
         //removeItem() 메소드 내에서 position이 유효한 범위인지를 검사
         if (itemPosition >= 0 && itemPosition < fridgeItems.size()) {
