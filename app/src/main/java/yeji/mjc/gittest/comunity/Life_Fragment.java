@@ -10,41 +10,54 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 import yeji.mjc.gittest.R;
 
 public class Life_Fragment extends Fragment {
 
-    private ArrayList<LifePostItem> list = new ArrayList<>(); //리사이클러뷰에 추가할 아이템 리스트
+    private ArrayList<TipItem> list = new ArrayList<TipItem>(); //리사이클러뷰에 추가할 아이템 리스트
     private LifePost_Adapter adapter; // 어뎁터
     private RecyclerView recyclerView;
+
+    //파이어베이스에서 데이터베이스 가져오기
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference lifeDB;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
         View view = inflater.inflate(R.layout.fragment_life, container, false);
 
-        list.add(new LifePostItem("좁아도 OK! 똑똑하게 싱크대 쓰는 법", "걸어서 사용할 수 있는 것은 되도록 걸어서 사용하는 것이 주방을 넓게 사용하는 방법 중 하나인데요. 조리도구나 키친타올 등 걸 수 있는 것들은 모두 걸 수 있도록 아이디어를 내면 좋아요.",
-                R.drawable.post1));
-        list.add(new LifePostItem("좁아도 OK! 똑똑하게 싱크대 쓰는 법", "걸어서 사용할 수 있는 것은 되도록 걸어서 사용하는 것이 주방을 넓게 사용하는 방법 중 하나인데요. 조리도구나 키친타올 등 걸 수 있는 것들은 모두 걸 수 있도록 아이디어를 내면 좋아요.",
-                R.drawable.post1));
-        list.add(new LifePostItem("좁아도 OK! 똑똑하게 싱크대 쓰는 법", "걸어서 사용할 수 있는 것은 되도록 걸어서 사용하는 것이 주방을 넓게 사용하는 방법 중 하나인데요. 조리도구나 키친타올 등 걸 수 있는 것들은 모두 걸 수 있도록 아이디어를 내면 좋아요.",
-                R.drawable.post1));
-        list.add(new LifePostItem("좁아도 OK! 똑똑하게 싱크대 쓰는 법", "걸어서 사용할 수 있는 것은 되도록 걸어서 사용하는 것이 주방을 넓게 사용하는 방법 중 하나인데요. 조리도구나 키친타올 등 걸 수 있는 것들은 모두 걸 수 있도록 아이디어를 내면 좋아요.",
-                R.drawable.post1));
-        list.add(new LifePostItem("좁아도 OK! 똑똑하게 싱크대 쓰는 법", "걸어서 사용할 수 있는 것은 되도록 걸어서 사용하는 것이 주방을 넓게 사용하는 방법 중 하나인데요. 조리도구나 키친타올 등 걸 수 있는 것들은 모두 걸 수 있도록 아이디어를 내면 좋아요.",
-                R.drawable.post1));
-        list.add(new LifePostItem("좁아도 OK! 똑똑하게 싱크대 쓰는 법", "걸어서 사용할 수 있는 것은 되도록 걸어서 사용하는 것이 주방을 넓게 사용하는 방법 중 하나인데요. 조리도구나 키친타올 등 걸 수 있는 것들은 모두 걸 수 있도록 아이디어를 내면 좋아요.",
-                R.drawable.post1));
-        list.add(new LifePostItem("좁아도 OK! 똑똑하게 싱크대 쓰는 법", "걸어서 사용할 수 있는 것은 되도록 걸어서 사용하는 것이 주방을 넓게 사용하는 방법 중 하나인데요. 조리도구나 키친타올 등 걸 수 있는 것들은 모두 걸 수 있도록 아이디어를 내면 좋아요.",
-                R.drawable.post1));
-        list.add(new LifePostItem("좁아도 OK! 똑똑하게 싱크대 쓰는 법", "걸어서 사용할 수 있는 것은 되도록 걸어서 사용하는 것이 주방을 넓게 사용하는 방법 중 하나인데요. 조리도구나 키친타올 등 걸 수 있는 것들은 모두 걸 수 있도록 아이디어를 내면 좋아요.",
-                R.drawable.post1));
-
         recyclerView = (RecyclerView) view.findViewById(R.id.life_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new LifePost_Adapter(list);
         recyclerView.setAdapter(adapter);
+
+        //파이어베이스에 저장되어 있는 회원의 알러지 정보를 받아 해당하는 알러지를 recyclerview로 나타낸다
+        lifeDB = database.getReference().child("life");
+        lifeDB.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //파이어베이스 데이터베이스의 데이터를 받아오는 곳
+                list.clear();   //기존 배열리스트가 존재하지 않게 초기화
+                for (DataSnapshot snapshot1 : snapshot.getChildren()){
+                    TipItem tipitem = snapshot1.getValue(TipItem.class);
+                    list.add(tipitem);
+                }
+                recyclerView.getAdapter().notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //디비를 가져오다 오류 발생시
+            }
+        });
 
         return view;
     }
