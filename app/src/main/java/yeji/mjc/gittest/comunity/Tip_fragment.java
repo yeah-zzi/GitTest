@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -28,6 +29,8 @@ public class Tip_fragment extends Fragment implements SelectListener{
     public RecyclerView recyclerView;
     public RecyclerView.Adapter adapter_tip;
     public ArrayList<TipItem> tipItems = new ArrayList<TipItem>();
+
+    String userid = "임시용 유저 아이디1";
 
     //파이어베이스에서 데이터베이스 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -69,7 +72,19 @@ public class Tip_fragment extends Fragment implements SelectListener{
 
     @Override
     public void onItemClicked(TipItem tip_fragment) {
-        Intent fridgePlusIntent = new Intent(getActivity(), TipComment.class);
-        startActivity(fridgePlusIntent);
+        Intent comIntent = new Intent(getActivity(), TipComment.class);
+        Toast.makeText(getActivity(),tip_fragment.getTitle(),Toast.LENGTH_SHORT).show();
+        String code = tip_fragment.com_code;
+        comIntent.putExtra("커뮤니티 코드",code);
+        comIntent.putExtra("작성자",tip_fragment.getWriter());
+        comIntent.putExtra("내용",tip_fragment.getContent());
+        comIntent.putExtra("이미지",tip_fragment.getPost_img());
+        comIntent.putExtra("제목",tip_fragment.getTitle());
+        comIntent.putExtra("좋아요",tip_fragment.getLike());
+        comIntent.putExtra("댓글수",tip_fragment.getComment_count());
+        comIntent.putExtra("작성자이미지",tip_fragment.getWriter_img());
+        comIntent.putExtra("작성자이미지",tip_fragment.getWriter_img());
+        comIntent.putExtra("작성자이미지",tip_fragment.getWriter_img());
+        startActivity(comIntent);
     }
 }
