@@ -148,7 +148,7 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
 
     // 현재 정렬 기준을 설정하는 메서드
     public void setSortType(SortType sortType) {
-        currentSortType = sortType;
+        currentSortType = sortType; //정렬 기준
         sortItems();
         notifyDataSetChanged(); //정렬 결과를 반영.
     }

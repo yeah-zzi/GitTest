@@ -90,7 +90,7 @@ public class Fridge extends Fragment{
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // 선택된 정렬 기준에 따라 Fridge_Adapter의 setSortType 메서드를 호출
                 switch (position) {
-                    case 0: // 이름 오름차순
+                    case 1: // 이름 오름차순
                         ((Fridge_Adapter) adapter_refidge).setSortType(Fridge_Adapter.SortType.NAME_ASCENDING);
                         break;
                     // 다른 정렬 기준에 따른 case를 추가할 수 있습니다.
@@ -121,6 +121,7 @@ public class Fridge extends Fragment{
         fridgeItems.add(new Fridge_Item(R.drawable.corn,"옥수수","1개","D-21"));
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
-        recyclerView.setAdapter(new Fridge_Adapter(fridgeItems));
+        adapter_refidge = new Fridge_Adapter(fridgeItems); // 수정: adapter_refidge 초기화
+        recyclerView.setAdapter(adapter_refidge);
     }
 }
