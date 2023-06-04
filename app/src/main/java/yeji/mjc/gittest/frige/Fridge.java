@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -49,6 +51,7 @@ public class Fridge extends Fragment{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fridge_main, container, false);
 
+        adapter_refidge = new Fridge_Adapter(fridgeItems);
 
         recyclerView = view.findViewById(R.id.fridgeRecyclerView);
         recyclerView.setHasFixedSize(true);
@@ -80,14 +83,30 @@ public class Fridge extends Fragment{
                 return;
             }
         });
+
+        Spinner spinner = view.findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // 선택된 정렬 기준에 따라 Fridge_Adapter의 setSortType 메서드를 호출
+                switch (position) {
+                    case 0: // 이름 오름차순
+                        ((Fridge_Adapter) adapter_refidge).setSortType(Fridge_Adapter.SortType.NAME_ASCENDING);
+                        break;
+                    // 다른 정렬 기준에 따른 case를 추가할 수 있습니다.
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // 아무것도 선택되지 않았을 때의 동작
+            }
+        });
+
         return view;
 
 
     }
-
-
-
-
 
 
     public void onStart(){

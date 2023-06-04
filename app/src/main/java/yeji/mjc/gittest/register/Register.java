@@ -34,6 +34,7 @@ public class Register extends AppCompatActivity {
     EditText edit_name;
     public String userid;
 
+
     //리사이클러뷰 선언 및 리사이클러뷰에 넣을 아이템 선언
     public RecyclerView registerallergyrecyclerView;
     public ArrayList<AllergyItem> allergyitems = new ArrayList<AllergyItem>();
