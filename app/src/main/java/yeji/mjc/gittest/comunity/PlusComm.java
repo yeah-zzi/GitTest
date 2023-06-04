@@ -11,12 +11,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -39,14 +43,15 @@ public class PlusComm extends AppCompatActivity {
     Uri imageUri;
 
     String com_title,com_content;
+    String com_code;
 
-    String userid = "임시";
+    String userid = "임시용 유저 아이디1";
+    String username,userimg;
     public ArrayList<String> code_item = new ArrayList<String>();
 
     //파이어베이스 설정
     FirebaseDatabase database = FirebaseDatabase.getInstance(); // 파이어베이스 저장소 객체
-    DatabaseReference comDB;
-    DatabaseReference ref;
+    DatabaseReference comDB,userDB;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference reference = storage.getReference(); // 저장소 레퍼런스 객체 : storage 를 사용해 저장 위치를 설정
 
@@ -63,11 +68,27 @@ public class PlusComm extends AppCompatActivity {
         title = findViewById(R.id.title);
         content = findViewById(R.id.plus_content);
 
+        userDB = database.getReference().child("user").child(userid).child("user_info");
+        userDB.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userimg = snapshot.child("user_img").getValue().toString();
+                username = snapshot.child("user_name").getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         //현재 선택되어 있는 커뮤니티 종류 이름을 받아온다
         com_name = (String) com_kind.getText();
 
         //파이어베이스의 경로 조정
         comDB = database.getReference().child("life").push();
+        //생성된 게시물의 코드를 변수에 저장
+        com_code = comDB.getKey();
 
         //취소 버튼을 누를 시 종료
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -112,11 +133,13 @@ public class PlusComm extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"이미지를 선택해 주세요",Toast.LENGTH_SHORT).show();
                 }else{
                     //파이어베이스에 데이터 올리기
-                    comDB.child("writer").setValue(userid);
+                    comDB.child("writer").setValue(username);
                     comDB.child("title").setValue(com_title);
                     comDB.child("content").setValue(com_content);
                     comDB.child("like").setValue("0");
                     comDB.child("comment_count").setValue("0");
+                    comDB.child("com_code").setValue(com_code);
+                    comDB.child("writer_img").setValue(userimg);
                     uploadToFirebase(imageUri);
 
                     finish();
@@ -140,8 +163,10 @@ public class PlusComm extends AppCompatActivity {
                     //파이어베이스의 경로 조정
                     if(select_com_name.equals("생활정보")){
                         comDB = database.getReference().child("life").push();
+                        com_code = comDB.getKey();
                     }else if(select_com_name.equals("이거어때")){
                         comDB = database.getReference().child("tip").push();
+                        com_code = comDB.getKey();
                     }
                 }
             }
