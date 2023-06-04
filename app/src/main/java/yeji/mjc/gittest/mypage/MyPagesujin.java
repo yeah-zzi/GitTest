@@ -105,7 +105,7 @@ public class MyPagesujin extends Fragment {
         super.onStart();
 
         //파이어베이스에 저장되어 있는 회원의 알러지 정보를 받아 해당하는 알러지를 recyclerview로 나타낸다
-        allergyDB = database.getReference().child("user").child(userid).child("allergy");
+        /*allergyDB = database.getReference().child("user").child(userid).child("allergy");
         allergyDB.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -122,7 +122,7 @@ public class MyPagesujin extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
                 //디비를 가져오다 오류 발생시
             }
-        });
+        });*/
 
     }
 }

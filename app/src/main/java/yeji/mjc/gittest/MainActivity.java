@@ -89,15 +89,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        tabFriendAdd = findViewById(R.id.tabFriendAdd);
-        tabFriendAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent addfriend = new Intent(MainActivity.this, New_friend_sub.class);
-                startActivity(addfriend);
-            }
-        });
-
         tabPost =findViewById(R.id.tabPost);
         tabPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,7 +137,6 @@ public class MainActivity extends AppCompatActivity {
                             clicked = false;
                             if(from_comm == true){
                                 tab.startAnimation(rotateClose);
-                                tabFriendAdd.startAnimation(toBottom);
                                 tabPost.startAnimation(toBottom);
                                 tabCamera.startAnimation(toBottom);
                                 tabBattle.startAnimation(toBottom);
@@ -165,7 +155,6 @@ public class MainActivity extends AppCompatActivity {
                             clicked = false;
                             if(from_comm == true){
                                 tab.startAnimation(rotateClose);
-                                tabFriendAdd.startAnimation(toBottom);
                                 tabPost.startAnimation(toBottom);
                                 tabCamera.startAnimation(toBottom);
                                 tabBattle.startAnimation(toBottom);
@@ -184,7 +173,6 @@ public class MainActivity extends AppCompatActivity {
                             clicked = false;
                             if(from_comm == true){
                                 tab.startAnimation(rotateClose);
-                                tabFriendAdd.startAnimation(toBottom);
                                 tabPost.startAnimation(toBottom);
                                 tabCamera.startAnimation(toBottom);
                                 tabBattle.startAnimation(toBottom);
@@ -231,14 +219,14 @@ public class MainActivity extends AppCompatActivity {
             {
                 tabBarcode.setEnabled(false); tabWrite.setEnabled(false);
                 tabWrite.setVisibility(View.GONE); tabBarcode.setVisibility(View.GONE);
-                tabFriendAdd.setVisibility(View.VISIBLE); tabPost.setVisibility(View.VISIBLE); tabCamera.setVisibility(View.VISIBLE); tabBattle.setVisibility(View.VISIBLE);
-                tabCamera.setEnabled(true); tabPost.setEnabled(true); tabBattle.setEnabled(true); tabFriendAdd.setEnabled(true);
+                 tabPost.setVisibility(View.VISIBLE); tabCamera.setVisibility(View.VISIBLE); tabBattle.setVisibility(View.VISIBLE);
+                tabCamera.setEnabled(true); tabPost.setEnabled(true); tabBattle.setEnabled(true);
             }else{
                 tabBarcode.setEnabled(true); tabWrite.setEnabled(true);
                 tabWrite.setVisibility(View.VISIBLE); tabBarcode.setVisibility(View.VISIBLE);
-                tabFriendAdd.setVisibility(View.GONE); tabPost.setVisibility(View.GONE);
+                 tabPost.setVisibility(View.GONE);
                 tabCamera.setVisibility(View.GONE); tabBattle.setVisibility(View.GONE);
-                tabCamera.setEnabled(false); tabPost.setEnabled(false); tabBattle.setEnabled(false); tabFriendAdd.setEnabled(false);
+                tabCamera.setEnabled(false); tabPost.setEnabled(false); tabBattle.setEnabled(false);
             }
         }
     }
@@ -251,7 +239,6 @@ public class MainActivity extends AppCompatActivity {
             tab.startAnimation(rotateOpen);
             if(community == true)
             {
-                tabFriendAdd.startAnimation(fromBottom);
                 tabPost.startAnimation(fromBottom);
                 tabCamera.startAnimation(fromBottom);
                 tabBattle.startAnimation(fromBottom);
@@ -264,19 +251,27 @@ public class MainActivity extends AppCompatActivity {
         } else {
             tab.startAnimation(rotateClose);
             if(community == true){
-                tabFriendAdd.startAnimation(toBottom);
                 tabPost.startAnimation(toBottom);
                 tabCamera.startAnimation(toBottom);
                 tabBattle.startAnimation(toBottom);
                 tabWrite.startAnimation(toBottom);
                 tabBarcode.startAnimation(toBottom);
+                tabPost.setEnabled(false);
+                tabCamera.setEnabled(false);
+                tabBattle.setEnabled(false);
+                tabWrite.setEnabled(false);
+                tabBarcode.setEnabled(false);
             }else{
-                tabFriendAdd.startAnimation(die);
                 tabPost.startAnimation(die);
                 tabCamera.startAnimation(die);
                 tabBattle.startAnimation(die);
                 tabWrite.startAnimation(toBottom);
                 tabBarcode.startAnimation(toBottom);
+                tabPost.setEnabled(false);
+                tabCamera.setEnabled(false);
+                tabBattle.setEnabled(false);
+                tabWrite.setEnabled(false);
+                tabBarcode.setEnabled(false);
             }
         }
 
