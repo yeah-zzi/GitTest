@@ -27,7 +27,7 @@
         android:src="@drawable/find_market"
         tools:layout_editor_absoluteY="141dp" />
 
-    <RadioButton
+    <CheckBox
         android:id="@+id/AllSelectBT"
         android:layout_width="50dp"
         android:layout_height="50dp"

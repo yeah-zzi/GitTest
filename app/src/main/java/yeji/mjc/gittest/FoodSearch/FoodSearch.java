@@ -1,19 +1,24 @@
 package yeji.mjc.gittest.FoodSearch;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.ktx.Firebase;
 
 import java.util.ArrayList;
 
@@ -22,20 +27,29 @@ import yeji.mjc.gittest.FoodSearch.FoodSearchAdapter;
 import yeji.mjc.gittest.FoodSearch.FoodSearchItem;
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.SelectListener;
+import yeji.mjc.gittest.cart.CartPlus;
+import yeji.mjc.gittest.cart.FoodAdapter;
+import yeji.mjc.gittest.cart.FoodItem;
+import yeji.mjc.gittest.comunity.PlusComm;
+import yeji.mjc.gittest.firebase.AllergyFirebase;
+import yeji.mjc.gittest.firebase.FoodFirebase;
 
 
 public class FoodSearch extends Activity implements View.OnClickListener, SelectListener {
 
     //리사이클러뷰 변수 선언
-    public RecyclerView recyclerView;
+    public RecyclerView recyclerView, FoodrecyclerView;
     public RecyclerView.Adapter foodSearchAdapter;
     public ArrayList<FoodSearchItem> items = new ArrayList<FoodSearchItem>();
-
     //FireBase DB 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference addfoodDB;
+    DatabaseReference databaseReference = database.getReference();
+    DatabaseReference addfoodDB , cartDB;
     String userid = "임시용 유저 아이디1";
 
+
+    TextView foodName;
+    ImageView foodImg;
 
     ColorStateList def;
     TextView vegetable,fruit,meet,seafood,milk,drink,select;
@@ -46,6 +60,10 @@ public class FoodSearch extends Activity implements View.OnClickListener, Select
         setContentView(R.layout.food_img_search);
 
         addfoodDB = database.getReference().child("user").child(userid).child("addfood");
+        cartDB = database.getReference().child("user").child(userid).child("cart");
+
+        //전페이지에서 커뮤니티 이름을 받아온다
+        Intent dateIntent = getIntent();
 
         //설치 메뉴바 구현
         vegetable = findViewById(R.id.vegetable);
@@ -221,15 +239,20 @@ public class FoodSearch extends Activity implements View.OnClickListener, Select
 
     @Override
     public void onItemClicked(FoodSearchItem myModel) {
-        int fb_food_img = myModel.food_img;
-        String fb_food_name = myModel.food_name;
+        int fb_food_img = myModel.getFood_img();
+        String fb_food_name = myModel.getFood_name();
 
-        addfoodDB.child(fb_food_name).child("food_name").setValue(fb_food_name);
-        addfoodDB.child(fb_food_name).child("food_img").setValue(fb_food_img);
+        //장바구니
+        int cart_food_img = myModel.getFood_img();
+        String cart_food_name = myModel.getFood_name();
 
+
+        Intent cartIntent = new Intent(getApplicationContext(), CartPlus.class);
+        cartIntent.putExtra("이미지",cart_food_img);
+        cartIntent.putExtra("이름",cart_food_name);
+        setResult(RESULT_OK,cartIntent);
+        finish();
     }
-
-
 
 
 }

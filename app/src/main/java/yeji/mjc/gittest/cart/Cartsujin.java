@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 
 import android.widget.ImageButton;
@@ -27,12 +28,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 import yeji.mjc.gittest.FoodBattle_IMG_Upload;
 import yeji.mjc.gittest.MainActivity;
 import yeji.mjc.gittest.R;
+import yeji.mjc.gittest.frige.Fridge;
 
 public class Cartsujin extends Fragment {
 
@@ -44,8 +47,6 @@ public class Cartsujin extends Fragment {
 
     ImageButton MartSearch;
     Button AddBtn;
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,28 +63,29 @@ public class Cartsujin extends Fragment {
             }
         });
         //recyclerView.setHasFixedSize(true);
-      RadioButton radioButton = view.findViewById(R.id.AllSelectBT);
-        radioButton.setOnClickListener(new View.OnClickListener() {
+     CheckBox checkBox = view.findViewById(R.id.AllSelectBT);
+        checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isChecked = ((RadioButton) v).isChecked();
+                boolean isChecked = ((CheckBox) v).isChecked();
                 if (isChecked) {
                     foodAdapter.selectAll();
-//                    AlertDialog.Builder cartDelete = new AlertDialog.Builder(getContext());
-//                    cartDelete.setMessage("전부 삭제하시겠습니까?");
-//                    cartDelete.setPositiveButton("취소", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//
-//                        }
-//                    });
-//                    cartDelete.setNegativeButton("삭제", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                           foodAdapter.removeAllItem();
-//                        }
-//                    });
-//                    cartDelete.show();
+                    AlertDialog.Builder cartDelete = new AlertDialog.Builder(getContext());
+                    cartDelete.setMessage("전부 삭제하시겠습니까?");
+                    cartDelete.setPositiveButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    cartDelete.setNegativeButton("삭제", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                           foodAdapter.removeAllItem();
+                           foodAdapter.notifyDataSetChanged();
+                        }
+                    });
+                    cartDelete.show();
                 } else {
                     foodAdapter.deselectAll();
                 }
@@ -159,9 +161,6 @@ public class Cartsujin extends Fragment {
                 startActivity(intent);
             }
         });
-
-
-
         return view;
     }
 
@@ -169,7 +168,7 @@ public class Cartsujin extends Fragment {
         super.onStart();
 
         for(int i=0;i<9;i++){
-            foodItems.add(new FoodItem("오징어", "0개",R.drawable.bread,false));
+            foodItems.add(new FoodItem("오징어", "0개",R.drawable.squid,false));
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
