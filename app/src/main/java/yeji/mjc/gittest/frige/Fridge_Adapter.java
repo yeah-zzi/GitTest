@@ -42,6 +42,8 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
         holder.food_count.setText(fridgeItems.get(position).getFood_count());
         holder.food_date.setText(fridgeItems.get(position).getFood_date());
 
+
+
         //재료 수 더하기
         holder.count_plus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,8 +120,6 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
 
             }
         });
-
-
     }
 
 

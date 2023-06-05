@@ -44,6 +44,8 @@
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/write_community.xml" value="0.33" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/write_community_kind.xml" value="0.29628046173578454" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/menu/bottom_nav_menu.xml" value="0.30833333333333335" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/drawable/back_select_bar.xml" value="0.1" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/drawable/back_select_bar2.xml" value="0.1" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/drawable/button_cart.xml" value="0.1" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/drawable/button_delete.xml" value="0.203" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/drawable/circle_button.xml" value="0.1" />
@@ -70,7 +72,7 @@
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/cart_plus.xml" value="0.12409420289855072" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/cart_recyclerview.xml" value="0.264" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/celender.xml" value="0.1" />
-        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/community_menu.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/community_menu.xml" value="0.3677536231884058" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/expiry_date.xml" value="0.264" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fight_go.xml" value="0.11820652173913043" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fight_main.xml" value="0.136" />
@@ -86,10 +88,12 @@
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fragment_user_info_change.xml" value="0.1" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_cold.xml" value="0.2" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_frozen.xml" value="0.2" />
-        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_main.xml" value="0.1" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_main.xml" value="0.22328042328042327" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_menu.xml" value="0.13541666666666666" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_plus.xml" value="0.264" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_recyclerview.xml" value="0.1" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_recyclerview_longclick.xml" value="0.4" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_select.xml" value="0.1" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/homerice_battle.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/life_post_items.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/menu_selector_color.xml" value="0.1" />
@@ -101,7 +105,8 @@
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/startpage.xml" value="0.152" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/tip_comment.xml" value="0.12864583333333332" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/tip_comment_recycler.xml" value="0.13179347826086957" />
-        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/tip_main.xml" value="0.2" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/tip_main.xml" value="0.152" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/tip_plus.xml" value="0.13541666666666666" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/tip_recyclerview.xml" value="0.12864583333333332" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/toolbar.xml" value="0.13179347826086957" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/userinfochange.xml" value="0.11413043478260869" />

@@ -42,14 +42,56 @@
         app:layout_constraintRight_toRightOf="@+id/fridgetype"
         app:layout_constraintTop_toTopOf="@+id/fridgetype" />
 
+    <TextView
+        android:id="@+id/select_all"
+        android:layout_width="62dp"
+        android:layout_height="20dp"
+        android:layout_marginRight="0.5dp"
+        android:layout_marginTop="0.5dp"
+        android:background="@drawable/back_select_bar2"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/fridgetype"
+        app:layout_constraintLeft_toLeftOf="@+id/fridgetype"
+        app:layout_constraintRight_toRightOf="@+id/bar1"
+        app:layout_constraintTop_toTopOf="@+id/fridgetype" />
+
+    <TextView
+        android:id="@+id/select_cold"
+        android:layout_width="62dp"
+        android:layout_height="20dp"
+        android:layout_marginRight="0.3dp"
+        android:layout_marginTop="0.5dp"
+        android:background="@drawable/back_select_bar2"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/fridgetype"
+        app:layout_constraintLeft_toLeftOf="@+id/bar1"
+        app:layout_constraintRight_toRightOf="@+id/bar2"
+        app:layout_constraintTop_toTopOf="@+id/fridgetype" />
+
+    <TextView
+        android:id="@+id/select_frozen"
+        android:layout_width="62dp"
+        android:layout_height="20dp"
+        android:layout_marginRight="0.1dp"
+        android:layout_marginTop="0.5dp"
+        android:background="@drawable/back_select_bar2"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/fridgetype"
+        app:layout_constraintLeft_toLeftOf="@+id/bar2"
+        app:layout_constraintRight_toRightOf="@+id/fridgetype"
+        app:layout_constraintTop_toTopOf="@+id/fridgetype"/>
+
     <Button
         android:id="@+id/fridge_main"
         android:layout_width="70dp"
         android:layout_height="40dp"
         android:text="종합"
-        android:textColor="@color/black"
+        android:textColor="#6E6E6E"
         android:textStyle="bold"
-        app:backgroundTint="@color/main_yellow"
+        app:backgroundTint="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/fridgetype"
         app:layout_constraintLeft_toLeftOf="@+id/fridgetype"
         app:layout_constraintRight_toRightOf="@+id/bar1"
@@ -60,7 +102,7 @@
         android:layout_width="70dp"
         android:layout_height="40dp"
         android:text="냉장"
-        android:textColor="#6D6D6D"
+        android:textColor="#6E6E6E"
         android:textStyle="bold"
         app:backgroundTint="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/fridgetype"
@@ -73,7 +115,7 @@
         android:layout_width="70dp"
         android:layout_height="40dp"
         android:text="냉동"
-        android:textColor="#6D6D6D"
+        android:textColor="#6E6E6E"
         android:textStyle="bold"
         app:backgroundTint="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/fridgetype"
