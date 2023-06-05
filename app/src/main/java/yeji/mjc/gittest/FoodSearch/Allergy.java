@@ -308,4 +308,5 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
         databaseReference.child("user").child(userid).child("allergy").child(name).setValue(allergyFirebase);
     }
 
+
 }

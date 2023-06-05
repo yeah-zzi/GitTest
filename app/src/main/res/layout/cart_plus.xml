@@ -28,9 +28,10 @@
         app:layout_constraintRight_toRightOf="@+id/back">
         <ImageView
             android:id="@+id/food_img"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:scaleType="fitCenter"
+            android:background="@color/white"
             android:src="@drawable/healthy_food"
             android:layout_gravity="center" />
     </androidx.cardview.widget.CardView>
@@ -62,13 +63,14 @@
             android:textColor="@color/black"
             android:layout_marginTop="12dp"
             android:layout_marginStart="15dp"/>
-        <TextView
+        <EditText
             android:id="@+id/search_food_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="토마토"
-            android:textSize="20dp"
-            android:layout_marginTop="12dp"
+            android:textColor="@color/gray"
+            android:textSize="18dp"
+            android:background="@null"
+            android:layout_marginTop="2dp"
             android:layout_marginStart="15dp"/>
     </LinearLayout>
 
@@ -90,13 +92,14 @@
             android:textColor="@color/black"
             android:layout_marginTop="12dp"
             android:layout_marginStart="15dp"/>
-        <TextView
+        <EditText
             android:id="@+id/search_food_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3"
-            android:textSize="20dp"
-            android:layout_marginTop="12dp"
+            android:textColor="@color/gray"
+            android:textSize="18dp"
+            android:background="@null"
+            android:layout_marginTop="2dp"
             android:layout_marginStart="15dp"/>
     </LinearLayout>
 
