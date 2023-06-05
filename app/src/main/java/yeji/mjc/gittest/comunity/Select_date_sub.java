@@ -29,6 +29,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import yeji.mjc.gittest.R;
+import yeji.mjc.gittest.UserData;
 
 public class Select_date_sub extends AppCompatActivity {
 
@@ -64,10 +65,12 @@ public class Select_date_sub extends AppCompatActivity {
 
         //전페이지에서 유저 아이디와 집밥대결 유저를 가져온다
         Intent dateIntent = getIntent();
-        userid = dateIntent.getStringExtra("유저");
         friendid = dateIntent.getStringExtra("집밥대결 친구 아이디");
         friendName = dateIntent.getStringExtra("집밥대결 친구 이름");
         friendImg = dateIntent.getStringExtra("집밥대결 친구 이미지");
+
+        userid = UserData.getInstance().getUserid();
+
 
 
         Calendar now = Calendar.getInstance();

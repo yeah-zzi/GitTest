@@ -26,13 +26,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import yeji.mjc.gittest.AllergyItem;
 import yeji.mjc.gittest.R;
+import yeji.mjc.gittest.UserData;
 
 public class Comsujin extends Fragment implements View.OnClickListener{
 
     ColorStateList def;
     TextView life_info,tip,food_battle,select;
 
-    String userid = "임시용 유저 아이디1";
+    String userid;
 
     //파이어베이스에서 데이터베이스 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -46,6 +47,8 @@ public class Comsujin extends Fragment implements View.OnClickListener{
 
         //커뮤티니 메뉴바 구현
         View view = inflater.inflate(R.layout.tip_main, container, false);
+
+        userid = UserData.getInstance().getUserid();
 
         getFragmentManager().beginTransaction().add(R.id.tip_container, new Life_Fragment()).commit();
 

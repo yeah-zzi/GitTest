@@ -26,6 +26,7 @@ import yeji.mjc.gittest.FoodItem;
 import yeji.mjc.gittest.FoodSearch.Allergy;
 import yeji.mjc.gittest.MainActivity;
 import yeji.mjc.gittest.R;
+import yeji.mjc.gittest.UserData;
 
 public class Register extends AppCompatActivity {
 
@@ -60,9 +61,8 @@ public class Register extends AppCompatActivity {
         edit_name = findViewById(R.id.edittextnickname);
         nameBtn = findViewById(R.id.idbuttion);
 
-        //로그인 시 아이디값 인텐트로 받아오기
-        Intent intent = getIntent();
-        userid = intent.getStringExtra("userId");
+        //로그인 시 아이디값 받아오기
+        userid = UserData.getInstance().getUserid();
 
         //닉네임 중복 확인 버튼을 누르면 쓰여있는 닉네임을 받아서 데이터베이스에 넣는다
         //TODO 데이터 중복 확인 구문 작성
