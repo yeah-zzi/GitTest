@@ -93,7 +93,6 @@ public class Cold_Fridge extends Fragment{
                     case 1: // 이름 오름차순
                         ((Fridge_Adapter) adapter_refidge).setSortType(Fridge_Adapter.SortType.NAME_ASCENDING);
                         break;
-                    // 다른 정렬 기준에 따른 case를 추가할 수 있습니다.
                 }
             }
 

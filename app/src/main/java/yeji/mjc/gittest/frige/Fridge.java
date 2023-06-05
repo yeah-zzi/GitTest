@@ -60,10 +60,17 @@ public class Fridge extends Fragment{
         View fridge_cold = view.findViewById(R.id.fridge_cold);
         View fridge_frozen = view.findViewById(R.id.fridge_frozen);
 
+        View select_all = view.findViewById(R.id.select_all);
+        View select_cold = view.findViewById(R.id.select_cold);
+        View select_frozen = view.findViewById(R.id.select_frozen);
+
         fridge_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getFragmentManager().beginTransaction().replace(R.id.fridge_main_container, new Fridge()).commit();
+                select_all.setVisibility(View.VISIBLE);
+                select_cold.setVisibility(View.GONE);
+                select_frozen.setVisibility(View.GONE);
                 return;
             }
         });
@@ -72,6 +79,9 @@ public class Fridge extends Fragment{
             @Override
             public void onClick(View v) {
                 getFragmentManager().beginTransaction().replace(R.id.fridge_main_container, new Cold_Fridge()).commit();
+                select_all.setVisibility(View.GONE);
+                select_cold.setVisibility(View.VISIBLE);
+                select_frozen.setVisibility(View.GONE);
                 return;
             }
         });
@@ -80,6 +90,9 @@ public class Fridge extends Fragment{
             @Override
             public void onClick(View v) {
                 getFragmentManager().beginTransaction().replace(R.id.fridge_main_container, new Frozen_Fridge()).commit();
+                select_all.setVisibility(View.GONE);
+                select_cold.setVisibility(View.GONE);
+                select_frozen.setVisibility(View.VISIBLE);
                 return;
             }
         });
@@ -93,7 +106,6 @@ public class Fridge extends Fragment{
                     case 1: // 이름 오름차순
                         ((Fridge_Adapter) adapter_refidge).setSortType(Fridge_Adapter.SortType.NAME_ASCENDING);
                         break;
-                    // 다른 정렬 기준에 따른 case를 추가할 수 있습니다.
                 }
             }
 
