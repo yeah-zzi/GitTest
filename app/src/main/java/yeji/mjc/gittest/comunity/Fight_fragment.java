@@ -29,11 +29,12 @@ import java.util.Date;
 import de.hdodenhof.circleimageview.CircleImageView;
 import yeji.mjc.gittest.FB_IMG_Item;
 import yeji.mjc.gittest.R;
+import yeji.mjc.gittest.UserData;
 
 
 public class Fight_fragment extends Fragment implements FBListener{
 
-    String userid = "임시용 유저 아이디1";
+    String userid ;
     TextView user_name,friend_name;
     TextView remainDate,ingDate,startDateText;
     Button meNum,friendNum;
@@ -50,7 +51,7 @@ public class Fight_fragment extends Fragment implements FBListener{
     RecyclerView recyclerView,user_recyclerview,friend_recyclerview;
 
     //유저의 이미지
-    String userImg,friendImg;
+    String userImg,friendImg,userName,friendName;
     CircleImageView viewUserImg,viewFriendImg;
 
     //선택된 집밥대결 코드
@@ -65,6 +66,10 @@ public class Fight_fragment extends Fragment implements FBListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fight_main, container, false);
+
+        userid = UserData.getInstance().getUserid();
+        userImg = UserData.getInstance().getUserimg();
+        userName = UserData.getInstance().getUsername();
 
         user_name = view.findViewById(R.id.Me);
         friend_name = view.findViewById(R.id.Friend);
@@ -118,30 +123,11 @@ public class Fight_fragment extends Fragment implements FBListener{
             }
         });
 
-        userDB = database.getReference().child("user").child(userid).child("user_info");
-        userDB.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userImg = snapshot.child("user_img").getValue(String.class);
-                Glide.with(getActivity()).load(userImg).into(viewUserImg);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
+        Glide.with(getActivity()).load(userImg).into(viewUserImg);
+        user_name.setText(userName);
         return view;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-
-        user_name.setText(userid);
-    }
 
     @Override
     public void onItemClicked(FBTabItem myModel) {

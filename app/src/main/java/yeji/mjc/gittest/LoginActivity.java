@@ -34,7 +34,8 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private DatabaseReference mDatabase;
     public ImageButton loginButton;
-    public String userId;
+    public String userId,userEmail,userName,userImg;
+
 //    public Button logoutButton;
 //    public TextView nickName;
 //    public ImageView profile;
@@ -81,6 +82,13 @@ public class LoginActivity extends AppCompatActivity {
                 updateKakaoLoginUi();
             } else if (tokenInfo != null) {
                 Toast.makeText(this, "토큰 정보 보기 성공", Toast.LENGTH_SHORT).show();
+
+                updateKakaoLoginUi();
+//                //전역변수에 현재 유저 정보 넣기
+//                UserData.getInstance().setUserid(userId);
+//                UserData.getInstance().setUserimg(userImg);
+//                UserData.getInstance().setUsername(userName);
+
                 Log.i(TAG, "토큰 정보 보기 성공" +
                         "\n회원번호: " + tokenInfo.getId() +
                         "\n만료시간: " + tokenInfo.getExpiresIn() + "초");
@@ -104,6 +112,10 @@ public class LoginActivity extends AppCompatActivity {
                     Log.w(TAG, "토큰 발급 오류 : " + throwable.getLocalizedMessage());
                 }
                 updateKakaoLoginUi();
+                Intent loginIntent = new Intent(LoginActivity.this, Register.class);
+                //loginIntent.putExtra("userId", userId);
+                startActivity(loginIntent);
+                finish();
                 return null;
             }
         };
@@ -133,9 +145,14 @@ public class LoginActivity extends AppCompatActivity {
                 if (user != null) {
 
                     userId = user.getId().toString();
-                    String userEmail = user.getKakaoAccount().getEmail().toString();
-                    String userName = user.getKakaoAccount().getProfile().getNickname().toString();
-                    String userImg = user.getKakaoAccount().getProfile().getProfileImageUrl().toString();
+                    userEmail = user.getKakaoAccount().getEmail().toString();
+                    userName = user.getKakaoAccount().getProfile().getNickname().toString();
+                    userImg = user.getKakaoAccount().getProfile().getProfileImageUrl().toString();
+
+                    //전역변수에 현재 유저 정보 넣기
+                    UserData.getInstance().setUserid(userId);
+                    UserData.getInstance().setUserimg(userImg);
+                    UserData.getInstance().setUsername(userName);
 
                     // 유저의 아이디
                     Log.d(TAG, "kakao 유저 id : " + userId);
@@ -158,10 +175,10 @@ public class LoginActivity extends AppCompatActivity {
 //                    nickName.setText(user.getKakaoAccount().getProfile().getNickname()); // 받아온 닉네임
 //                    Glide.with(profile).load(user.getKakaoAccount().getProfile().getProfileImageUrl()).circleCrop().into(profile);
 
-                    Intent loginIntent = new Intent(LoginActivity.this, Register.class);
-                    loginIntent.putExtra("userId", userId);
-                    startActivity(loginIntent);
-                    finish();
+//                    Intent loginIntent = new Intent(LoginActivity.this, Register.class);
+//                    loginIntent.putExtra("userId", userId);
+//                    startActivity(loginIntent);
+//                    finish();
 
                     Toast.makeText(LoginActivity.this, user.getId() + "로그인되었습니다!", Toast.LENGTH_SHORT).show();
                 } else {

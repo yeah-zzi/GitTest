@@ -25,6 +25,7 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import yeji.mjc.gittest.R;
+import yeji.mjc.gittest.UserData;
 
 public class TipComment extends Activity {
 
@@ -40,7 +41,7 @@ public class TipComment extends Activity {
     EditText add_comment_content;
     ImageButton comment_add;
 
-    String comment_content,comment_code;
+    String comment_content,comment_code,userid,userimg;
 
     //파이어베이스에서 데이터베이스 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -53,14 +54,20 @@ public class TipComment extends Activity {
         recyclerView = findViewById(R.id.tip_comment_recycler);
         recyclerView.setHasFixedSize(true);
 
+        userid = UserData.getInstance().getUsername();
+        userimg = UserData.getInstance().getUserimg();
+
+        writer = UserData.getInstance().getUserid();
+        writer_img = UserData.getInstance().getUserimg();
+
         Intent getIntent = getIntent();
         code = getIntent.getStringExtra("커뮤니티 코드");
-        writer = getIntent.getStringExtra("작성자");
         content = getIntent.getStringExtra("내용");
         post_img = getIntent.getStringExtra("이미지");
         title = getIntent.getStringExtra("제목");
         getLike = getIntent.getStringExtra("좋아요");
         getCommentCount = getIntent.getStringExtra("댓글수");
+        writer = getIntent.getStringExtra("작성자");
         writer_img = getIntent.getStringExtra("작성자이미지");
 
         writer_id = findViewById(R.id.writer_id);
@@ -88,9 +95,9 @@ public class TipComment extends Activity {
                 tipDB = database.getReference().child("tip").child(code).child("comment").push();
                 comment_code = tipDB.getKey();
                 commentDB = tipDB.child("comment_writer_id");
-                commentDB.setValue(writer);
+                commentDB.setValue(userid);
                 commentDB = tipDB.child("comment_writer_img");
-                commentDB.setValue(writer_img);
+                commentDB.setValue(userimg);
                 commentDB = tipDB.child("comment_content");
                 commentDB.setValue(comment_content);
                 commentDB = tipDB.child("comment_code");
@@ -103,7 +110,7 @@ public class TipComment extends Activity {
     public void onStart(){
         super.onStart();
 
-        //파이어베이스에 저장되어 있는 회원의 알러지 정보를 받아 해당하는 알러지를 recyclerview로 나타낸다
+        //파이어베이스에 저장되어 있는 댓글 정보를 가져와
         tipDB = database.getReference().child("tip").child(code).child("comment");
         tipDB.addValueEventListener(new ValueEventListener() {
             @Override

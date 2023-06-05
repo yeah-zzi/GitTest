@@ -23,6 +23,7 @@ import java.time.Period;
 import java.util.*;
 
 import yeji.mjc.gittest.R;
+import yeji.mjc.gittest.UserData;
 
 public class FightGo extends AppCompatActivity {
 
@@ -51,7 +52,7 @@ public class FightGo extends AppCompatActivity {
 
         //전페이지에서 입력받은 정보들 가져오기
         Intent finishIntent = getIntent();
-        userid = finishIntent.getStringExtra("유저");
+        userid = UserData.getInstance().getUserid();
         friendid = finishIntent.getStringExtra("집밥대결 친구 아이디");
         friendName = finishIntent.getStringExtra("집밥대결 친구 이름");
         friendimg = finishIntent.getStringExtra("집밥대결 친구 이미지");

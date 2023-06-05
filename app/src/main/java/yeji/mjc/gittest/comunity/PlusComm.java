@@ -31,6 +31,7 @@ import yeji.mjc.gittest.FoodBattle_IMG_Upload;
 import yeji.mjc.gittest.MainActivity;
 import yeji.mjc.gittest.Model;
 import yeji.mjc.gittest.R;
+import yeji.mjc.gittest.UserData;
 
 public class PlusComm extends AppCompatActivity {
 
@@ -45,7 +46,7 @@ public class PlusComm extends AppCompatActivity {
     String com_title,com_content;
     String com_code;
 
-    String userid = "임시용 유저 아이디1";
+    String userid;
     String username,userimg;
     public ArrayList<String> code_item = new ArrayList<String>();
 
@@ -60,6 +61,10 @@ public class PlusComm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.write_community);
 
+        userid = UserData.getInstance().getUserid();
+        userimg = UserData.getInstance().getUserimg();
+        username = UserData.getInstance().getUsername();
+
         cancel = findViewById(R.id.cancel);
         kind = findViewById(R.id.com_kind_btn);
         com_kind = findViewById(R.id.com_kind);
@@ -68,19 +73,6 @@ public class PlusComm extends AppCompatActivity {
         title = findViewById(R.id.title);
         content = findViewById(R.id.plus_content);
 
-        userDB = database.getReference().child("user").child(userid).child("user_info");
-        userDB.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userimg = snapshot.child("user_img").getValue().toString();
-                username = snapshot.child("user_name").getValue().toString();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
         //현재 선택되어 있는 커뮤니티 종류 이름을 받아온다
         com_name = (String) com_kind.getText();
@@ -133,12 +125,12 @@ public class PlusComm extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"이미지를 선택해 주세요",Toast.LENGTH_SHORT).show();
                 }else{
                     //파이어베이스에 데이터 올리기
-                    comDB.child("writer").setValue(username);
                     comDB.child("title").setValue(com_title);
                     comDB.child("content").setValue(com_content);
                     comDB.child("like").setValue("0");
                     comDB.child("comment_count").setValue("0");
                     comDB.child("com_code").setValue(com_code);
+                    comDB.child("writer").setValue(username);
                     comDB.child("writer_img").setValue(userimg);
                     uploadToFirebase(imageUri);
 

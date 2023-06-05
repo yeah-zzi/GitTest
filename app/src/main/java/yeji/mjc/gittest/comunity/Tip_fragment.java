@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 import yeji.mjc.gittest.AllergyItem;
 import yeji.mjc.gittest.R;
+import yeji.mjc.gittest.UserData;
 
 
 public class Tip_fragment extends Fragment implements SelectListener{
@@ -30,7 +31,7 @@ public class Tip_fragment extends Fragment implements SelectListener{
     public RecyclerView.Adapter adapter_tip;
     public ArrayList<TipItem> tipItems = new ArrayList<TipItem>();
 
-    String userid = "임시용 유저 아이디1";
+    String userid;
 
     //파이어베이스에서 데이터베이스 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -45,6 +46,8 @@ public class Tip_fragment extends Fragment implements SelectListener{
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(new TipAdapter(getActivity(),tipItems,this));
         // Inflate the layout for this fragment
+
+        userid = UserData.getInstance().getUserid();
 
         recyclerView.setHasFixedSize(true);
 
@@ -82,8 +85,6 @@ public class Tip_fragment extends Fragment implements SelectListener{
         comIntent.putExtra("제목",tip_fragment.getTitle());
         comIntent.putExtra("좋아요",tip_fragment.getLike());
         comIntent.putExtra("댓글수",tip_fragment.getComment_count());
-        comIntent.putExtra("작성자이미지",tip_fragment.getWriter_img());
-        comIntent.putExtra("작성자이미지",tip_fragment.getWriter_img());
         comIntent.putExtra("작성자이미지",tip_fragment.getWriter_img());
         startActivity(comIntent);
     }

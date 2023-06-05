@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import yeji.mjc.gittest.R;
-
+import yeji.mjc.gittest.UserData;
 
 
 public class New_fight_sub extends AppCompatActivity implements FriendListener {
@@ -40,7 +40,7 @@ public class New_fight_sub extends AppCompatActivity implements FriendListener {
     //검색시 같은 이름이 있는 아이템이 담길 리스트
     public ArrayList<FriendAdd_Item> search_Items = new ArrayList<FriendAdd_Item>();
 
-    String userid = "임시용 유저 아이디1";
+    String userid;
     String friendid = "";
     String friendName;
     String friendImg = null;
@@ -51,6 +51,7 @@ public class New_fight_sub extends AppCompatActivity implements FriendListener {
         setContentView(R.layout.add_fight);
 
         editText = findViewById(R.id.edt1);
+        userid = UserData.getInstance().getUserid();
 
         RecyclerView recyclerView = findViewById(R.id.friend_add_recyclerview);
 
@@ -92,7 +93,6 @@ public class New_fight_sub extends AppCompatActivity implements FriendListener {
                     Toast.makeText(getApplicationContext(),"집밥대결 상대를 선택해 주십시오",Toast.LENGTH_SHORT).show();
                 }else{
                     Intent fridgeSearchIntent = new Intent(getApplicationContext(), Select_date_sub.class);
-                    fridgeSearchIntent.putExtra("유저",userid);
                     fridgeSearchIntent.putExtra("집밥대결 친구 아이디",friendid);
                     fridgeSearchIntent.putExtra("집밥대결 친구 이름",friendName);
                     fridgeSearchIntent.putExtra("집밥대결 친구 이미지",friendImg);
