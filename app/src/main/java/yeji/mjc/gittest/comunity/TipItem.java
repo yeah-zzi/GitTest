@@ -10,10 +10,11 @@ public class TipItem {
     String title;
     String writer;
     String writer_img;
+    String date;
 
     public TipItem(){}
 
-    public TipItem(String com_code, String comment_count, String content, String like, String post_img, String title, String writer, String writer_img) {
+    public TipItem(String com_code, String comment_count, String content, String like, String post_img, String title, String writer, String writer_img, String date) {
         this.com_code = com_code;
         this.comment_count = comment_count;
         this.content = content;
@@ -22,10 +23,19 @@ public class TipItem {
         this.title = title;
         this.writer = writer;
         this.writer_img = writer_img;
+        this.date = date;
     }
 
     public String getCom_code() {
         return com_code;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public void setCom_code(String com_code) {

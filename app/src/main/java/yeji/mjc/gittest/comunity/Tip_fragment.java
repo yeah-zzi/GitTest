@@ -51,7 +51,7 @@ public class Tip_fragment extends Fragment implements SelectListener{
 
         recyclerView.setHasFixedSize(true);
 
-        //파이어베이스에 저장되어 있는 회원의 알러지 정보를 받아 해당하는 알러지를 recyclerview로 나타낸다
+        //파이어베이스에 저장되어 있는 이거어때 게시글을 불러온다
         tipDB = database.getReference().child("tip");
         tipDB.addValueEventListener(new ValueEventListener() {
             @Override

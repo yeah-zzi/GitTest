@@ -25,7 +25,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import yeji.mjc.gittest.FoodBattle_IMG_Upload;
 import yeji.mjc.gittest.MainActivity;
@@ -49,6 +53,8 @@ public class PlusComm extends AppCompatActivity {
     String userid;
     String username,userimg;
     public ArrayList<String> code_item = new ArrayList<String>();
+    Calendar now = Calendar.getInstance();
+    String today;
 
     //파이어베이스 설정
     FirebaseDatabase database = FirebaseDatabase.getInstance(); // 파이어베이스 저장소 객체
@@ -72,6 +78,13 @@ public class PlusComm extends AppCompatActivity {
         complete = findViewById(R.id.complete);
         title = findViewById(R.id.title);
         content = findViewById(R.id.plus_content);
+
+        //문자열로 날짜를 초기화
+        DateFormat df = new SimpleDateFormat("yyyy년 MM월 dd일");
+
+        //현재 날짜를 시작날짜 문자열에 저장
+        now.setTime(new Date());
+        today = df.format(now.getTime());
 
 
         //현재 선택되어 있는 커뮤니티 종류 이름을 받아온다
@@ -132,7 +145,17 @@ public class PlusComm extends AppCompatActivity {
                     comDB.child("com_code").setValue(com_code);
                     comDB.child("writer").setValue(username);
                     comDB.child("writer_img").setValue(userimg);
+                    comDB.child("date").setValue(today);
                     uploadToFirebase(imageUri);
+
+                    //선택한 게시판에 따라 유저가 작성한 게시글의 코드 경로가 달라진다
+                    if(com_name.equals("생활정보")){
+                        userDB = database.getReference().child("user").child(userid).child("life_post").push();
+                        userDB.setValue(com_code);
+                    }else if(com_name.equals("이거어때")){
+                        userDB = database.getReference().child("user").child(userid).child("tip_post").push();
+                        userDB.setValue(com_code);
+                    }
 
                     finish();
                 }
