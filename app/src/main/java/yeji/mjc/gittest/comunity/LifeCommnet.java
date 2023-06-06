@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,10 +43,11 @@ public class LifeCommnet extends Activity {
 
     String comment_content,comment_code;
     String userid,username,userimg;
+    int comment_size ;
 
     //파이어베이스에서 데이터베이스 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference lifeDB,commentDB;
+    DatabaseReference lifeDB,commentDB,countDB;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,6 +70,9 @@ public class LifeCommnet extends Activity {
         writer = getIntent.getStringExtra("작성자");
         writer_img = getIntent.getStringExtra("작성자이미지");
         date = getIntent.getStringExtra("작성날짜");
+
+        //댓글수로 int로
+        comment_size = Integer.valueOf(getCommentCount);
 
         //인플레이트
         img = findViewById(R.id.main_picture);
@@ -92,19 +97,28 @@ public class LifeCommnet extends Activity {
             @Override
             public void onClick(View v) {
                 comment_content = comment_add_content.getText().toString();
-                comment_add_content.setText(null);
-                //댓글작성자이미지,작성자이름,작성내용
-                lifeDB = database.getReference().child("life").child(code).child("comment").push();
-                //생성된 댓글 코드
-                comment_code = lifeDB.getKey();
-                commentDB = lifeDB.child("comment_writer_id");
-                commentDB.setValue(userid);
-                commentDB = lifeDB.child("comment_writer_img");
-                commentDB.setValue(userimg);
-                commentDB = lifeDB.child("comment_content");
-                commentDB.setValue(comment_content);
-                commentDB = lifeDB.child("comment_code");
-                commentDB.setValue(comment_code);
+                if(comment_content == null || comment_content.trim().isEmpty()){
+                    Toast.makeText(getApplicationContext(),"댓글 내용을 입력해주세요",Toast.LENGTH_SHORT).show();
+                }else {
+                    comment_add_content.setText(null);
+                    //댓글작성자이미지,작성자이름,작성내용
+                    lifeDB = database.getReference().child("life").child(code).child("comment").push();
+                    //생성된 댓글 코드
+                    comment_code = lifeDB.getKey();
+                    commentDB = lifeDB.child("comment_writer_id");
+                    commentDB.setValue(userid);
+                    commentDB = lifeDB.child("comment_writer_img");
+                    commentDB.setValue(userimg);
+                    commentDB = lifeDB.child("comment_content");
+                    commentDB.setValue(comment_content);
+                    commentDB = lifeDB.child("comment_code");
+                    commentDB.setValue(comment_code);
+                    comment_size++;
+                    getCommentCount = Integer.toString(comment_size);
+                    countDB = database.getReference().child("life").child(code).child("comment_count");
+                    countDB.setValue(getCommentCount);
+                    comment_count.setText(getCommentCount);
+                }
             }
         });
     }
