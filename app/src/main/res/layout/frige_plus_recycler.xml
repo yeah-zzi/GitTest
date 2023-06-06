@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="350dp"
+        android:layout_height="400dp"
+        android:background="@drawable/fridge_food_card"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="400dp"
+        android:layout_height="450dp"
+        android:id="@+id/cartrecycler"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <ImageButton
+        android:id="@+id/cancel"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:background="@drawable/lightgraycircld"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/back"
+        app:layout_constraintLeft_toLeftOf="@id/back"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="취소"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@+id/cancel"
+        app:layout_constraintBottom_toBottomOf="@id/cancel"
+        app:layout_constraintLeft_toLeftOf="@id/cancel"
+        app:layout_constraintRight_toRightOf="@id/cancel"/>
+
+    <ImageButton
+        android:id="@+id/complete"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:background="@drawable/switch_track_on"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/back"
+        app:layout_constraintRight_toRightOf="@+id/back"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="확인"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@+id/complete"
+        app:layout_constraintBottom_toBottomOf="@id/complete"
+        app:layout_constraintLeft_toLeftOf="@id/complete"
+        app:layout_constraintRight_toRightOf="@id/complete"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
