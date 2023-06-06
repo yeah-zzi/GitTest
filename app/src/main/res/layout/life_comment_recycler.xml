@@ -4,6 +4,16 @@
     android:layout_height="90dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ImageView
+        android:id="@+id/delete"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:elevation="10dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_baseline_cancel_24"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/cat"
         android:layout_width="60dp"
