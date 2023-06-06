@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.UserData;
 
-public class LifeCommnet extends Activity {
+public class LifeCommnet extends Activity implements CommentListener{
 
     String code,writer,getcontent,post_img,gettitle,getLike,getCommentCount,writer_img,date;
 
@@ -47,7 +47,7 @@ public class LifeCommnet extends Activity {
 
     //파이어베이스에서 데이터베이스 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference lifeDB,commentDB,countDB;
+    DatabaseReference uploadDB,commentDB,countDB,lifeDB;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -102,17 +102,18 @@ public class LifeCommnet extends Activity {
                 }else {
                     comment_add_content.setText(null);
                     //댓글작성자이미지,작성자이름,작성내용
-                    lifeDB = database.getReference().child("life").child(code).child("comment").push();
+                    uploadDB = database.getReference().child("life").child(code).child("comment").push();
                     //생성된 댓글 코드
-                    comment_code = lifeDB.getKey();
-                    commentDB = lifeDB.child("comment_writer_id");
+                    comment_code = uploadDB.getKey();
+                    commentDB = uploadDB.child("comment_writer_id");
                     commentDB.setValue(userid);
-                    commentDB = lifeDB.child("comment_writer_img");
+                    commentDB = uploadDB.child("comment_writer_img");
                     commentDB.setValue(userimg);
-                    commentDB = lifeDB.child("comment_content");
+                    commentDB = uploadDB.child("comment_content");
                     commentDB.setValue(comment_content);
-                    commentDB = lifeDB.child("comment_code");
+                    commentDB = uploadDB.child("comment_code");
                     commentDB.setValue(comment_code);
+
                     comment_size++;
                     getCommentCount = Integer.toString(comment_size);
                     countDB = database.getReference().child("life").child(code).child("comment_count");
@@ -147,6 +148,19 @@ public class LifeCommnet extends Activity {
         });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new Life_Comment_Adapter(items));
+        recyclerView.setAdapter(new Life_Comment_Adapter(items,this));
+    }
+
+    @Override
+    public void onItemClicked(Tip_comment_item item) {
+        String comment_Code = item.getComment_code();
+        //Toast.makeText(this,getCommentCount,Toast.LENGTH_SHORT).show();
+        lifeDB.child(comment_Code).removeValue();
+
+        comment_size--;
+        getCommentCount = Integer.toString(comment_size);
+        countDB = database.getReference().child("life").child(code).child("comment_count");
+        countDB.setValue(getCommentCount);
+        comment_count.setText(getCommentCount);
     }
 }
