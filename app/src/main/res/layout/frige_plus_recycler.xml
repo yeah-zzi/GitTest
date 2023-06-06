@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/back"
-        android:layout_width="350dp"
-        android:layout_height="400dp"
+        android:layout_width="400dp"
+        android:layout_height="450dp"
         android:background="@drawable/fridge_food_card"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
