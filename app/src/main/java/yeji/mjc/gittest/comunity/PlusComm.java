@@ -130,9 +130,9 @@ public class PlusComm extends AppCompatActivity {
                 com_title = title.getText().toString();
                 com_content = content.getText().toString();
 
-                if(com_title.equals(null) || com_title.equals("")){
+                if(com_title.equals(null) || com_title.trim().isEmpty()){
                     Toast.makeText(getApplicationContext(),"제목을 입력해 주세요",Toast.LENGTH_SHORT).show();
-                }else if(com_content.equals(null) || com_content.equals("")){
+                }else if(com_content.equals(null) || com_content.trim().isEmpty()){
                     Toast.makeText(getApplicationContext(),"내용을 입력해 주세요",Toast.LENGTH_SHORT).show();
                 }else if(imageUri == null){
                     Toast.makeText(getApplicationContext(),"이미지를 선택해 주세요",Toast.LENGTH_SHORT).show();
