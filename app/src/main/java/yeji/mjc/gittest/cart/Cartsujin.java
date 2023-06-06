@@ -1,7 +1,6 @@
 package yeji.mjc.gittest.cart;
 
 
-import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Color;
 
@@ -14,13 +13,11 @@ import android.view.ViewGroup;
 
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.RadioButton;
 
 import android.widget.ImageButton;
 
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,21 +25,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
-import yeji.mjc.gittest.FoodBattle_IMG_Upload;
-import yeji.mjc.gittest.MainActivity;
 import yeji.mjc.gittest.R;
-import yeji.mjc.gittest.frige.Fridge;
 
 public class Cartsujin extends Fragment {
 
-    public RecyclerView recyclerView;
+    public RecyclerView recyclerView, cartrecyclerView;
     public ArrayList<FoodItem> foodItems = new ArrayList<FoodItem>();
+    public ArrayList<CartItem> cartItems = new ArrayList<CartItem>();
 
     public FoodAdapter foodAdapter;
+    public CartAdapter cartAdapter;
 
 
     ImageButton MartSearch;
@@ -54,6 +49,7 @@ public class Cartsujin extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.cart_main, container, false);
         recyclerView = view.findViewById(R.id.FoodListRV);
+        cartrecyclerView = view.findViewById(R.id.cartrecycler);
         AddBtn = view.findViewById(R.id.AddBtn);
         AddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,22 +66,8 @@ public class Cartsujin extends Fragment {
                 boolean isChecked = ((CheckBox) v).isChecked();
                 if (isChecked) {
                     foodAdapter.selectAll();
-                    AlertDialog.Builder cartDelete = new AlertDialog.Builder(getContext());
-                    cartDelete.setMessage("전부 삭제하시겠습니까?");
-                    cartDelete.setPositiveButton("취소", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-                    cartDelete.setNegativeButton("삭제", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                           foodAdapter.removeAllItem();
-                           foodAdapter.notifyDataSetChanged();
-                        }
-                    });
-                    cartDelete.show();
+                    Intent cartDialog = new Intent(getActivity(),CartDialog.class);
+                    startActivity(cartDialog);
                 } else {
                     foodAdapter.deselectAll();
                 }
