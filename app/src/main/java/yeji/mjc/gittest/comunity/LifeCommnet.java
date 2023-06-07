@@ -36,18 +36,18 @@ public class LifeCommnet extends Activity implements CommentListener{
     public ArrayList<Tip_comment_item> items = new ArrayList<Tip_comment_item>();
 
     //뷰에서 가져오기
-    ImageView img;
+    ImageView img,like;
     TextView title,info,heart_count,comment_count,content;
     EditText comment_add_content;
     ImageButton comment_add;
 
-    String comment_content,comment_code;
+    String comment_content,comment_code,heartClick;
     String userid,username,userimg;
-    int comment_size ;
+    int comment_size,like_size;
 
     //파이어베이스에서 데이터베이스 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference uploadDB,commentDB,countDB,lifeDB;
+    DatabaseReference uploadDB,commentDB,countDB,lifeDB,heartDB,heartClickDB,likeDB,userHeartDB;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class LifeCommnet extends Activity implements CommentListener{
         recyclerView = findViewById(R.id.life_commnet_recycler);
         recyclerView.setHasFixedSize(true);
 
-        userid = UserData.getInstance().getUsername();
+        userid = UserData.getInstance().getUserid();
         userimg = UserData.getInstance().getUserimg();
 
         Intent getIntent = getIntent();
@@ -73,9 +73,11 @@ public class LifeCommnet extends Activity implements CommentListener{
 
         //댓글수로 int로
         comment_size = Integer.valueOf(getCommentCount);
+        like_size = Integer.valueOf(getLike);
 
         //인플레이트
         img = findViewById(R.id.main_picture);
+        like = findViewById(R.id.like);
         title = findViewById(R.id.title);
         info = findViewById(R.id.info);
         heart_count = findViewById(R.id.like_count);
@@ -91,6 +93,29 @@ public class LifeCommnet extends Activity implements CommentListener{
         content.setText(getcontent);
         heart_count.setText(getLike);
         comment_count.setText(getCommentCount);
+
+        //유저가 하트를 눌렀는지 불린 가져오기
+        heartDB = database.getReference().child("life").child(code).child("like_user");
+        heartDB.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                heartClick = "unclick";
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    if(userid.equals(dataSnapshot.getKey())){
+                        heartClick = dataSnapshot.getValue(String.class);
+                        break;
+                    }
+                }
+
+                // onDataChange 메소드가 호출된 이후에 처리되어야 하는 로직 호출
+                handleHeartClick();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // 오류 처리
+            }
+        });
 
         //댓글 작성
         comment_add.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +145,32 @@ public class LifeCommnet extends Activity implements CommentListener{
                     countDB.setValue(getCommentCount);
                     comment_count.setText(getCommentCount);
                 }
+            }
+        });
+
+        userHeartDB = database.getReference().child("user").child(userid).child("heart_life").child(code);
+        //좋아요 버튼 누르기
+        like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //현재 하트상태에 따라 불값 바꾸기
+                heartClickDB = database.getReference().child("life").child(code).child("like_user").child(userid);
+                likeDB = database.getReference().child("life").child(code).child("like");
+                if(heartClick.equals("click")){
+                    like_size--;
+                    like.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                    heartClick = "unclick";
+                    heartClickDB.setValue("unclick");
+                    userHeartDB.removeValue();
+                }else{
+                    like_size++;
+                    like.setImageResource(R.drawable.ic_baseline_favorite_24);
+                    heartClick = "click";
+                    heartClickDB.setValue("click");
+                    userHeartDB.setValue(code);
+                }
+                heart_count.setText(like_size+"");
+                likeDB.setValue(like_size+"");
             }
         });
     }
@@ -162,5 +213,14 @@ public class LifeCommnet extends Activity implements CommentListener{
         countDB = database.getReference().child("life").child(code).child("comment_count");
         countDB.setValue(getCommentCount);
         comment_count.setText(getCommentCount);
+    }
+
+    private void handleHeartClick() {
+        // 불러온 유저 하트 누른 Boolean으로 설정
+        if(heartClick.equals("click")){
+            like.setImageResource(R.drawable.ic_baseline_favorite_24);
+        } else {
+            like.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+        }
     }
 }
