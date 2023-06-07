@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -82,5 +84,12 @@ public class Life_Fragment extends Fragment implements SelectListener{
         comIntent.putExtra("작성날짜",tip_fragment.getDate());
         startActivity(comIntent);
     }
+
+    @Override
+    public void onHeartClicked(TipItem tip_fragment, ImageView imageView, TextView textView) {
+
+    }
+
+
 }
 

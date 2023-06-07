@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,7 +22,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import yeji.mjc.gittest.AllergyItem;
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.UserData;
 
@@ -31,11 +32,15 @@ public class Tip_fragment extends Fragment implements SelectListener{
     public RecyclerView.Adapter adapter_tip;
     public ArrayList<TipItem> tipItems = new ArrayList<TipItem>();
 
-    String userid;
+    ImageView heartBtn;
+    TextView heartText;
+
+    String userid,code,heartClick;
+    int like_size;
 
     //파이어베이스에서 데이터베이스 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference tipDB;
+    DatabaseReference tipDB,heartClickDB,likeDB,heartDB,userHeartDB;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,6 +75,7 @@ public class Tip_fragment extends Fragment implements SelectListener{
                 //디비를 가져오다 오류 발생시
             }
         });
+
         return view;
     }
 
@@ -88,4 +94,62 @@ public class Tip_fragment extends Fragment implements SelectListener{
         comIntent.putExtra("작성자이미지",tip_fragment.getWriter_img());
         startActivity(comIntent);
     }
+
+    @Override
+    public void onHeartClicked(TipItem tip_fragment, ImageView imageView, TextView textView) {
+        heartBtn = imageView;
+        heartText = textView;
+
+        code = tip_fragment.getCom_code();
+        String getLike = tip_fragment.getLike();
+        like_size = Integer.valueOf(getLike);
+
+        //유저가 하트를 눌렀는지 불린 가져오기
+        heartDB = database.getReference().child("tip").child(code).child("like_user");
+        heartDB.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                heartClick = "unclick";
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    if(userid.equals(dataSnapshot.getKey())){
+                        heartClick = dataSnapshot.getValue(String.class);
+                        break;
+                    }
+                }
+
+                // onDataChange 메소드가 호출된 이후에 처리되어야 하는 로직 호출
+                handleHeartClick();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // 오류 처리
+            }
+        });
+
+        //현재 하트상태에 따라 불값 바꾸기
+        heartClickDB = database.getReference().child("tip").child(code).child("like_user").child(userid);
+        likeDB = database.getReference().child("tip").child(code).child("like");
+        userHeartDB = database.getReference().child("user").child(userid).child("heart_tip").child(code);
+
+    }
+
+    private void handleHeartClick() {
+        if(heartClick.equals("click")){
+            like_size--;
+            heartBtn.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+            heartClick = "unclick";
+            heartClickDB.setValue("unclick");
+            userHeartDB.removeValue();
+        }else{
+            like_size++;
+            heartBtn.setImageResource(R.drawable.ic_baseline_favorite_24);
+            heartClick = "click";
+            heartClickDB.setValue("click");
+            userHeartDB.setValue(code);
+        }
+        heartText.setText(like_size+"");
+        likeDB.setValue(like_size+"");
+    }
+
 }

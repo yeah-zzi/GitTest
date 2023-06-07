@@ -2,15 +2,19 @@ package yeji.mjc.gittest.comunity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -27,7 +32,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.UserData;
 
-public class TipComment extends Activity {
+public class TipComment extends Activity implements CommentListener{
 
     //리사이클러뷰 변수 선언
     public RecyclerView recyclerView;
@@ -41,11 +46,14 @@ public class TipComment extends Activity {
     EditText add_comment_content;
     ImageButton comment_add;
 
-    String comment_content,comment_code,userid,userimg;
+    int comment_size,like_size;
+    String heartClick;
+    String comment_content,comment_code, username,userimg,userid;
+
 
     //파이어베이스에서 데이터베이스 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference tipDB,commentDB;
+    DatabaseReference tipDB,commentDB,countDB,deleteDB,heartDB,heartClickDB,likeDB,userHeartDB;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,7 +62,8 @@ public class TipComment extends Activity {
         recyclerView = findViewById(R.id.tip_comment_recycler);
         recyclerView.setHasFixedSize(true);
 
-        userid = UserData.getInstance().getUsername();
+        username = UserData.getInstance().getUsername();
+        userid = UserData.getInstance().getUserid();
         userimg = UserData.getInstance().getUserimg();
 
         writer = UserData.getInstance().getUserid();
@@ -78,6 +87,7 @@ public class TipComment extends Activity {
         tip_post_img = findViewById(R.id.tip_post_img);
         comment_add = findViewById(R.id.comment_add);
         add_comment_content = findViewById(R.id.comment_add_content);
+        like = findViewById(R.id.like);
 
         writer_id.setText(writer);
         post_content.setText(content);
@@ -85,6 +95,33 @@ public class TipComment extends Activity {
         comment_count.setText(getCommentCount);
         Glide.with(this).load(post_img).into(tip_post_img);
         Glide.with(this).load(writer_img).into(writerImg);
+
+        //유저가 하트를 눌렀는지 불린 가져오기
+        heartDB = database.getReference().child("tip").child(code).child("like_user");
+        heartDB.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                heartClick = "unclick";
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    if(userid.equals(dataSnapshot.getKey())){
+                        heartClick = dataSnapshot.getValue(String.class);
+                        break;
+                    }
+                }
+
+                // onDataChange 메소드가 호출된 이후에 처리되어야 하는 로직 호출
+                handleHeartClick();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // 오류 처리
+            }
+        });
+
+        //댓글수로 int로
+        comment_size = Integer.valueOf(getCommentCount);
+        like_size = Integer.valueOf(getLike);
 
         comment_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,13 +132,46 @@ public class TipComment extends Activity {
                 tipDB = database.getReference().child("tip").child(code).child("comment").push();
                 comment_code = tipDB.getKey();
                 commentDB = tipDB.child("comment_writer_id");
-                commentDB.setValue(userid);
+                commentDB.setValue(username);
                 commentDB = tipDB.child("comment_writer_img");
                 commentDB.setValue(userimg);
                 commentDB = tipDB.child("comment_content");
                 commentDB.setValue(comment_content);
                 commentDB = tipDB.child("comment_code");
                 commentDB.setValue(comment_code);
+
+                comment_size++;
+                getCommentCount = Integer.toString(comment_size);
+                countDB = database.getReference().child("tip").child(code).child("comment_count");
+                countDB.setValue(getCommentCount);
+                comment_count.setText(getCommentCount);
+            }
+        });
+
+        userHeartDB = database.getReference().child("user").child(userid).child("heart_tip").child(code);
+
+        //좋아요 버튼 누르기
+        like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //현재 하트상태에 따라 불값 바꾸기
+                heartClickDB = database.getReference().child("tip").child(code).child("like_user").child(userid);
+                likeDB = database.getReference().child("tip").child(code).child("like");
+                if(heartClick.equals("click")){
+                    like_size--;
+                    like.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                    heartClick = "unclick";
+                    heartClickDB.setValue("unclick");
+                    userHeartDB.removeValue();
+                }else{
+                    like_size++;
+                    like.setImageResource(R.drawable.ic_baseline_favorite_24);
+                    heartClick = "click";
+                    heartClickDB.setValue("click");
+                    userHeartDB.setValue(code);
+                }
+                like_count.setText(like_size+"");
+                likeDB.setValue(like_size+"");
             }
         });
     }
@@ -131,6 +201,28 @@ public class TipComment extends Activity {
         });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new TipCommentAdapter(items));
+        recyclerView.setAdapter(new TipCommentAdapter(items,this));
+    }
+
+    @Override
+    public void onItemClicked(Tip_comment_item item) {
+        String comment_Code = item.getComment_code();
+        deleteDB = database.getReference().child("tip").child(code).child("comment").child(comment_Code);
+        deleteDB.removeValue();
+
+        comment_size--;
+        getCommentCount = Integer.toString(comment_size);
+        countDB = database.getReference().child("tip").child(code).child("comment_count");
+        countDB.setValue(getCommentCount);
+        comment_count.setText(getCommentCount);
+    }
+
+    private void handleHeartClick() {
+        // 불러온 유저 하트 누른 Boolean으로 설정
+        if(heartClick.equals("click")){
+            like.setImageResource(R.drawable.ic_baseline_favorite_24);
+        } else {
+            like.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+        }
     }
 }
