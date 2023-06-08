@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 
 import androidx.annotation.NonNull;
@@ -49,7 +50,6 @@ public class Cartsujin extends Fragment {
     DatabaseReference cartdb;
     ArrayList<CartItem> items;
     String userid = "2810839655";
-
 
     ImageButton MartSearch;
     Button AddBtn;
@@ -86,6 +86,7 @@ public class Cartsujin extends Fragment {
             }
         });
 
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         foodAdapter = new FoodAdapter(foodItems);
         recyclerView.setAdapter(foodAdapter);
 
@@ -162,11 +163,11 @@ public class Cartsujin extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //파이어베이스 데이터베이스의 데이터를 받아오는 곳
-                cartItems.clear();   //기존 배열리스트가 존재하지 않게 초기화
+                foodItems.clear();   //기존 배열리스트가 존재하지 않게 초기화
                 for (DataSnapshot snapshot1 : snapshot.getChildren()){
                     CartItem cartItem= snapshot1.getValue(CartItem.class);
                     FoodItem foodItem =
-                            new FoodItem(cartItem.getFood_name(),cartItem.getFood_count(),cartItem.getFood_img(),false);
+                            new FoodItem(cartItem.getFood_name(),cartItem.getFood_count()+"개",cartItem.getFood_img(),false);
                     foodItems.add(foodItem);
                 }
                 recyclerView.getAdapter().notifyDataSetChanged();
@@ -179,18 +180,6 @@ public class Cartsujin extends Fragment {
         });
 
         return view;
-    }
-
-    public void onStart(){
-        super.onStart();
-
-
-//        for(int i=0;i<9;i++){
-//            foodItems.add(new FoodItem("오징어", "0개",,false));
-//        }
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //recyclerView.setAdapter(new FoodAdapter(foodItems));
     }
 
 }

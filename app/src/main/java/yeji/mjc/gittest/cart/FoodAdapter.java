@@ -33,7 +33,7 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
     @Override
     public void onBindViewHolder(@NonNull Food_recycle_holder holder, int position) {
         holder.foodName.setText(items.get(position).getName());
-       // holder.foodNum.setText(items.get(position).getNum());
+        holder.foodNum.setText(items.get(position).getNum());
         holder.checkBox.setChecked(items.get(position).isCheckBox());
         Glide.with(holder.itemView).load(items.get(position).getImg()).into(holder.foodImage);
 

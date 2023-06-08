@@ -1,8 +1,10 @@
 package yeji.mjc.gittest.cart;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
@@ -18,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import yeji.mjc.gittest.FoodSearch.Food_expiry;
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.comunity.Tip_comment_item;
 
@@ -32,7 +35,8 @@ public class CartDialog extends AppCompatActivity {
     DatabaseReference cartdb, frigedb;
     String userid = "2810839655";
 
-    ImageButton cancel, complete;
+    ImageButton cancel, complete, carlendar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,7 @@ public class CartDialog extends AppCompatActivity {
         frigerecyclerview = findViewById(R.id.fridgeRecyclerView);
         complete = findViewById(R.id.complete);
         cancel = findViewById(R.id.cancel);
+        carlendar = findViewById(R.id.calendar);
         cartAdapter = new CartAdapter(cartItems);
 
 
@@ -55,10 +60,10 @@ public class CartDialog extends AppCompatActivity {
                 cartItems.clear();   //기존 배열리스트가 존재하지 않게 초기화
                 for (DataSnapshot snapshot1 : snapshot.getChildren()){
                     CartItem cartItem= snapshot1.getValue(CartItem.class);
-                    FoodItem foodItem =
-                            new FoodItem(cartItem.getFood_name(),cartItem.getFood_count(),cartItem.getFood_img(),false);
+//                    FoodItem foodItem =
+//                            new FoodItem(cartItem.getFood_name(),cartItem.getFood_count()+"개",cartItem.getFood_img(),false);
                     cartItems.add(cartItem);
-                    foodItems.add(foodItem);
+                    //foodItems.add(foodItem);
                 }
                 cartrecyclerView.getAdapter().notifyDataSetChanged();
             }
@@ -83,10 +88,13 @@ public class CartDialog extends AppCompatActivity {
                             CartItem cartItem= snapshot1.getValue(CartItem.class);
                             FoodItem foodItem =
                                     new FoodItem(cartItem.getFood_name(),cartItem.getFood_count(),cartItem.getFood_img(),false);
-                            cartItems.add(cartItem);
                             frigedb = database.getReference().child("user").child(userid).child("fridge");
-                            frigedb.setValue(foodItem);
+                            // 파이어베이스에 해당 아이템 저장
+                            String key = frigedb.push().getKey();  // 새로운 키 생성
+                            frigedb.child(key).setValue(foodItem);
                         }
+                        // 확인 누르면 카트에 있는 아이템들 삭제 >> 이미 냉장고에 들어갔으니까
+                        cartdb.getRef().removeValue();
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
@@ -104,6 +112,14 @@ public class CartDialog extends AppCompatActivity {
                 finish();
             }
         });
+
+//        carlendar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent foodexpiry = new Intent(getApplicationContext(), Food_expiry.class);
+//                startActivity(foodexpiry);
+//            }
+//        });
 
         cartrecyclerView.setLayoutManager(new LinearLayoutManager(this));
         cartrecyclerView.setAdapter(cartAdapter);

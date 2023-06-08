@@ -2,42 +2,42 @@ package yeji.mjc.gittest.cart;
 
 public class FoodItem {
 
-    String name;
-    String num;
-    String img;
+    String food_name;
+    String food_count;
+    String food_img;
     boolean checkBox;
 
-    public FoodItem(String name, String num, String img, boolean checkBox) {
-        this.name = name;
-        this.num = num;
-        this.img = img;
+    public FoodItem(String food_name, String food_count, String food_img, boolean checkBox) {
+        this.food_name = food_name;
+        this.food_count = food_count;
+        this.food_img = food_img;
         this.checkBox = checkBox;
     }
 
     public String getName() {
-        return name;
+        return food_name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.food_name = food_name;
     }
 
 
     public String getNum() {
-        return num;
+        return food_count;
     }
 
     public void setNum(String num) {
-        this.num = num;
+        this.food_count = food_count;
     }
 
 
     public String getImg() {
-        return img;
+        return food_img;
     }
 
     public void setImg(String img) {
-        this.img = img;
+        this.food_img= food_img;
     }
 
 

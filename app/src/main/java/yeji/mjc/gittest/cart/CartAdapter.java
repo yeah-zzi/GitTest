@@ -33,7 +33,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
     FirebaseDatabase database = FirebaseDatabase.getInstance(); // 파이어베이스 저장소 객체
     DatabaseReference cartDB, frigeDB;
     ArrayList<CartItem> items;
-    String userid = "2810839655";
 
 
     public CartAdapter(ArrayList<CartItem> items) {
@@ -50,11 +49,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
         Glide.with(holder.itemView).load(items.get(position).getFood_img()).into(holder.food_img);
         holder.food_name.setText(items.get(position).getFood_name());
         holder.food_count.setText(items.get(position).getFood_count());
+        holder.food_count.getText().toString();
         holder.calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 캘린더 화면 나오고 날짜 설정 가능 , 혹은 날짜 직접 입력 가능
-                holder.food_dead.setText(toString());
+                holder.food_dead.getText().toString();
             }
         });
     }
