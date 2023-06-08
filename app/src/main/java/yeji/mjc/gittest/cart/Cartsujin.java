@@ -24,6 +24,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -40,12 +45,19 @@ public class Cartsujin extends Fragment {
     public CartAdapter cartAdapter;
 
 
+    FirebaseDatabase database = FirebaseDatabase.getInstance(); // 파이어베이스 저장소 객체
+    DatabaseReference cartdb;
+    ArrayList<CartItem> items;
+    String userid = "2810839655";
+
+
     ImageButton MartSearch;
     Button AddBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.cart_main, container, false);
         recyclerView = view.findViewById(R.id.FoodListRV);
@@ -143,15 +155,39 @@ public class Cartsujin extends Fragment {
                 startActivity(intent);
             }
         });
+
+        //파이어베이스에 저장되어 있는 카트
+        cartdb = database.getReference().child("user").child(userid).child("cart");
+        cartdb.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //파이어베이스 데이터베이스의 데이터를 받아오는 곳
+                cartItems.clear();   //기존 배열리스트가 존재하지 않게 초기화
+                for (DataSnapshot snapshot1 : snapshot.getChildren()){
+                    CartItem cartItem= snapshot1.getValue(CartItem.class);
+                    FoodItem foodItem =
+                            new FoodItem(cartItem.getFood_name(),cartItem.getFood_count(),cartItem.getFood_img(),false);
+                    foodItems.add(foodItem);
+                }
+                recyclerView.getAdapter().notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //디비를 가져오다 오류 발생시
+            }
+        });
+
         return view;
     }
 
     public void onStart(){
         super.onStart();
 
-        for(int i=0;i<9;i++){
-            foodItems.add(new FoodItem("오징어", "0개",R.drawable.squid,false));
-        }
+
+//        for(int i=0;i<9;i++){
+//            foodItems.add(new FoodItem("오징어", "0개",,false));
+//        }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //recyclerView.setAdapter(new FoodAdapter(foodItems));

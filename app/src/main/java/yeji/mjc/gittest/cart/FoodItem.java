@@ -4,10 +4,10 @@ public class FoodItem {
 
     String name;
     String num;
-    int img;
+    String img;
     boolean checkBox;
 
-    public FoodItem(String name, String num, int img, boolean checkBox) {
+    public FoodItem(String name, String num, String img, boolean checkBox) {
         this.name = name;
         this.num = num;
         this.img = img;
@@ -32,11 +32,11 @@ public class FoodItem {
     }
 
 
-    public int getImg() {
+    public String getImg() {
         return img;
     }
 
-    public void setImg(int img) {
+    public void setImg(String img) {
         this.img = img;
     }
 

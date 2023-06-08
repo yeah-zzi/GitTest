@@ -7,6 +7,8 @@ public class UserData{
     private String username;
     private String userimg;
 
+
+
     public String getUserid() {
         return userid;
     }
@@ -36,6 +38,9 @@ public class UserData{
     public static synchronized UserData getInstance(){
         if (null  == instance){
             instance = new UserData();
+            UserData.getInstance().getUserid();
+            UserData.getInstance().getUserimg();
+            UserData.getInstance().getUsername();
         }
         return instance;
     }

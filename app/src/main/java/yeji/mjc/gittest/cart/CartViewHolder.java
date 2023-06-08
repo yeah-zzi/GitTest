@@ -2,6 +2,7 @@ package yeji.mjc.gittest.cart;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import yeji.mjc.gittest.R;
 public class CartViewHolder extends RecyclerView.ViewHolder {
     public ImageView food_img;
     public EditText food_name, food_count, food_dead;
+    public ImageButton cancel, complete, calendar;
 
 
     public CartViewHolder(@NonNull View itemView) {
@@ -24,5 +26,8 @@ public class CartViewHolder extends RecyclerView.ViewHolder {
         food_name = itemView.findViewById(R.id.search_food_name);
         food_count = itemView.findViewById(R.id.search_food_count);
         food_dead = itemView.findViewById(R.id.search_food_dead);
+        cancel = itemView.findViewById(R.id.cancel);
+        complete = itemView.findViewById(R.id.complete);
+        calendar = itemView.findViewById(R.id.calendar);
     }
 }
