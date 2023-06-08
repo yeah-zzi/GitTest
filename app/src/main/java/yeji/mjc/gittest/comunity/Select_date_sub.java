@@ -18,8 +18,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.util.Pair;
 
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointBackward;
+import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.android.material.datepicker.OnSelectionChangedListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -162,25 +166,30 @@ public class Select_date_sub extends AppCompatActivity {
 
         //오늘 날짜
         long today = MaterialDatePicker.todayInUtcMilliseconds();
-        //달력 버튼을 누를시
+// 달력 버튼을 누를 때
         calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MaterialDatePicker.Builder<Pair<Long, Long>> builder = MaterialDatePicker.Builder.dateRangePicker().setTheme(com.google.android.material.R.style.ThemeOverlay_MaterialComponents_MaterialCalendar);
+                builder.setTitleText("집밥 대결을 진행할 기간을 선택해 주세요");
 
-                MaterialDatePicker.Builder<Pair<Long,Long>> builder = MaterialDatePicker.Builder.dateRangePicker().setTheme(com.google.android.material.R.style.ThemeOverlay_MaterialComponents_MaterialCalendar);
-                builder.setTitleText("날짜를 선택");
+                // 날짜 선택 제약 조건 설정
+                CalendarConstraints.Builder constraintsBuilder = new CalendarConstraints.Builder();
+                constraintsBuilder.setValidator(DateValidatorPointForward.now());
 
-                //미리 날짜 선택
-                builder.setSelection(Pair.create(MaterialDatePicker.thisMonthInUtcMilliseconds(),MaterialDatePicker.todayInUtcMilliseconds()));
+                builder.setCalendarConstraints(constraintsBuilder.build());
+
+                // 첫 번째 날짜 범위 설정
+                builder.setSelection(Pair.create(today, today));
 
                 MaterialDatePicker materialDatePicker = builder.build();
 
-                materialDatePicker.show(getSupportFragmentManager(),"DATE_PICKER");
+                materialDatePicker.show(getSupportFragmentManager(), "DATE_PICKER");
 
-                //확인 버튼
-                materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long,Long>>() {
+                // 확인 버튼
+                materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>>() {
                     @Override
-                    public void onPositiveButtonClick(Pair<Long,Long> selection) {
+                    public void onPositiveButtonClick(Pair<Long, Long> selection) {
                         Date startD = new Date();
                         Date endD = new Date();
 
@@ -190,12 +199,11 @@ public class Select_date_sub extends AppCompatActivity {
                         startDate = df.format(startD);
                         changeDate = df.format(endD);
 
-                        Toast.makeText(getApplicationContext(),startDate+"이랑"+changeDate,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), startDate + " 이랑 " + changeDate, Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         });
-
     }
 
     //팝업창을 종료할때 하단으로 내려가는 애니메이션 효과를 제거하는 함수
