@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -40,9 +41,8 @@ public class MyPageAdapter extends RecyclerView.Adapter<MyPage_Holder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyPage_Holder holder, int position) {
-        holder.allergy1.setImageResource(items.get(position).getAllergy_img());
-        holder.allergy2.setImageResource(items.get(position).getAllergy_img());
-        holder.allergy3.setImageResource(items.get(position).getAllergy_img());
+        Glide.with(holder.itemView).load(items.get(position).getAllergy_img()).into(holder.allergy1);
+
     }
 
     @Override
