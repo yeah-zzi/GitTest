@@ -29,18 +29,18 @@ import kotlin.jvm.functions.Function1;
 import yeji.mjc.gittest.FoodSearch.AllergyAdapter;
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.LoginActivity;
+import yeji.mjc.gittest.UserData;
 import yeji.mjc.gittest.register.RegisterAllergyAdapter;
 
 public class MyPagesujin extends Fragment {
     Button logoutBtn;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference allergyDB;
-    public String userid;
+    public String userid = UserData.getInstance().getUserid();
 
     //리사이클러뷰 선언 및 리사이클러뷰에 넣을 아이템 선언
     public RecyclerView allergyrecyclerView;
     public ArrayList<MyPageAllergyItem> allergyitems = new ArrayList<MyPageAllergyItem>();
-    public ImageView allergy1, allergy2, allergy3;
 
 
     @Override
@@ -59,7 +59,6 @@ public class MyPagesujin extends Fragment {
         //리사이클러뷰에 매니저와 어댑터를 연결
         allergyrecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
         allergyrecyclerView.setAdapter(new MyPageAdapter(allergyitems));
-
 
         //View Friend = view.findViewById(R.id.Friend);
         View Bell = view.findViewById(R.id.Bell);
@@ -97,15 +96,9 @@ public class MyPagesujin extends Fragment {
                 return;
             }
         });
-        return view;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
 
         //파이어베이스에 저장되어 있는 회원의 알러지 정보를 받아 해당하는 알러지를 recyclerview로 나타낸다
-        /*allergyDB = database.getReference().child("user").child(userid).child("allergy");
+        allergyDB = database.getReference().child("user").child(userid).child("allergy");
         allergyDB.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -122,7 +115,13 @@ public class MyPagesujin extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
                 //디비를 가져오다 오류 발생시
             }
-        });*/
+        });
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
 
     }
 }

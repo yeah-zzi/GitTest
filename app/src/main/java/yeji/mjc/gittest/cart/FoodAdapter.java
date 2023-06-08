@@ -16,7 +16,7 @@ import yeji.mjc.gittest.R;
 
 public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
 
-    static ArrayList<FoodItem> items;
+    ArrayList<FoodItem> items;
     private int count =1;
 
     public FoodAdapter(ArrayList<FoodItem> items) {
