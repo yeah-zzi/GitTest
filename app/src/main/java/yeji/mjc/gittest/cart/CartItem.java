@@ -42,4 +42,13 @@ public class CartItem {
     public void setFood_img(String food_img) {
         this.food_img = food_img;
     }
+
+    public int getFoodCountAsInt() {
+        try {
+            return Integer.parseInt(food_count);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return 1;
+        }
+    }
 }
