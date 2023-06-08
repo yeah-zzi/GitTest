@@ -6,6 +6,7 @@ public class UserData{
     private String userid;
     private String username;
     private String userimg;
+    private String usernickname;
 
 
 
@@ -31,6 +32,14 @@ public class UserData{
 
     public void setUserimg(String userimg) {
         this.userimg = userimg;
+    }
+
+    public String getUsernickname() {
+        return usernickname;
+    }
+
+    public void setUsernickname(String usernickname) {
+        this.usernickname = usernickname;
     }
 
     private  static UserData instance = null;

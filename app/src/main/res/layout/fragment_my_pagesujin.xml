@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/textmypage"
         android:text="마이페이지"
-        android:textSize="30dp"
+        android:textSize="25dp"
         android:textColor="#ffffff"
         android:textStyle="bold"
         android:gravity="center" />
@@ -44,6 +44,7 @@
             android:src="@drawable/ic_round_face_24" />
 
         <TextView
+            android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="girin_geurim"
@@ -53,6 +54,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/userAllergyInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -64,7 +66,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="150dp"
             android:layout_height="30dp"
-            android:id="@+id/mypagerecyclerview"
+            android:id="@+id/allergyrecyclerview"
             android:layout_marginLeft="170dp"
             android:layout_marginTop="115dp"/>
 
@@ -95,7 +97,7 @@
             android:background="#000000" />
 
         <ImageView
-            android:id="@+id/profile1"
+            android:id="@+id/myprofile"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="200dp"
@@ -103,7 +105,7 @@
             android:src="@drawable/ic_round_face_24" />
 
         <ImageView
-            android:id="@+id/profile2"
+            android:id="@+id/profile1"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="200dp"
@@ -111,7 +113,7 @@
             android:src="@drawable/ic_round_face_24" />
 
         <ImageView
-            android:id="@+id/profile3"
+            android:id="@+id/profile2"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="200dp"
@@ -168,7 +170,7 @@
     </FrameLayout>
 
     <FrameLayout
-        android:id="@+id/Friend"
+        android:id="@+id/post"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentLeft="true"
@@ -181,7 +183,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginLeft="60dp"
-            android:text="친구 관리"
+            android:text="게시물 관리"
             android:textSize="18sp"
             android:gravity="center_vertical" />
 
@@ -199,72 +201,7 @@
             android:src="@drawable/ic_baseline_chevron_right_24" />
     </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/Bell"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="360dp"
-        android:background="#ffffff"
-        android:elevation="3dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="60dp"
-            android:text="알림 설정"
-            android:textSize="18sp"
-            android:gravity="center_vertical" />
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_margin="15dp"
-            android:src="@drawable/bell1" />
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="350dp"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/ic_baseline_chevron_right_24" />
-
-    </FrameLayout>
-
-
-    <FrameLayout
-        android:id="@+id/Tutorial"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="430dp"
-        android:background="#ffffff"
-        android:elevation="3dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="60dp"
-            android:text="튜토리얼"
-            android:textSize="18sp"
-            android:gravity="center_vertical" />
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_margin="15dp"
-            android:src="@drawable/tutorial" />
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="350dp"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/ic_baseline_chevron_right_24" />
-
-    </FrameLayout>
 </FrameLayout>
 </FrameLayout>
 

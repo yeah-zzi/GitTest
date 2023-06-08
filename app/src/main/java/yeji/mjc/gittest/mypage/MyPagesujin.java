@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,6 +39,10 @@ public class MyPagesujin extends Fragment {
     DatabaseReference allergyDB;
     public String userid = UserData.getInstance().getUserid();
 
+    private ImageView profile, myprofile, profile1, profile2;
+    private TextView username, userAllergyInfo;
+    String userN="", userA="";
+
     //리사이클러뷰 선언 및 리사이클러뷰에 넣을 아이템 선언
     public RecyclerView allergyrecyclerView;
     public ArrayList<MyPageAllergyItem> allergyitems = new ArrayList<MyPageAllergyItem>();
@@ -54,14 +59,14 @@ public class MyPagesujin extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_pagesujin, container, false);
         View User = view.findViewById(R.id.User);
-        allergyrecyclerView = view.findViewById(R.id.mypagerecyclerview);
+        allergyrecyclerView = view.findViewById(R.id.allergyrecyclerview);
         allergyrecyclerView.setHasFixedSize(true);
         //리사이클러뷰에 매니저와 어댑터를 연결
         allergyrecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
         allergyrecyclerView.setAdapter(new MyPageAdapter(allergyitems));
 
         //View Friend = view.findViewById(R.id.Friend);
-        View Bell = view.findViewById(R.id.Bell);
+        View Post = view.findViewById(R.id.post);
         //View Tutorial = view.findViewById(R.id.Tutorial);
 
         logoutBtn = view.findViewById(R.id.logoutButton);
@@ -81,6 +86,26 @@ public class MyPagesujin extends Fragment {
             }
         });
 
+        profile = view.findViewById(R.id.profile); // 유저 프로필 사진 담길 곳
+        myprofile = view.findViewById(R.id.myprofile);
+        username = view.findViewById(R.id.username); // 유저 닉네임 담길 곳 (임시로 이름)
+        userAllergyInfo = view.findViewById(R.id.userAllergyInfo); // 유저 닉네임 넣어 수정할 텍스트 뷰
+
+        profile1 = view.findViewById(R.id.profile1); // 대결하고 있는 상대1,2 프로필 담길 곳
+        profile2 = view.findViewById(R.id.profile2);
+
+        //Glide 라이브러리 사용하여 이미지 circlecrop(원형)으로 넣기
+        Glide.with(this).load(UserData.getInstance().getUserimg()).circleCrop().into(profile);
+        Glide.with(this).load(UserData.getInstance().getUserimg()).circleCrop().into(myprofile);
+
+        userN = UserData.getInstance().getUsernickname();
+        userA = UserData.getInstance().getUsername()+"님의 알러지 정보 ";
+        username.setText(userN); // 유저 이름 설정
+        userAllergyInfo.setText(userA);
+
+
+
+
         User.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,10 +114,10 @@ public class MyPagesujin extends Fragment {
             }
         });
 
-        Bell.setOnClickListener(new View.OnClickListener() {
+        Post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.mpcontainer, new Bellset()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.mpcontainer, new Mypage_Post()).commit();
                 return;
             }
         });

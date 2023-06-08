@@ -72,6 +72,7 @@ public class Register extends AppCompatActivity {
                 String name = edit_name.getText().toString();
                 userdb = database.getReference().child("user").child(userid).child("user_info").child("user_nickname");
                 userdb.setValue(name);
+                UserData.getInstance().setUsernickname(name);
             }
         });
 

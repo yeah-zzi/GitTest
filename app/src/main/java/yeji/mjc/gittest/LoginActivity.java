@@ -132,6 +132,7 @@ public class LoginActivity extends AppCompatActivity {
                     UserApiClient.getInstance().loginWithKakaoAccount(LoginActivity.this, callback);
                     //카카오톡 미설치, 카카오계정으로 로그인
                 }
+                updateKakaoLoginUi();
             }
         });
     }
