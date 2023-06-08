@@ -33,7 +33,7 @@ public class New_fight_sub extends AppCompatActivity implements FriendListener {
 
     //파이어베이스에서 데이터베이스 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference friendDB,makeDB;
+    DatabaseReference friendDB,makeDB,fbDB;
 
     //리사이클러뷰에 추가할 아이템 리스트
     public ArrayList<FriendAdd_Item> friendaddItems = new ArrayList<FriendAdd_Item>();
@@ -62,7 +62,11 @@ public class New_fight_sub extends AppCompatActivity implements FriendListener {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot friend_data : snapshot.getChildren()){
                     FriendAdd_Item getItem = friend_data.child("user_info").getValue(FriendAdd_Item.class);
-                    friendaddItems.add(getItem);
+                    if(userid.equals(getItem.getUserId())){
+
+                    }else{
+                        friendaddItems.add(getItem);
+                    }
                 }
             }
 
@@ -147,8 +151,28 @@ public class New_fight_sub extends AppCompatActivity implements FriendListener {
 
     @Override
     public void onItemClicked(FriendAdd_Item myModel) {
-        friendName = myModel.getUser_name();
-        friendid = myModel.getUserId();
-        friendImg = myModel.getUser_img();
+        fbDB = database.getReference().child("user").child(userid).child("foodbattle_code");
+        fbDB.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    String ing = dataSnapshot.child("fb_friend").getValue(String.class);
+                    if(ing.equals(myModel.getUserId())) {
+                        friendid = "";
+                        Toast.makeText(getApplicationContext(), "이미 집밥대결을 진행중인 대상입니다", Toast.LENGTH_SHORT).show();
+                        break;
+                    }else{
+                        friendName = myModel.getUser_name();
+                        friendid = myModel.getUserId();
+                        friendImg = myModel.getUser_img();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

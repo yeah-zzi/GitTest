@@ -68,8 +68,7 @@ public class FoodBattle_IMG_Upload extends AppCompatActivity {
     public ArrayList<String> code_item = new ArrayList<String>();
 
     Calendar now = Calendar.getInstance();
-
-    String userid = "임시용 유저 아이디1";
+    String userid;
     String today;
     private static final int REQUEST_IMAGE_CODE = 101;
 
@@ -83,6 +82,9 @@ public class FoodBattle_IMG_Upload extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.foodbattle_img_upload);
+
+        //userid = UserData.getInstance().getUserid();
+        userid = "2800157896";
 
         imageView = findViewById(R.id.image_view);
         btnCamera = findViewById(R.id.camera);
