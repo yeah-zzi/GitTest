@@ -118,7 +118,7 @@ public class FridgePlus extends AppCompatActivity implements View.OnClickListene
         // 파이어베이스 데이터베이스의 "Product" 경로에서 바코드 값을 가져옴
         Barcodedb = FirebaseDatabase.getInstance().getReference().child("Product").child("barcode");
         // 스캔한 바코드 값과 파이어베이스 안에 있는 바코드 값이 같으면 불러냄
-        Query query = Barcodedb.orderByChild("barcode").equalTo(scannedBarcode);
+        Query query = Barcodedb.orderByKey().startAt(scannedBarcode).endAt(scannedBarcode);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

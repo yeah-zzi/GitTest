@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 import yeji.mjc.gittest.R;
@@ -15,7 +17,7 @@ import yeji.mjc.gittest.R;
 public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
 
     static ArrayList<FoodItem> items;
-    private int count =0;
+    private int count =1;
 
     public FoodAdapter(ArrayList<FoodItem> items) {
         this.items = items;
@@ -33,12 +35,14 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
         holder.foodName.setText(items.get(position).getName());
        // holder.foodNum.setText(items.get(position).getNum());
         holder.checkBox.setChecked(items.get(position).isCheckBox());
-        holder.foodImage.setImageResource(items.get(position).getImg());
+        Glide.with(holder.itemView).load(items.get(position).getImg()).into(holder.foodImage);
+
         holder.minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(count>1) {
                 count--;
-                holder.foodNum.setText(count+"개");
+                holder.foodNum.setText(count+"개"); }
             }
         });
 
