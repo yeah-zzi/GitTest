@@ -218,11 +218,18 @@ public class Fight_fragment extends Fragment implements FBListener{
                     //종료 날짜로부터 지금기준으로 몇일 차이 나느가
                     long end_diffSec = (d_fb_end.getTime() - d_fb_now.getTime()) / 1000; //초 차이
                     end_diffDays = end_diffSec / (24*60*60) + 1; //일자수 차이
-                    remainDate.setText(end_diffDays+"일 뒤 대결이 종료 됩니다");
+                    //remainDate.setText(end_diffDays+"일 뒤 대결이 종료 됩니다");
                     //시작 날짜로부터 지금기준으로 몇일 차이 나느가
                     long start_diffSec = (d_fb_now.getTime() - d_fb_start.getTime()) / 1000; //초 차이
                     start_diffDays = start_diffSec / (24*60*60) + 1; //일자수 차이
-                    ingDate.setText(start_diffDays+"일째");
+                    if(start_diffSec < 0 ){
+                        ingDate.setText("0일째");
+                        remainDate.setText(start_diffDays+"일 뒤 대결이 시작됩니다!");
+                    }else{
+                        start_diffDays = start_diffSec / (24*60*60) + 1; //일자수 차이
+                        ingDate.setText(start_diffDays+"일째");
+                        remainDate.setText(end_diffDays+"일 뒤 대결이 종료 됩니다");
+                    }
 
                 } catch (ParseException e) {
                     e.printStackTrace();
