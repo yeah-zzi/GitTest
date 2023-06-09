@@ -34,7 +34,7 @@ public class FightGo extends AppCompatActivity {
     Date startCalender=null,endCalender=null;
     long diffDays;
 
-    String userid,friendid,friendName,friendimg,startDate,changeDate;
+    String userid,friendid,friendName,friendimg,startDate,changeDate,userimg;
 
     //파이어베이스에서 데이터베이스 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -53,6 +53,7 @@ public class FightGo extends AppCompatActivity {
         //전페이지에서 입력받은 정보들 가져오기
         Intent finishIntent = getIntent();
         userid = UserData.getInstance().getUserid();
+        userimg = UserData.getInstance().getUserimg();
         friendid = finishIntent.getStringExtra("집밥대결 친구 아이디");
         friendName = finishIntent.getStringExtra("집밥대결 친구 이름");
         friendimg = finishIntent.getStringExtra("집밥대결 친구 이미지");
@@ -105,7 +106,7 @@ public class FightGo extends AppCompatActivity {
                 makeDB = database.getReference().child("user").child(friendid).child("foodbattle_code").child(fb_code);
                 makeDB.child("code").setValue(fb_code);
                 makeDB.child("fb_friend").setValue(userid);
-                //makeDB.child("fb_friend_img").setValue(friendimg);
+                makeDB.child("fb_friend_img").setValue(userimg);
                 finish();
             }
         });

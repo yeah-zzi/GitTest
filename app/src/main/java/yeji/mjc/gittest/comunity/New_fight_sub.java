@@ -76,6 +76,7 @@ public class New_fight_sub extends AppCompatActivity implements FriendListener {
             }
         });
 
+
         //새로만들어질 집밥대결 키
         makeDB = database.getReference().child("foodbattle").push();
 
@@ -149,23 +150,28 @@ public class New_fight_sub extends AppCompatActivity implements FriendListener {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    @Override
     public void onItemClicked(FriendAdd_Item myModel) {
         fbDB = database.getReference().child("user").child(userid).child("foodbattle_code");
         fbDB.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    String ing = dataSnapshot.child("fb_friend").getValue(String.class);
-                    if(ing.equals(myModel.getUserId())) {
-                        friendid = "";
-                        Toast.makeText(getApplicationContext(), "이미 집밥대결을 진행중인 대상입니다", Toast.LENGTH_SHORT).show();
-                        break;
-                    }else{
-                        friendName = myModel.getUser_name();
-                        friendid = myModel.getUserId();
-                        friendImg = myModel.getUser_img();
+                if (snapshot.exists()) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        String ing = dataSnapshot.child("fb_friend").getValue(String.class);
+                        if (ing != null && ing.equals(myModel.getUserId())) {
+                            friendid = "";
+                            Toast.makeText(getApplicationContext(), "이미 집밥대결을 진행중인 대상입니다", Toast.LENGTH_SHORT).show();
+                            break;
+                        } else {
+                            friendName = myModel.getUser_name();
+                            friendid = myModel.getUserId();
+                            friendImg = myModel.getUser_img();
+                        }
                     }
+                } else {
+                    friendName = myModel.getUser_name();
+                    friendid = myModel.getUserId();
+                    friendImg = myModel.getUser_img();
                 }
             }
 
