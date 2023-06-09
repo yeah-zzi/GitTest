@@ -41,6 +41,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -70,10 +71,12 @@ public class FoodBattle_IMG_Upload extends AppCompatActivity {
     Calendar now = Calendar.getInstance();
     String userid;
     String today;
+    Date nowDate,startDate;
+    DateFormat df;
     private static final int REQUEST_IMAGE_CODE = 101;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance(); // 파이어베이스 저장소 객체
-    DatabaseReference fb_upload, codeDB, ref;
+    DatabaseReference fb_upload, codeDB, ref, dateDB;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference reference = storage.getReference(); // 저장소 레퍼런스 객체 : storage 를 사용해 저장 위치를 설정
 
@@ -96,11 +99,12 @@ public class FoodBattle_IMG_Upload extends AppCompatActivity {
 
         //오늘 날짜를 가져온다
         //문자열로 날짜를 초기화
-        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        df = new SimpleDateFormat("yyyy/MM/dd");
 
         //현재 날짜를 시작날짜 문자열에 저장
         now.setTime(new Date());
         today = df.format(now.getTime());
+        nowDate = now.getTime();
 
 
         //파이어베이스에서 유저의 집밥대결 코드를 가져와 배열에 넣는다
@@ -108,10 +112,17 @@ public class FoodBattle_IMG_Upload extends AppCompatActivity {
         codeDB.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot friend_data : snapshot.getChildren()) {
-                    FBTabItem getItem = friend_data.getValue(FBTabItem.class);
-                    String code = getItem.getCode();
-                    code_item.add(code);
+                if(snapshot.exists()) {
+                    for (DataSnapshot friend_data : snapshot.getChildren()) {
+                        FBTabItem getItem = friend_data.getValue(FBTabItem.class);
+
+                        String code = getItem.getCode();
+                        //집밥대결 사진을 올린 코드들
+                        checkDate(code);
+                    }
+                }else{
+                    Toast.makeText(FoodBattle_IMG_Upload.this, "진행중인 대결이 없습니다", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
 
@@ -172,14 +183,16 @@ public class FoodBattle_IMG_Upload extends AppCompatActivity {
                 fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
+
                         //이미지 모델에 담기
                         Model model = new Model(uri.toString());
-
                         for (int i = 0; i < code_item.size(); i++) {
                             String code = code_item.get(i);
+                            //집밥대결이 시작하지 않으면 올라가지 않는다
                             ref = fb_upload.child(code_item.get(i)).child("fb_mem").child(userid).child("upload_info").push();
                             ref.child("upload_img").setValue(uri.toString());
                             ref.child("upload_time").setValue(today);
+
                         }
 
                         Toast.makeText(FoodBattle_IMG_Upload.this, "업로드 성공", Toast.LENGTH_SHORT).show();
@@ -189,6 +202,29 @@ public class FoodBattle_IMG_Upload extends AppCompatActivity {
         });
     }
 
+    private void checkDate(String fbcode){
+        dateDB = database.getReference().child("foodbattle").child(fbcode).child("fb_start_date");
+        dateDB.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+               String start_date = snapshot.getValue(String.class);
+                try {
+                    startDate = df.parse(start_date);
+                    long diff = (startDate.getTime() - nowDate.getTime()); //현재 지간 비교
+                    if(diff > 0){
+                        //아직 대결이 시작 되지 않았어
+                    }else{
+                        code_item.add(fbcode);
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
+    }
 
     private Uri createUri() {
         File imageFile = new File(getApplicationContext().getFilesDir(), "camera_photo.jpg");
