@@ -83,8 +83,7 @@ public class FoodBattle_IMG_Upload extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.foodbattle_img_upload);
 
-        //userid = UserData.getInstance().getUserid();
-        userid = "2800157896";
+        userid = UserData.getInstance().getUserid();
 
         imageView = findViewById(R.id.image_view);
         btnCamera = findViewById(R.id.camera);

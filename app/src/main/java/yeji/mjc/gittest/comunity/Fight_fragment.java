@@ -107,7 +107,7 @@ public class Fight_fragment extends Fragment implements FBListener{
 
         //파이어베이스에 저장되어 있는 회원이 진행중인 집밥대결 정보들을 받아온다
         fbdDB = database.getReference().child("user").child(userid).child("foodbattle_code");
-        fbdDB.addValueEventListener(new ValueEventListener() {
+        fbdDB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //파이어베이스 데이터베이스의 데이터를 받아오는 곳

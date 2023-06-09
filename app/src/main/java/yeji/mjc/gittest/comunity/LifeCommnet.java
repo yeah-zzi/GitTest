@@ -58,6 +58,7 @@ public class LifeCommnet extends Activity implements CommentListener{
         recyclerView.setHasFixedSize(true);
 
         userid = UserData.getInstance().getUserid();
+        username = UserData.getInstance().getUsername();
         userimg = UserData.getInstance().getUserimg();
 
         Intent getIntent = getIntent();
@@ -131,7 +132,7 @@ public class LifeCommnet extends Activity implements CommentListener{
                     //생성된 댓글 코드
                     comment_code = uploadDB.getKey();
                     commentDB = uploadDB.child("comment_writer_id");
-                    commentDB.setValue(userid);
+                    commentDB.setValue(username);
                     commentDB = uploadDB.child("comment_writer_img");
                     commentDB.setValue(userimg);
                     commentDB = uploadDB.child("comment_content");
