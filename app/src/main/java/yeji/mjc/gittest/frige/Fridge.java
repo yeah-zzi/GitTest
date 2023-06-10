@@ -9,17 +9,33 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.kakao.sdk.user.model.User;
 
 import java.util.ArrayList;
 
+import yeji.mjc.gittest.FoodSearch.Product;
 import yeji.mjc.gittest.R;
+import yeji.mjc.gittest.UserData;
+import yeji.mjc.gittest.frige.Data_Item;
+import yeji.mjc.gittest.frige.Fridge_Item;
+import yeji.mjc.gittest.cart.CartAdapter;
+import yeji.mjc.gittest.cart.CartItem;
+import yeji.mjc.gittest.cart.FoodAdapter;
+import yeji.mjc.gittest.cart.FoodItem;
 import yeji.mjc.gittest.comunity.Fight_fragment;
 import yeji.mjc.gittest.comunity.Life_Fragment;
 import yeji.mjc.gittest.comunity.NewFight_fragment;
@@ -29,16 +45,19 @@ import yeji.mjc.gittest.mypage.UserInfoChange;
 
 public class Fridge extends Fragment{
 
-    //메뉴바 버튼 변수 선언
-    public Button fridge_main; //종합
-    public Button fridge_cold; //냉장
-    public Button fridge_frozen; //냉동
-
     //리사이클러뷰 변수 선언
     public RecyclerView recyclerView;
     public RecyclerView.Adapter adapter_refidge;
     public ArrayList<Fridge_Item> fridgeItems = new ArrayList<Fridge_Item>();
+    public ArrayList<FoodItem> foodItems = new ArrayList<FoodItem>();
 
+    public FoodAdapter foodAdapter;
+    public CartAdapter cartAdapter;
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance(); // 파이어베이스 저장소 객체
+    DatabaseReference fridgedb;
+    ArrayList<FoodItem> items;
+    String userid;
 
     @Override
     public void setEnterTransition(@Nullable Object transition) {
@@ -50,15 +69,18 @@ public class Fridge extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fridge_main, container, false);
-
-        adapter_refidge = new Fridge_Adapter(fridgeItems);
-
         recyclerView = view.findViewById(R.id.fridgeRecyclerView);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapter_refidge = new Fridge_Adapter(fridgeItems);
+        recyclerView.setAdapter(foodAdapter);
+
         recyclerView.setHasFixedSize(true);
 
-        View fridge_main = view.findViewById(R.id.fridge_main);
-        View fridge_cold = view.findViewById(R.id.fridge_cold);
-        View fridge_frozen = view.findViewById(R.id.fridge_frozen);
+
+        Button fridge_main = view.findViewById(R.id.fridge_main);
+        Button fridge_cold = view.findViewById(R.id.fridge_cold);
+        Button fridge_frozen = view.findViewById(R.id.fridge_frozen);
 
         View select_all = view.findViewById(R.id.select_all);
         View select_cold = view.findViewById(R.id.select_cold);
@@ -97,6 +119,36 @@ public class Fridge extends Fragment{
             }
         });
 
+        /*
+        // 로그인 시 아이디값 변수 받아오기
+        userid = UserData.getInstance().getUserid();
+
+        // 파이어베이스에 저장되어 있는 냉장고
+        fridgedb = database.getReference().child("user").child(userid).child("fridge");
+        fridgedb.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
+                fridgeItems.clear(); // 기존 배열리스트가 존재하지 않게 초기화
+                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                    Fridge_Item fridge_item = snapshot1.getValue(Fridge_Item.class);
+                    if (fridge_item != null) {
+                        // Data_Item의 값이 null이 아닌 경우에만 Fridge_Item 객체를 생성
+                        Fridge_Item fridgeItem = new Fridge_Item(fridge_item.getFood_img(), fridge_item.getFood_name(), fridge_item.getFood_count() + "개", "D-" + fridge_item.getFood_date());
+                        fridgeItems.add(fridgeItem);
+                    }
+                    else
+                }
+                recyclerView.getAdapter().notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // 디비를 가져오다 오류 발생시
+            }
+        });
+*/
+
         Spinner spinner = view.findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -120,20 +172,24 @@ public class Fridge extends Fragment{
 
     }
 
-
-    public void onStart(){
+    public void onStart() {
         super.onStart();
 
-        fridgeItems.add(new Fridge_Item(R.drawable.potato,"감자","5개","D-16"));
-        fridgeItems.add(new Fridge_Item(R.drawable.fdsaf,"베이컨","2개","D-20"));
-        fridgeItems.add(new Fridge_Item(R.drawable.chilli,"고추","10개","D-5"));
-        fridgeItems.add(new Fridge_Item(R.drawable.carrot,"당근","6개","D-30"));
-        fridgeItems.add(new Fridge_Item(R.drawable.gazi,"가지","1개","D-7"));
-        fridgeItems.add(new Fridge_Item(R.drawable.godung,"고등어","2개","D-2"));
-        fridgeItems.add(new Fridge_Item(R.drawable.corn,"옥수수","1개","D-21"));
+        /*
+        if (Data_Item == null || Data_Item.getFood_img() == null || Data_Item.getFood_name() == null || Data_Item.getFood_date() == null) {
+            setContentView(R.layout.null_fridge); // null_fridge.xml 파일을 화면에 표시
+            return;
+        }*/
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
-        adapter_refidge = new Fridge_Adapter(fridgeItems); // 수정: adapter_refidge 초기화
+        fridgeItems.add(new Fridge_Item(Data_Item.getFood_img(), Data_Item.getFood_name(), Data_Item.getFood_count() + "개", "D-" + Data_Item.getFood_date()));
+
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        adapter_refidge = new Fridge_Adapter(fridgeItems);
         recyclerView.setAdapter(adapter_refidge);
     }
+
+    private void setContentView(int null_fridge) {
+    }
+
+
 }

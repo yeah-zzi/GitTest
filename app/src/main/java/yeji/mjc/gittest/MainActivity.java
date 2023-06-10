@@ -15,7 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import yeji.mjc.gittest.FoodSearch.FridgePlus;
+import yeji.mjc.gittest.frige.FridgePlus;
 import yeji.mjc.gittest.cart.Cartsujin;
 import yeji.mjc.gittest.comunity.Comsujin;
 import yeji.mjc.gittest.comunity.New_fight_sub;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     //FireBase DB 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference addfoodDB;
-    String userid = "임시용 유저 아이디1";
+    String userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         toBottom = AnimationUtils.loadAnimation(this,R.anim.to_bottom_anim);
         die = AnimationUtils.loadAnimation(this,R.anim.die_ainm);
 
+        //로그인 시 아이디값 변수 받아오기
+        userid = UserData.getInstance().getUserid();
 
         // + 버튼
         tab = findViewById(R.id.tab);
@@ -69,15 +71,27 @@ public class MainActivity extends AppCompatActivity {
         tabWrite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addfoodDB=database.getReference().child("user").child(userid).child("addfood");
-                //식재료 추가 버튼 눌렀을때 빈 페이지 불러오기
-                //addfoodDB.removeValue();
+                //addfoodDB=database.getReference().child("user").child(userid).child("addfood");
+                /*  식재료 추가 버튼 눌렀을때 빈 페이지 불러오기
+                    addfoodDB.removeValue();*/
 
+                //냉장고 식재료 추가 페이지로 이동 (FridgePlus.class)
                 Intent FridgePlusintent = new Intent(MainActivity.this, FridgePlus.class);
                 startActivity(FridgePlusintent);
 
             }
         });
+
+        /*
+        //장바구니에 식재료 추가
+        AddBtn = view.findViewById(R.id.AddBtn);
+        AddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent CartPlusintent = new Intent(getContext(), CartPlus.class);
+                startActivity(CartPlusintent);
+            }
+        });*/
 
         tabBarcode = findViewById(R.id.tabBarcode);
         tabBarcode.setOnClickListener(new View.OnClickListener() {
