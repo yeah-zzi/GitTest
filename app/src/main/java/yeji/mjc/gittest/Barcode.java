@@ -2,7 +2,6 @@ package yeji.mjc.gittest;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
-import yeji.mjc.gittest.FoodSearch.FridgePlus;
+import yeji.mjc.gittest.frige.FridgePlus;
 
 public class Barcode extends AppCompatActivity {
 

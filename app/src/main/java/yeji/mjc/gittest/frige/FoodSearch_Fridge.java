@@ -1,4 +1,4 @@
-package yeji.mjc.gittest.FoodSearch;
+package yeji.mjc.gittest.frige;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,12 +17,13 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+import yeji.mjc.gittest.FoodSearch.FoodSearchAdapter;
+import yeji.mjc.gittest.FoodSearch.FoodSearchItem;
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.SelectListener;
-import yeji.mjc.gittest.cart.CartPlus;
 
 
-public class FoodSearch extends Activity implements View.OnClickListener, SelectListener {
+public class FoodSearch_Fridge extends Activity implements View.OnClickListener, SelectListener {
 
     //리사이클러뷰 변수 선언
     public RecyclerView recyclerView, FoodrecyclerView;
@@ -229,14 +230,14 @@ public class FoodSearch extends Activity implements View.OnClickListener, Select
         int fb_food_img = myModel.getFood_img();
         String fb_food_name = myModel.getFood_name();
 
-        //장바구니
-        int cart_food_img = myModel.getFood_img();
-        String cart_food_name = myModel.getFood_name();
+        //냉장고
+        int fridge_food_img = myModel.getFood_img();
+        String friege_food_name = myModel.getFood_name();
 
 
-        Intent cartIntent = new Intent(getApplicationContext(), CartPlus.class);
-        cartIntent.putExtra("이미지",cart_food_img);
-        cartIntent.putExtra("이름",cart_food_name);
+        Intent cartIntent = new Intent(getApplicationContext(), FridgePlus.class);
+        cartIntent.putExtra("이미지",fridge_food_img);
+        cartIntent.putExtra("이름",friege_food_name);
         setResult(RESULT_OK,cartIntent);
         finish();
     }

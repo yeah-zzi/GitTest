@@ -104,6 +104,9 @@ public class Register extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        //로그인 시 아이디값 변수 받아오기
+        userid = UserData.getInstance().getUserid();
+
         //파이어베이스에 저장되어 있는 회원의 알러지 정보를 받아 해당하는 알러지를 recyclerview로 나타낸다
         allergyDB = database.getReference().child("user").child(userid).child("allergy");
         allergyDB.addValueEventListener(new ValueEventListener() {
