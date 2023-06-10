@@ -1,10 +1,12 @@
 package yeji.mjc.gittest.comunity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +43,7 @@ public class Fight_fragment extends Fragment implements FBListener{
     TextView remainDate,ingDate,startDateText;
     Button meNum,friendNum;
     ProgressBar progressBar;
+    ImageView ready;
 
     //파이어베이스에서 데이터베이스 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -76,6 +79,7 @@ public class Fight_fragment extends Fragment implements FBListener{
         userImg = UserData.getInstance().getUserimg();
         userName = UserData.getInstance().getUsername();
 
+        ready = view.findViewById(R.id.readybtn);
         user_name = view.findViewById(R.id.Me);
         friend_name = view.findViewById(R.id.Friend);
         remainDate = view.findViewById(R.id.ending);
@@ -104,6 +108,13 @@ public class Fight_fragment extends Fragment implements FBListener{
         friend_recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         friend_recyclerview.setAdapter(new FB_IMG_Adapter(friendimg_items));
 
+        ready.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent readyIntent = new Intent(getActivity(), Ready.class);
+                startActivity(readyIntent);
+            }
+        });
 
         //파이어베이스에 저장되어 있는 회원이 진행중인 집밥대결 정보들을 받아온다
         fbdDB = database.getReference().child("user").child(userid).child("foodbattle_code");
@@ -112,11 +123,13 @@ public class Fight_fragment extends Fragment implements FBListener{
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //파이어베이스 데이터베이스의 데이터를 받아오는 곳
                 items.clear();   //기존 배열리스트가 존재하지 않게 초기화
-                for (DataSnapshot snapshot1 : snapshot.getChildren()){
-                    FBTabItem item = snapshot1.getValue(FBTabItem.class);
-                    //윗 부분을 String getCode = snapshot1.getValue(String.class);
-                    checkDate(item);
-                    //items.add(item);
+                if(snapshot.exists()){
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()){
+                        FBTabItem item = snapshot1.getValue(FBTabItem.class);
+                        if(item.getReady().equals("true"))
+                            checkDate(item);
+                        //items.add(item);
+                    }
                 }
             }
 
