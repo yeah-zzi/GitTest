@@ -74,7 +74,7 @@ public class Ready extends AppCompatActivity implements FBListener {
 
         //파이어베이스에 저장되어 있는 회원이 진행중인 집밥대결 정보들을 받아온다
         readyDB = database.getReference().child("user").child(userid).child("foodbattle_code");
-        readyDB.addValueEventListener(new ValueEventListener() {
+        readyDB.addListenerForSingleValueEvent(new ValueEventListener() {
             //기존 배열리스트가 존재하지 않게 초기화
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //파이어베이스 데이터베이스의 데이터를 받아오는 곳
@@ -159,6 +159,8 @@ public class Ready extends AppCompatActivity implements FBListener {
         //친구한테서 집밥대결 코드 수락
         acceptDB = database.getReference().child("user").child(myModel.getFb_friend()).child("foodbattle_code").child(myModel.getCode()).child("propose");
         acceptDB.setValue("true");
+
+        finish();
     }
 
     public void checkDate(FBTabItem item) {
