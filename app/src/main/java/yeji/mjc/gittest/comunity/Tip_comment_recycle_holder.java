@@ -11,7 +11,7 @@ import yeji.mjc.gittest.R;
 
 public class Tip_comment_recycle_holder extends RecyclerView.ViewHolder {
 
-    ImageView comment_img;
+    ImageView comment_img,delete;
     TextView comment_id;
     TextView comment;
 
@@ -21,6 +21,7 @@ public class Tip_comment_recycle_holder extends RecyclerView.ViewHolder {
         comment_img = itemView.findViewById(R.id.comment);
         comment_id = itemView.findViewById(R.id.comment_id);
         comment = itemView.findViewById(R.id.comment_content);
+        delete = itemView.findViewById(R.id.delete);
 
     }
 }

@@ -132,7 +132,7 @@ public class FridgePlus extends AppCompatActivity implements View.OnClickListene
         // 파이어베이스 데이터베이스의 "Product" 경로에서 바코드 값을 가져옴
         Barcodedb = FirebaseDatabase.getInstance().getReference().child("Product").child("barcode");
         // 스캔한 바코드 값과 파이어베이스 안에 있는 바코드 값이 같으면 불러냄
-        Query query = Barcodedb.orderByChild("barcode").equalTo(scannedBarcode);
+        Query query = Barcodedb.orderByKey().startAt(scannedBarcode).endAt(scannedBarcode);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -152,31 +152,6 @@ public class FridgePlus extends AppCompatActivity implements View.OnClickListene
             }
         });
 
-//        // ValueEventListener를 사용하여 데이터 변경을 감지하고 이름을 가져옵니다.
-//        ValueEventListener valueEventListener = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                if (dataSnapshot.exists()) {
-//                    // 바코드 값에 해당하는 이름을 가져옴
-//                    String Name = dataSnapshot.child("PRDT_NM").getValue(String.class);
-//
-//                    // 가져온 이름을 TextView에 설정
-//                    foodName.setText(Name);
-//                } else {
-//                    // 파이어베이스에 해당 바코드가 없을 경우에 대한 처리
-//                    Toast.makeText(FridgePlus.this, "스캔된 제품을 찾을 수 없습니다!", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                // 데이터 가져오기가 실패한 경우에 대한 처리
-//                Toast.makeText(FridgePlus.this, "ERROR!", Toast.LENGTH_SHORT).show();
-//            }
-//        };
-//
-//        //  ValueEventListener를 ValueEventListener를 통해 등록합니다.
-//        Barcodedb.addValueEventListener(valueEventListener);
     }
 
     //팝업창을 종료할때 하단으로 내려가는 애니메이션 효과를 제거하는 함수

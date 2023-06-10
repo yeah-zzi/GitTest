@@ -3,6 +3,7 @@ package yeji.mjc.gittest.mypage;
 public class MyPageAllergyItem {
 
     int allergy_img;
+
     public MyPageAllergyItem(){}
 
     public MyPageAllergyItem(int allergy_img) {

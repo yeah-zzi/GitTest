@@ -45,7 +45,7 @@ public class RegisterAllergyAdapter extends RecyclerView.Adapter<RegisterAllergy
         //x버튼을 누를시 해당 알러지를 파이어베이스에서 삭제하며 해당 리사이클러뷰도 삭제한다
         String deleteAllergyName = items.get(position).getAllergy_name();
 
-        userid = UserData.getInstance().getUsername();
+        userid = UserData.getInstance().getUserid();
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

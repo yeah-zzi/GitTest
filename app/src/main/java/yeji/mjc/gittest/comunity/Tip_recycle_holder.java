@@ -14,7 +14,7 @@ import yeji.mjc.gittest.R;
 public class Tip_recycle_holder extends RecyclerView.ViewHolder {
 
     TextView id,like,comment,content;
-    ImageView tip_img;
+    ImageView tip_img,like_btn;
     CardView cardView;
 
     public Tip_recycle_holder(@NonNull View itemView) {
@@ -25,7 +25,7 @@ public class Tip_recycle_holder extends RecyclerView.ViewHolder {
         content = itemView.findViewById(R.id.content);
         tip_img = itemView.findViewById(R.id.tip_post_img);
         cardView = itemView.findViewById(R.id.tip_comment_card);
-
+        like_btn = itemView.findViewById(R.id.like);
     }
 }
 

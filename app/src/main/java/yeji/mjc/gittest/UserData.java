@@ -6,6 +6,9 @@ public class UserData{
     private String userid;
     private String username;
     private String userimg;
+    private String usernickname;
+
+
 
     public String getUserid() {
         return userid;
@@ -31,11 +34,22 @@ public class UserData{
         this.userimg = userimg;
     }
 
+    public String getUsernickname() {
+        return usernickname;
+    }
+
+    public void setUsernickname(String usernickname) {
+        this.usernickname = usernickname;
+    }
+
     private  static UserData instance = null;
 
     public static synchronized UserData getInstance(){
         if (null  == instance){
             instance = new UserData();
+            UserData.getInstance().getUserid();
+            UserData.getInstance().getUserimg();
+            UserData.getInstance().getUsername();
         }
         return instance;
     }
