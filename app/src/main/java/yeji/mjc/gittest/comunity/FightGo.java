@@ -101,12 +101,16 @@ public class FightGo extends AppCompatActivity {
                 makeDB.child("code").setValue(fb_code);
                 makeDB.child("fb_friend").setValue(friendid);
                 makeDB.child("fb_friend_img").setValue(friendimg);
+                makeDB.child("ready").setValue("false");
+                makeDB.child("propose").setValue("true");
 
                 //집밥대결을 신청한 친구한테 집밥대결 코드 정보를 저장
                 makeDB = database.getReference().child("user").child(friendid).child("foodbattle_code").child(fb_code);
                 makeDB.child("code").setValue(fb_code);
                 makeDB.child("fb_friend").setValue(userid);
                 makeDB.child("fb_friend_img").setValue(userimg);
+                makeDB.child("ready").setValue("false");
+                makeDB.child("propose").setValue("false");
                 finish();
             }
         });

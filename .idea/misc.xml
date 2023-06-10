@@ -21,7 +21,7 @@
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/cart_recyclerview.xml" value="0.15089514066496162" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/fb_tab_recyclerview.xml" value="0.2933727311101731" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/fb_upload_recyclerview.xml" value="0.5" />
-        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/fight_main.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/fight_main.xml" value="0.33" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/food_img_search_recyclerview.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/fragment_bellset.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/fragment_cartsujin.xml" value="0.3619791666666667" />
@@ -32,6 +32,8 @@
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_main.xml" value="0.9" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/life_post_items.xml" value="0.67" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/post_addfriend.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/ready_add.xml" value="0.33" />
+        <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/ready_recyclerview.xml" value="0.67" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/register.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/search_menu.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82109/AndroidStudioProjects/GitTest/app/src/main/res/layout/select_date.xml" value="0.2933727311101731" />

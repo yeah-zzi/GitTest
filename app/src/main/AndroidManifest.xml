@@ -90,6 +90,7 @@
         <activity android:name=".comunity.PlusComm"></activity>
         <activity android:name=".comunity.Comm_kind"></activity>
         <activity android:name=".comunity.LifeCommnet"></activity>
+        <activity android:name=".comunity.Ready"></activity>
 
 
     </application>
