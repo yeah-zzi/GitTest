@@ -29,11 +29,12 @@ public class FoodSearch_Fridge extends Activity implements View.OnClickListener,
     public RecyclerView recyclerView, FoodrecyclerView;
     public RecyclerView.Adapter foodSearchAdapter;
     public ArrayList<FoodSearchItem> items = new ArrayList<FoodSearchItem>();
+
     //FireBase DB 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = database.getReference();
     DatabaseReference addfoodDB , cartDB;
-    String userid = "임시용 유저 아이디1";
+    String userid;
 
 
     TextView foodName;

@@ -32,7 +32,7 @@ public class FoodSearch extends Activity implements View.OnClickListener, Select
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = database.getReference();
     DatabaseReference addfoodDB , cartDB;
-    String userid = "임시용 유저 아이디1";
+    String userid;
 
 
     TextView foodName;

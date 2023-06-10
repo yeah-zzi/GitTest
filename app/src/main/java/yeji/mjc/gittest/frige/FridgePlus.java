@@ -35,9 +35,8 @@ import yeji.mjc.gittest.UserData;
 public class FridgePlus extends AppCompatActivity implements View.OnClickListener {
 
 
-
     //변수 선언
-    ImageButton plusBTN,cancelBTN,completeBTN,calendarBTN;
+    ImageButton plusBTN, cancelBTN, completeBTN, calendarBTN;
     TextView foodName; //식재료 이름
     ImageView foodImg; //식재료 이미지
     TextView foodCount; //식재료 수
@@ -50,7 +49,7 @@ public class FridgePlus extends AppCompatActivity implements View.OnClickListene
     DatabaseReference addfoodDB;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference reference = storage.getReference(); // 저장소 레퍼런스 객체 : storage 를 사용해 저장 위치를 설정
-    String userid,name,count;
+    String userid, name, count;
 
     private DatabaseReference Barcodedb;
 
@@ -58,7 +57,6 @@ public class FridgePlus extends AppCompatActivity implements View.OnClickListene
     public ArrayList<Fridge_Item> fridgeItems = new ArrayList<Fridge_Item>();
     // 선택한 아이템
     public ArrayList<FoodSearchItem> items = new ArrayList<FoodSearchItem>();
-
 
 
     @Override
@@ -77,6 +75,7 @@ public class FridgePlus extends AppCompatActivity implements View.OnClickListene
         //로그인 시 아이디값 변수 받아오기
         userid = UserData.getInstance().getUserid();
 
+        //intent로 식재료 사진과 이름 받아오기
         Intent fbintent = getIntent();
         String name = fbintent.getStringExtra("food_name");
         int Img = fbintent.getIntExtra("food_img", 0);
@@ -118,6 +117,7 @@ public class FridgePlus extends AppCompatActivity implements View.OnClickListene
         String productName = getIntent().getStringExtra("productName");
         foodName.setText(productName);
 
+
         calendarBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,6 +125,7 @@ public class FridgePlus extends AppCompatActivity implements View.OnClickListene
                 startActivity(foodexpiry);
             }
         });
+
 
 
         //스캔하여 얻은 값
@@ -136,16 +137,17 @@ public class FridgePlus extends AppCompatActivity implements View.OnClickListene
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot barcode_date: snapshot.getChildren()){
+                for (DataSnapshot barcode_date : snapshot.getChildren()) {
                     Product product = barcode_date.getValue(Product.class);
-                    if( product != null ){
-                        String name = product.getPRDT_NM()+" ";
-                        foodName.setText((String)name);
+                    if (product != null) {
+                        String name = product.getPRDT_NM() + " ";
+                        foodName.setText((String) name);
                         String img = product.getImg();
                         Glide.with(getApplicationContext()).load(img).into(foodImg);
                     }
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(FridgePlus.this, "ERROR!", Toast.LENGTH_SHORT).show();
@@ -154,10 +156,23 @@ public class FridgePlus extends AppCompatActivity implements View.OnClickListene
 
     }
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 3) {
+            if (resultCode == RESULT_OK) {
+                name = data.getStringExtra("이름");
+                int img = data.getIntExtra("이미지", 0);
+
+                foodName.setText(name);
+                foodImg.setImageResource(img);
+            }
+        }
+    }
+
     //팝업창을 종료할때 하단으로 내려가는 애니메이션 효과를 제거하는 함수
     protected void onPause() {
         super.onPause();
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
     }
 
     @Override

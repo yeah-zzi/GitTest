@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         tabWrite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addfoodDB=database.getReference().child("user").child(userid).child("addfood");
+                //addfoodDB=database.getReference().child("user").child(userid).child("addfood");
                 /*  식재료 추가 버튼 눌렀을때 빈 페이지 불러오기
                     addfoodDB.removeValue();*/
 
