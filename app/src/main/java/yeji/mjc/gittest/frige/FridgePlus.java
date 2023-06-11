@@ -3,9 +3,11 @@ package yeji.mjc.gittest.frige;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,9 +19,9 @@ import yeji.mjc.gittest.R;
 public class FridgePlus extends AppCompatActivity {
 
     ImageButton plusBTN, cancelBTN, completeBTN, calendarBTN;
-    TextView foodName;
+    EditText foodName;
     ImageView foodImg;
-    TextView foodCount;
+    EditText foodCount;
     TextView deadLine;
     private String deadline;
 
@@ -34,6 +36,7 @@ public class FridgePlus extends AppCompatActivity {
         calendarBTN = findViewById(R.id.calendar);
         foodName = findViewById(R.id.search_food_name);
         foodImg = findViewById(R.id.food_img);
+        foodCount=findViewById(R.id.search_food_count);
         deadLine = findViewById(R.id.search_food_dead);
 
         // Intent에서 deadline 값 받아오기
@@ -56,6 +59,16 @@ public class FridgePlus extends AppCompatActivity {
         completeBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String name = foodName.getText().toString();
+                String count = foodCount.getText().toString();
+                String deadline = deadLine.getText().toString();
+
+                if (name.isEmpty() || count.isEmpty() || deadline.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "식재료 정보를 모두 입력하세요!", Toast.LENGTH_SHORT).show();
+                    return; // completeBTN 버튼이 눌리지 않도록 리턴
+                }
+
+                // 입력값이 유효한 경우에만 액티비티 종료
                 finish();
             }
         });
