@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
@@ -9,7 +10,7 @@
     <ImageView
         android:id="@+id/back"
         android:layout_width="350dp"
-        android:layout_height="450dp"
+        android:layout_height="490dp"
         android:background="@drawable/fridge_food_card"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,6 +37,7 @@
     </androidx.cardview.widget.CardView>
 
     <ImageView
+        android:id="@+id/line"
         android:layout_width="280dp"
         android:layout_height="3dp"
         android:background="#F3F3F3"
@@ -44,15 +46,45 @@
         app:layout_constraintLeft_toLeftOf="@id/back"
         app:layout_constraintRight_toRightOf="@id/back"/>
 
+    <Button
+        android:id="@+id/cold"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/lightgray"
+        android:layout_margin="5dp"
+        android:text="냉장"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/line"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintLeft_toLeftOf="@id/back"
+        app:layout_constraintRight_toLeftOf="@+id/frozen"/>
+
+    <Button
+        android:id="@+id/frozen"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/lightgray"
+        android:layout_margin="5dp"
+        android:text="냉동"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/line"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintRight_toRightOf="@id/back"
+        app:layout_constraintLeft_toRightOf="@+id/cold"/>
+
     <LinearLayout
         android:id="@+id/nametxt"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:background="@drawable/spinner_background"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintLeft_toLeftOf="@id/back"
         app:layout_constraintRight_toRightOf="@id/back"
-        app:layout_constraintTop_toBottomOf="@id/img_background">
+        app:layout_constraintTop_toBottomOf="@id/frozen">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

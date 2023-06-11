@@ -1,6 +1,7 @@
 package yeji.mjc.gittest.frige;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -10,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -22,6 +24,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.util.Pair;
 
@@ -61,6 +64,7 @@ public class FridgePlus extends AppCompatActivity {
     ImageView foodImg;
     EditText foodCount;
     TextView deadLine;
+    Button cold,frozen;
     private String deadline;
     Date endD;
 
@@ -69,7 +73,7 @@ public class FridgePlus extends AppCompatActivity {
     DatabaseReference cartDB,realData;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference reference = storage.getReference(); // 저장소 레퍼런스 객체 : storage 를 사용해 저장 위치를 설정
-    String userid,startDate,changeDate;
+    String userid,startDate,changeDate,fridge_type="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +100,8 @@ public class FridgePlus extends AppCompatActivity {
         foodImg = findViewById(R.id.food_img);
         foodCount=findViewById(R.id.search_food_count);
         deadLine = findViewById(R.id.search_food_dead);
+        cold = findViewById(R.id.cold);
+        frozen = findViewById(R.id.frozen);
 
         imageUri = createUri();
         registerPictureLauncher();
@@ -109,6 +115,26 @@ public class FridgePlus extends AppCompatActivity {
         startDate = df.format(now.getTime());
 
         deadLine.setText(deadline);
+
+        //음식이 냉장인지 냉동인지 입력
+        cold.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fridge_type = "cold";
+                cold.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.yellow));
+                frozen.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.lightgray));
+            }
+        });
+
+        frozen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fridge_type = "frozen";
+                cold.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.lightgray));
+                frozen.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.yellow));
+            }
+        });
+
 
         // 취소 버튼을 누르면 액티비티 종료
         cancelBTN.setOnClickListener(new View.OnClickListener() {
@@ -136,13 +162,14 @@ public class FridgePlus extends AppCompatActivity {
                 String count = foodCount.getText().toString();
                 String deadline = deadLine.getText().toString();
 
-                if (name.isEmpty() || count.isEmpty() || deadline.isEmpty()) {
+                if (name.isEmpty() || count.isEmpty() || deadline.isEmpty() || fridge_type.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "식재료 정보를 모두 입력하세요!", Toast.LENGTH_SHORT).show();
                     return; // completeBTN 버튼이 눌리지 않도록 리턴
                 }else{
                     cartDB = database.getReference().child("user").child(userid).child("fridge").child(name);
                     cartDB.child("food_name").setValue(name);
                     cartDB.child("food_count").setValue(count);
+                    cartDB.child("fridge_type").setValue(fridge_type);
                     cartDB.child("food_date").setValue(changeDate);
 
                     uploadToFirebase(imageUri);
