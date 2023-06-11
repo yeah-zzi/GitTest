@@ -16,8 +16,7 @@ public class Fridge_Item {
         this.progress = progress;
     }
 
-    public Fridge_Item() {
-
+    public Fridge_Item(Fridge_Item fridge_item) {
     }
 
 
@@ -63,6 +62,5 @@ public class Fridge_Item {
     public void setProgress(int progress) {
         this.progress = progress;
     }
-
 
 }
