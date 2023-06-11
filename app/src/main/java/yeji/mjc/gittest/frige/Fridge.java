@@ -49,7 +49,7 @@ import yeji.mjc.gittest.comunity.Tip_fragment;
 import yeji.mjc.gittest.mypage.Bellset;
 import yeji.mjc.gittest.mypage.UserInfoChange;
 
-public class Fridge extends Fragment{
+public class Fridge extends Fragment {
 
     //리사이클러뷰 변수 선언
     public RecyclerView recyclerView;
@@ -64,9 +64,7 @@ public class Fridge extends Fragment{
     DatabaseReference fridgedb;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference reference = storage.getReference(); // 저장소 레퍼런스 객체 : storage 를 사용해 저장 위치를 설정
-    String userid,startDate,changeDate,fridge_type="";
-
-
+    String userid, startDate, changeDate, fridge_type = "";
 
 
     @Override
@@ -78,8 +76,6 @@ public class Fridge extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        userid = UserData.getInstance().getUserid();
-
         View view = inflater.inflate(R.layout.fridge_main, container, false);
         recyclerView = view.findViewById(R.id.fridgeRecyclerView);
 
@@ -88,7 +84,6 @@ public class Fridge extends Fragment{
         recyclerView.setAdapter(foodAdapter);
 
         recyclerView.setHasFixedSize(true);
-
 
 
         Button fridge_main = view.findViewById(R.id.fridge_main);
@@ -133,7 +128,6 @@ public class Fridge extends Fragment{
         });
 
 
-
         Spinner spinner = view.findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -160,23 +154,6 @@ public class Fridge extends Fragment{
             }
         });
 
-        fridgedb = database.getReference().child("user").child(userid).child("fridge");
-        fridgedb.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                fridgeItems.clear();
-                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                    Fridge_Item Item = snapshot1.getValue(Fridge_Item.class);
-                    fridgeItems.add(Item);
-                }
-                recyclerView.getAdapter().notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // 디비를 가져오다 오류 발생시
-            }
-        });
 
         return view;
 
@@ -185,18 +162,38 @@ public class Fridge extends Fragment{
     public void onStart() {
         super.onStart();
 
+        /*
+        userid = UserData.getInstance().getUserid();//
 
-        fridgeItems.add(new Fridge_Item(R.drawable.potato,"감자","5개","D-16","cold",60));
-        fridgeItems.add(new Fridge_Item(R.drawable.fdsaf,"베이컨","2개","D-20","cold",76));
-        fridgeItems.add(new Fridge_Item(R.drawable.chilli,"고추","10개","D-2","frozen",20));
-        fridgeItems.add(new Fridge_Item(R.drawable.carrot,"당근","6개","D-31","cold",76));
-        fridgeItems.add(new Fridge_Item(R.drawable.gazi,"가지","1개","D-6","cold", 40));
+        fridgedb = database.getReference().child("user").child(userid).child("fridge");
+        fridgedb.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                fridgeItems.clear();
+                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                    String foodName = snapshot1.getKey();
+                    String foodCount = snapshot1.child("food_count").getValue(String.class);
+                    String foodImgPath = snapshot1.child("food_img").getValue(String.class);
+                    String foodDate = snapshot1.child("food_date").getValue(String.class);
+                    String fridgeType = snapshot1.child("fridge_type").getValue(String.class);
+
+                    Fridge_Item item = new Fridge_Item(foodName, foodCount, foodImgPath, foodDate, fridgeType);
+                    fridgeItems.add(item);
+                }
+                adapter_refidge.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        */
 
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         adapter_refidge = new Fridge_Adapter(fridgeItems);
         recyclerView.setAdapter(adapter_refidge);
-
 
 
     }
