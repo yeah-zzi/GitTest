@@ -167,6 +167,21 @@ public class Fridge extends Fragment{
             }
         });
 
+        /*
+        if (fridgeItems.isEmpty()) {
+            // fridgeItems가 비어있으면 null_fridge.xml을 inflate하여 사용
+            View nullView = inflater.inflate(R.layout.null_fridge_main, container, false);
+            return nullView;
+        } else {
+            // fridgeItems가 비어있지 않으면 아이템을 RecyclerView에 표시
+            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+            adapter_refidge = new Fridge_Adapter(fridgeItems);
+            recyclerView.setAdapter(adapter_refidge);
+            recyclerView.setHasFixedSize(true);
+
+        }
+        */
+
         return view;
 
 
@@ -175,20 +190,15 @@ public class Fridge extends Fragment{
     public void onStart() {
         super.onStart();
 
-        /*
-        if (Data_Item == null || Data_Item.getFood_img() == null || Data_Item.getFood_name() == null || Data_Item.getFood_date() == null) {
-            setContentView(R.layout.null_fridge); // null_fridge.xml 파일을 화면에 표시
-            return;
-        }*/
-
-        fridgeItems.add(new Fridge_Item(Data_Item.getFood_img(), Data_Item.getFood_name(), Data_Item.getFood_count() + "개", "D-" + Data_Item.getFood_date()));
+        fridgeItems.add(new Fridge_Item(R.drawable.potato,"감자","5개","D-16"));
+        fridgeItems.add(new Fridge_Item(R.drawable.fdsaf,"베이컨","2개","D-20"));
+        fridgeItems.add(new Fridge_Item(R.drawable.chilli,"고추","10개","D-5"));
+        fridgeItems.add(new Fridge_Item(R.drawable.carrot,"당근","6개","D-30"));
+        fridgeItems.add(new Fridge_Item(R.drawable.gazi,"가지","1개","D-7"));
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         adapter_refidge = new Fridge_Adapter(fridgeItems);
         recyclerView.setAdapter(adapter_refidge);
-    }
-
-    private void setContentView(int null_fridge) {
     }
 
 

@@ -87,8 +87,6 @@ public class FridgePlus extends AppCompatActivity implements View.OnClickListene
         cancelBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Firebase 값에서 조회내역 삭제
-                addfoodDB.removeValue();
                 finish();
             }
         });
@@ -109,7 +107,7 @@ public class FridgePlus extends AppCompatActivity implements View.OnClickListene
         plusBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent fridgeSearchIntent = new Intent(getApplicationContext(), FoodSearch_Fridge.class);
+                Intent fridgeSearchIntent = new Intent(getApplicationContext(), FoodSearch.class);
                 startActivity(fridgeSearchIntent);
             }
         });
@@ -133,7 +131,7 @@ public class FridgePlus extends AppCompatActivity implements View.OnClickListene
         // 파이어베이스 데이터베이스의 "Product" 경로에서 바코드 값을 가져옴
         Barcodedb = FirebaseDatabase.getInstance().getReference().child("Product").child("barcode");
         // 스캔한 바코드 값과 파이어베이스 안에 있는 바코드 값이 같으면 불러냄
-        Query query = Barcodedb.orderByKey().startAt(scannedBarcode).endAt(scannedBarcode);
+        Query query = Barcodedb.orderByChild("barcode").equalTo(scannedBarcode);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
