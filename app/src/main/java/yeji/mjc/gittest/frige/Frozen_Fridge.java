@@ -8,10 +8,19 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -29,6 +38,13 @@ public class Frozen_Fridge extends Fragment{
     public RecyclerView.Adapter adapter_refidge;
     public ArrayList<Fridge_Item> frozenFridgeItems = new ArrayList<Fridge_Item>();
 
+
+    //FireBase DB 가져오기
+    FirebaseDatabase database = FirebaseDatabase.getInstance(); // 파이어베이스 저장소 객체
+    DatabaseReference fridgedb;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference reference = storage.getReference(); // 저장소 레퍼런스 객체 : storage 를 사용해 저장 위치를 설정
+    String userid,startDate,changeDate,fridge_type="";
 
 
     @Override
@@ -102,6 +118,26 @@ public class Frozen_Fridge extends Fragment{
             }
         });
 
+        fridgedb = database.getReference().child("user").child(userid).child("fridge");
+        fridgedb.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                frozenFridgeItems.clear(); // 기존 데이터 초기화
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Fridge_Item item = dataSnapshot.getValue(Fridge_Item.class);
+                    if (item.getFridge_type().equals("frozen")) {
+                        frozenFridgeItems.add(item);
+                    }
+                }
+                recyclerView.getAdapter().notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // 디비를 가져오다 오류 발생시
+            }
+        });
+
         return view;
 
     }
@@ -110,17 +146,11 @@ public class Frozen_Fridge extends Fragment{
     public void onStart(){
         super.onStart();
 
-        frozenFridgeItems.add(new Fridge_Item(R.drawable.carrot,"당근","6개","D-31",50));
-        frozenFridgeItems.add(new Fridge_Item(R.drawable.gazi,"가지","1개","D-6", 50));
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
         adapter_refidge = new Fridge_Adapter(frozenFridgeItems);
         recyclerView.setAdapter(adapter_refidge);
     }
 
-    public ArrayList<Fridge_Item> getFrozenFridgeItems() {
-        ArrayList<Fridge_Item> frozenItems = new ArrayList<>();
-        return frozenItems;
-    }
 
 }

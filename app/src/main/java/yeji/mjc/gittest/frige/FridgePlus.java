@@ -28,25 +28,32 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.util.Pair;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import yeji.mjc.gittest.FoodSearch.FoodSearch;
+import yeji.mjc.gittest.FoodSearch.Product;
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.UserData;
 import yeji.mjc.gittest.cart.CartPlus;
@@ -70,7 +77,7 @@ public class FridgePlus extends AppCompatActivity {
 
     //FireBase DB 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance(); // 파이어베이스 저장소 객체
-    DatabaseReference cartDB,realData;
+    DatabaseReference cartDB,Barcodedb,realData;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference reference = storage.getReference(); // 저장소 레퍼런스 객체 : storage 를 사용해 저장 위치를 설정
     String userid,startDate,changeDate,fridge_type="";
@@ -96,6 +103,7 @@ public class FridgePlus extends AppCompatActivity {
         cancelBTN = findViewById(R.id.cancel);
         completeBTN = findViewById(R.id.complete);
         calendarBTN = findViewById(R.id.calendar);
+
         foodName = findViewById(R.id.search_food_name);
         foodImg = findViewById(R.id.food_img);
         foodCount=findViewById(R.id.search_food_count);
@@ -171,7 +179,6 @@ public class FridgePlus extends AppCompatActivity {
                     cartDB.child("food_count").setValue(count);
                     cartDB.child("fridge_type").setValue(fridge_type);
                     cartDB.child("food_date").setValue(changeDate);
-
                     uploadToFirebase(imageUri);
                     // 입력값이 유효한 경우에만 액티비티 종료
                     finish();
@@ -189,6 +196,33 @@ public class FridgePlus extends AppCompatActivity {
 
             }
         });
+
+        //스캔하여 얻은 값
+        String scannedBarcode = getIntent().getStringExtra("barcode");
+        // 파이어베이스 데이터베이스의 "Product" 경로에서 바코드 값을 가져옴
+        Barcodedb = FirebaseDatabase.getInstance().getReference().child("Product").child("barcode");
+        // 스캔한 바코드 값과 파이어베이스 안에 있는 바코드 값이 같으면 불러냄
+        Query query = Barcodedb.orderByKey().equalTo(scannedBarcode);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot barcode_date : snapshot.getChildren()) {
+                    Product product = barcode_date.getValue(Product.class);
+                    if (product != null) {
+                        String name = product.getPRDT_NM() + " ";
+                        foodName.setText((String) name);
+                        String img = product.getImg();
+                        Glide.with(getApplicationContext()).load(img).into(foodImg);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(FridgePlus.this, "ERROR!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         // 선택한 상품의 이름 설정
         String productName = getIntent().getStringExtra("productName");
