@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 import yeji.mjc.gittest.FoodSearch.Food_expiry;
 import yeji.mjc.gittest.R;
+import yeji.mjc.gittest.UserData;
 import yeji.mjc.gittest.comunity.Tip_comment_item;
 
 public class CartDialog extends AppCompatActivity {
@@ -33,7 +34,7 @@ public class CartDialog extends AppCompatActivity {
     //FireBase DB 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference cartdb, frigedb;
-    String userid = "2810839655";
+    String userid;
 
     ImageButton cancel, complete, carlendar;
 
@@ -42,6 +43,9 @@ public class CartDialog extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.frige_plus_recycler);
+
+        //로그인 시 아이디값 변수 받아오기
+        userid = UserData.getInstance().getUserid();
 
         cartrecyclerView = findViewById(R.id.cartrecycler);
         frigerecyclerview = findViewById(R.id.fridgeRecyclerView);

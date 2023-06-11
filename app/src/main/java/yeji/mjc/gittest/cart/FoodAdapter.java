@@ -51,7 +51,7 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
             public void onClick(View v) {
                 if(count>1) {
                 count--;
-                holder.foodNum.setText(count); }
+                holder.foodNum.setText(count+"개"); }
             }
         });
 
@@ -59,7 +59,7 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
             @Override
             public void onClick(View v) {
                 count++;
-                holder.foodNum.setText(count);
+                holder.foodNum.setText(count+"개");
             }
         });
 
