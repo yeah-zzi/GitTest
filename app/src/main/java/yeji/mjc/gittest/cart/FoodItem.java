@@ -7,6 +7,10 @@ public class FoodItem {
     String food_img;
     boolean checkBox;
 
+    public FoodItem() {
+
+    }
+
     public FoodItem(String food_name, String food_count, String food_img, boolean checkBox) {
         this.food_name = food_name;
         this.food_count = food_count;

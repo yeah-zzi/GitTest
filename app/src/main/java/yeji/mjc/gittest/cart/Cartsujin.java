@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 
 import androidx.annotation.NonNull;
@@ -29,6 +28,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -99,6 +99,7 @@ public class Cartsujin extends Fragment {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
                 int position = viewHolder.getAdapterPosition();
 
                 switch (direction) {
@@ -113,14 +114,55 @@ public class Cartsujin extends Fragment {
                         foodAdapter.notifyItemRemoved(position);
                         foodAdapter.notifyDataSetChanged();
 
+                        // 아이템을 cartdb에서 삭제
+                        DatabaseReference cartDbRef = database.getReference().child("user").child(userid).child("cart");
+                        cartDbRef.child(deleteItem.food_name).removeValue();
+
+
+                        // 아이템을 cartdeleteditems에 추가 (삭제된 아이템 저장)
+                        DatabaseReference cartDeletedItemsRef = database.getReference().child("user").child(userid).child("cartdeleteditems");
+                        String itemName = deleteItem.getName();
+                        cartDeletedItemsRef.child(itemName).setValue(deleteItem);
+
+
                         //복구
                         Snackbar.make(recyclerView, deleteItem.getName(), Snackbar.LENGTH_LONG)
                                 .setAction("복구", new View.OnClickListener(){
                                     @Override
                                     public void onClick(View view) {
-                                        foodItems.add(position, deleteItem);
-                                        foodAdapter.addItem(position,deleteItem);
-                                        foodAdapter.notifyItemInserted(position);
+
+                                        DatabaseReference cartDbRef1 = database.getReference().child("user").child(userid).child("cart");
+                                        // cartItem 클래스랑 똑같이 맞춰서 넣어야함
+                                        CartItem decartItem = new CartItem(deleteItem.getName(), deleteItem.getNum(), deleteItem.getImg());
+                                        cartDbRef1.child(itemName).setValue(decartItem);
+
+                                            foodItems.add(position, deleteItem);
+                                            foodAdapter.addItem(position, deleteItem);
+                                            foodAdapter.notifyItemInserted(position);
+
+
+                                        // 복구된 아이템을 cartdb에 추가 (복구)
+                                        DatabaseReference cartDbRef = database.getReference().child("user").child(userid).child("cartdeleteditems");
+                                        cartDbRef.addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                //파이어베이스 데이터베이스의 데이터를 받아오는 곳
+                                                foodItems.clear();   //기존 배열리스트가 존재하지 않게 초기화
+                                                for (DataSnapshot snapshot1 : snapshot.getChildren()){
+                                                    FoodItem decartItem = snapshot1.getValue(FoodItem.class);
+                                                    foodItems.add(decartItem);
+                                                }
+                                                recyclerView.getAdapter().notifyDataSetChanged();
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+                                                //디비를 가져오다 오류 발생시
+                                            }
+                                        });
+
+                                        // cartdeleteditems에서 아이템 제거
+                                        cartDeletedItemsRef.child(itemName).removeValue();
                                     }
                                 }).show();
                         break;
@@ -165,7 +207,7 @@ public class Cartsujin extends Fragment {
                 //파이어베이스 데이터베이스의 데이터를 받아오는 곳
                 foodItems.clear();   //기존 배열리스트가 존재하지 않게 초기화
                 for (DataSnapshot snapshot1 : snapshot.getChildren()){
-                    CartItem cartItem= snapshot1.getValue(CartItem.class);
+                    CartItem cartItem = snapshot1.getValue(CartItem.class);
                     FoodItem foodItem =
                             new FoodItem(cartItem.getFood_name(),cartItem.getFood_count()+"개",cartItem.getFood_img(),false);
                     foodItems.add(foodItem);
