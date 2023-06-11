@@ -25,10 +25,23 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
 
     private int[] gaugeColors = {
             Color.rgb(225, 0, 0),
-            Color.rgb(250, 156, 0),
-            Color.rgb(255, 213, 0),
-            Color.rgb(100, 191, 0)
+            Color.rgb(255, 191, 0),
+            Color.rgb(100, 191, 0),
+            Color.rgb(33, 121, 240)
     };
+
+    private int calculateProgress(String food_date) {
+        int daysLeft = Integer.parseInt(food_date.substring(2));
+        if (daysLeft >= 30) {
+            return 76;
+        } else if (daysLeft >= 15) {
+            return 60;
+        } else if (daysLeft >= 7) {
+            return 40;
+        } else {
+            return 20;
+        }
+    }
 
     public Fridge_Adapter(ArrayList<Fridge_Item> fridgeItems) {
         this.fridgeItems = fridgeItems;
@@ -42,13 +55,18 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
     @Override
     public void onBindViewHolder(@NonNull Fridge_recycle_holder holder, int position) {
 
-        int progress = fridgeItems.get(position).getProgress();
-        int colorIndex = progress / 25; // 게이지 값에 따라 색상 인덱스 계산
-        int gaugeColor = gaugeColors[colorIndex]; // 배열에서 해당하는 색상 가져오기
+        Fridge_Item fridgeItem = fridgeItems.get(position);
+        String foodDate = fridgeItem.getFood_date();
+        int progress = calculateProgress(foodDate);
+
+        fridgeItem.setProgress(progress);
+
+        progress = fridgeItems.get(position).getProgress();
+        int colorIndex = progress / 25;
+        int gaugeColor = gaugeColors[colorIndex];
 
         holder.progressbar.setProgress(progress);
         holder.progressbar.setProgressTintList(ColorStateList.valueOf(gaugeColor));
-
 
 
         int itemPosition = holder.getAdapterPosition();
