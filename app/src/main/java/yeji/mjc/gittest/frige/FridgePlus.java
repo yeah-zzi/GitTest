@@ -109,6 +109,8 @@ public class FridgePlus extends AppCompatActivity implements View.OnClickListene
             public void onClick(View v) {
                 Intent fridgeSearchIntent = new Intent(getApplicationContext(), FoodSearch.class);
                 startActivity(fridgeSearchIntent);
+                startActivityForResult(fridgeSearchIntent,3);
+
             }
         });
 

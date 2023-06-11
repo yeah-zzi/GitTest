@@ -1,30 +1,15 @@
 package yeji.mjc.gittest.FoodSearch;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.widget.CalendarView;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.util.Pair;
-
-import com.google.android.material.datepicker.MaterialDatePicker;
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 import yeji.mjc.gittest.R;
-import yeji.mjc.gittest.comunity.FightGo;
 
 public class Food_expiry extends AppCompatActivity {
     CalendarView calendar;
@@ -32,7 +17,7 @@ public class Food_expiry extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.expiry_date);
+        setContentView(R.layout.date_expiry);
 
         //뒤 배경을 반투명하게
         Window window = this.getWindow();
