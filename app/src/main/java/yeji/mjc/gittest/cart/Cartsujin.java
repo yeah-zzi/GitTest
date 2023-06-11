@@ -35,6 +35,7 @@ import java.util.ArrayList;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 import yeji.mjc.gittest.R;
+import yeji.mjc.gittest.UserData;
 
 public class Cartsujin extends Fragment {
 
@@ -49,7 +50,7 @@ public class Cartsujin extends Fragment {
     FirebaseDatabase database = FirebaseDatabase.getInstance(); // 파이어베이스 저장소 객체
     DatabaseReference cartdb;
     ArrayList<CartItem> items;
-    String userid = "2810839655";
+    String userid;
 
     ImageButton MartSearch;
     Button AddBtn;
@@ -57,6 +58,9 @@ public class Cartsujin extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        //로그인 시 아이디값 변수 받아오기
+        userid = UserData.getInstance().getUserid();
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.cart_main, container, false);
