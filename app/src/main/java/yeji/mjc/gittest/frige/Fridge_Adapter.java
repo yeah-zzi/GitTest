@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
 import yeji.mjc.gittest.FoodItem;
 import yeji.mjc.gittest.R;
@@ -23,6 +25,7 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
     ArrayList<Fridge_Item> fridgeItems;
     int count = 0;
 
+
     private int[] gaugeColors = {
             Color.rgb(225, 0, 0),
             Color.rgb(255, 191, 0),
@@ -32,16 +35,17 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
 
     private int calculateProgress(String food_date) {
         int daysLeft = Integer.parseInt(food_date.substring(2));
-        if (daysLeft >= 30) {
-            return 76;
-        } else if (daysLeft >= 15) {
-            return 60;
-        } else if (daysLeft >= 7) {
-            return 40;
-        } else {
+        if (daysLeft <= 3) {
             return 20;
-        }
+        } else if (daysLeft <= 15) {
+            return 40;
+        } else if (daysLeft <= 30) {
+            return 60;
+        } else
+            return 76;
+
     }
+
 
     public Fridge_Adapter(ArrayList<Fridge_Item> fridgeItems) {
         this.fridgeItems = fridgeItems;
@@ -60,6 +64,7 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
         int progress = calculateProgress(foodDate);
 
         fridgeItem.setProgress(progress);
+
 
         progress = fridgeItems.get(position).getProgress();
         int colorIndex = progress / 25;
@@ -162,15 +167,20 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
 
     //정렬 기준을 나타내는 enum
     public enum SortType {
-        NAME_ASCENDING, //Food_name을 기준으로 오름차순
-        // 추가적인 정렬 기준은 이곳에 추가
+        ADD_ASCENDING, //추가순
+        NAME_ASCENDING, //이름순
+        DATE_ASCENDING, //날짜순
+
     }
 
-    private SortType currentSortType = SortType.NAME_ASCENDING; //현재 정렬 기준
+    private SortType currentSortType = SortType.NAME_ASCENDING;
 
     // 아이템 정렬 메서드
     private void sortItems() {
         switch (currentSortType) {
+            case ADD_ASCENDING:
+
+                break;
             case NAME_ASCENDING:
                 Collections.sort(fridgeItems, new Comparator<Fridge_Item>() {
                     @Override
@@ -179,15 +189,23 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
                     }
                 });
                 break;
-            // 추가적인 정렬 기준에 따라 case를 추가
+            case DATE_ASCENDING:
+                Collections.sort(fridgeItems, new Comparator<Fridge_Item>() {
+                    @Override
+                    public int compare(Fridge_Item item1, Fridge_Item item2) {
+                        String date1 = item1.getFood_date().substring(2);
+                        String date2 = item2.getFood_date().substring(2);
+                        return Integer.compare(Integer.parseInt(date1), Integer.parseInt(date2));
+                    }
+                });
+                break;
         }
     }
 
-    // 현재 정렬 기준을 설정하는 메서드
     public void setSortType(SortType sortType) {
-        currentSortType = sortType; //정렬 기준
+        currentSortType = sortType;
         sortItems();
-        notifyDataSetChanged(); //정렬 결과를 반영.
+        notifyDataSetChanged();
     }
 
 
