@@ -104,7 +104,6 @@ public class Frozen_Fridge extends Fragment{
 
         return view;
 
-
     }
 
 
