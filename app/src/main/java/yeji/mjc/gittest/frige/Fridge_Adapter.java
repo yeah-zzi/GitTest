@@ -41,6 +41,7 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
         holder.food_name.setText(fridgeItems.get(position).getFood_name());
         holder.food_count.setText(fridgeItems.get(position).getFood_count());
         holder.food_date.setText(fridgeItems.get(position).getFood_date());
+        holder.progressBar.setProgress(fridgeItems.get(position).getProgress());
 
 
 

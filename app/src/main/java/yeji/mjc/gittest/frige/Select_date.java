@@ -1,63 +1,74 @@
 package yeji.mjc.gittest.frige;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.util.Pair;
 
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 import yeji.mjc.gittest.R;
-import yeji.mjc.gittest.UserData;
-import yeji.mjc.gittest.comunity.FightGo;
 
 public class Select_date extends AppCompatActivity {
 
-    ImageButton complete, calendar;
-
+    TextView selectedDateText;
+    Button complete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.date_expiry);
 
-        //뒤 배경을 반투명하게 설정
-        Window window = this.getWindow();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            setTranslucent(true);
-            window.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#80000000")));
-            window.setStatusBarColor(Color.parseColor("#80000000"));
-        }
-        overridePendingTransition(0, 0);
+        selectedDateText = findViewById(R.id.selectedDateText);
+        complete = findViewById(R.id.complete);
 
-        calendar=findViewById(R.id.calendar);
+        // 현재 날짜로 초기화
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
+        selectedDateText.setText(dateFormat.format(calendar.getTime()));
 
-        complete=findViewById(R.id.complete);
+        // MaterialDatePicker 생성
+        MaterialDatePicker.Builder<Long> builder = MaterialDatePicker.Builder.datePicker();
+        builder.setTitleText("유통기한 선택");
+        CalendarConstraints.Builder constraintsBuilder = new CalendarConstraints.Builder();
+        constraintsBuilder.setValidator(DateValidatorPointForward.now());
+        builder.setCalendarConstraints(constraintsBuilder.build());
+        MaterialDatePicker<Long> materialDatePicker = builder.build();
+
+        // MaterialDatePicker가 닫힐 때 선택된 날짜 처리
+        materialDatePicker.addOnPositiveButtonClickListener(
+                new MaterialPickerOnPositiveButtonClickListener<Long>() {
+                    @Override
+                    public void onPositiveButtonClick(Long selectedDate) {
+                        Calendar selectedCalendar = Calendar.getInstance();
+                        selectedCalendar.setTimeInMillis(selectedDate);
+                        selectedDateText.setText(dateFormat.format(selectedCalendar.getTime()));
+                    }
+                }
+        );
+
+
         complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // 선택된 날짜 가져오기
+                String selectedDate = selectedDateText.getText().toString();
+
+                // FridgePlus 액티비티로 이동하는 인텐트 생성
                 Intent intent = new Intent(Select_date.this, FridgePlus.class);
+                intent.putExtra("DEADLINE", selectedDate);
                 startActivity(intent);
                 finish();
             }
         });
     }
-
-
 }

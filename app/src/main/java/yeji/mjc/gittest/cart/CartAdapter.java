@@ -20,7 +20,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.zip.Inflater;
 
-import yeji.mjc.gittest.FoodSearch.Food_expiry;
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.comunity.FB_IMG_Holder;
 import yeji.mjc.gittest.comunity.TipItem;

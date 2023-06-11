@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ public class Fridge_recycle_holder extends RecyclerView.ViewHolder {
     TextView food_name;
     TextView food_count;
     TextView food_date;
+    ProgressBar progressBar;
     ImageButton count_plus;
     ImageButton count_minus;
 
@@ -34,6 +36,7 @@ public class Fridge_recycle_holder extends RecyclerView.ViewHolder {
         food_date = itemView.findViewById(R.id.food_date);
         count_plus=itemView.findViewById(R.id.count_plus);
         count_minus=itemView.findViewById(R.id.count_minus);
+        progressBar=itemView.findViewById(R.id.progressbar);
 
         close=itemView.findViewById(R.id.close);
         btn_cart=itemView.findViewById(R.id.btn_cart);

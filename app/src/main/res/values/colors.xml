@@ -16,4 +16,12 @@
     <color name="gray">#6A6A6A</color>
     <color name="lightgray">#bcbcbc</color>
     <color name="transparent">#00000000</color>
+
+    <color name="colorRed">#FFC82222</color>
+    <color name="colorYellow">#FFF1BB1B</color>
+    <color name="colorGreen">#FF459E25</color>
+    <color name="colorBlue">#FF1D6DCF</color>
+
+
+
 </resources>
