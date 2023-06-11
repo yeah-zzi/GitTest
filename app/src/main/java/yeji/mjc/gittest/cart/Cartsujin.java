@@ -151,7 +151,7 @@ public class Cartsujin extends Fragment {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                 //파이어베이스 데이터베이스의 데이터를 받아오는 곳
-                                                foodItems.clear();   //기존 배열리스트가 존재하지 않게 초기화
+                                                //foodItems.clear();   //기존 배열리스트가 존재하지 않게 초기화
                                                 for (DataSnapshot snapshot1 : snapshot.getChildren()){
                                                     FoodItem decartItem = snapshot1.getValue(FoodItem.class);
                                                     foodItems.add(decartItem);
@@ -213,7 +213,7 @@ public class Cartsujin extends Fragment {
                 for (DataSnapshot snapshot1 : snapshot.getChildren()){
                     CartItem cartItem = snapshot1.getValue(CartItem.class);
                     FoodItem foodItem =
-                            new FoodItem(cartItem.getFood_name(),cartItem.getFood_count()+"개",cartItem.getFood_img(),false);
+                            new FoodItem(cartItem.getFood_name(),cartItem.getFood_count(),cartItem.getFood_img(),false);
                     foodItems.add(foodItem);
                 }
                 recyclerView.getAdapter().notifyDataSetChanged();
