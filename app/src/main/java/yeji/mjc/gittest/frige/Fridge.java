@@ -162,6 +162,7 @@ public class Fridge extends Fragment {
     public void onStart() {
         super.onStart();
 
+        /*
         userid = UserData.getInstance().getUserid();//
 
         fridgedb = database.getReference().child("user").child(userid).child("fridge");
@@ -187,6 +188,8 @@ public class Fridge extends Fragment {
 
             }
         });
+        */
+
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         adapter_refidge = new Fridge_Adapter(fridgeItems);
