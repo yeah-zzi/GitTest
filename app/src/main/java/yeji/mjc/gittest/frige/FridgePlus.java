@@ -117,7 +117,7 @@ public class FridgePlus extends AppCompatActivity implements View.OnClickListene
         String productName = getIntent().getStringExtra("productName");
         foodName.setText(productName);
 
-
+        //
         calendarBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
