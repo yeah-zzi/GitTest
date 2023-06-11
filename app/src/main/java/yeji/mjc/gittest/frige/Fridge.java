@@ -214,11 +214,7 @@ public class Fridge extends Fragment{
         adapter_refidge = new Fridge_Adapter(fridgeItems);
         recyclerView.setAdapter(adapter_refidge);
 
-        Frozen_Fridge frozenFridgeFragment = new Frozen_Fridge();
-        ArrayList<Fridge_Item> frozenItems = frozenFridgeFragment.getFrozenFridgeItems();
 
-        fridgeItems.addAll(frozenItems);
-        recyclerView.getAdapter().notifyDataSetChanged();
 
     }
 
