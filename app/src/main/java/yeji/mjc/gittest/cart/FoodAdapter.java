@@ -18,15 +18,18 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import yeji.mjc.gittest.R;
+import yeji.mjc.gittest.UserData;
 
 public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
 
     ArrayList<FoodItem> items;
-    private int count =1;
+
 
     FirebaseDatabase database = FirebaseDatabase.getInstance(); // 파이어베이스 저장소 객체
     DatabaseReference cartdb, cartdeleteditems;
-    String userid = "2810839655";
+    String userid ;
+    int count =1;
+
 
     public FoodAdapter(ArrayList<FoodItem> items) {
         this.items = items;
@@ -37,10 +40,14 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
     public Food_recycle_holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_recyclerview,parent,false);
         return new Food_recycle_holder(v); //오징어 이미지 수정
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull Food_recycle_holder holder, int position) {
+        //로그인 시 아이디값 변수 받아오기
+        userid = UserData.getInstance().getUserid();
+
         holder.foodName.setText(items.get(position).getName());
         holder.foodNum.setText(items.get(position).getNum());
         holder.checkBox.setChecked(items.get(position).isCheckBox());
@@ -51,7 +58,13 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
             public void onClick(View v) {
                 if(count>1) {
                 count--;
-                holder.foodNum.setText(count+"개"); }
+                holder.foodNum.setText(count+"");
+
+                    // 파이어베이스에서 해당 아이템의 값을 업데이트
+                    String itemName = items.get(holder.getAdapterPosition()).getName();
+                    DatabaseReference cartdb = database.getReference().child("user").child(userid).child("cart");
+                    cartdb.child(itemName).child("food_count").setValue(String.valueOf(count));
+                }
             }
         });
 
@@ -59,7 +72,12 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
             @Override
             public void onClick(View v) {
                 count++;
-                holder.foodNum.setText(count+"개");
+                holder.foodNum.setText(count+"");
+
+                // 파이어베이스에서 해당 아이템의 값을 업데이트
+                String itemName = items.get(holder.getAdapterPosition()).getName();
+                DatabaseReference cartdb = database.getReference().child("user").child(userid).child("cart");
+                cartdb.child(itemName).child("food_count").setValue(String.valueOf(count));
             }
         });
 
