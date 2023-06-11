@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import yeji.mjc.gittest.R;
 public class Select_date extends AppCompatActivity {
 
     TextView selectedDateText;
+    CalendarView calendarView;
     Button complete;
 
     @Override
@@ -29,6 +31,7 @@ public class Select_date extends AppCompatActivity {
         setContentView(R.layout.date_expiry);
 
         selectedDateText = findViewById(R.id.selectedDateText);
+        calendarView = findViewById(R.id.calendarView);
         complete = findViewById(R.id.complete);
 
         // 현재 날짜로 초기화
@@ -56,7 +59,6 @@ public class Select_date extends AppCompatActivity {
                 }
         );
 
-
         complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,6 +70,14 @@ public class Select_date extends AppCompatActivity {
                 intent.putExtra("DEADLINE", selectedDate);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        // MaterialDatePicker를 표시
+        calendarView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                materialDatePicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
             }
         });
     }

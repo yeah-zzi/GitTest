@@ -1,10 +1,13 @@
 package yeji.mjc.gittest.frige;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -20,6 +23,12 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
     ArrayList<Fridge_Item> fridgeItems;
     int count = 0;
 
+    private int[] gaugeColors = {
+            Color.rgb(225, 0, 0),
+            Color.rgb(250, 156, 0),
+            Color.rgb(255, 213, 0),
+            Color.rgb(100, 191, 0)
+    };
 
     public Fridge_Adapter(ArrayList<Fridge_Item> fridgeItems) {
         this.fridgeItems = fridgeItems;
@@ -33,6 +42,15 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
     @Override
     public void onBindViewHolder(@NonNull Fridge_recycle_holder holder, int position) {
 
+        int progress = fridgeItems.get(position).getProgress();
+        int colorIndex = progress / 25; // 게이지 값에 따라 색상 인덱스 계산
+        int gaugeColor = gaugeColors[colorIndex]; // 배열에서 해당하는 색상 가져오기
+
+        holder.progressbar.setProgress(progress);
+        holder.progressbar.setProgressTintList(ColorStateList.valueOf(gaugeColor));
+
+
+
         int itemPosition = holder.getAdapterPosition();
         //아이템의 위치를 동적으로 가져옴.
         fridge_adapter = this; // fridge_adapter 객체 초기화
@@ -41,7 +59,7 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
         holder.food_name.setText(fridgeItems.get(position).getFood_name());
         holder.food_count.setText(fridgeItems.get(position).getFood_count());
         holder.food_date.setText(fridgeItems.get(position).getFood_date());
-        holder.progressBar.setProgress(fridgeItems.get(position).getProgress());
+        holder.progressbar.setProgress(fridgeItems.get(position).getProgress());
 
 
 
