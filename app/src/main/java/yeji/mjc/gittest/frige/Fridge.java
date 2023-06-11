@@ -30,6 +30,7 @@ import com.kakao.sdk.user.model.User;
 import java.util.ArrayList;
 
 import yeji.mjc.gittest.FoodSearch.Product;
+import yeji.mjc.gittest.MainActivity;
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.UserData;
 import yeji.mjc.gittest.frige.Data_Item;
@@ -51,16 +52,17 @@ public class Fridge extends Fragment{
     public RecyclerView recyclerView;
     public RecyclerView.Adapter adapter_refidge;
     public ArrayList<Fridge_Item> fridgeItems = new ArrayList<Fridge_Item>();
-    public ArrayList<FoodItem> foodItems = new ArrayList<FoodItem>();
 
     public FoodAdapter foodAdapter;
-    public CartAdapter cartAdapter;
 
 
     FirebaseDatabase database = FirebaseDatabase.getInstance(); // 파이어베이스 저장소 객체
     DatabaseReference fridgedb;
     ArrayList<FoodItem> items;
     String userid;
+
+
+
 
     @Override
     public void setEnterTransition(@Nullable Object transition) {
@@ -79,6 +81,7 @@ public class Fridge extends Fragment{
         recyclerView.setAdapter(foodAdapter);
 
         recyclerView.setHasFixedSize(true);
+
 
 
 
@@ -157,10 +160,18 @@ public class Fridge extends Fragment{
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // 선택된 정렬 기준에 따라 Fridge_Adapter의 setSortType 메서드를 호출
                 switch (position) {
-                    case 1: // 이름 오름차순
-                        ((Fridge_Adapter) adapter_refidge).setSortType(Fridge_Adapter.SortType.NAME_ASCENDING);
+                    case 0: //추가순
+                        ((Fridge_Adapter) adapter_refidge).
+                                setSortType(Fridge_Adapter.SortType.ADD_ASCENDING);
+                        break;
+                    case 1: //이름순
+                        ((Fridge_Adapter) adapter_refidge).
+                                setSortType(Fridge_Adapter.SortType.NAME_ASCENDING);
+                        break;
+                    case 2: //유통기한순
+                        ((Fridge_Adapter) adapter_refidge).
+                                setSortType(Fridge_Adapter.SortType.DATE_ASCENDING);
                         break;
                 }
             }
@@ -193,20 +204,25 @@ public class Fridge extends Fragment{
     public void onStart() {
         super.onStart();
 
-        fridgeItems.add(new Fridge_Item(R.drawable.potato,"감자","5개","D-16",60));
-        fridgeItems.add(new Fridge_Item(R.drawable.fdsaf,"베이컨","2개","D-20",76));
-        fridgeItems.add(new Fridge_Item(R.drawable.chilli,"고추","10개","D-2",20));
-        fridgeItems.add(new Fridge_Item(R.drawable.carrot,"당근","6개","D-31",76));
-        fridgeItems.add(new Fridge_Item(R.drawable.gazi,"가지","1개","D-6", 40));
 
+        fridgeItems.add(new Fridge_Item(R.drawable.carrot,"당근","6개","D-31",50));
+        fridgeItems.add(new Fridge_Item(R.drawable.gazi,"가지","1개","D-6", 50));
+        fridgeItems.add(new Fridge_Item(R.drawable.potato,"감자","5개","D-16",50));
+        fridgeItems.add(new Fridge_Item(R.drawable.fdsaf,"베이컨","2개","D-10",50));
+        fridgeItems.add(new Fridge_Item(R.drawable.chilli,"고추","10개","D-2",50));
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         adapter_refidge = new Fridge_Adapter(fridgeItems);
         recyclerView.setAdapter(adapter_refidge);
 
+        Frozen_Fridge frozenFridgeFragment = new Frozen_Fridge();
+        ArrayList<Fridge_Item> frozenItems = frozenFridgeFragment.getFrozenFridgeItems();
+
+        fridgeItems.addAll(frozenItems);
+        recyclerView.getAdapter().notifyDataSetChanged();
 
     }
 
-
-
 }
+
+

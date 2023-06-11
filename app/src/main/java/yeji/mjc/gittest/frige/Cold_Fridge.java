@@ -37,7 +37,7 @@ public class Cold_Fridge extends Fragment{
     //리사이클러뷰 변수 선언
     public RecyclerView recyclerView;
     public RecyclerView.Adapter adapter_refidge;
-    public ArrayList<Fridge_Item> fridgeItems = new ArrayList<Fridge_Item>();
+    public ArrayList<Fridge_Item> coldFridgeItems = new ArrayList<Fridge_Item>();
 
 
     @Override
@@ -51,7 +51,7 @@ public class Cold_Fridge extends Fragment{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fridge_main, container, false);
 
-        adapter_refidge = new Fridge_Adapter(fridgeItems);
+        adapter_refidge = new Fridge_Adapter(coldFridgeItems);
 
         recyclerView = view.findViewById(R.id.fridgeRecyclerView);
         recyclerView.setHasFixedSize(true);
@@ -84,14 +84,23 @@ public class Cold_Fridge extends Fragment{
             }
         });
 
+
         Spinner spinner = view.findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // 선택된 정렬 기준에 따라 Fridge_Adapter의 setSortType 메서드를 호출
                 switch (position) {
-                    case 1: // 이름 오름차순
-                        ((Fridge_Adapter) adapter_refidge).setSortType(Fridge_Adapter.SortType.NAME_ASCENDING);
+                    case 0: //추가순
+                        ((Fridge_Adapter) adapter_refidge).
+                                setSortType(Fridge_Adapter.SortType.ADD_ASCENDING);
+                        break;
+                    case 1: //이름순
+                        ((Fridge_Adapter) adapter_refidge).
+                                setSortType(Fridge_Adapter.SortType.NAME_ASCENDING);
+                        break;
+                    case 2: //유통기한순
+                        ((Fridge_Adapter) adapter_refidge).
+                                setSortType(Fridge_Adapter.SortType.DATE_ASCENDING);
                         break;
                 }
             }
@@ -111,10 +120,12 @@ public class Cold_Fridge extends Fragment{
     public void onStart(){
         super.onStart();
 
-
+        coldFridgeItems.add(new Fridge_Item(R.drawable.potato,"감자","5개","D-16",50));
+        coldFridgeItems.add(new Fridge_Item(R.drawable.fdsaf,"베이컨","2개","D-10",50));
+        coldFridgeItems.add(new Fridge_Item(R.drawable.chilli,"고추","10개","D-2",50));
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
-        adapter_refidge = new Fridge_Adapter(fridgeItems); // 수정: adapter_refidge 초기화
+        adapter_refidge = new Fridge_Adapter(coldFridgeItems); // 수정: adapter_refidge 초기화
         recyclerView.setAdapter(adapter_refidge);
     }
 }
