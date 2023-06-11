@@ -25,10 +25,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.kakao.sdk.user.model.User;
 
 import java.util.ArrayList;
 
+import yeji.mjc.gittest.AllergyItem;
 import yeji.mjc.gittest.FoodSearch.Product;
 import yeji.mjc.gittest.MainActivity;
 import yeji.mjc.gittest.R;
@@ -56,10 +59,12 @@ public class Fridge extends Fragment{
     public FoodAdapter foodAdapter;
 
 
+    //FireBase DB 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance(); // 파이어베이스 저장소 객체
     DatabaseReference fridgedb;
-    ArrayList<FoodItem> items;
-    String userid;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference reference = storage.getReference(); // 저장소 레퍼런스 객체 : storage 를 사용해 저장 위치를 설정
+    String userid,startDate,changeDate,fridge_type="";
 
 
 
@@ -72,7 +77,9 @@ public class Fridge extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
+        userid = UserData.getInstance().getUserid();
+
         View view = inflater.inflate(R.layout.fridge_main, container, false);
         recyclerView = view.findViewById(R.id.fridgeRecyclerView);
 
@@ -82,7 +89,6 @@ public class Fridge extends Fragment{
 
         recyclerView.setHasFixedSize(true);
 
-        userid = UserData.getInstance().getUserid();
 
 
         Button fridge_main = view.findViewById(R.id.fridge_main);
@@ -127,33 +133,6 @@ public class Fridge extends Fragment{
         });
 
 
-        // 로그인 시 아이디값 변수 받아오기
-        userid = UserData.getInstance().getUserid();
-
-//        // 파이어베이스에 저장되어 있는 냉장고
-//        fridgedb = database.getReference().child("user").child(userid).child("fridge");
-//        fridgedb.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
-//                fridgeItems.clear(); // 기존 배열리스트가 존재하지 않게 초기화
-//                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-//                    Fridge_Item fridge_item = snapshot1.getValue(Fridge_Item.class);
-//                    if (fridge_item != null) {
-//                        // Data_Item의 값이 null이 아닌 경우에만 Fridge_Item 객체를 생성
-//                        Fridge_Item fridgeItem = new Fridge_Item(fridge_item);
-//                        fridgeItems.add(fridgeItem);
-//                    }
-//                }
-//                recyclerView.getAdapter().notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                // 디비를 가져오다 오류 발생시
-//            }
-//        });
-
 
         Spinner spinner = view.findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -181,20 +160,23 @@ public class Fridge extends Fragment{
             }
         });
 
-        /*
-        if (fridgeItems.isEmpty()) {
-            // fridgeItems가 비어있으면 null_fridge.xml을 inflate하여 사용
-            View nullView = inflater.inflate(R.layout.null_fridge_main, container, false);
-            return nullView;
-        } else {
-            // fridgeItems가 비어있지 않으면 아이템을 RecyclerView에 표시
-            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-            adapter_refidge = new Fridge_Adapter(fridgeItems);
-            recyclerView.setAdapter(adapter_refidge);
-            recyclerView.setHasFixedSize(true);
+        fridgedb = database.getReference().child("user").child(userid).child("fridge");
+        fridgedb.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                fridgeItems.clear();
+                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                    Fridge_Item Item = snapshot1.getValue(Fridge_Item.class);
+                    fridgeItems.add(Item);
+                }
+                recyclerView.getAdapter().notifyDataSetChanged();
+            }
 
-        }
-        */
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // 디비를 가져오다 오류 발생시
+            }
+        });
 
         return view;
 

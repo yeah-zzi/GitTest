@@ -110,6 +110,7 @@ public class CartPlus extends AppCompatActivity {
                 //파이어베이스에 정보를 저장한다
                 name = foodName.getText().toString();
                 count = foodCount.getText().toString();
+
                 cartDB = database.getReference().child("user").child(userid).child("cart").child(name);
                 cartDB.child("food_name").setValue(name);
                 cartDB.child("food_count").setValue(count);
