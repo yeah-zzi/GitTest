@@ -28,8 +28,8 @@
         app:layout_constraintRight_toRightOf="@+id/back">
         <ImageView
             android:id="@+id/food_img"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:scaleType="fitCenter"
             android:src="@drawable/healthy_food"
             android:layout_gravity="center" />
@@ -58,14 +58,17 @@
             android:layout_height="wrap_content"
             android:text="이름"
             android:textSize="18dp"
+            android:layout_gravity="center"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_marginTop="3dp"
             android:layout_marginStart="15dp"/>
         <EditText
             android:id="@+id/search_food_name"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:layout_gravity="center"
             android:textColor="@color/gray"
             android:textSize="18dp"
             android:layout_marginTop="2dp"
@@ -88,13 +91,16 @@
             android:textSize="18dp"
             android:textStyle="bold"
             android:textColor="@color/black"
+            android:layout_gravity="center"
             android:layout_marginTop="3dp"
             android:layout_marginStart="15dp"/>
         <EditText
             android:id="@+id/search_food_count"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:textSize="18dp"
+            android:background="@null"
             android:textColor="@color/gray"
             android:layout_marginTop="2dp"
             android:layout_marginStart="15dp"/>

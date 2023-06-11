@@ -16,6 +16,9 @@ public class Fridge_Item {
         this.progress = progress;
     }
 
+    public Fridge_Item(Fridge_Item fridge_item) {
+    }
+
 
     public int getFood_img() {
         return food_img;
