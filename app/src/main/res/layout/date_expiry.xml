@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="350dp"
+        android:layout_height="570dp"
+        android:background="@drawable/fridge_food_card"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+    <TextView
+        android:id="@+id/message1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="유통기한 선택"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginTop="17dp"
+        app:layout_constraintRight_toRightOf="@id/back"
+        app:layout_constraintLeft_toLeftOf="@id/back"
+        app:layout_constraintTop_toTopOf="@id/back"/>
+
+    <ImageView
+        android:id="@+id/image1"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="17dp"
+        android:src="@drawable/healthy_food"
+        app:layout_constraintRight_toRightOf="@id/back"
+        app:layout_constraintLeft_toLeftOf="@id/back"
+        app:layout_constraintTop_toBottomOf="@id/message1"/>
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="날짜 선택"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:textColor="@color/dialogColor"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        app:layout_constraintLeft_toLeftOf="@id/back"
+        app:layout_constraintTop_toBottomOf="@id/image1"/>
+
+
+    <TextView
+        android:id="@+id/selectedDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        app:layout_constraintRight_toRightOf="@id/back"
+        app:layout_constraintLeft_toLeftOf="@id/back"
+        app:layout_constraintTop_toBottomOf="@id/text1"/>
+
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/text1"
+        app:layout_constraintBottom_toTopOf="@+id/complete" />
+
+    <Button
+        android:id="@+id/complete"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:backgroundTint="#FFAF10"
+        android:text="확인"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintRight_toRightOf="@id/back"
+        app:layout_constraintLeft_toLeftOf="@id/back"
+        app:layout_constraintBottom_toBottomOf="@id/back"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

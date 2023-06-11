@@ -83,6 +83,7 @@
         <activity android:name=".FoodSearch.Allergy" android:theme="@style/DialogTheme"/>
         <activity android:name=".comunity.TipComment" />
         <activity android:name=".frige.FridgePlus" android:theme="@style/DialogTheme"/>
+        <activity android:name=".frige.Select_date" android:theme="@style/DialogTheme"/>
         <activity android:name=".FoodSearch.Food_expiry" android:theme="@style/DialogTheme"/>
         <activity android:name=".comunity.FightGo" android:theme="@style/DialogTheme"/>
         <activity android:name=".comunity.New_fight_sub" android:theme="@style/DialogTheme"></activity>

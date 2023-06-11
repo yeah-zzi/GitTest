@@ -5,15 +5,16 @@ public class Fridge_Item {
     String food_name;
     String food_count;
     String food_date;
+    int progress;
 
 
-    public Fridge_Item(int food_img, String food_name, String food_count, String food_date) {
+    public Fridge_Item(int food_img, String food_name, String food_count, String food_date, int progress) {
         this.food_img = food_img;
         this.food_name = food_name;
         this.food_count = food_count;
         this.food_date = food_date;
+        this.progress = progress;
     }
-
 
 
     public int getFood_img() {
@@ -50,4 +51,13 @@ public class Fridge_Item {
     public void setFood_date(String food_date) {
         this.food_date = food_date;
     }
+
+    public int getProgress() {
+        return progress;
+    }
+
+    public void setProgress(int progress) {
+        this.progress = progress;
+    }
+
 }

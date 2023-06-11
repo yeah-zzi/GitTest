@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean community = false;
     boolean from_comm = false;
 
+
+
     // 하단바 연결
     BottomNavigationView bottomNavigationView; // 바텀 네비게이션 뷰
 

@@ -111,10 +111,7 @@ public class Cold_Fridge extends Fragment{
     public void onStart(){
         super.onStart();
 
-        fridgeItems.add(new Fridge_Item(R.drawable.potato,"감자","5개","D-16"));
-        fridgeItems.add(new Fridge_Item(R.drawable.gazi,"가지","1개","D-7"));
-        fridgeItems.add(new Fridge_Item(R.drawable.godung,"고등어","2개","D-2"));
-        fridgeItems.add(new Fridge_Item(R.drawable.corn,"옥수수","1개","D-21"));
+
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
         adapter_refidge = new Fridge_Adapter(fridgeItems); // 수정: adapter_refidge 초기화

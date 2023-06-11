@@ -54,6 +54,8 @@ public class Fridge extends Fragment{
     public FoodAdapter foodAdapter;
     public CartAdapter cartAdapter;
 
+    int progressBar;
+
     FirebaseDatabase database = FirebaseDatabase.getInstance(); // 파이어베이스 저장소 객체
     DatabaseReference fridgedb;
     ArrayList<FoodItem> items;
@@ -77,6 +79,8 @@ public class Fridge extends Fragment{
 
         recyclerView.setHasFixedSize(true);
 
+        //progressBar = view.findViewById(R.id.progressbar);
+        //int progress = 50;
 
         Button fridge_main = view.findViewById(R.id.fridge_main);
         Button fridge_cold = view.findViewById(R.id.fridge_cold);
@@ -182,6 +186,21 @@ public class Fridge extends Fragment{
         }
         */
 
+        /*
+        int progressColor;
+        if (progress < 25) {
+            progressColor = getResources().getColor(R.color.colorRed);
+        } else if (progress < 50) {
+            progressColor = getResources().getColor(R.color.colorYellow);
+        } else if (progress < 75) {
+            progressColor = getResources().getColor(R.color.colorGreen);
+        } else {
+            progressColor = getResources().getColor(R.color.colorBlue);
+        }
+
+        progressBar.getProgressDrawable().setColorFilter(progressColor, PorterDuff.Mode.SRC_IN);
+        */
+
         return view;
 
 
@@ -190,11 +209,11 @@ public class Fridge extends Fragment{
     public void onStart() {
         super.onStart();
 
-        fridgeItems.add(new Fridge_Item(R.drawable.potato,"감자","5개","D-16"));
-        fridgeItems.add(new Fridge_Item(R.drawable.fdsaf,"베이컨","2개","D-20"));
-        fridgeItems.add(new Fridge_Item(R.drawable.chilli,"고추","10개","D-5"));
-        fridgeItems.add(new Fridge_Item(R.drawable.carrot,"당근","6개","D-30"));
-        fridgeItems.add(new Fridge_Item(R.drawable.gazi,"가지","1개","D-7"));
+        fridgeItems.add(new Fridge_Item(R.drawable.potato,"감자","5개","D-16",15));
+        fridgeItems.add(new Fridge_Item(R.drawable.fdsaf,"베이컨","2개","D-20",56));
+        fridgeItems.add(new Fridge_Item(R.drawable.chilli,"고추","10개","D-5",26));
+        fridgeItems.add(new Fridge_Item(R.drawable.carrot,"당근","6개","D-30",92));
+        fridgeItems.add(new Fridge_Item(R.drawable.gazi,"가지","1개","D-7", 45));
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         adapter_refidge = new Fridge_Adapter(fridgeItems);

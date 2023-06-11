@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.SelectListener;
 import yeji.mjc.gittest.cart.CartPlus;
+import yeji.mjc.gittest.frige.FridgePlus;
 
 
 public class FoodSearch extends Activity implements View.OnClickListener, SelectListener {
@@ -32,7 +33,7 @@ public class FoodSearch extends Activity implements View.OnClickListener, Select
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = database.getReference();
     DatabaseReference addfoodDB , cartDB;
-    String userid;
+    String userid="임시용 유저 아이디1";
 
 
     TextView foodName;
@@ -229,10 +230,20 @@ public class FoodSearch extends Activity implements View.OnClickListener, Select
         int fb_food_img = myModel.getFood_img();
         String fb_food_name = myModel.getFood_name();
 
+        //냉장고
+        int fridge_food_img = myModel.getFood_img();
+        String fridge_food_name = myModel.getFood_name();
+
+        Intent fridgeIntent = new Intent(getApplicationContext(), FridgePlus.class);
+        fridgeIntent.putExtra("이미지",fridge_food_img);
+        fridgeIntent.putExtra("이름",fridge_food_name);
+        setResult(RESULT_OK,fridgeIntent);
+        finish();
+
+
         //장바구니
         int cart_food_img = myModel.getFood_img();
         String cart_food_name = myModel.getFood_name();
-
 
         Intent cartIntent = new Intent(getApplicationContext(), CartPlus.class);
         cartIntent.putExtra("이미지",cart_food_img);
