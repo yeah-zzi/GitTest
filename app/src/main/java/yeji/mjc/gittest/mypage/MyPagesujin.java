@@ -1,5 +1,7 @@
 package yeji.mjc.gittest.mypage;
 
+import static com.google.android.material.color.utilities.MaterialDynamicColors.error;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -31,12 +33,13 @@ import yeji.mjc.gittest.FoodSearch.AllergyAdapter;
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.LoginActivity;
 import yeji.mjc.gittest.UserData;
+import yeji.mjc.gittest.comunity.FBTabItem;
 import yeji.mjc.gittest.register.RegisterAllergyAdapter;
 
 public class MyPagesujin extends Fragment {
     Button logoutBtn;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference allergyDB;
+    DatabaseReference allergyDB, fbdDB;
     public String userid = UserData.getInstance().getUserid();
 
     private ImageView profile, myprofile, profile1, profile2;
@@ -105,7 +108,6 @@ public class MyPagesujin extends Fragment {
 
 
 
-
         User.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,8 +143,36 @@ public class MyPagesujin extends Fragment {
                 //디비를 가져오다 오류 발생시
             }
         });
+
+        //파이어베이스에 저장되어 있는 회원의 진행중인 집밥대결 정보 중 대결친구 이미지 정보를 받아온다 (최대 2명 표시)
+        fbdDB = database.getReference().child("user").child(userid).child("foodbattle_code").child("fb_friend_img");
+        fbdDB.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //파이어베이스 데이터베이스의 데이터를 받아오는 곳
+                if(snapshot.exists()){
+                    int count=0;
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()){
+                        String friend_img ="";
+                        friend_img = snapshot1.getValue(String.class);
+                        if(friend_img != ""){
+                            count++;
+                            if(count==1) Glide.with(getContext()).load(friend_img).circleCrop().into(profile1);
+                            else if(count==2) Glide.with(getContext()).load(friend_img).circleCrop().into(profile2);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         return view;
     }
+
 
     @Override
     public void onStart() {

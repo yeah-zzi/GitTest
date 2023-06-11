@@ -17,12 +17,12 @@ public class Mypage_Post extends Fragment {
        View view = inflater.inflate(R.layout.fragment_post , container, false);
        View backbtn = view.findViewById(R.id.backbtn);
        View delete_post = view.findViewById(R.id.delete_post);
-       View good_post = view.findViewById(R.id.good_post);
+       View heart_post = view.findViewById(R.id.heart_post);
 
        backbtn.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               getFragmentManager().beginTransaction().replace(R.id.bellcontainer, new MyPagesujin()).commit();
+               getFragmentManager().beginTransaction().replace(R.id.postcontainer, new MyPagesujin()).commit();
                return;
            }
        });
@@ -31,13 +31,17 @@ public class Mypage_Post extends Fragment {
            @Override
            public void onClick(View v) {
                //TODO 유저가 업로드한 게시물 리사이클러뷰로 보여지는 XML 연결
+               getFragmentManager().beginTransaction().replace(R.id.postcontainer, new DeletePost()).commit();
+               return;
            }
        });
 
-       good_post.setOnClickListener(new View.OnClickListener() {
+       heart_post.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                //TODO 유저가 좋아요 누른 게시물 리사이클러뷰로 보여지는 XML 연결
+               getFragmentManager().beginTransaction().replace(R.id.postcontainer, new HeartPost()).commit();
+               return;
            }
        });
 
