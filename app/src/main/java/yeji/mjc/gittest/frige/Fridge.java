@@ -162,7 +162,7 @@ public class Fridge extends Fragment {
     public void onStart() {
         super.onStart();
 
-        userid = UserData.getInstance().getUserid();
+        userid = UserData.getInstance().getUserid();//
 
         fridgedb = database.getReference().child("user").child(userid).child("fridge");
         fridgedb.addValueEventListener(new ValueEventListener() {
