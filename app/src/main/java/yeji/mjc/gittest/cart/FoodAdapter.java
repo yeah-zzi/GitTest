@@ -56,9 +56,12 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
         holder.minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                int count = Integer.parseInt(items.get(position).getNum());
                 if(count>1) {
-                count--;
-                holder.foodNum.setText(count+"");
+                    count--;
+                    items.get(position).setNum(String.valueOf(count));
+                    holder.foodNum.setText(String.valueOf(count));
 
                     // 파이어베이스에서 해당 아이템의 값을 업데이트
                     String itemName = items.get(holder.getAdapterPosition()).getName();
@@ -71,8 +74,11 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
         holder.plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                int count = Integer.parseInt(items.get(position).getNum());
                 count++;
-                holder.foodNum.setText(count+"");
+                items.get(position).setNum(String.valueOf(count));
+                holder.foodNum.setText(String.valueOf(count));
 
                 // 파이어베이스에서 해당 아이템의 값을 업데이트
                 String itemName = items.get(holder.getAdapterPosition()).getName();
