@@ -56,7 +56,7 @@ public class Ready extends AppCompatActivity implements FBListener {
 
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(new ReadyAdapter(items, this));
 
         complete = findViewById(R.id.complete);
