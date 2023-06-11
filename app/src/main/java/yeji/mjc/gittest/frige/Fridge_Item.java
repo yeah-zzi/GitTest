@@ -17,10 +17,16 @@ public class Fridge_Item {
         this.progress = progress;
     }
 
+    public Fridge_Item() {
+    }
+
     public Fridge_Item(Fridge_Item fridge_item) {
     }
 
     public Fridge_Item(String food_name, String food_count, String food_img, boolean b) {
+    }
+
+    public Fridge_Item(String foodName, String foodCount, String foodImgPath, String foodDate, String fridgeType) {
     }
 
 
