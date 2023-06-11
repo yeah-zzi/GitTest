@@ -43,12 +43,4 @@ public class CartItem {
         this.food_img = food_img;
     }
 
-    public int getFoodCountAsInt() {
-        try {
-            return Integer.parseInt(food_count);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-            return 1;
-        }
-    }
 }

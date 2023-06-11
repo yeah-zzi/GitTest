@@ -9,6 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -18,6 +23,10 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
 
     ArrayList<FoodItem> items;
     private int count =1;
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance(); // 파이어베이스 저장소 객체
+    DatabaseReference cartdb, cartdeleteditems;
+    String userid = "2810839655";
 
     public FoodAdapter(ArrayList<FoodItem> items) {
         this.items = items;
@@ -42,7 +51,7 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
             public void onClick(View v) {
                 if(count>1) {
                 count--;
-                holder.foodNum.setText(count+"개"); }
+                holder.foodNum.setText(count); }
             }
         });
 
@@ -50,7 +59,7 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
             @Override
             public void onClick(View v) {
                 count++;
-                holder.foodNum.setText(count+"개");
+                holder.foodNum.setText(count);
             }
         });
 
