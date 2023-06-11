@@ -131,7 +131,7 @@ public class Cartsujin extends Fragment {
 
                         //복구
                         Snackbar.make(recyclerView, deleteItem.getName(), Snackbar.LENGTH_LONG)
-                                .setAction("복구", new View.OnClickListener(){
+                                .setAction("복구", new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
 
@@ -140,9 +140,9 @@ public class Cartsujin extends Fragment {
                                         CartItem decartItem = new CartItem(deleteItem.getName(), deleteItem.getNum(), deleteItem.getImg());
                                         cartDbRef1.child(itemName).setValue(decartItem);
 
-                                            foodItems.add(position, deleteItem);
-                                            foodAdapter.addItem(position, deleteItem);
-                                            foodAdapter.notifyItemInserted(position);
+                                        foodItems.add(position, deleteItem);
+                                        foodAdapter.addItem(position, deleteItem);
+                                        foodAdapter.notifyItemInserted(position);
 
 
                                         // 복구된 아이템을 cartdb에 추가 (복구)
@@ -152,9 +152,10 @@ public class Cartsujin extends Fragment {
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                 //파이어베이스 데이터베이스의 데이터를 받아오는 곳
                                                 //foodItems.clear();   //기존 배열리스트가 존재하지 않게 초기화
-                                                for (DataSnapshot snapshot1 : snapshot.getChildren()){
+                                                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                                                     FoodItem decartItem = snapshot1.getValue(FoodItem.class);
                                                     foodItems.add(decartItem);
+
                                                 }
                                                 recyclerView.getAdapter().notifyDataSetChanged();
                                             }
