@@ -1,5 +1,6 @@
 package yeji.mjc.gittest.frige;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -70,14 +71,6 @@ public class Select_date extends AppCompatActivity {
                 intent.putExtra("DEADLINE", selectedDate);
                 startActivity(intent);
                 finish();
-            }
-        });
-
-        // MaterialDatePicker를 표시
-        calendarView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                materialDatePicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
             }
         });
     }

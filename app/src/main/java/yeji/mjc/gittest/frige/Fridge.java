@@ -185,25 +185,27 @@ public class Fridge extends Fragment{
         }
         */
 
-
         return view;
-
 
     }
 
     public void onStart() {
         super.onStart();
 
-        fridgeItems.add(new Fridge_Item(R.drawable.potato,"감자","5개","D-16",22));
+        fridgeItems.add(new Fridge_Item(R.drawable.potato,"감자","5개","D-16",60));
         fridgeItems.add(new Fridge_Item(R.drawable.fdsaf,"베이컨","2개","D-20",76));
-        fridgeItems.add(new Fridge_Item(R.drawable.chilli,"고추","10개","D-5",35));
-        fridgeItems.add(new Fridge_Item(R.drawable.carrot,"당근","6개","D-30",56));
-        fridgeItems.add(new Fridge_Item(R.drawable.gazi,"가지","1개","D-7", 24));
+        fridgeItems.add(new Fridge_Item(R.drawable.chilli,"고추","10개","D-2",20));
+        fridgeItems.add(new Fridge_Item(R.drawable.carrot,"당근","6개","D-31",76));
+        fridgeItems.add(new Fridge_Item(R.drawable.gazi,"가지","1개","D-6", 40));
+
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         adapter_refidge = new Fridge_Adapter(fridgeItems);
         recyclerView.setAdapter(adapter_refidge);
+
+
     }
+
 
 
 }

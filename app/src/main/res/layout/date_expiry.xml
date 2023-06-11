@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/back"
         android:layout_width="350dp"
-        android:layout_height="570dp"
+        android:layout_height="620dp"
         android:background="@drawable/fridge_food_card"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -51,13 +51,12 @@
         app:layout_constraintLeft_toLeftOf="@id/back"
         app:layout_constraintTop_toBottomOf="@id/image1"/>
 
-
     <TextView
         android:id="@+id/selectedDateText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textColor="#979797"
+        android:textSize="15sp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         app:layout_constraintRight_toRightOf="@id/back"
@@ -67,7 +66,8 @@
     <CalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="320dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@+id/text1"
         app:layout_constraintBottom_toTopOf="@+id/complete" />
 

@@ -52,7 +52,7 @@
         android:indeterminate="false"
         android:max="100"
         android:progress="72"
-        android:progressBackgroundTint="#A1A1A1"
+        android:progressBackgroundTint="#C3C3C3"
         android:progressDrawable="@drawable/circle_progressbar"
         android:progressTint="@color/green"
         app:layout_constraintLeft_toLeftOf="@id/back"
