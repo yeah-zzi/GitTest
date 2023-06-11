@@ -80,7 +80,7 @@ public class Fridge extends Fragment{
 
         recyclerView.setHasFixedSize(true);
 
-
+        userid = UserData.getInstance().getUserid();
 
         Button fridge_main = view.findViewById(R.id.fridge_main);
         Button fridge_cold = view.findViewById(R.id.fridge_cold);
@@ -123,35 +123,34 @@ public class Fridge extends Fragment{
             }
         });
 
-        /*
+
         // 로그인 시 아이디값 변수 받아오기
         userid = UserData.getInstance().getUserid();
 
-        // 파이어베이스에 저장되어 있는 냉장고
-        fridgedb = database.getReference().child("user").child(userid).child("fridge");
-        fridgedb.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
-                fridgeItems.clear(); // 기존 배열리스트가 존재하지 않게 초기화
-                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                    Fridge_Item fridge_item = snapshot1.getValue(Fridge_Item.class);
-                    if (fridge_item != null) {
-                        // Data_Item의 값이 null이 아닌 경우에만 Fridge_Item 객체를 생성
-                        Fridge_Item fridgeItem = new Fridge_Item(fridge_item.getFood_img(), fridge_item.getFood_name(), fridge_item.getFood_count() + "개", "D-" + fridge_item.getFood_date());
-                        fridgeItems.add(fridgeItem);
-                    }
-                    else
-                }
-                recyclerView.getAdapter().notifyDataSetChanged();
-            }
+//        // 파이어베이스에 저장되어 있는 냉장고
+//        fridgedb = database.getReference().child("user").child(userid).child("fridge");
+//        fridgedb.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
+//                fridgeItems.clear(); // 기존 배열리스트가 존재하지 않게 초기화
+//                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+//                    Fridge_Item fridge_item = snapshot1.getValue(Fridge_Item.class);
+//                    if (fridge_item != null) {
+//                        // Data_Item의 값이 null이 아닌 경우에만 Fridge_Item 객체를 생성
+//                        Fridge_Item fridgeItem = new Fridge_Item(fridge_item);
+//                        fridgeItems.add(fridgeItem);
+//                    }
+//                }
+//                recyclerView.getAdapter().notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                // 디비를 가져오다 오류 발생시
+//            }
+//        });
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // 디비를 가져오다 오류 발생시
-            }
-        });
-*/
 
         Spinner spinner = view.findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
