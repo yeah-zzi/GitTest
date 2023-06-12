@@ -76,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //addfoodDB=database.getReference().child("user").child(userid).child("addfood");
-                /*  식재료 추가 버튼 눌렀을때 빈 페이지 불러오기
-                    addfoodDB.removeValue();*/
+                // 식재료 추가 버튼 눌렀을때 빈 페이지 불러오기
+                //addfoodDB.removeValue();
 
                 //냉장고 식재료 추가 페이지로 이동 (FridgePlus.class)
                 Intent FridgePlusintent = new Intent(MainActivity.this, FridgePlus.class);

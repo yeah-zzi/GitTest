@@ -1,14 +1,14 @@
 package yeji.mjc.gittest.frige;
 
-public class Fridge_Item {
-    int food_img;
+public class New_Item {
+    String food_img;
     String food_name;
     String food_count;
     String food_date;
     String fridge_type;
     int progress;
 
-    public Fridge_Item(int food_img, String food_name, String food_count, String food_date, String fridge_type, int progress) {
+    public New_Item(String food_img, String food_name, String food_count, String food_date, String fridge_type, int progress) {
         this.food_img = food_img;
         this.food_name = food_name;
         this.food_count = food_count;
@@ -27,11 +27,11 @@ public class Fridge_Item {
         this.fridge_type = fridge_type;
     }
 
-    public int getFood_img() {
+    public String getFood_img() {
         return food_img;
     }
 
-    public void setFood_img(int food_img) {
+    public void setFood_img(String food_img) {
         this.food_img = food_img;
     }
 

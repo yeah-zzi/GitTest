@@ -77,16 +77,6 @@ public class Cold_Fridge extends Fragment{
         View fridge_cold = view.findViewById(R.id.fridge_cold);
         View fridge_frozen = view.findViewById(R.id.fridge_frozen);
 
-        if (coldFridgeItems.isEmpty()) {
-            recyclerView.setVisibility(View.GONE);
-            view.findViewById(R.id.null_fridge).setVisibility(View.VISIBLE);
-        } else {
-            recyclerView.setVisibility(View.VISIBLE);
-            view.findViewById(R.id.null_fridge).setVisibility(View.GONE);
-            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-            adapter_refidge = new Fridge_Adapter(coldFridgeItems);
-            recyclerView.setAdapter(adapter_refidge);
-        }
 
         fridge_main.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,15 +108,11 @@ public class Cold_Fridge extends Fragment{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
-                    case 0: //추가순
-                        ((Fridge_Adapter) adapter_refidge).
-                                setSortType(Fridge_Adapter.SortType.ADD_ASCENDING);
-                        break;
-                    case 1: //이름순
+                    case 0: //이름순
                         ((Fridge_Adapter) adapter_refidge).
                                 setSortType(Fridge_Adapter.SortType.NAME_ASCENDING);
                         break;
-                    case 2: //유통기한순
+                    case 1: //유통기한순
                         ((Fridge_Adapter) adapter_refidge).
                                 setSortType(Fridge_Adapter.SortType.DATE_ASCENDING);
                         break;
@@ -174,6 +160,9 @@ public class Cold_Fridge extends Fragment{
     public void onStart(){
         super.onStart();
 
+        coldFridgeItems.add(new Fridge_Item(R.drawable.chilli,"고추","10개","D-32","cold",50));
+        coldFridgeItems.add(new Fridge_Item(R.drawable.carrot,"당근","6개","D-8","cold",50));
+        coldFridgeItems.add(new Fridge_Item(R.drawable.yogurt,"요거트","10개","D-35","cold",50));
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
         adapter_refidge = new Fridge_Adapter(coldFridgeItems); // 수정: adapter_refidge 초기화

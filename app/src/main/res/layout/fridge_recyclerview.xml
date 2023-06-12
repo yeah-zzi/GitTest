@@ -92,8 +92,8 @@
 
     <ImageButton
         android:id="@+id/count_plus"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+        android:layout_width="17dp"
+        android:layout_height="17dp"
         android:layout_marginLeft="5dp"
         android:adjustViewBounds="true"
         android:background="@drawable/plus"
@@ -106,8 +106,8 @@
 
     <ImageButton
         android:id="@+id/count_minus"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+        android:layout_width="17dp"
+        android:layout_height="17dp"
         android:layout_marginRight="5dp"
         android:adjustViewBounds="true"
         android:background="@drawable/minus"
