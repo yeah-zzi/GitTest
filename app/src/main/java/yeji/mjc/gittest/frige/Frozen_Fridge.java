@@ -69,6 +69,17 @@ public class Frozen_Fridge extends Fragment{
         View fridge_cold = view.findViewById(R.id.fridge_cold);
         View fridge_frozen = view.findViewById(R.id.fridge_frozen);
 
+        if (frozenFridgeItems.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            view.findViewById(R.id.null_fridge).setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            view.findViewById(R.id.null_fridge).setVisibility(View.GONE);
+            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+            adapter_refidge = new Fridge_Adapter(frozenFridgeItems);
+            recyclerView.setAdapter(adapter_refidge);
+        }
+
         fridge_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +131,31 @@ public class Frozen_Fridge extends Fragment{
             }
         });
 
+        /*
+        userid = UserData.getInstance().getUserid();
+
+        fridgedb = database.getReference().child("user").child(userid).child("fridge");
+        fridgedb.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                frozenFridgeItems.clear();
+                if (snapshot.exists()) {
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                        String fridgeType = snapshot1.child("fridge_type").getValue(String.class);
+                        if (fridgeType != null && fridgeType.equals("frozen")) {
+                            Fridge_Item item = snapshot1.getValue(Fridge_Item.class);
+                            frozenFridgeItems.add(item);
+                        }
+                    }
+                    adapter_refidge.notifyDataSetChanged();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        */
 
         return view;
 
@@ -128,38 +164,6 @@ public class Frozen_Fridge extends Fragment{
 
     public void onStart(){
         super.onStart();
-
-        /*
-
-        userid = UserData.getInstance().getUserid();
-
-        fridgedb = database.getReference().child("user").child(userid).child("fridge");
-        fridgedb.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                frozenFridgeItems.clear();
-                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                    String foodName = snapshot1.getKey();
-                    String foodCount = snapshot1.child("food_count").getValue(String.class);
-                    String foodImgPath = snapshot1.child("food_img").getValue(String.class);
-                    String foodDate = snapshot1.child("food_date").getValue(String.class);
-                    String fridgeType = snapshot1.child("fridge_type").getValue(String.class);
-
-                    if (fridgeType != null && fridgeType.equals("frozen")) {
-                        Fridge_Item item = new Fridge_Item(foodName, foodCount, foodImgPath, foodDate, fridgeType);
-                        frozenFridgeItems.add(item);
-                    }
-                }
-                adapter_refidge.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-         */
 
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
