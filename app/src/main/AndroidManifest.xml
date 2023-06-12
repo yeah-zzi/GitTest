@@ -77,7 +77,7 @@
         <activity android:name=".register.Register"/>
         <activity android:name=".cart.Cart_Map"/>
         <activity android:name=".cart.CartPlus" android:theme="@style/DialogTheme" />
-        <activity android:name=".cart.CartDialog" android:theme="@style/DialogTheme" />
+        <activity android:name=".cart.CartDialog"/>
         <activity android:name=".FoodBattle_IMG_Upload" android:theme="@style/DialogTheme"/>
         <activity android:name=".FoodSearch.FoodSearch" android:theme="@style/DialogTheme"/>
         <activity android:name=".FoodSearch.Allergy" android:theme="@style/DialogTheme"/>

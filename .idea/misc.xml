@@ -88,7 +88,7 @@
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_frozen.xml" value="0.2" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_main.xml" value="0.1" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_plus.xml" value="0.264" />
-        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_recyclerview.xml" value="0.1" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_recyclerview.xml" value="0.6" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_recyclerview_longclick.xml" value="0.4" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/homerice_battle.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GitTest/app/src/main/res/layout/life_post_items.xml" value="0.10989583333333333" />
@@ -114,6 +114,7 @@
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/bellset.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/calendar.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/community_menu.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/date_expiry.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/fight_go.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/fight_main.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/food_fight.xml" value="0.24947916666666667" />
@@ -126,6 +127,8 @@
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/fragment_tip_fragment.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/fragment_user_info_change.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_main.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/fridge_plus.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/frige_item_list.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/home_battle_main.xml" value="0.2484375" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/homerice_battle.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/layout/life_post_items.xml" value="0.24947916666666667" />

@@ -120,7 +120,7 @@
             android:textColor="@color/black"
             android:layout_marginTop="12dp"
             android:layout_marginStart="15dp"/>
-        <EditText
+        <TextView
             android:id="@+id/search_food_dead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
         android:layout_marginRight="10dp"
         app:layout_constraintRight_toRightOf="@id/deadtxt"
         app:layout_constraintBottom_toBottomOf="@+id/deadtxt"
-        app:layout_constraintTop_toTopOf="@id/deadtxt"/>
+        app:layout_constraintTop_toTopOf="@id/deadtxt" />
 
 
 
