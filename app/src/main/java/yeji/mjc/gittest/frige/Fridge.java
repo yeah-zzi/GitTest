@@ -68,7 +68,7 @@ public class Fridge extends Fragment {
     DatabaseReference fridgedb;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference reference = storage.getReference(); // 저장소 레퍼런스 객체 : storage 를 사용해 저장 위치를 설정
-    String userid, startDate, changeDate, fridge_type = "";
+    String userid="임시용 유저 아이디1", startDate, changeDate, fridge_type = "";
 
 
     @Override
@@ -99,16 +99,7 @@ public class Fridge extends Fragment {
         View select_cold = view.findViewById(R.id.select_cold);
         View select_frozen = view.findViewById(R.id.select_frozen);
 
-        if (fridgeItems.isEmpty()) {
-            recyclerView.setVisibility(View.GONE);
-            view.findViewById(R.id.null_fridge).setVisibility(View.VISIBLE);
-        } else {
-            recyclerView.setVisibility(View.VISIBLE);
-            view.findViewById(R.id.null_fridge).setVisibility(View.GONE);
-            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-            adapter_refidge = new Fridge_Adapter(fridgeItems);
-            recyclerView.setAdapter(adapter_refidge);
-        }
+
 
         fridge_main.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,15 +140,11 @@ public class Fridge extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
-                    case 0: //추가순
-                        ((Fridge_Adapter) adapter_refidge).
-                                setSortType(Fridge_Adapter.SortType.ADD_ASCENDING);
-                        break;
-                    case 1: //이름순
+                    case 0: //이름순
                         ((Fridge_Adapter) adapter_refidge).
                                 setSortType(Fridge_Adapter.SortType.NAME_ASCENDING);
                         break;
-                    case 2: //유통기한순
+                    case 1: //유통기한순
                         ((Fridge_Adapter) adapter_refidge).
                                 setSortType(Fridge_Adapter.SortType.DATE_ASCENDING);
                         break;
@@ -170,6 +157,38 @@ public class Fridge extends Fragment {
             }
         });
 
+
+        /*
+        fridgedb = database.getReference().child("user").child(userid).child("fridge");
+        fridgedb.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                fridgeItems.clear();
+                if (snapshot.exists()) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        Fridge_Item item = dataSnapshot.getValue(Fridge_Item.class);
+                        String foodCount = String.valueOf(item.getFood_count());
+                        item.setFood_count(foodCount);
+                        fridgeItems.add(item);
+                    }
+                    adapter_refidge.notifyDataSetChanged();
+
+                    if (fridgeItems.isEmpty()) {
+                        recyclerView.setVisibility(View.GONE);
+                        view.findViewById(R.id.null_fridge).setVisibility(View.VISIBLE);
+                    } else {
+                        recyclerView.setVisibility(View.VISIBLE);
+                        view.findViewById(R.id.null_fridge).setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle the error
+            }
+        });
+        */
 
         /*
         userid = UserData.getInstance().getUserid();
@@ -197,6 +216,14 @@ public class Fridge extends Fragment {
         */
 
 
+        fridgeItems.add(new Fridge_Item(R.drawable.potato,"감자","5개","D-3","frozen", 50));
+        fridgeItems.add(new Fridge_Item(R.drawable.fdsaf,"베이컨","2개","D-10","frozen",50));
+        fridgeItems.add(new Fridge_Item(R.drawable.chilli,"고추","10개","D-32","cold",50));
+        fridgeItems.add(new Fridge_Item(R.drawable.carrot,"당근","6개","D-8","cold",50));
+        fridgeItems.add(new Fridge_Item(R.drawable.gazi,"가지","1개","D-16", "frozen",50));
+        fridgeItems.add(new Fridge_Item(R.drawable.food_squid,"오징어","1개","D-2","frozen", 50));
+        fridgeItems.add(new Fridge_Item(R.drawable.yogurt,"요거트","10개","D-35","cold",50));
+        fridgeItems.add(new Fridge_Item(R.drawable.lemon,"레몬","2개","D-18","frozen",50));
 
         return view;
 
