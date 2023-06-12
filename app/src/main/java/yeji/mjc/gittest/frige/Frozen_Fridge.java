@@ -69,6 +69,8 @@ public class Frozen_Fridge extends Fragment{
         View fridge_cold = view.findViewById(R.id.fridge_cold);
         View fridge_frozen = view.findViewById(R.id.fridge_frozen);
 
+
+
         fridge_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,15 +101,11 @@ public class Frozen_Fridge extends Fragment{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
-                    case 0: //추가순
-                        ((Fridge_Adapter) adapter_refidge).
-                                setSortType(Fridge_Adapter.SortType.ADD_ASCENDING);
-                        break;
-                    case 1: //이름순
+                    case 0: //이름순
                         ((Fridge_Adapter) adapter_refidge).
                                 setSortType(Fridge_Adapter.SortType.NAME_ASCENDING);
                         break;
-                    case 2: //유통기한순
+                    case 1: //유통기한순
                         ((Fridge_Adapter) adapter_refidge).
                                 setSortType(Fridge_Adapter.SortType.DATE_ASCENDING);
                         break;
@@ -120,6 +118,31 @@ public class Frozen_Fridge extends Fragment{
             }
         });
 
+        /*
+        userid = UserData.getInstance().getUserid();
+
+        fridgedb = database.getReference().child("user").child(userid).child("fridge");
+        fridgedb.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                frozenFridgeItems.clear();
+                if (snapshot.exists()) {
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                        String fridgeType = snapshot1.child("fridge_type").getValue(String.class);
+                        if (fridgeType != null && fridgeType.equals("frozen")) {
+                            Fridge_Item item = snapshot1.getValue(Fridge_Item.class);
+                            frozenFridgeItems.add(item);
+                        }
+                    }
+                    adapter_refidge.notifyDataSetChanged();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        */
 
         return view;
 
@@ -129,38 +152,12 @@ public class Frozen_Fridge extends Fragment{
     public void onStart(){
         super.onStart();
 
-        /*
 
-        userid = UserData.getInstance().getUserid();
-
-        fridgedb = database.getReference().child("user").child(userid).child("fridge");
-        fridgedb.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                frozenFridgeItems.clear();
-                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                    String foodName = snapshot1.getKey();
-                    String foodCount = snapshot1.child("food_count").getValue(String.class);
-                    String foodImgPath = snapshot1.child("food_img").getValue(String.class);
-                    String foodDate = snapshot1.child("food_date").getValue(String.class);
-                    String fridgeType = snapshot1.child("fridge_type").getValue(String.class);
-
-                    if (fridgeType != null && fridgeType.equals("frozen")) {
-                        Fridge_Item item = new Fridge_Item(foodName, foodCount, foodImgPath, foodDate, fridgeType);
-                        frozenFridgeItems.add(item);
-                    }
-                }
-                adapter_refidge.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-         */
-
+        frozenFridgeItems.add(new Fridge_Item(R.drawable.potato,"감자","5개","D-3","frozen", 50));
+        frozenFridgeItems.add(new Fridge_Item(R.drawable.fdsaf,"베이컨","2개","D-10","frozen",50));
+        frozenFridgeItems.add(new Fridge_Item(R.drawable.gazi,"가지","1개","D-16", "frozen",50));
+        frozenFridgeItems.add(new Fridge_Item(R.drawable.food_squid,"오징어","1개","D-2","frozen", 50));
+        frozenFridgeItems.add(new Fridge_Item(R.drawable.lemon,"레몬","2개","D-18","frozen",50));
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
         adapter_refidge = new Fridge_Adapter(frozenFridgeItems);

@@ -164,9 +164,16 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_bar"
+        android:visibility="visible"/>
+
+    <include
+        android:id="@+id/null_fridge"
+        layout="@layout/null_fridge"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_bar" />
-
-
 
 
 

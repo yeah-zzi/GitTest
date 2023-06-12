@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -78,7 +80,9 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
         //아이템의 위치를 동적으로 가져옴.
         fridge_adapter = this; // fridge_adapter 객체 초기화
 
-        holder.food_img.setImageResource(fridgeItems.get(position).getFood_img());
+        Glide.with(holder.itemView)
+                .load(fridgeItems.get(position).getFood_img())
+                .into(holder.food_img);
         holder.food_name.setText(fridgeItems.get(position).getFood_name());
         holder.food_count.setText(fridgeItems.get(position).getFood_count());
         holder.food_date.setText(fridgeItems.get(position).getFood_date());
@@ -117,6 +121,32 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
                 holder.food_date.setVisibility(View.GONE);
                 holder.btn_cart.setVisibility(View.VISIBLE);
                 holder.btn_delete.setVisibility(View.VISIBLE);
+
+
+                //롱클릭의 후속 리스너..
+                holder.btn_cart.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (itemPosition != RecyclerView.NO_POSITION) {
+
+                            //해당 아이템 삭제
+                            fridgeItems.remove(itemPosition);
+                            fridge_adapter.removeItem(itemPosition);
+                            fridge_adapter.notifyItemRemoved(itemPosition);
+                            fridge_adapter.notifyDataSetChanged();
+
+                            //아이템을 삭제했다면 나머지 식재료들은 원상태로 복구
+                            holder.close.setVisibility(View.GONE);
+                            holder.food_count.setVisibility(View.VISIBLE);
+                            holder.count_plus.setVisibility(View.VISIBLE);
+                            holder.count_minus.setVisibility(View.VISIBLE);
+                            holder.food_date.setVisibility(View.VISIBLE);
+                            holder.btn_cart.setVisibility(View.GONE);
+                            holder.btn_delete.setVisibility(View.GONE);
+
+                        }
+                    }
+                });
 
                 //롱클릭의 후속 리스너..
                 holder.btn_delete.setOnClickListener(new View.OnClickListener() {
@@ -178,9 +208,6 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
     // 아이템 정렬 메서드
     private void sortItems() {
         switch (currentSortType) {
-            case ADD_ASCENDING:
-
-                break;
             case NAME_ASCENDING:
                 Collections.sort(fridgeItems, new Comparator<Fridge_Item>() {
                     @Override

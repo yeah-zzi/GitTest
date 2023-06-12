@@ -213,6 +213,20 @@ public class FridgePlus extends AppCompatActivity {
                             foodName.setText((String) name);
                             String img = product.getImg();
                             Glide.with(getApplicationContext()).load(img).into(foodImg);
+        // 파이어베이스 데이터베이스의 "Product" 경로에서 바코드 값을 가져옴
+        Barcodedb = FirebaseDatabase.getInstance().getReference().child("Product").child("barcode");
+        // 스캔한 바코드 값과 파이어베이스 안에 있는 바코드 값이 같으면 불러냄
+        Query query = Barcodedb.orderByChild("barcode").equalTo(scannedBarcode);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot barcode_date : snapshot.getChildren()) {
+                    Product product = barcode_date.getValue(Product.class);
+                    if (product != null) {
+                        String name = product.getPRDT_NM() + " ";
+                        foodName.setText((String) name);
+                        String img = product.getImg();
+                        Glide.with(getApplicationContext()).load(img).into(foodImg);
                     }
                 }
                 @Override
