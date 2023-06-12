@@ -1,7 +1,6 @@
 package yeji.mjc.gittest.frige;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -9,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -26,7 +26,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
-import androidx.core.util.Pair;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -46,17 +45,15 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import yeji.mjc.gittest.FoodSearch.FoodSearch;
-import yeji.mjc.gittest.FoodSearch.Product;
+import yeji.mjc.gittest.Product;
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.UserData;
-import yeji.mjc.gittest.cart.CartPlus;
 
 public class FridgePlus extends AppCompatActivity {
 
@@ -77,7 +74,7 @@ public class FridgePlus extends AppCompatActivity {
 
     //FireBase DB 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance(); // 파이어베이스 저장소 객체
-    DatabaseReference cartDB,Barcodedb,realData;
+    DatabaseReference cartDB,barcodedb,realData;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference reference = storage.getReference(); // 저장소 레퍼런스 객체 : storage 를 사용해 저장 위치를 설정
     String userid,startDate,changeDate,fridge_type="";
@@ -197,35 +194,33 @@ public class FridgePlus extends AppCompatActivity {
             }
         });
 
-        //스캔하여 얻은 값
-        String scannedBarcode = getIntent().getStringExtra("barcode");
-        // 파이어베이스 데이터베이스의 "Product" 경로에서 바코드 값을 가져옴
-        Barcodedb = FirebaseDatabase.getInstance().getReference().child("Product").child("barcode");
-        // 스캔한 바코드 값과 파이어베이스 안에 있는 바코드 값이 같으면 불러냄
-        Query query = Barcodedb.orderByChild("barcode").equalTo(scannedBarcode);        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot barcode_date : snapshot.getChildren()) {
-                    Product product = barcode_date.getValue(Product.class);
-                    if (product != null) {
-                        String name = product.getPRDT_NM() + " ";
-                        foodName.setText((String) name);
-                        String img = product.getImg();
-                        Glide.with(getApplicationContext()).load(img).into(foodImg);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(FridgePlus.this, "ERROR!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
         // 선택한 상품의 이름 설정
         String productName = getIntent().getStringExtra("productName");
         foodName.setText(productName);
+
+        //스캔하여 얻은 값
+        String scannedBarcode = getIntent().getStringExtra("barcode");
+        if(scannedBarcode != null ) {
+            // 파이어베이스 데이터베이스의 "Product" 경로에서 바코드 값을 가져옴
+            barcodedb = database.getReference().child("Product").child("barcode").child(scannedBarcode);
+            // 스캔한 바코드 값과 파이어베이스 안에 있는 바코드 값이 같으면 불러냄
+            barcodedb.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Product product = snapshot.getValue(Product.class);
+                        if (product != null) {
+                            String name = product.getPRDT_NM() + " ";
+                            foodName.setText((String) name);
+                            String img = product.getImg();
+                            Glide.with(getApplicationContext()).load(img).into(foodImg);
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(FridgePlus.this, "ERROR!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
 
 
         //오늘 날짜

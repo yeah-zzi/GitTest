@@ -1,53 +1,28 @@
 package yeji.mjc.gittest.frige;
 
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.kakao.sdk.user.model.User;
 
 import java.util.ArrayList;
 
-import yeji.mjc.gittest.AllergyItem;
-import yeji.mjc.gittest.FoodSearch.Product;
-import yeji.mjc.gittest.MainActivity;
 import yeji.mjc.gittest.R;
-import yeji.mjc.gittest.UserData;
-import yeji.mjc.gittest.frige.Data_Item;
-import yeji.mjc.gittest.frige.Fridge_Item;
-import yeji.mjc.gittest.cart.CartAdapter;
-import yeji.mjc.gittest.cart.CartItem;
 import yeji.mjc.gittest.cart.FoodAdapter;
-import yeji.mjc.gittest.cart.FoodItem;
-import yeji.mjc.gittest.comunity.Fight_fragment;
-import yeji.mjc.gittest.comunity.Life_Fragment;
-import yeji.mjc.gittest.comunity.NewFight_fragment;
-import yeji.mjc.gittest.comunity.Tip_fragment;
-import yeji.mjc.gittest.mypage.Bellset;
-import yeji.mjc.gittest.mypage.UserInfoChange;
 
 public class Fridge extends Fragment {
 

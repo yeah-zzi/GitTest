@@ -1,4 +1,4 @@
-package yeji.mjc.gittest.FoodSearch;
+package yeji.mjc.gittest;
 
 public class Product {
     String PRDT_NM;
@@ -15,11 +15,11 @@ public class Product {
         return PRDT_NM;
     }
 
-    public void setPRDT_NM(String Product_name){
+    public void setPRDT_NM(String PRDT_NM){
         this.PRDT_NM = PRDT_NM;
     }
 
     public String getImg() {return Img;}
 
-    public void setImg(String Product_img) {this.Img = Img;}
+    public void setImg(String Img) {this.Img = Img;}
 }
