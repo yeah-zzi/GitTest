@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -78,7 +80,9 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
         //아이템의 위치를 동적으로 가져옴.
         fridge_adapter = this; // fridge_adapter 객체 초기화
 
-        holder.food_img.setImageResource(fridgeItems.get(position).getFood_img());
+        Glide.with(holder.itemView)
+                .load(fridgeItems.get(position).getFood_img())
+                .into(holder.food_img);
         holder.food_name.setText(fridgeItems.get(position).getFood_name());
         holder.food_count.setText(fridgeItems.get(position).getFood_count());
         holder.food_date.setText(fridgeItems.get(position).getFood_date());

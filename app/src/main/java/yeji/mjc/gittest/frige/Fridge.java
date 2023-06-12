@@ -2,6 +2,7 @@ package yeji.mjc.gittest.frige;
 
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,6 +38,8 @@ import yeji.mjc.gittest.FoodSearch.Product;
 import yeji.mjc.gittest.MainActivity;
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.UserData;
+import yeji.mjc.gittest.comunity.FBTabAdapter;
+import yeji.mjc.gittest.comunity.FBTabItem;
 import yeji.mjc.gittest.frige.Data_Item;
 import yeji.mjc.gittest.frige.Fridge_Item;
 import yeji.mjc.gittest.cart.CartAdapter;
@@ -85,6 +89,7 @@ public class Fridge extends Fragment {
 
         recyclerView.setHasFixedSize(true);
 
+        TextView foodName = view.findViewById(R.id.food_name);
 
         Button fridge_main = view.findViewById(R.id.fridge_main);
         Button fridge_cold = view.findViewById(R.id.fridge_cold);
@@ -93,6 +98,17 @@ public class Fridge extends Fragment {
         View select_all = view.findViewById(R.id.select_all);
         View select_cold = view.findViewById(R.id.select_cold);
         View select_frozen = view.findViewById(R.id.select_frozen);
+
+        if (fridgeItems.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            view.findViewById(R.id.null_fridge).setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            view.findViewById(R.id.null_fridge).setVisibility(View.GONE);
+            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+            adapter_refidge = new Fridge_Adapter(fridgeItems);
+            recyclerView.setAdapter(adapter_refidge);
+        }
 
         fridge_main.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,34 +171,24 @@ public class Fridge extends Fragment {
         });
 
 
-        return view;
-
-    }
-
-    public void onStart() {
-        super.onStart();
-
         /*
-        userid = UserData.getInstance().getUserid();//
+        userid = UserData.getInstance().getUserid();
 
-        fridgedb = database.getReference().child("user").child(userid).child("fridge");
-        fridgedb.addValueEventListener(new ValueEventListener() {
+        String name = foodName.getText().toString();
+
+        fridgedb = database.getReference().child("user").child(userid).child("fridge").child(name);
+        fridgedb.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 fridgeItems.clear();
-                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                    String foodName = snapshot1.getKey();
-                    String foodCount = snapshot1.child("food_count").getValue(String.class);
-                    String foodImgPath = snapshot1.child("food_img").getValue(String.class);
-                    String foodDate = snapshot1.child("food_date").getValue(String.class);
-                    String fridgeType = snapshot1.child("fridge_type").getValue(String.class);
-
-                    Fridge_Item item = new Fridge_Item(foodName, foodCount, foodImgPath, foodDate, fridgeType);
-                    fridgeItems.add(item);
+                if (snapshot.exists()) {
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                        Fridge_Item item = snapshot1.getValue(Fridge_Item.class);
+                        fridgeItems.add(item);
+                    }
+                    adapter_refidge.notifyDataSetChanged();
                 }
-                adapter_refidge.notifyDataSetChanged();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -190,6 +196,14 @@ public class Fridge extends Fragment {
         });
         */
 
+
+
+        return view;
+
+    }
+
+    public void onStart() {
+        super.onStart();
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         adapter_refidge = new Fridge_Adapter(fridgeItems);
