@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,12 +28,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import yeji.mjc.gittest.LoginActivity;
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.UserData;
 import yeji.mjc.gittest.comunity.LifePost_Adapter;
 import yeji.mjc.gittest.comunity.SelectListener;
 import yeji.mjc.gittest.comunity.TipAdapter;
 import yeji.mjc.gittest.comunity.TipItem;
+import yeji.mjc.gittest.register.Register;
 
 public class DeletePost extends Fragment implements SelectListener {
 
@@ -231,7 +234,9 @@ public class DeletePost extends Fragment implements SelectListener {
                     mytipDB.child(deletePostCode).removeValue();
                     tip_recyclerview.getAdapter().notifyDataSetChanged();
                 }
-
+                Toast.makeText(getActivity(), "게시물 삭제를 완료했습니다!", Toast.LENGTH_LONG).show();
+                getFragmentManager().beginTransaction().replace(R.id.mpcontainer, new DeletePost()).commit();
+                return;
             }
         };
         DialogInterface.OnClickListener cancle = new DialogInterface.OnClickListener() {
