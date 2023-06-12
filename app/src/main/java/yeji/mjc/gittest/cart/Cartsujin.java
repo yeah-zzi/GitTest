@@ -137,7 +137,7 @@ public class Cartsujin extends Fragment {
 
                                         DatabaseReference cartDbRef1 = database.getReference().child("user").child(userid).child("cart");
                                         // cartItem 클래스랑 똑같이 맞춰서 넣어야함
-                                        CartItem decartItem = new CartItem(deleteItem.getName(), deleteItem.getNum(), deleteItem.getImg());
+                                        CartItem decartItem = new CartItem(deleteItem.getName(), deleteItem.getNum(), deleteItem.getImg(),"");
                                         cartDbRef1.child(itemName).setValue(decartItem);
 
                                         foodItems.add(position, deleteItem);

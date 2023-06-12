@@ -8,15 +8,25 @@ public class CartItem {
     String food_name;
     String food_count;
     String food_img;
+    String food_dead;
 
     public CartItem() {
 
     }
 
-    public CartItem(String food_name, String food_count, String food_img) {
+    public CartItem(String food_name, String food_count, String food_img,String food_dead) {
         this.food_name = food_name;
         this.food_count = food_count;
         this.food_img = food_img;
+        this.food_dead = food_dead;
+    }
+
+    public String getFood_dead() {
+        return food_dead;
+    }
+
+    public void setFood_dead(String food_dead) {
+        this.food_dead = food_dead;
     }
 
     public String getFood_name() {
