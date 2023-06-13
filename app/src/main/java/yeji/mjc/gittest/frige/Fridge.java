@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,7 +33,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.kakao.sdk.user.model.User;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import yeji.mjc.gittest.AllergyItem;
 import yeji.mjc.gittest.FoodSearch.Product;
@@ -55,6 +62,9 @@ import yeji.mjc.gittest.mypage.UserInfoChange;
 
 public class Fridge extends Fragment {
 
+    ImageButton search;
+    EditText text_bar;
+
     //리사이클러뷰 변수 선언
     public RecyclerView recyclerView;
     public RecyclerView.Adapter adapter_refidge;
@@ -62,13 +72,24 @@ public class Fridge extends Fragment {
 
     public FoodAdapter foodAdapter;
 
+    public static String dDay;
+
+
+    public int getDaysUntilFood(Date expirationDate) {
+        long currentTime = System.currentTimeMillis();
+        long expirationTime = expirationDate.getTime();
+        long diffInMillis = expirationTime - currentTime;
+        long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillis);
+        return (int) diffInDays;
+    }
+
 
     //FireBase DB 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance(); // 파이어베이스 저장소 객체
     DatabaseReference fridgedb;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference reference = storage.getReference(); // 저장소 레퍼런스 객체 : storage 를 사용해 저장 위치를 설정
-    String userid="임시용 유저 아이디1", startDate, changeDate, fridge_type = "";
+    String userid="2830097009", startDate, changeDate, fridge_type = "";
 
 
     @Override
@@ -84,10 +105,17 @@ public class Fridge extends Fragment {
         recyclerView = view.findViewById(R.id.fridgeRecyclerView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter_refidge = new Fridge_Adapter(fridgeItems);
+        try {
+            adapter_refidge = new Fridge_Adapter(fridgeItems);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         recyclerView.setAdapter(foodAdapter);
 
         recyclerView.setHasFixedSize(true);
+
+        ImageButton search=view.findViewById(R.id.search);
+        EditText text_bar=view.findViewById(R.id.text_bar);
 
         TextView foodName = view.findViewById(R.id.food_name);
 
@@ -99,7 +127,26 @@ public class Fridge extends Fragment {
         View select_cold = view.findViewById(R.id.select_cold);
         View select_frozen = view.findViewById(R.id.select_frozen);
 
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchText = text_bar.getText().toString().trim();
+                ArrayList<Fridge_Item> filteredItems = new ArrayList<>();
 
+                for (Fridge_Item item : fridgeItems) {
+                    if (item.getFood_name().equals(searchText)) {
+                        filteredItems.add(item);
+                    }
+                }
+
+                try {
+                    adapter_refidge = new Fridge_Adapter(filteredItems);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                recyclerView.setAdapter(adapter_refidge);
+            }
+        });
 
         fridge_main.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,44 +205,10 @@ public class Fridge extends Fragment {
         });
 
 
-        /*
+
+        //userid = UserData.getInstance().getUserid();
+
         fridgedb = database.getReference().child("user").child(userid).child("fridge");
-        fridgedb.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                fridgeItems.clear();
-                if (snapshot.exists()) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        Fridge_Item item = dataSnapshot.getValue(Fridge_Item.class);
-                        String foodCount = String.valueOf(item.getFood_count());
-                        item.setFood_count(foodCount);
-                        fridgeItems.add(item);
-                    }
-                    adapter_refidge.notifyDataSetChanged();
-
-                    if (fridgeItems.isEmpty()) {
-                        recyclerView.setVisibility(View.GONE);
-                        view.findViewById(R.id.null_fridge).setVisibility(View.VISIBLE);
-                    } else {
-                        recyclerView.setVisibility(View.VISIBLE);
-                        view.findViewById(R.id.null_fridge).setVisibility(View.GONE);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Handle the error
-            }
-        });
-        */
-
-        /*
-        userid = UserData.getInstance().getUserid();
-
-        String name = foodName.getText().toString();
-
-        fridgedb = database.getReference().child("user").child(userid).child("fridge").child(name);
         fridgedb.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -203,6 +216,21 @@ public class Fridge extends Fragment {
                 if (snapshot.exists()) {
                     for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                         Fridge_Item item = snapshot1.getValue(Fridge_Item.class);
+
+                        String foodCount = item.getFood_count();
+                        item.setFood_count(foodCount + "개");
+
+                        String foodDate = item.getFood_date();
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+                        try {
+                            Date expirationDate = dateFormat.parse(foodDate);
+                            int daysUntilFood = getDaysUntilFood(expirationDate)+1;
+                            String dDay = "D-" + daysUntilFood;
+                            item.setFood_date(dDay);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
                         fridgeItems.add(item);
                     }
                     adapter_refidge.notifyDataSetChanged();
@@ -213,27 +241,26 @@ public class Fridge extends Fragment {
 
             }
         });
-        */
 
 
-        fridgeItems.add(new Fridge_Item(R.drawable.potato,"감자","5개","D-3","frozen", 50));
-        fridgeItems.add(new Fridge_Item(R.drawable.fdsaf,"베이컨","2개","D-10","frozen",50));
-        fridgeItems.add(new Fridge_Item(R.drawable.chilli,"고추","10개","D-32","cold",50));
-        fridgeItems.add(new Fridge_Item(R.drawable.carrot,"당근","6개","D-8","cold",50));
-        fridgeItems.add(new Fridge_Item(R.drawable.gazi,"가지","1개","D-16", "frozen",50));
-        fridgeItems.add(new Fridge_Item(R.drawable.food_squid,"오징어","1개","D-2","frozen", 50));
-        fridgeItems.add(new Fridge_Item(R.drawable.yogurt,"요거트","10개","D-35","cold",50));
-        fridgeItems.add(new Fridge_Item(R.drawable.lemon,"레몬","2개","D-18","frozen",50));
+
+
 
         return view;
 
     }
 
+
+
     public void onStart() {
         super.onStart();
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-        adapter_refidge = new Fridge_Adapter(fridgeItems);
+        try {
+            adapter_refidge = new Fridge_Adapter(fridgeItems);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         recyclerView.setAdapter(adapter_refidge);
 
 

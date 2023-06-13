@@ -7,6 +7,10 @@ public class Fridge_Item {
     String food_date;
     String fridge_type;
     int progress;
+    String dDay;
+
+    public Fridge_Item() {
+    }
 
     public Fridge_Item(int food_img, String food_name, String food_count, String food_date, String fridge_type, int progress) {
         this.food_img = food_img;
@@ -62,6 +66,7 @@ public class Fridge_Item {
         this.food_date = food_date;
     }
 
+
     public int getProgress() {
         return progress;
     }
@@ -69,5 +74,18 @@ public class Fridge_Item {
     public void setProgress(int progress) {
         this.progress = progress;
     }
+
+    public String getDDay() {
+        return dDay;
+    }
+
+    public void setDDay(String dDay) {
+        this.dDay = dDay;
+    }
+
+
+
+
+
 
 }
