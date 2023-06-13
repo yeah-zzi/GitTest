@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -23,12 +25,20 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.UserData;
 
 public class Frozen_Fridge extends Fragment{
+
+    ImageButton search;
+    EditText text_bar;
 
     //메뉴바 버튼 변수 선언
     public Button fridge_main; //종합
@@ -46,8 +56,16 @@ public class Frozen_Fridge extends Fragment{
     DatabaseReference fridgedb;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference reference = storage.getReference(); // 저장소 레퍼런스 객체 : storage 를 사용해 저장 위치를 설정
-    String userid,startDate,changeDate,fridge_type="";
+    String userid="2830097009",startDate,changeDate,fridge_type="";
 
+
+    public int getDaysUntilFood(Date expirationDate) {
+        long currentTime = System.currentTimeMillis();
+        long expirationTime = expirationDate.getTime();
+        long diffInMillis = expirationTime - currentTime;
+        long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillis);
+        return (int) diffInDays;
+    }
 
     @Override
     public void setEnterTransition(@Nullable Object transition) {
@@ -60,7 +78,11 @@ public class Frozen_Fridge extends Fragment{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fridge_main, container, false);
 
-        adapter_refidge = new Fridge_Adapter(frozenFridgeItems);
+        try {
+            adapter_refidge = new Fridge_Adapter(frozenFridgeItems);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         recyclerView = view.findViewById(R.id.fridgeRecyclerView);
         recyclerView.setHasFixedSize(true);
@@ -69,6 +91,30 @@ public class Frozen_Fridge extends Fragment{
         View fridge_cold = view.findViewById(R.id.fridge_cold);
         View fridge_frozen = view.findViewById(R.id.fridge_frozen);
 
+        ImageButton search=view.findViewById(R.id.search);
+        EditText text_bar=view.findViewById(R.id.text_bar);
+
+        //검색기능 구현
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchText = text_bar.getText().toString().trim();
+                ArrayList<Fridge_Item> filteredItems = new ArrayList<>();
+
+                for (Fridge_Item item : frozenFridgeItems) {
+                    if (item.getFood_name().equals(searchText)) {
+                        filteredItems.add(item);
+                    }
+                }
+
+                try {
+                    adapter_refidge = new Fridge_Adapter(filteredItems);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                recyclerView.setAdapter(adapter_refidge);
+            }
+        });
 
 
         fridge_main.setOnClickListener(new View.OnClickListener() {
@@ -118,9 +164,8 @@ public class Frozen_Fridge extends Fragment{
             }
         });
 
-        /*
-        userid = UserData.getInstance().getUserid();
 
+        //userid = UserData.getInstance().getUserid();
         fridgedb = database.getReference().child("user").child(userid).child("fridge");
         fridgedb.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -128,9 +173,24 @@ public class Frozen_Fridge extends Fragment{
                 frozenFridgeItems.clear();
                 if (snapshot.exists()) {
                     for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                        String fridgeType = snapshot1.child("fridge_type").getValue(String.class);
-                        if (fridgeType != null && fridgeType.equals("frozen")) {
-                            Fridge_Item item = snapshot1.getValue(Fridge_Item.class);
+                        Fridge_Item item = snapshot1.getValue(Fridge_Item.class);
+
+                        String foodCount = item.getFood_count();
+                        item.setFood_count(foodCount + "개");
+
+                        String foodDate = item.getFood_date();
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+                        try {
+                            Date expirationDate = dateFormat.parse(foodDate);
+                            int daysUntilFood = getDaysUntilFood(expirationDate)+1;
+                            String dDay = "D-" + daysUntilFood;
+                            item.setFood_date(dDay);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        String foodType = item.getFridge_type();
+                        if (foodType != null && foodType.equals("frozen")) {
                             frozenFridgeItems.add(item);
                         }
                     }
@@ -139,10 +199,9 @@ public class Frozen_Fridge extends Fragment{
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
-        */
+
 
         return view;
 
@@ -153,14 +212,12 @@ public class Frozen_Fridge extends Fragment{
         super.onStart();
 
 
-        frozenFridgeItems.add(new Fridge_Item(R.drawable.potato,"감자","5개","D-3","frozen", 50));
-        frozenFridgeItems.add(new Fridge_Item(R.drawable.fdsaf,"베이컨","2개","D-10","frozen",50));
-        frozenFridgeItems.add(new Fridge_Item(R.drawable.gazi,"가지","1개","D-16", "frozen",50));
-        frozenFridgeItems.add(new Fridge_Item(R.drawable.food_squid,"오징어","1개","D-2","frozen", 50));
-        frozenFridgeItems.add(new Fridge_Item(R.drawable.lemon,"레몬","2개","D-18","frozen",50));
-
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
-        adapter_refidge = new Fridge_Adapter(frozenFridgeItems);
+        try {
+            adapter_refidge = new Fridge_Adapter(frozenFridgeItems);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         recyclerView.setAdapter(adapter_refidge);
     }
 

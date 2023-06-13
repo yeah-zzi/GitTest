@@ -12,11 +12,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import yeji.mjc.gittest.FoodItem;
 import yeji.mjc.gittest.R;
@@ -27,8 +37,7 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
     ArrayList<Fridge_Item> fridgeItems;
     int count = 0;
 
-
-    private int[] gaugeColors = {
+    private final int[] gaugeColors = {
             Color.rgb(225, 0, 0),
             Color.rgb(255, 191, 0),
             Color.rgb(100, 191, 0),
@@ -36,20 +45,23 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
     };
 
     private int calculateProgress(String food_date) {
-        int daysLeft = Integer.parseInt(food_date.substring(2));
-        if (daysLeft <= 3) {
-            return 20;
-        } else if (daysLeft <= 15) {
-            return 40;
-        } else if (daysLeft <= 30) {
-            return 60;
-        } else
-            return 76;
 
+        String numberString = food_date.substring(2);
+        int number = Integer.parseInt(numberString);
+
+        if (number <= 3) {
+            return 20;
+        } else if (number <= 15) {
+            return 40;
+        } else if (number <= 30) {
+            return 60;
+        } else {
+            return 76;
+        }
     }
 
 
-    public Fridge_Adapter(ArrayList<Fridge_Item> fridgeItems) {
+    public Fridge_Adapter(ArrayList<Fridge_Item> fridgeItems) throws ParseException {
         this.fridgeItems = fridgeItems;
     }
 
@@ -58,15 +70,16 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
         return new Fridge_recycle_holder(v);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull Fridge_recycle_holder holder, int position) {
 
         Fridge_Item fridgeItem = fridgeItems.get(position);
         String foodDate = fridgeItem.getFood_date();
+
         int progress = calculateProgress(foodDate);
 
         fridgeItem.setProgress(progress);
-
 
         progress = fridgeItems.get(position).getProgress();
         int colorIndex = progress / 25;
@@ -87,7 +100,6 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
         holder.food_count.setText(fridgeItems.get(position).getFood_count());
         holder.food_date.setText(fridgeItems.get(position).getFood_date());
         holder.progressbar.setProgress(fridgeItems.get(position).getProgress());
-
 
 
         //재료 수 더하기
@@ -197,7 +209,6 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
 
     //정렬 기준을 나타내는 enum
     public enum SortType {
-        ADD_ASCENDING, //추가순
         NAME_ASCENDING, //이름순
         DATE_ASCENDING, //날짜순
 
@@ -226,6 +237,8 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
                     }
                 });
                 break;
+
+
         }
     }
 

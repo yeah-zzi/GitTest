@@ -77,7 +77,7 @@ public class FridgePlus extends AppCompatActivity {
     DatabaseReference cartDB,barcodedb,realData;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference reference = storage.getReference(); // 저장소 레퍼런스 객체 : storage 를 사용해 저장 위치를 설정
-    String userid,startDate,changeDate,fridge_type="";
+    String userid="2830097009",startDate,changeDate,fridge_type="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
