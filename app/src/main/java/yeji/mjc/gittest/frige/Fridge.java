@@ -41,7 +41,6 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import yeji.mjc.gittest.AllergyItem;
-import yeji.mjc.gittest.FoodSearch.Product;
 import yeji.mjc.gittest.MainActivity;
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.UserData;
@@ -127,6 +126,7 @@ public class Fridge extends Fragment {
         View select_cold = view.findViewById(R.id.select_cold);
         View select_frozen = view.findViewById(R.id.select_frozen);
 
+        //검색기능 구현
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

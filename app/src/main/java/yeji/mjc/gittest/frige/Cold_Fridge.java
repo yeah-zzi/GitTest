@@ -102,7 +102,7 @@ public class Cold_Fridge extends Fragment{
         ImageButton search=view.findViewById(R.id.search);
         EditText text_bar=view.findViewById(R.id.text_bar);
 
-
+        //검색기능 구현
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
