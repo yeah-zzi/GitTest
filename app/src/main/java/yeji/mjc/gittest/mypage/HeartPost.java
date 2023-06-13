@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,9 +30,11 @@ import java.util.ArrayList;
 
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.UserData;
+import yeji.mjc.gittest.comunity.LifeCommnet;
 import yeji.mjc.gittest.comunity.LifePost_Adapter;
 import yeji.mjc.gittest.comunity.SelectListener;
 import yeji.mjc.gittest.comunity.TipAdapter;
+import yeji.mjc.gittest.comunity.TipComment;
 import yeji.mjc.gittest.comunity.TipItem;
 
 public class HeartPost extends Fragment implements SelectListener {
@@ -40,7 +43,7 @@ public class HeartPost extends Fragment implements SelectListener {
     private LifePost_Adapter life_adapter;
     public ArrayList<TipItem> list = new ArrayList<TipItem>();
 
-    String userid;
+    String userid, postType;
     RadioGroup radioGroup;
 
     //파이어베이스에서 데이터베이스 가져오기
@@ -94,7 +97,7 @@ public class HeartPost extends Fragment implements SelectListener {
                                 list.clear();
                                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                                     String mypostNum = snapshot1.getValue().toString(); // 변수에 코드 저장
-                                    String postType = "life";
+                                    postType = "life";
                                     Log.d(mypostNum, "내가 올린 생활정보 게시물 넘버 : "+mypostNum);
                                     //comparePostData(mypostNum, postType);
                                     showmypost(postType, mypostNum);
@@ -122,7 +125,7 @@ public class HeartPost extends Fragment implements SelectListener {
                                 list.clear();
                                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                                     String mypostNum = snapshot1.getValue().toString(); // 변수에 코드 저장
-                                    String postType = "tip";
+                                    postType = "tip";
                                     Log.d(mypostNum, "내가 올린 이거어때 게시물 넘버 : "+mypostNum);
                                     //comparePostData(mypostNum, postType);
                                     showmypost(postType, mypostNum);
@@ -219,8 +222,34 @@ public class HeartPost extends Fragment implements SelectListener {
         DialogInterface.OnClickListener confirm = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                getFragmentManager().beginTransaction().replace(R.id.postcontainer, new Mypage_Post()).commit();
-                return;
+                if(postType=="life"){
+                    Intent lifeIntent = new Intent(getActivity(), LifeCommnet.class);
+                    String code = tip_fragment.com_code;
+                    lifeIntent.putExtra("커뮤니티 코드",code);
+                    lifeIntent.putExtra("작성자",tip_fragment.getWriter());
+                    lifeIntent.putExtra("내용",tip_fragment.getContent());
+                    lifeIntent.putExtra("이미지",tip_fragment.getPost_img());
+                    lifeIntent.putExtra("제목",tip_fragment.getTitle());
+                    lifeIntent.putExtra("좋아요",tip_fragment.getLike());
+                    lifeIntent.putExtra("댓글수",tip_fragment.getComment_count());
+                    lifeIntent.putExtra("작성자이미지",tip_fragment.getWriter_img());
+                    lifeIntent.putExtra("작성날짜",tip_fragment.getDate());
+                    startActivity(lifeIntent);
+                }
+                else if(postType=="tip"){
+                    Intent tipintent = new Intent(getActivity(), TipComment.class);
+                    Toast.makeText(getActivity(),tip_fragment.getTitle(),Toast.LENGTH_SHORT).show();
+                    String code = tip_fragment.com_code;
+                    tipintent.putExtra("커뮤니티 코드",code);
+                    tipintent.putExtra("작성자",tip_fragment.getWriter());
+                    tipintent.putExtra("내용",tip_fragment.getContent());
+                    tipintent.putExtra("이미지",tip_fragment.getPost_img());
+                    tipintent.putExtra("제목",tip_fragment.getTitle());
+                    tipintent.putExtra("좋아요",tip_fragment.getLike());
+                    tipintent.putExtra("댓글수",tip_fragment.getComment_count());
+                    tipintent.putExtra("작성자이미지",tip_fragment.getWriter_img());
+                    startActivity(tipintent);
+                }
 
             }
         };
@@ -234,18 +263,6 @@ public class HeartPost extends Fragment implements SelectListener {
                 .setPositiveButton("확인", confirm)
                 .setNegativeButton("취소", cancle).show();
 
-    }
-
-    private void deletepost(String delete) {
-        mDatabase.child(delete).removeValue();
-        mylifeDB.child(delete).removeValue();
-        life_recyclerview.getAdapter().notifyDataSetChanged();
-        mytipDB.child(delete).removeValue();
-        tip_recyclerview.getAdapter().notifyDataSetChanged();
-
-        //화면 새로고침 효과
-        Intent intent = new Intent(getActivity(), HeartPost.class);
-        startActivity(intent);
     }
 
     @Override

@@ -2,7 +2,7 @@ package yeji.mjc.gittest.comunity;
 
 public class TipItem {
 
-    String com_code;
+    public String com_code;
     String comment_count;
     String content;
     String like;

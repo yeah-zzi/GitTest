@@ -2,6 +2,7 @@ package yeji.mjc.gittest;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,10 +48,11 @@ public class Barcode extends AppCompatActivity {
         barcodeScannerView.decodeContinuous(new BarcodeCallback() {  // BarcodeCallback >> 바코드 스캔 결과처리
             @Override
             public void barcodeResult(BarcodeResult result) {
-                //readBarcode(result.toString()); // 바코드 스캔 결과 출력
+                String barcode = readBarcode(result.toString());
                 Intent intent = new Intent(Barcode.this, FridgePlus.class);
-                intent.putExtra("barcode", readBarcode(result.toString()));
+                intent.putExtra("barcode", barcode);
                 startActivity(intent);
+                finish();
             }
 
             @Override
@@ -87,7 +89,7 @@ public class Barcode extends AppCompatActivity {
 
     public String readBarcode(String barcode) {
 
-        //Toast.makeText(Barcode.this, barcode, Toast.LENGTH_SHORT).show();
+        Toast.makeText(Barcode.this, barcode, Toast.LENGTH_SHORT).show();
         return barcode;
     }
 }

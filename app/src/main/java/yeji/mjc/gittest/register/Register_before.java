@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,20 +21,18 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import yeji.mjc.gittest.AllergyItem;
 import yeji.mjc.gittest.FoodSearch.Allergy;
 import yeji.mjc.gittest.MainActivity;
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.UserData;
 
-public class Register extends AppCompatActivity {
+public class Register_before extends AppCompatActivity {
 
     ImageButton startBtn;
-    Button allergyBtn;
-    TextView usernametv;
-    public String userid, username, userimg;
-    CircleImageView userimgview;
+    Button allergyBtn,nameBtn;
+    EditText edit_name;
+    public String userid;
 
 
     //리사이클러뷰 선언 및 리사이클러뷰에 넣을 아이템 선언
@@ -49,7 +46,7 @@ public class Register extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.register);
+        setContentView(R.layout.register_before);
 
         registerallergyrecyclerView = findViewById(R.id.allergyregister);
         registerallergyrecyclerView.setHasFixedSize(true);
@@ -60,16 +57,23 @@ public class Register extends AppCompatActivity {
 
         startBtn = findViewById(R.id.startbutton);
         allergyBtn = findViewById(R.id.allergybtn);
-        usernametv = findViewById(R.id.username);
-        userimgview = findViewById(R.id.userimg);
+        edit_name = findViewById(R.id.userimg);
+        nameBtn = findViewById(R.id.rename);
 
         //로그인 시 아이디값 받아오기
         userid = UserData.getInstance().getUserid();
-        username = UserData.getInstance().getUsername();
-        userimg = UserData.getInstance().getUserimg();
 
-        usernametv.setText(username);
-        Glide.with(this).load(userimg).circleCrop().into(userimgview);
+        //닉네임 중복 확인 버튼을 누르면 쓰여있는 닉네임을 받아서 데이터베이스에 넣는다
+        //TODO 데이터 중복 확인 구문 작성
+        nameBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = edit_name.getText().toString();
+                userdb = database.getReference().child("user").child(userid).child("user_info").child("user_nickname");
+                userdb.setValue(name);
+                UserData.getInstance().setUsernickname(name);
+            }
+        });
 
         //시작하기 버튼을 누르면 main화면으로 이동한다
         startBtn.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +83,7 @@ public class Register extends AppCompatActivity {
                 int num = 1;
                 foodbattleDB = database.getReference().child("user").child(userid).child("foodbattle_count");
                 foodbattleDB.setValue(num);
-                Intent registerIntent = new Intent(Register.this, MainActivity.class);
+                Intent registerIntent = new Intent(Register_before.this, MainActivity.class);
                 startActivity(registerIntent);
                 finish();
             }
@@ -89,7 +93,7 @@ public class Register extends AppCompatActivity {
         allergyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent registerIntent = new Intent(Register.this, Allergy.class);
+                Intent registerIntent = new Intent(Register_before.this, Allergy.class);
                 registerIntent.putExtra("userId", userid);
                 startActivity(registerIntent);
             }

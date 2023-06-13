@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -33,7 +34,9 @@ import yeji.mjc.gittest.FoodSearch.AllergyAdapter;
 import yeji.mjc.gittest.R;
 import yeji.mjc.gittest.LoginActivity;
 import yeji.mjc.gittest.UserData;
+import yeji.mjc.gittest.comunity.FBTabAdapter;
 import yeji.mjc.gittest.comunity.FBTabItem;
+import yeji.mjc.gittest.register.Register;
 import yeji.mjc.gittest.register.RegisterAllergyAdapter;
 
 public class MyPagesujin extends Fragment {
@@ -47,8 +50,9 @@ public class MyPagesujin extends Fragment {
     String userN="", userA="";
 
     //리사이클러뷰 선언 및 리사이클러뷰에 넣을 아이템 선언
-    public RecyclerView allergyrecyclerView;
+    public RecyclerView allergyrecyclerView, friendimgrecyclerView;
     public ArrayList<MyPageAllergyItem> allergyitems = new ArrayList<MyPageAllergyItem>();
+    public ArrayList<FBTabItem> friendimgitems = new ArrayList<FBTabItem>();
 
 
     @Override
@@ -64,9 +68,16 @@ public class MyPagesujin extends Fragment {
         View User = view.findViewById(R.id.User);
         allergyrecyclerView = view.findViewById(R.id.allergyrecyclerview);
         allergyrecyclerView.setHasFixedSize(true);
+
+        friendimgrecyclerView = view.findViewById(R.id.friendImg_recyclerview);
+        friendimgrecyclerView.setHasFixedSize(true);
+
         //리사이클러뷰에 매니저와 어댑터를 연결
         allergyrecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
         allergyrecyclerView.setAdapter(new MyPageAdapter(allergyitems));
+
+        friendimgrecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        friendimgrecyclerView.setAdapter(new FriendimgAdapter(friendimgitems));
 
         //View Friend = view.findViewById(R.id.Friend);
         View Post = view.findViewById(R.id.post);
@@ -94,14 +105,11 @@ public class MyPagesujin extends Fragment {
         username = view.findViewById(R.id.username); // 유저 닉네임 담길 곳 (임시로 이름)
         userAllergyInfo = view.findViewById(R.id.userAllergyInfo); // 유저 닉네임 넣어 수정할 텍스트 뷰
 
-        profile1 = view.findViewById(R.id.profile1); // 대결하고 있는 상대1,2 프로필 담길 곳
-        profile2 = view.findViewById(R.id.profile2);
-
         //Glide 라이브러리 사용하여 이미지 circlecrop(원형)으로 넣기
         Glide.with(this).load(UserData.getInstance().getUserimg()).circleCrop().into(profile);
         Glide.with(this).load(UserData.getInstance().getUserimg()).circleCrop().into(myprofile);
 
-        userN = UserData.getInstance().getUsernickname();
+        userN = UserData.getInstance().getUsername();
         userA = UserData.getInstance().getUsername()+"님의 알러지 정보 ";
         username.setText(userN); // 유저 이름 설정
         userAllergyInfo.setText(userA);
@@ -111,8 +119,8 @@ public class MyPagesujin extends Fragment {
         User.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.mpcontainer, new UserInfoChange()).commit();
-                return;
+                Intent intent = new Intent(getActivity(), Register.class);
+                startActivity(intent);
             }
         });
 
@@ -144,29 +152,25 @@ public class MyPagesujin extends Fragment {
             }
         });
 
-        //파이어베이스에 저장되어 있는 회원의 진행중인 집밥대결 정보 중 대결친구 이미지 정보를 받아온다 (최대 2명 표시)
-        fbdDB = database.getReference().child("user").child(userid).child("foodbattle_code").child("fb_friend_img");
+        //파이어베이스에 저장되어 있는 회원이 진행중인 집밥대결 정보들을 받아온다
+        fbdDB = database.getReference().child("user").child(userid).child("foodbattle_code");
         fbdDB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //파이어베이스 데이터베이스의 데이터를 받아오는 곳
+                friendimgitems.clear();   //기존 배열리스트가 존재하지 않게 초기화
                 if(snapshot.exists()){
-                    int count=0;
                     for (DataSnapshot snapshot1 : snapshot.getChildren()){
-                        String friend_img ="";
-                        friend_img = snapshot1.getValue(String.class);
-                        if(friend_img != ""){
-                            count++;
-                            if(count==1) Glide.with(getContext()).load(friend_img).circleCrop().into(profile1);
-                            else if(count==2) Glide.with(getContext()).load(friend_img).circleCrop().into(profile2);
-                        }
+                        FBTabItem item = snapshot1.getValue(FBTabItem.class);
+                        friendimgitems.add(item);
                     }
+                    friendimgrecyclerView.getAdapter().notifyDataSetChanged();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                //디비를 가져오다 오류 발생시
             }
         });
 

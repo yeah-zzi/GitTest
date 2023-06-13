@@ -65,8 +65,11 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
 
                     // 파이어베이스에서 해당 아이템의 값을 업데이트
                     String itemName = items.get(holder.getAdapterPosition()).getName();
-                    DatabaseReference cartdb = database.getReference().child("user").child(userid).child("cart");
-                    cartdb.child(itemName).child("food_count").setValue(String.valueOf(count));
+                    int itemIndex = holder.getAdapterPosition(); // 아이템의 인덱스 확인
+                    if (itemIndex >= 0 && itemIndex < items.size()) {
+                        DatabaseReference cartdb = database.getReference().child("user").child(userid).child("cart");
+                        cartdb.child(itemName).child("food_count").setValue(String.valueOf(count));
+                    }
                 }
             }
         });
@@ -82,8 +85,11 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
 
                 // 파이어베이스에서 해당 아이템의 값을 업데이트
                 String itemName = items.get(holder.getAdapterPosition()).getName();
-                DatabaseReference cartdb = database.getReference().child("user").child(userid).child("cart");
-                cartdb.child(itemName).child("food_count").setValue(String.valueOf(count));
+                int itemIndex = holder.getAdapterPosition(); // 아이템의 인덱스 확인
+                if (itemIndex >= 0 && itemIndex < items.size()) {
+                    DatabaseReference cartdb = database.getReference().child("user").child(userid).child("cart");
+                    cartdb.child(itemName).child("food_count").setValue(String.valueOf(count));
+                }
             }
         });
 
