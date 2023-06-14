@@ -71,7 +71,7 @@ public class CartPlus extends AppCompatActivity {
     DatabaseReference cartDB,realData;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference reference = storage.getReference(); // 저장소 레퍼런스 객체 : storage 를 사용해 저장 위치를 설정
-    String userid,name,count;
+    String userid="2830097009",name,count;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,7 +79,7 @@ public class CartPlus extends AppCompatActivity {
         setContentView(R.layout.cart_plus);
 
         //로그인 시 아이디값 변수 받아오기
-        userid = UserData.getInstance().getUserid();
+        //userid = UserData.getInstance().getUserid();
 
         //cartDB=database.getReference().child("user").child(userid).child("cart");
 
