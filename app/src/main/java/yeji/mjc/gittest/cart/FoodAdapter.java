@@ -27,7 +27,7 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance(); // 파이어베이스 저장소 객체
     DatabaseReference cartdb, cartdeleteditems;
-    String userid ;
+    String userid ="2830097009";
     int count =1;
 
 
@@ -46,10 +46,10 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
     @Override
     public void onBindViewHolder(@NonNull Food_recycle_holder holder, int position) {
         //로그인 시 아이디값 변수 받아오기
-        userid = UserData.getInstance().getUserid();
+        //userid = UserData.getInstance().getUserid();
 
         holder.foodName.setText(items.get(position).getName());
-        holder.foodNum.setText(items.get(position).getNum());
+        holder.foodNum.setText(items.get(position).getNum()+"개");
         holder.checkBox.setChecked(items.get(position).isCheckBox());
         Glide.with(holder.itemView).load(items.get(position).getImg()).into(holder.foodImage);
 
@@ -61,7 +61,7 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
                 if(count>1) {
                     count--;
                     items.get(position).setNum(String.valueOf(count));
-                    holder.foodNum.setText(String.valueOf(count));
+                    holder.foodNum.setText(String.valueOf(count)+"개");
 
                     // 파이어베이스에서 해당 아이템의 값을 업데이트
                     String itemName = items.get(holder.getAdapterPosition()).getName();
@@ -81,7 +81,7 @@ public class FoodAdapter extends RecyclerView.Adapter<Food_recycle_holder> {
                 int count = Integer.parseInt(items.get(position).getNum());
                 count++;
                 items.get(position).setNum(String.valueOf(count));
-                holder.foodNum.setText(String.valueOf(count));
+                holder.foodNum.setText(String.valueOf(count)+"개");
 
                 // 파이어베이스에서 해당 아이템의 값을 업데이트
                 String itemName = items.get(holder.getAdapterPosition()).getName();
