@@ -2,8 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="110dp"
-    android:layout_height="190dp"
+    android:layout_width="117dp"
+    android:layout_height="189dp"
+    android:layout_marginTop="5dp"
     android:background="@color/background_color">
 
     <ImageView
@@ -47,7 +48,7 @@
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="12dp"
         android:elevation="10dp"
         android:indeterminate="false"
         android:max="100"
