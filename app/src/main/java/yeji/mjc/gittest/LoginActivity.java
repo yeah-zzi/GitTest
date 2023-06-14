@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
 //    public ImageView profile;
 
     //임시 시작버튼
-    Button btn1, btn2;
+  //  Button btn1, btn2;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,24 +52,24 @@ public class LoginActivity extends AppCompatActivity {
 //        nickName = findViewById(R.id.nickName);
 //        profile = findViewById(R.id.profile);
 
-        //임시 시작버튼 연결
-        btn1 = findViewById(R.id.start);
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btn2 = findViewById(R.id.start2);
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Register.class);
-                startActivity(intent);
-            }
-        });
+//        //임시 시작버튼 연결
+//        btn1 = findViewById(R.id.start);
+//        btn1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        btn2 = findViewById(R.id.start2);
+//        btn2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), Register.class);
+//                startActivity(intent);
+//            }
+//        });
 
         //firebase 정의
         mDatabase = FirebaseDatabase.getInstance().getReference();
