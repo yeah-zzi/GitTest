@@ -11,6 +11,8 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -36,6 +38,12 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
     Fridge_Adapter fridge_adapter;
     ArrayList<Fridge_Item> fridgeItems;
     int count = 0;
+    String userid="2830097009";
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance(); // 파이어베이스 저장소 객체
+    DatabaseReference cartdb;
+
+
 
     private final int[] gaugeColors = {
             Color.rgb(225, 0, 0),
@@ -84,6 +92,8 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
         progress = fridgeItems.get(position).getProgress();
         int colorIndex = progress / 25;
         int gaugeColor = gaugeColors[colorIndex];
+
+        cartdb = database.getReference().child("user").child(userid).child("cart");
 
         holder.progressbar.setProgress(progress);
         holder.progressbar.setProgressTintList(ColorStateList.valueOf(gaugeColor));
@@ -141,11 +151,15 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
                     public void onClick(View view) {
                         if (itemPosition != RecyclerView.NO_POSITION) {
 
+                            cartdb.child(fridgeItems.get(position).getFood_name()).child("food_count").setValue(fridgeItems.get(position).getFood_count()+"");
+                            cartdb.child(fridgeItems.get(position).getFood_name()).child("food_img").setValue(fridgeItems.get(position).getFood_img()+"");
+                            cartdb.child(fridgeItems.get(position).getFood_name()).child("food_name").setValue(fridgeItems.get(position).getFood_count()+"");
+
                             //해당 아이템 삭제
-                            fridgeItems.remove(itemPosition);
-                            fridge_adapter.removeItem(itemPosition);
-                            fridge_adapter.notifyItemRemoved(itemPosition);
-                            fridge_adapter.notifyDataSetChanged();
+//                            fridgeItems.remove(itemPosition);
+//                            fridge_adapter.removeItem(itemPosition);
+//                            fridge_adapter.notifyItemRemoved(itemPosition);
+//                            fridge_adapter.notifyDataSetChanged();
 
                             //아이템을 삭제했다면 나머지 식재료들은 원상태로 복구
                             holder.close.setVisibility(View.GONE);
