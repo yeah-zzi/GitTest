@@ -51,7 +51,7 @@ public class CartDialog extends AppCompatActivity implements CartDateListener {
     //FireBase DB 가져오기
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference cartdb, frigedb;
-    String userid;
+    String userid="2830097009";
 
     String startDate,changeDate;
     Date endD;
@@ -81,7 +81,7 @@ public class CartDialog extends AppCompatActivity implements CartDateListener {
         overridePendingTransition(0,0);
 
         //로그인 시 아이디값 변수 받아오기
-        userid = UserData.getInstance().getUserid();
+        //userid = UserData.getInstance().getUserid();
 
         Calendar now = Calendar.getInstance();
 

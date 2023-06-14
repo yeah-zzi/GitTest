@@ -50,7 +50,7 @@ public class Cartsujin extends Fragment {
     FirebaseDatabase database = FirebaseDatabase.getInstance(); // 파이어베이스 저장소 객체
     DatabaseReference cartdb;
     ArrayList<CartItem> items;
-    String userid;
+    String userid="2830097009";
 
     ImageButton MartSearch;
     Button AddBtn;
@@ -60,7 +60,7 @@ public class Cartsujin extends Fragment {
                              Bundle savedInstanceState) {
 
         //로그인 시 아이디값 변수 받아오기
-        userid = UserData.getInstance().getUserid();
+        //userid = UserData.getInstance().getUserid();
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.cart_main, container, false);
@@ -153,6 +153,7 @@ public class Cartsujin extends Fragment {
                                                 //파이어베이스 데이터베이스의 데이터를 받아오는 곳
                                                 //foodItems.clear();   //기존 배열리스트가 존재하지 않게 초기화
                                                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+
                                                     FoodItem decartItem = snapshot1.getValue(FoodItem.class);
                                                     foodItems.add(decartItem);
 

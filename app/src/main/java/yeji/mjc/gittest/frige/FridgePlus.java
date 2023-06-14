@@ -77,7 +77,7 @@ public class FridgePlus extends AppCompatActivity {
     DatabaseReference cartDB,barcodedb,realData;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference reference = storage.getReference(); // 저장소 레퍼런스 객체 : storage 를 사용해 저장 위치를 설정
-    String userid="2830097009",startDate,changeDate,fridge_type="";
+    String userid="2830097009",name,startDate,changeDate,fridge_type="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +94,7 @@ public class FridgePlus extends AppCompatActivity {
         overridePendingTransition(0,0);
 
         //로그인 시 아이디값 변수 받아오기
-        userid = UserData.getInstance().getUserid();
+        //userid = UserData.getInstance().getUserid();
 
         plusBTN = findViewById(R.id.plusbtn);
         cancelBTN = findViewById(R.id.cancel);
@@ -174,12 +174,14 @@ public class FridgePlus extends AppCompatActivity {
                     cartDB = database.getReference().child("user").child(userid).child("fridge").child(name);
                     cartDB.child("food_name").setValue(name);
                     cartDB.child("food_count").setValue(count);
+                    cartDB.child("food_img").setValue(imageUri.toString());
                     cartDB.child("fridge_type").setValue(fridge_type);
                     cartDB.child("food_date").setValue(changeDate);
                     uploadToFirebase(imageUri);
                     // 입력값이 유효한 경우에만 액티비티 종료
                     finish();
                 }
+
             }
         });
 
@@ -264,8 +266,11 @@ public class FridgePlus extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 3) {
             if (resultCode == RESULT_OK) {
+
+                name = data.getStringExtra("이름");
                 String name = data.getStringExtra("이름");
                 int img = data.getIntExtra("이미지", 0);
+                imageUri = getURLForResource(img);
 
                 foodName.setText(name);
                 foodImg.setImageResource(img);
