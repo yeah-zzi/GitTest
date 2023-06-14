@@ -175,8 +175,8 @@ public class Frozen_Fridge extends Fragment{
                     for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                         Fridge_Item item = snapshot1.getValue(Fridge_Item.class);
 
-                        String foodCount = item.getFood_count();
-                        item.setFood_count(foodCount + "개");
+//                        String foodCount = item.getFood_count();
+//                        item.setFood_count(foodCount);
 
                         String foodDate = item.getFood_date();
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());

@@ -108,7 +108,7 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
                 .load(fridgeItems.get(position).getFood_img())
                 .into(holder.food_img);
         holder.food_name.setText(fridgeItems.get(position).getFood_name());
-        holder.food_count.setText(fridgeItems.get(position).getFood_count());
+        holder.food_count.setText(fridgeItems.get(position).getFood_count()+"개");
         holder.food_date.setText(fridgeItems.get(position).getFood_date());
         holder.progressbar.setProgress(fridgeItems.get(position).getProgress());
 
@@ -117,8 +117,19 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
         holder.count_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int position = holder.getAdapterPosition();
+                int count = Integer.parseInt(fridgeItems.get(position).getFood_count());
                 count++;
-                holder.food_count.setText(count + "개");
+                fridgeItems.get(position).setFood_count(String.valueOf(count));
+                holder.food_count.setText(String.valueOf(count)+"개");
+
+                // 파이어베이스에서 해당 아이템의 값을 업데이트
+                String itemName = fridgeItems.get(holder.getAdapterPosition()).getFood_name();
+                int itemIndex = holder.getAdapterPosition(); // 아이템의 인덱스 확인
+                if (itemIndex >= 0 && itemIndex < fridgeItems.size()) {
+                    DatabaseReference cartdb = database.getReference().child("user").child(userid).child("fridge");
+                    cartdb.child(itemName).child("food_count").setValue(String.valueOf(count));
+                }
             }
         });
 
@@ -126,9 +137,20 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
         holder.count_minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (count > 1) { //식재료 수가 0 또는 음수일때 감소하지 않도록
+                int position = holder.getAdapterPosition();
+                int count = Integer.parseInt(fridgeItems.get(position).getFood_count());
+                if(count>1) {
                     count--;
-                    holder.food_count.setText(count + "개");
+                    fridgeItems.get(position).setFood_count(String.valueOf(count));
+                    holder.food_count.setText(String.valueOf(count)+"개");
+
+                    // 파이어베이스에서 해당 아이템의 값을 업데이트
+                    String itemName = fridgeItems.get(holder.getAdapterPosition()).getFood_name();
+                    int itemIndex = holder.getAdapterPosition(); // 아이템의 인덱스 확인
+                    if (itemIndex >= 0 && itemIndex < fridgeItems.size()) {
+                        DatabaseReference cartdb = database.getReference().child("user").child(userid).child("fridge");
+                        cartdb.child(itemName).child("food_count").setValue(String.valueOf(count));
+                    }
                 }
             }
         });
@@ -151,16 +173,9 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
                     @Override
                     public void onClick(View view) {
                         if (itemPosition != RecyclerView.NO_POSITION) {
-
-                            cartdb.child(fridgeItems.get(position).getFood_name()).child("food_count").setValue(fridgeItems.get(position).getFood_count()+"");
+                            cartdb.child(fridgeItems.get(position).getFood_name()).child("food_count").setValue(fridgeItems.get(position).getFood_count());
                             cartdb.child(fridgeItems.get(position).getFood_name()).child("food_img").setValue(fridgeItems.get(position).getFood_img()+"");
                             cartdb.child(fridgeItems.get(position).getFood_name()).child("food_name").setValue(fridgeItems.get(position).getFood_name()+"");
-
-                            //해당 아이템 삭제
-//                            fridgeItems.remove(itemPosition);
-//                            fridge_adapter.removeItem(itemPosition);
-//                            fridge_adapter.notifyItemRemoved(itemPosition);
-//                            fridge_adapter.notifyDataSetChanged();
 
                             //아이템을 삭제했다면 나머지 식재료들은 원상태로 복구
                             holder.close.setVisibility(View.GONE);
