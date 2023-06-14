@@ -114,6 +114,11 @@ public class LoginActivity extends AppCompatActivity {
                 updateKakaoLoginUi();
                 Intent loginIntent = new Intent(LoginActivity.this, Register.class);
                 //loginIntent.putExtra("userId", userId);
+                try{
+                    Thread.sleep(10000);
+                }catch (InterruptedException e){
+                    e.printStackTrace();
+                }
                 startActivity(loginIntent);
                 finish();
                 return null;
