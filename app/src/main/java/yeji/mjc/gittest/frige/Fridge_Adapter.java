@@ -1,5 +1,6 @@
 package yeji.mjc.gittest.frige;
 
+import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -80,7 +81,7 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
 
 
     @Override
-    public void onBindViewHolder(@NonNull Fridge_recycle_holder holder, int position) {
+    public void onBindViewHolder(@NonNull Fridge_recycle_holder holder, @SuppressLint("RecyclerView") int position) {
 
         Fridge_Item fridgeItem = fridgeItems.get(position);
         String foodDate = fridgeItem.getFood_date();
@@ -153,7 +154,7 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
 
                             cartdb.child(fridgeItems.get(position).getFood_name()).child("food_count").setValue(fridgeItems.get(position).getFood_count()+"");
                             cartdb.child(fridgeItems.get(position).getFood_name()).child("food_img").setValue(fridgeItems.get(position).getFood_img()+"");
-                            cartdb.child(fridgeItems.get(position).getFood_name()).child("food_name").setValue(fridgeItems.get(position).getFood_count()+"");
+                            cartdb.child(fridgeItems.get(position).getFood_name()).child("food_name").setValue(fridgeItems.get(position).getFood_name()+"");
 
                             //해당 아이템 삭제
 //                            fridgeItems.remove(itemPosition);
