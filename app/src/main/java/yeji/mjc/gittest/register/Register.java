@@ -67,6 +67,11 @@ public class Register extends AppCompatActivity {
         userid = UserData.getInstance().getUserid();
         username = UserData.getInstance().getUsername();
         userimg = UserData.getInstance().getUserimg();
+//        Intent getIntent = getIntent();
+//        userid = getIntent.getStringExtra("userId");
+//        username = getIntent.getStringExtra("userName");
+//        userimg = getIntent.getStringExtra("userImg");
+
 
         usernametv.setText(username);
         Glide.with(this).load(userimg).circleCrop().into(userimgview);

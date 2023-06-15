@@ -75,6 +75,28 @@ public class LoginActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
+//        // 유저 토큰 정보가 있다면, 자동로그인 하여 Main으로 넘어감
+//        UserApiClient.getInstance().accessTokenInfo((tokenInfo, error) -> {
+//            if (error != null) {
+//                Toast.makeText(this, "토큰 정보 보기 실패", Toast.LENGTH_SHORT).show();
+//                updateKakaoLoginUi();
+//            } else if (tokenInfo != null) {
+//                Toast.makeText(this, "토큰 정보 보기 성공", Toast.LENGTH_SHORT).show();
+//
+//                updateKakaoLoginUi();
+////                //전역변수에 현재 유저 정보 넣기
+////                UserData.getInstance().setUserid(userId);
+////                UserData.getInstance().setUserimg(userImg);
+////                UserData.getInstance().setUsername(userName);
+//
+//                Log.i(TAG, "토큰 정보 보기 성공" +
+//                        "\n회원번호: " + tokenInfo.getId() +
+//                        "\n만료시간: " + tokenInfo.getExpiresIn() + "초");
+//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+//            }
+//            return null;
+//        });
         // 유저 토큰 정보가 있다면, 자동로그인 하여 Main으로 넘어감
         UserApiClient.getInstance().accessTokenInfo((tokenInfo, error) -> {
             if (error != null) {
@@ -113,7 +135,9 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 updateKakaoLoginUi();
                 Intent loginIntent = new Intent(LoginActivity.this, Register.class);
-                //loginIntent.putExtra("userId", userId);
+//                loginIntent.putExtra("userId", userId);
+//                loginIntent.putExtra("userImg", userImg);
+//                loginIntent.putExtra("userName", userName);
                 try{
                     Thread.sleep(10000);
                 }catch (InterruptedException e){
@@ -183,6 +207,9 @@ public class LoginActivity extends AppCompatActivity {
 
 //                    Intent loginIntent = new Intent(LoginActivity.this, Register.class);
 //                    loginIntent.putExtra("userId", userId);
+//                    loginIntent.putExtra("userImg", userImg);
+//                    loginIntent.putExtra("userName", userName);
+//
 //                    startActivity(loginIntent);
 //                    finish();
 

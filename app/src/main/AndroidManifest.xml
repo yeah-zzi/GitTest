@@ -25,9 +25,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/foodiemate_ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/foodiemate_ic_launcher"
         android:supportsRtl="true"
         android:hardwareAccelerated="true"
         android:theme="@style/Theme.GitTest"
@@ -45,7 +45,7 @@
         </provider>
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".LodingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -74,6 +74,7 @@
 
         <activity android:name=".Barcode" android:theme="@style/DialogTheme"/>
         <activity android:name=".MainActivity"/>
+        <activity android:name=".LoginActivity"/>
         <activity android:name=".register.Register"/>
         <activity android:name=".cart.Cart_Map"/>
         <activity android:name=".cart.CartPlus" android:theme="@style/DialogTheme" />
@@ -92,6 +93,7 @@
         <activity android:name=".comunity.Comm_kind"></activity>
         <activity android:name=".comunity.LifeCommnet"></activity>
         <activity android:name=".comunity.Ready"></activity>
+
 
 
     </application>
