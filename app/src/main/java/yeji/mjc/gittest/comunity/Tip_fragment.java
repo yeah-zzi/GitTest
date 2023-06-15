@@ -82,7 +82,7 @@ public class Tip_fragment extends Fragment implements SelectListener{
     @Override
     public void onItemClicked(TipItem tip_fragment) {
         Intent comIntent = new Intent(getActivity(), TipComment.class);
-        Toast.makeText(getActivity(),tip_fragment.getTitle(),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(),tip_fragment.getTitle(),Toast.LENGTH_SHORT).show();
         String code = tip_fragment.com_code;
         comIntent.putExtra("커뮤니티 코드",code);
         comIntent.putExtra("작성자",tip_fragment.getWriter());

@@ -238,7 +238,7 @@ public class HeartPost extends Fragment implements SelectListener {
                 }
                 else if(postType=="tip"){
                     Intent tipintent = new Intent(getActivity(), TipComment.class);
-                    Toast.makeText(getActivity(),tip_fragment.getTitle(),Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(),tip_fragment.getTitle(),Toast.LENGTH_SHORT).show();
                     String code = tip_fragment.com_code;
                     tipintent.putExtra("커뮤니티 코드",code);
                     tipintent.putExtra("작성자",tip_fragment.getWriter());

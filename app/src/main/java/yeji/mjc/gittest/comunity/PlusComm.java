@@ -171,7 +171,7 @@ public class PlusComm extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 select_com_name = data.getStringExtra("커뮤니티 종류");
                 if (select_com_name != null) {
-                    Toast.makeText(this, select_com_name, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, select_com_name, Toast.LENGTH_SHORT).show();
                     com_kind.setText(select_com_name);
                     com_name = select_com_name;
 

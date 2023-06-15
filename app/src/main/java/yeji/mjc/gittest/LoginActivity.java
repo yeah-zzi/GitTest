@@ -78,10 +78,10 @@ public class LoginActivity extends AppCompatActivity {
         // 유저 토큰 정보가 있다면, 자동로그인 하여 Main으로 넘어감
         UserApiClient.getInstance().accessTokenInfo((tokenInfo, error) -> {
             if (error != null) {
-                Toast.makeText(this, "토큰 정보 보기 실패", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "토큰 정보 보기 실패", Toast.LENGTH_SHORT).show();
                 updateKakaoLoginUi();
             } else if (tokenInfo != null) {
-                Toast.makeText(this, "토큰 정보 보기 성공", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "토큰 정보 보기 성공", Toast.LENGTH_SHORT).show();
 
                 updateKakaoLoginUi();
 //                //전역변수에 현재 유저 정보 넣기
@@ -186,7 +186,7 @@ public class LoginActivity extends AppCompatActivity {
 //                    startActivity(loginIntent);
 //                    finish();
 
-                    Toast.makeText(LoginActivity.this, user.getId() + "로그인되었습니다!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LoginActivity.this, user.getId() + "로그인되었습니다!", Toast.LENGTH_SHORT).show();
                 } else {
                 }
                 return null;
@@ -203,14 +203,14 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         // Write was successful!
-                        Toast.makeText(LoginActivity.this, "저장을 완료했습니다.", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(LoginActivity.this, "저장을 완료했습니다.", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         // Write failed
-                        Toast.makeText(LoginActivity.this, "저장을 실패했습니다.", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(LoginActivity.this, "저장을 실패했습니다.", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -226,7 +226,7 @@ public class LoginActivity extends AppCompatActivity {
                     User post = dataSnapshot.getValue(User.class);
                     Log.w("FireBaseData", "getData" + post.toString());
                 } else {
-                    Toast.makeText(LoginActivity.this, "데이터 없음...", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LoginActivity.this, "데이터 없음...", Toast.LENGTH_SHORT).show();
                 }
             }
 

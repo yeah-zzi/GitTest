@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -103,6 +104,10 @@ public class Fridge extends Fragment {
         View select_cold = view.findViewById(R.id.select_cold);
         View select_frozen = view.findViewById(R.id.select_frozen);
 
+        fridge_main.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.main_yellow));
+        fridge_cold.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.white));
+        fridge_frozen.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.white));
+
         //검색기능 구현
         search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,6 +133,9 @@ public class Fridge extends Fragment {
         fridge_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fridge_main.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.main_yellow));
+                fridge_cold.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.white));
+                fridge_frozen.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.white));
                 getFragmentManager().beginTransaction().replace(R.id.fridge_main_container, new Fridge()).commit();
                 select_all.setVisibility(View.VISIBLE);
                 select_cold.setVisibility(View.GONE);
@@ -139,6 +147,9 @@ public class Fridge extends Fragment {
         fridge_cold.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fridge_main.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.white));
+                fridge_cold.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.main_yellow));
+                fridge_frozen.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.white));
                 getFragmentManager().beginTransaction().replace(R.id.fridge_main_container, new Cold_Fridge()).commit();
                 select_all.setVisibility(View.GONE);
                 select_cold.setVisibility(View.VISIBLE);
@@ -150,6 +161,9 @@ public class Fridge extends Fragment {
         fridge_frozen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fridge_main.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.white));
+                fridge_cold.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.white));
+                fridge_frozen.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.main_yellow));
                 getFragmentManager().beginTransaction().replace(R.id.fridge_main_container, new Frozen_Fridge()).commit();
                 select_all.setVisibility(View.GONE);
                 select_cold.setVisibility(View.GONE);
