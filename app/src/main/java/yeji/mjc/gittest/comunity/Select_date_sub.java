@@ -101,7 +101,7 @@ public class Select_date_sub extends AppCompatActivity {
 
                 //바뀐 날짜를 문자열로 변환
                 changeDate = df.format(now.getTime());
-                Toast.makeText(getApplicationContext(),startDate,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),startDate,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -120,7 +120,7 @@ public class Select_date_sub extends AppCompatActivity {
 
                 //바뀐 날짜를 문자열로 변환
                 changeDate = df.format(now.getTime());
-                Toast.makeText(getApplicationContext(),changeDate,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),changeDate,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -139,7 +139,7 @@ public class Select_date_sub extends AppCompatActivity {
 
                 //바뀐 날짜를 문자열로 변환
                 changeDate = df.format(now.getTime());
-                Toast.makeText(getApplicationContext(),changeDate,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),changeDate,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -199,7 +199,7 @@ public class Select_date_sub extends AppCompatActivity {
                         startDate = df.format(startD);
                         changeDate = df.format(endD);
 
-                        Toast.makeText(getApplicationContext(), startDate + " 이랑 " + changeDate, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), startDate + " 이랑 " + changeDate, Toast.LENGTH_SHORT).show();
                     }
                 });
             }

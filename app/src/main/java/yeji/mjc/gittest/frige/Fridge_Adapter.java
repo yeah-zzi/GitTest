@@ -42,7 +42,7 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
     String userid="2830097009";
 
     FirebaseDatabase database = FirebaseDatabase.getInstance(); // 파이어베이스 저장소 객체
-    DatabaseReference cartdb;
+    DatabaseReference cartdb,fridgeDB;
 
 
 
@@ -197,6 +197,8 @@ public class Fridge_Adapter extends RecyclerView.Adapter<Fridge_recycle_holder> 
                         if (itemPosition != RecyclerView.NO_POSITION) {
 
                             //해당 아이템 삭제
+                            fridgeDB = database.getReference().child("user").child(userid).child("fridge").child(fridgeItems.get(position).getFood_name());
+                            fridgeDB.removeValue();
                             fridgeItems.remove(itemPosition);
                             fridge_adapter.removeItem(itemPosition);
                             fridge_adapter.notifyItemRemoved(itemPosition);
