@@ -153,6 +153,9 @@
         <entry key="..\:/Users/sujin/AndroidStudioProjects/GitTest/app/src/main/res/menu/bottom_nav_menu.xml" value="0.24947916666666667" />
         <entry key="app/src/main/res/drawable/border.xml" value="0.1245" />
         <entry key="app/src/main/res/drawable/borderimg.xml" value="0.15" />
+        <entry key="app/src/main/res/drawable/ic_round_face_24.xml" value="0.162" />
+        <entry key="app/src/main/res/drawable/round_button.xml" value="0.162" />
+        <entry key="app/src/main/res/drawable/round_logo.xml" value="0.162" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14629629629629629" />
         <entry key="app/src/main/res/layout/allergy_search_recyclerview.xml" value="0.29791666666666666" />
         <entry key="app/src/main/res/layout/bellset.xml" value="0.29791666666666666" />
