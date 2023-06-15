@@ -89,7 +89,7 @@ public class Barcode extends AppCompatActivity {
 
     public String readBarcode(String barcode) {
 
-        Toast.makeText(Barcode.this, barcode, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(Barcode.this, barcode, Toast.LENGTH_SHORT).show();
         return barcode;
     }
 }

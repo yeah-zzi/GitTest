@@ -295,7 +295,7 @@ public class Allergy extends Activity implements View.OnClickListener, SelectLis
     //알러지를 누르면 해당하는 알러지 정보를 사용자의 알러지 정보를 나타내는 리사이클러뷰에 추가한다
     @Override
     public void onItemClicked(FoodSearchItem myModel) {
-        Toast.makeText(this, myModel.getFood_name(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, myModel.getFood_name(), Toast.LENGTH_SHORT).show();
         allergyitems.add(new AllergyItem(myModel.getFood_img(), myModel.getFood_name()));
         allergyrecyclerView.getAdapter().notifyDataSetChanged();
 

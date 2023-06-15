@@ -214,7 +214,7 @@ public class Fight_fragment extends Fragment implements FBListener{
                 progressBar.setProgress((int) sum);
 
 
-                Toast.makeText(getActivity(),sum+"",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(),sum+"",Toast.LENGTH_SHORT).show();
 
                 //progressBar.setProgress(sum);
 

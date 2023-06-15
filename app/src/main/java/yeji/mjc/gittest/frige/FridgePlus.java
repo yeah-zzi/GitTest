@@ -248,7 +248,7 @@ public class FridgePlus extends AppCompatActivity {
                         changeDate = df.format(endD);
 
                         deadLine.setText(datePicker.getHeaderText());
-                        Toast.makeText(getApplicationContext(), changeDate, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), changeDate, Toast.LENGTH_SHORT).show();
 
 
                     }
